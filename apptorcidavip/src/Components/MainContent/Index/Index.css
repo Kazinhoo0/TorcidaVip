@@ -1,0 +1,435 @@
+@font-face {
+    font-family: 'Moonhouse';
+    src: url('../../../fonts/moonhouse.ttf') format('truetype'); /* Caminho até a fonte */
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Teko';
+    src: url('../../../fonts/Teko-VariableFont_wght.ttf') format('truetype'); /* Caminho até a fonte */
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'Montserrat Alternates';
+    src: url('../../../fonts/MontserratAlternates-ExtraLight.ttf') format('truetype'); /* Caminho até a fonte */
+    font-weight: normal;
+    font-style: normal;
+}
+.TorcidaVip {
+    position: absolute;
+    width: 259px;
+    height: 38px;
+    left: 108px;
+    top: 48px;
+    font-family: 'moonhouse';
+    font-style: normal;
+    font-weight: 400px;
+    font-size: 32px;
+    line-height: 32px;
+    color: #FFFFFF;
+}
+
+.container {
+    border: 1px solid rgb(0, 0, 0);
+}
+
+
+.container-searchbar {
+    width: 460px;
+    /* border: 1px solid red; */
+    height: 53.16px;
+    left: 950px;
+    position: absolute;
+    top: 40px;
+}
+
+
+.borderinput {
+    width: 450px;
+    /* border: 1px solid red; */
+    height: 53px;
+    left: 0;
+    top: 0p;
+    position: 'absolute';
+    background: 'white';
+    border-Radius: 46.50px;
+}
+
+.inputstyle {
+    width: 370px;
+    /* border: 1px solid red; */
+    height: 36.80px;
+    left: 57.93px;
+    top: 10px;
+    position:absolute;
+    color: rgba(0, 0, 0, 0.30);
+    font-Size: 20px;
+    font-Family: Lustria;
+    font-Weight: 400px;
+    word-wrap: break-word;
+}
+
+.containercartuserheart {
+    width: 160px;
+    height: 49.75px;
+    left: 1600px;
+    top: 43px;
+    position: absolute;
+    justify-Content: flex-start;
+    align-Items: center;
+    gap: 9px;
+    display: inline-flex;
+    
+}
+
+.container-maisvendido {
+    /* border: 1px solid red; */
+    height: 120px;
+}
+
+.maisvendido-style {
+    /* Rectangle 20 */
+    position: absolute;
+    width: 250px;
+    height: 58px;
+    left: 155px;
+    top: 30px;
+    background: #47B868;
+    border-radius: 0px 100px 0px 0px;
+    transform: matrix(1, 0, 0, -1, 0, 0);
+
+}
+
+.style-textmaisvendido {
+
+    /* MAIS VENDIDOS */
+    /* border: 1px solid red; */
+    position: absolute;
+    width: 250px;
+    height: 57px;
+    left: 140px;
+    top: 5px;
+    font-family: 'Teko';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 45px;
+    line-height: 57px;
+    color: #ffffff;
+
+}
+
+.products-maisvendidos {
+    /* Opções */
+    /* Auto layout */
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+    padding: 0px;
+    gap: 30px 15px;
+    position: absolute;
+    width: 1290.83px;
+    height: 772px;
+    left: 155px;
+    top: 125px;
+}
+
+
+.produtos-destaque{
+    /* Opções */
+    /* Auto layout */
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+    padding: 10px;
+    gap: 30px 20px;
+    position: absolute;
+    width: 1290.83px;
+    height: 772px;
+    left: 155px;
+    top: 1150px;
+}
+
+.container-bigproductdestaque {
+    border: 1px solid blue;
+}
+
+
+.container_destaques {
+    /* border: 1px solid red; */
+    height: 120px;
+    width: 100%;
+    position: absolute;
+    top: 1000px;
+}
+
+.products-opcoes {
+
+    /* Camisa 11 */
+    /* Auto layout */
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 9px;
+    isolation: isolate;
+    width: 300.21px;
+    height: 371px;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+
+}
+
+
+.imgstyle-products {
+    /* image */
+
+    box-sizing: border-box;
+    width: 300.21px;
+    height: 300px;
+    border: 0.5px solid #000000;
+    border-radius: 20px;
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+    z-index: 0;
+
+}
+
+
+
+.itensname-style {
+    /* Regata Vasco Alone Infantil R$ 59,90 */
+
+    width: 300.21px;
+    height: 0;
+    font-family: 'Montserrat Alternates';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    /* line-height: 25px; */
+    color: #000000;
+    
+    
+    
+
+
+    /* Inside auto layout */
+    /* flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+    z-index: 1; */
+
+}
+
+
+.container-infoproduct {
+    /* border: 1px solid red; */
+    width: 300px;
+    height: 100px;
+    padding: 0;
+    margin: 0;
+   
+    
+
+}
+
+
+.bidproductdestaque {
+
+    /* Casaco */
+    position: absolute;
+    width: 931px;
+    height: 689px;
+    left: 415px;
+    top: 1154px;
+
+}
+
+
+
+.container_filtrartimes {
+    /* border: 1px solid red; */
+    height: 120px;
+    width: 100%;
+    position: absolute;
+    top: 2000px;
+}
+
+
+.style-textfiltraportime {
+    /* FILTRAR POR TIMES */
+
+    position: absolute;
+    width: 315px;
+    height: 49px;
+    left: 107px;
+    top: 35px;
+
+    font-family: 'Teko';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 38px;
+    line-height: 0px;
+
+    color: #FFFFFF;
+
+
+}
+
+
+.style-textnovidadesloja{
+    /* border: 1px solid red; */
+    position: absolute;
+    width: 380px;
+    height: 57px;
+    left: 110px;
+    top: 5px;
+    font-family: 'Teko';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 45px;
+    line-height: 57px;
+    color: #ffffff;
+}
+
+
+.maisnovidadeloja-style {
+    /* Rectangle 20 */
+    position: absolute;
+    width: 340px;
+    height: 58px;
+    left: 155px;
+    top: 30px;
+    background: #47B868;
+    border-radius: 0px 100px 0px 0px;
+    transform: matrix(1, 0, 0, -1, 0, 0);
+
+}
+
+
+.maisfiltrartime-style {
+    /* Rectangle 20 */
+    position: absolute;
+    width: 250px;
+    height: 58px;
+    left: 155px;
+    top: 30px;
+    background: #47B868;
+    border-radius: 0px 100px 0px 0px;
+    transform: matrix(1, 0, 0, -1, 0, 0);
+
+}
+
+
+.container-productsfiltrartimes {
+
+    /* Opções */
+    /* Auto layout */
+    border: 1px solid rgb(0, 0, 0);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+    padding: 0px;
+    gap: 30px 15px;
+    position: absolute;
+    width: 1290.83px;
+    height: 430px;
+    left: 155px;
+    top: 2120px;
+
+}
+
+.products-filtrartimes {
+    /* Auto layout */
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 9px;
+
+    width: 300.21px;
+    height: 387px;
+
+
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+
+}
+
+.textfiltrartime { 
+    
+    border: 1px solid red;
+    width: 300.21px;
+    height: 78px;
+    font-family: 'Montserrat Alternates';
+    font-style: normal;
+    font-weight: 300px;
+    font-size: 25px;
+    line-height: 35px;
+    text-align: center;
+    
+    color: #000000;
+    
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+
+.infosite {
+    border: 1px solid red;
+    display: flex;
+    align
+    position: absolute;
+    width: 1096px;
+    height: 100px;
+    left: 255px;
+    top: 2610px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
