@@ -19,6 +19,23 @@
     font-weight: normal;
     font-style: normal;
 }
+
+@font-face {
+    font-family: 'Russo One';
+    src: url('../../../fonts/Russo_One.ttf') format('truetype'); /* Caminho até a fonte */
+    font-weight: normal;
+    font-style: normal;
+}
+
+.container-homepag {
+    /* border: 1px solid red; */
+    width: 1600px;
+    height: 3390px;
+    position: absolute;
+    left: 120px;
+}
+
+
 .TorcidaVip {
     position: absolute;
     width: 259px;
@@ -34,7 +51,9 @@
 }
 
 .container {
-    border: 1px solid rgb(0, 0, 0);
+    /* border: 1px solid rgb(0, 0, 0); */
+    height: 3000px;
+    position: relative;
 }
 
 
@@ -125,7 +144,7 @@
 .products-maisvendidos {
     /* Opções */
     /* Auto layout */
-    border: 1px solid black;
+    /* border: 1px solid black; */
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -135,7 +154,7 @@
     gap: 30px 15px;
     position: absolute;
     width: 1290.83px;
-    height: 772px;
+    height: 820px;
     left: 155px;
     top: 125px;
 }
@@ -144,7 +163,7 @@
 .produtos-destaque{
     /* Opções */
     /* Auto layout */
-    border: 1px solid black;
+    /* border: 1px solid black; */
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -160,7 +179,7 @@
 }
 
 .container-bigproductdestaque {
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
 }
 
 
@@ -176,15 +195,16 @@
 
     /* Camisa 11 */
     /* Auto layout */
-    border: 1px solid red;
+    /* border: 1px solid red;  */
+    background-color: rgba(228, 226, 226, 0.363);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 0px;
+    padding-top: 20px;
     gap: 9px;
     isolation: isolate;
-    width: 300.21px;
-    height: 371px;
+    width: 305.21px;
+    height: 375px;
 
     /* Inside auto layout */
     flex: none;
@@ -244,7 +264,7 @@
     /* border: 1px solid red; */
     width: 300px;
     height: 100px;
-    padding: 0;
+    padding: 0px;
     margin: 0;
    
     
@@ -343,7 +363,7 @@
 
     /* Opções */
     /* Auto layout */
-    border: 1px solid rgb(0, 0, 0);
+    /* border: 1px solid rgb(0, 0, 0); */
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -361,7 +381,7 @@
 
 .products-filtrartimes {
     /* Auto layout */
-    border: 1px solid red;
+    /* border: 1px solid red; */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -380,13 +400,12 @@
 }
 
 .textfiltrartime { 
-    
-    border: 1px solid red;
+    /* border: 1px solid red; */
     width: 300.21px;
     height: 78px;
     font-family: 'Montserrat Alternates';
     font-style: normal;
-    font-weight: 300px;
+    font-weight: 400px;
     font-size: 25px;
     line-height: 35px;
     text-align: center;
@@ -403,15 +422,178 @@
 
 
 .infosite {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     display: flex;
-    align
     position: absolute;
     width: 1096px;
     height: 100px;
-    left: 255px;
-    top: 2610px;
+    left: 400px;
+    top: max(0px, min(2850px, 3400px));
 }
+
+
+.container-info {
+    /* border: 1px solid red; */
+    width: 500px;
+}
+
+.info-title-style {
+    /* border: 1px solid red; */
+    font-family: 'Russo One';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 21px;
+    padding: 0;
+    margin: 0;
+    gap: 0;
+    color: #363537;
+}
+
+.info-subs-style {
+    /* border: 1px solid red; */
+    font-family: 'Russo One';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 0;
+    margin: 0;
+    gap: 0;
+}
+
+.infosite-atendimento {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    width: 1902px;
+    height: 400px;
+    top: max(0px, min(600px, 1000px)); /* Limita o valor de top */
+    background-color: #363537;
+}
+
+.cont-sun-atendimento {
+    border: 1px solid red;
+    width: 1300px;
+    display: flex;
+    
+}
+
+.infos-atendimentos {
+    /* border: 1px solid red; */
+    width: 25%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    margin: 0px;
+    gap: 0px;
+    
+}
+
+.style-infos-atendimento {
+    padding: 0px;
+    margin: 0px;
+    gap: 0px;
+    text-Align: start;
+    color: white;
+    font-family: 'Russo One';
+    font-style: normal;
+    font-weight: 400;
+    background: #363537;
+    border-radius: 0px; 
+    cursor: pointer;
+}
+
+.style-infos-atendimento:hover {
+    color: #008000;
+}
+
+.container-sun-infos {
+    /* border: 1px solid red; */
+    display: grid;
+    height: 200px;
+    gap: 0;
+    padding: 0;
+    margin: 0;
+    row-gap: 0; 
+    column-gap: 0;
+}
+
+.shirt-container {
+    position: absolute;
+    
+}
+
+.favorite-icon {
+    position: absolute;
+    left: 245px;
+    top: 40px;
+}
+
+.copyright-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Russo One';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    color: white;
+    width: 1903px;
+    position: absolute;
+    height: 100px;
+    /* border: 1px solid rgb(5, 5, 5); */
+    background-color:#47B868;
+   
+}
+
+
+
+
+/* Heart */
+
+/* position: absolute;
+left: 84.27%;
+right: 3.4%;
+top: 2.7%;
+bottom: 87.33%;
+
+
+
+/* 
+Rectangle 11
+
+position: absolute;
+width: 1440px;
+height: 223px;
+left: 0px;
+top: 2631px;
+
+background: #363537;
+border-radius: 0px; */
+
+/* Atendimento Horário de Funcionamento Segundo a Sexta : 08:00 ás 20:00 Domingo e Feriados: 10:00 ás 18:00 (21) 99613-4701 (21) 99613-4701
+
+position: absolute;
+width: 177px;
+height: 118px;
+left: 227px;
+top: 2650px;
+
+font-family: 'Russo One';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 24px;
+
+color: #FFFFFF; */
+
+
+
+
+
+
+
+
 
 
 

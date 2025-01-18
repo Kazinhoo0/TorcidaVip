@@ -1,0 +1,174 @@
+.container-profile {
+    position: relative;
+    /* border: 1px solid rgb(255, 2, 255); */
+    width: 1900px;
+    height: 1920px; 
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.container-sun-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 2px solid rgb(2, 238, 238); */
+    z-index: 5;
+    width: 1900px;
+    height: 1300px;
+}
+
+.container-profile-left {
+    /* border: 1px solid red; */
+    width: 350px;
+    height: 900px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.container-optionsprofile {
+    /* border: 1px solid red;  */
+    width: 260px;
+    height: 250px;
+    padding: 0;
+    margin: 0;
+
+}
+
+.style-inputs-profile {
+    box-sizing: border-box;
+    width: 458px;
+    height: 47px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 0px 46.5px 46.5px 0px;
+    margin-left: 20px;
+}
+
+.style-inputs-profile2 {
+    box-sizing: border-box;
+    width: 920px;
+    height: 47px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 0px 46.5px 46.5px 0px;
+}
+
+.form-profilestyle {
+    /* border: 1px solid red; */
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height: 350px;
+}
+
+
+.font-text-profilepage {
+    /* border: 1px solid red; */
+    width: 180px;
+    height: 46px;
+    font-family: 'Teko';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 46px;
+    color: #000000;
+    text-align: start;
+    padding-left: 15px;
+
+}
+
+.font-text-profilepage2 {
+    /* border: 1px solid red; */
+    width: 370px;
+    height: 46px;
+    font-family: 'Teko';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 46px;
+    color: #000000;
+    text-align: start;
+    padding-left: 15px;
+
+}
+
+.sunprofile-right {
+    /* border: 1px solid red; */
+    width: 1000px;
+    height: 450px;
+}
+
+.font-title-profilepage {
+    /* border: 1px solid red; */
+    width: 260px;
+    height: 15px;
+    font-family: 'Teko';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 52px;
+    color: #000000;
+    text-align: center;
+    text-align: start;
+}
+
+.font-title-profilepage2 {
+    /* border: 1px solid red; */
+    width: 290px;
+    height: 15px;
+    font-family: 'Teko';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 2px;
+    color: #000000;
+    text-align: center;
+    text-align: start;
+    padding-left: 40px;
+}
+
+.iconsprofile-style {
+    /* border: 1px solid red; */
+    height: 50px;
+    width: 25px;
+    text-align: start;
+}
+
+.sun-optionsprofile {
+    height: 35px;
+    /* border: 1px solid red;  */
+    display:flex;
+    justify-Content: start;
+    align-Items: center;
+    gap: 0;
+    padding: 0;
+    padding-Top: 0;
+    margin: 0;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.container-profile-right{
+    /* border: 1px solid red; */
+    border-left: 1px solid black;
+    width: 1200px;
+    height: 1000px;
+    gap: 0;
+    padding: 0;
+    padding-Top: 0;
+    margin: 0;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.linha {
+    width: 1100px;
+    height: 0px;
+    border: 1px solid #000000;
+    transform: rotate(-90deg);
+}
+
+
+
+

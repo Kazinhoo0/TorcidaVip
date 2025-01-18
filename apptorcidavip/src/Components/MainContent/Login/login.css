@@ -1,0 +1,176 @@
+.container-login-register {
+    position: relative; /* Define o limite do posicionamento absoluto */
+    /* border: 1px solid rgb(255, 2, 255); */
+    width: 1900px;
+    height: 1800px; /* Altura definida para limitar o filho */
+    overflow-x: hidden;
+}
+
+.container-sun-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 2px solid rgb(2, 238, 238); */
+    z-index: 5;
+    width: 1900px;
+    height: 1000px;
+}
+
+
+.Rectangleareatorcedor {
+    position: absolute;
+    width: 1905px;
+    height: 240px;
+    left: 0px;
+    top: 10px;
+    background: #47B868;
+    border-radius: 0px 0px 100.5px 0px;
+    /* z-index: 1; */
+
+}
+
+.container-inputs {
+    /* border: 1px solid red; */
+    width: 420px;
+    height: 600px;
+    margin: 200px;
+    padding: 20px;
+    
+}
+
+.inputs-style {
+    box-sizing: border-box;
+    width: 422px;
+    height: 53px;
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    border-radius: 46.5px;
+    padding-left: 30px;
+    margin-top: 20px;
+}
+
+.container-logingoogle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 330px;
+    height: 74px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 37px;
+    cursor: pointer;
+
+}
+
+.googleicon { 
+    height: 35px;
+    width: 60px;
+
+
+
+}
+
+.textfazerlogincomgoogle {
+    width: 242px;
+    height: 24px;
+    font-family: 'Montserrat Alternates';
+    font-style: normal;
+    font-weight: 250;
+    font-size: 15px;
+    line-height: 24px;
+    color: #000000;
+}
+
+
+
+
+
+
+
+.style-infonewpassword {
+    font-weight: 500;
+    text-align: start;
+}
+
+.container-infonewpassword{
+    /* border: 1px solid red; */
+    height: 200px;
+}
+
+.text-recoverypass {
+    /* border: 1px solid red; */
+    width: 296.24px;
+    height: 37px;
+    font-family: 'Lustria';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 26px;
+    text-align: start;
+    color: rgba(0, 0, 0, 0.5);
+    border: none;
+    background: none;
+    cursor: pointer;
+
+}
+
+.container-buttonentrar { 
+    /* border: 1px solid red; */
+    width: 422px;
+    height: 58px;
+    background: #47B868;
+    border-radius: 0px 100px 0px 0px;
+    transform: matrix(1, 0, 0, -1, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.buttonentrar-style {
+    width: 300px;
+    height: 57px;
+    font-family: 'Teko';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 35px;
+    line-height: 57px;
+    color: #FFFFFF;
+    border: none;
+    background:none;
+    transform: matrix(1, 0, 0, -1, 0, 0);
+    cursor: pointer;
+}
+
+
+.titleloginregister {
+
+    width: 500px;
+    height: 9px;
+    font-family: 'Teko';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 69px;
+    text-align: start;
+    color: #000000;
+}
+
+.titlearetorcedor {
+    z-index: 3;
+    position: absolute;
+    width: 911px;
+    height: 116px;
+    left: 0px;
+    top: 25px;
+    font-family: 'Teko';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 96px;
+    line-height: 138px;
+    color: #ffffff;
+}
+
+
+
+

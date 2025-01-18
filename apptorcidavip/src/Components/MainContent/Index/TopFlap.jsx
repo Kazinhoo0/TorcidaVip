@@ -3,20 +3,27 @@ import user from '../../../imgs/user.png';
 import heart from '../../../imgs/heart.png';
 import cart from '../../../imgs/cart.png'
 import './Index.css';
+import { useNavigate } from 'react-router-dom';
 
 
 
 export default function TopFlap () {
 
+    const navigate = useNavigate();
+
+    const handlenavigatehomepage = () => {
+        navigate('/')
+    }
+
 
     return (
 
-        <div style={{width: 1905, height: 108, position: 'relative'}}>
-            <div style={{width: 1905, height: 108, left: 0, top: 0, position: 'absolute', background: 'linear-gradient(0deg, #363537 0%, #363537 100%), linear-gradient(0deg, #1E1E1E 0%, #1E1E1E 100%)', borderTopLeftRadius: 142.50}} />
+        <div style={{zIndex: 2,width: 1905, height: 108, position: 'relative'}}>
+            <div style={{width: 1905, height: 108, left: 0, top: 0, position: 'absolute', background: 'linear-gradient(0deg,rgb(2, 2, 2) 0%,rgb(25, 25, 26) 100%), linear-gradient(0deg, #1E1E1E 0%, #1E1E1E 100%)', borderBottomLeftRadius: 142.5}} />
             
             <div style={{width: 302.25, height: 84.51, left: 67.75, top: 14.99, position: 'absolute'}}>
                 <img style={{width: 43.62, height: 84.51, left: 0, top: 0, position: 'absolute'}} src={Logobranca}/>
-                <div style={{width: 259, height: 38, left: 15, top: 30, position: 'absolute', color: 'white', fontSize: 32, fontFamily: 'moonhouse', fontWeight: '400', wordWrap: 'break-word'}}>TorcidaVIP</div>
+                <div onClick={handlenavigatehomepage} style={{cursor: 'pointer',width: 259, height: 38, left: 15, top: 30, position: 'absolute', color: 'white', fontSize: 32, fontFamily: 'moonhouse', fontWeight: '400', wordWrap: 'break-word'}}>TorcidaVIP</div>
             </div>
 
             <div className='container-searchbar'>

@@ -1,0 +1,64 @@
+.container-viewprod {
+
+    position: relative;
+    /* border: 1px solid rgb(255, 2, 255); */
+    width: 1900px;
+    height: 2400px; 
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.sun-viewprod {
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: center;
+    height: 1630px;
+}
+
+.aligndiv-viewprod {
+    /* border: 1px solid red; */
+    width: 1500px;
+}
+
+.container-info-prod {
+    border: 1px solid red;
+    width: 750px;
+    height: 700px;
+    text-align: start;
+    padding-left: 20px;
+}
+
+.h2-product-style {
+    border: 1px solid red;
+    width: 548px;
+    height: 117px;
+    font-family: 'Montserrat Alternates';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 48px;
+    line-height: 59px;
+    color: #000000;
+    padding: 0;
+    margin: 0px;
+}
+
+
+
+.text-price-product-style {
+    /* border: 1px solid red; */
+    width: 250px;
+    height: 50px;
+    font-family: 'Montserrat Alternates';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 100px;
+    color: #363537;
+
+
+}
+
+.style-feedback-start {
+    border: none;
+    background: none;
+}
