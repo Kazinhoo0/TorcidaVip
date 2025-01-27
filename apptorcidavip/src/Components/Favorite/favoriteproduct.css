@@ -1,0 +1,85 @@
+.container-boxshadow {
+    position: absolute;
+    /* border: 1px solid red; */
+    background-color: rgba(128, 128, 128, 0.651);
+    width: 1900px;
+    height: 1798px;
+    z-index: 5;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.container-favoriteproduct {
+    /* border: 1px solid red; */
+    font-family: 'Montserrat Alternates';
+    position: fixed;
+    top: 290px;
+    left: 610px;
+    width: 700px;
+    height: 400px;
+    border-radius: 5px;
+    z-index: 5;
+    background-color: white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.tittle-and-close {
+    /* padding: 10px; */
+    /* border: 1px solid red; */
+    height: 80px;
+    display: flex; 
+}
+
+.closepage-style {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    padding-right: 10px;
+
+}
+
+.img-carrinho-empty-or-full {
+    /* border: 1px solid red; */
+    height: 120px;
+}
+
+.img-carrinho-empty-or-full img {
+    position: absolute;
+    right: 308px;
+}
+.infos-favorite {
+    /* border: 1px solid red; */
+    height: 125px;
+    font-weight: 600;
+}
+
+.cont-btn-acessarminhaconta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 5px;
+}
+
+.cont-btn-acessarminhaconta button {
+    font-family: 'Montserrat Alternates';
+    font-weight: 600;
+    font-size: 15px;
+    color: white;
+    border: none;
+    /* border: 1px solid red; */
+    height: 37px;
+    width: 200px;
+    height: 30px;
+    /* left: 155px;
+    top: 30px; */
+    background: #47B868;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.cont-btn-acessarminhaconta:hover button {
+    background: #edeeee;
+    color: black;
+    
+}

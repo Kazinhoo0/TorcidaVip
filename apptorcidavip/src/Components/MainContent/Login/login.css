@@ -10,10 +10,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* border: 2px solid rgb(2, 238, 238); */
+    /* border: 2px solid rgb(0, 0, 0); */
     z-index: 5;
     width: 1900px;
-    height: 1000px;
+    height: 1200px;
 }
 
 

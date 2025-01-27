@@ -1,0 +1,105 @@
+
+.container-registernewuser {
+    position: relative; 
+    /* border: 1px solid rgb(255, 2, 2); */
+    width: 1900px;
+    height: 2800px; 
+    overflow-x: hidden; 
+}
+
+.sun-registernewuser {
+    /* border: 1px solid rgb(145, 140, 140); */
+    position: absolute;
+    left: 530px;
+    top: 130px;
+    width: 900px;
+    height: 1950px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+}
+
+.container-title-register {
+    /* border: 1px solid red; */
+    border-bottom: 3px solid grey;
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+    padding-bottom: 20px;
+    width: 860px;
+    height: 100px;
+}
+
+.container-inputs-registernewuser {
+    /* border: 1px solid red; */
+    display: grid;
+    width: 860px;
+    padding-left: 50px;
+}
+
+.container-inputfile {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.img-profilepic {
+    border: 1px solid rgba(128, 128, 128, 0.616);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+.input-file {
+    /* border: 1px solid red; */
+
+}
+
+.style-timecoracao {
+    /* border: 1px solid red; */
+    width: 220px;
+    height: 40px;
+    margin-left: 40px;
+    padding-left: 10px;
+}
+
+option {
+    font-family: 'Montserrat Alternates' ; 
+    font-weight: 600;
+}
+
+label {
+    display: flex;
+    justify-content: start;
+    padding-left: 40px;
+    align-items: end;
+    font-family: 'Teko';
+    font-size: 20px;
+    height: 30px;
+    /* border: 1px solid red; */
+}
+
+.container-buttonregisternew {
+    /* border: 1px solid red; */
+    width: 860px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding-right: 50px;
+}
+
+.button-registernewuser {
+    width: 150px;
+    height: 38px;
+    background: #47B868;
+    border-radius: 0px 0px 0px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-family: 'Teko';
+    font-size: 22px;
+    border: 1px solid grey;
+}

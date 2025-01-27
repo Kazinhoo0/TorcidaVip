@@ -12,11 +12,13 @@ export default function InfoSite ({customTop}) {
         <>
 
             <div style={{
+                padding: '10px',
+                marginleft: '10px',
                 display:'flex',
                 position: 'absolute',
-                width: '1096px',
-                height: '100px',
-                left: '400px',
+                width: '1296px',
+                height: '130px',
+                left: '300px',
                 top: customTop
             }} className='infosite'>
 

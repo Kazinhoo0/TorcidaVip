@@ -11,10 +11,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* border: 2px solid rgb(2, 238, 238); */
+    border: 2px solid rgb(18, 19, 19);
     z-index: 5;
     width: 1900px;
-    height: 1300px;
+    height: 1500px;
 }
 
 .container-profile-left {

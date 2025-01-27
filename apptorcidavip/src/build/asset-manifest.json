@@ -1,0 +1,38 @@
+{
+  "files": {
+    "main.css": "/static/css/main.990ddb4e.css",
+    "main.js": "/static/js/main.55f5c7f4.js",
+    "static/js/488.17b092e6.chunk.js": "/static/js/488.17b092e6.chunk.js",
+    "static/media/casacovascodestaque.png": "/static/media/casacovascodestaque.4356db81a10702ddabc0.png",
+    "static/media/Teko-VariableFont_wght.ttf": "/static/media/Teko-VariableFont_wght.2c304a82d8b73b2829fa.ttf",
+    "static/media/MontserratAlternates-ExtraLight.ttf": "/static/media/MontserratAlternates-ExtraLight.9cdbca51b74ed2b1427e.ttf",
+    "static/media/Russo_One.ttf": "/static/media/Russo_One.76b69dd52622fb1a6bf0.ttf",
+    "static/media/imagem_2023-12-12_144445511-300x300 1.png": "/static/media/imagem_2023-12-12_144445511-300x300 1.b0a8bbbdb808876b9ac1.png",
+    "static/media/Change-Flu.png": "/static/media/Change-Flu.ee60a175653b41eb3d67.png",
+    "static/media/Alone.png": "/static/media/Alone.6dbff85060dc85b57cd9.png",
+    "static/media/image.png": "/static/media/image.7cf78b42312577d4c8f3.png",
+    "static/media/imagem_2023-11-21_191507162.png": "/static/media/imagem_2023-11-21_191507162.6a2ce624750fa91a0a9f.png",
+    "static/media/imagem_2023-01-14_012135193 (1).png": "/static/media/imagem_2023-01-14_012135193 (1).2990d3102f6a51cb8550.png",
+    "static/media/image (1).png": "/static/media/image (1).90a08dea197cb847baf4.png",
+    "static/media/Cmisafluminenseleftfeminina.png": "/static/media/Cmisafluminenseleftfeminina.130cef5d1845cd554d2d.png",
+    "static/media/15195641246_15170945177_D40-1332-014_zoom1-2.png": "/static/media/15195641246_15170945177_D40-1332-014_zoom1-2.a30a92fcff1b380cf74d.png",
+    "static/media/image (4).png": "/static/media/image (4).3eb4deae43196cd014da.png",
+    "static/media/15195639859_15186736348_imagem_2023-04-17_115903763.png": "/static/media/15195639859_15186736348_imagem_2023-04-17_115903763.6be9bd3312aea9f54c63.png",
+    "static/media/moonhouse.ttf": "/static/media/moonhouse.27ab573368b14c8ed14f.ttf",
+    "static/media/Bull-Bot.png": "/static/media/Bull-Bot.598ad5f87e21d1781208.png",
+    "static/media/imgcarrinho200px.png": "/static/media/imgcarrinho200px.f9f3a55fa74de8f8cf43.png",
+    "static/media/15195641015_15171215674_M_0087_002004314_01-2 (11).png": "/static/media/15195641015_15171215674_M_0087_002004314_01-2 (11).aa92b748ffb4377c38d6.png",
+    "static/media/imagem_2023-12-12_144445511-300x300 2 (1).png": "/static/media/imagem_2023-12-12_144445511-300x300 2 (1).5b6fc7246778363d4fbb.png",
+    "static/media/image (5).png": "/static/media/image (5).b4128f742b8e1832b231.png",
+    "static/media/do-utilizador.png": "/static/media/do-utilizador.c920752422c11377083e.png",
+    "static/media/logo.svg": "/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/index.html",
+    "main.990ddb4e.css.map": "/static/css/main.990ddb4e.css.map",
+    "main.55f5c7f4.js.map": "/static/js/main.55f5c7f4.js.map",
+    "488.17b092e6.chunk.js.map": "/static/js/488.17b092e6.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.990ddb4e.css",
+    "static/js/main.55f5c7f4.js"
+  ]
+}

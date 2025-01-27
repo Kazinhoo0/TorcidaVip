@@ -28,8 +28,8 @@ export default function IndexComponent () {
             </div>
 
             <div>
-                <InfoSite customTop={2850}/>
-                <InfoAtendimentos customcopyrightcontainer={3400} customTop={3000}/>
+                <InfoSite customTop={3960}/>
+                <InfoAtendimentos customcopyrightcontainer={4500} customTop={4150}/>
             </div>
             
 

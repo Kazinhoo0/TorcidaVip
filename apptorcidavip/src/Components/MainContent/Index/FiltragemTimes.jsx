@@ -16,11 +16,12 @@ export default function FiltragemTimes () {
 
         <>
             <div className="container_filtrartimes">
-                <div className="maisfiltrartime-style">
-                </div>
-                <h1 className="style-textfiltraportime">FILTRAR POR TIMES</h1>
-            </div>
 
+                <div className="maisfiltrartime-style">
+                    <h1 className="style-textfiltraportime">FILTRAR POR TIMES</h1>
+                </div>
+                
+            </div>
 
                 <div className='container-productsfiltrartimes'>
 

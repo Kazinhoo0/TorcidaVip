@@ -18,121 +18,34 @@ export default function MaisVendidos() {
         <>
             <div className="container-maisvendido">
                 <div className="maisvendido-style">
+                    <h1 className="style-textmaisvendido">MAIS VENDIDOS</h1>
                 </div>
-                <h1 className="style-textmaisvendido">MAIS VENDIDOS</h1>
             </div>
 
             <div className="products-maisvendidos">
 
                 <Product linkimg={camisa11} />
 
-
-                <div className="products-opcoes">
-
-                    <div>
-                        <div>
-                            <img src={gorro} alt="" />
-
-                            <img className='favorite-icon' src={heart} alt="" />
-                        </div>
+                
+                <Product linkimg={gorro} />
 
 
-                        <p className='itensname-style' style={{ display: 'flex', justifyContent: 'start', height: 10 }}>
-                            Regata Fluminense Left Feminina
-                        </p>
-                        <h3 style={{ display: 'flex', justifyContent: 'start', fontWeight: 'bold' }}>R$ 59,90</h3>
-                    </div>
-
-                </div>
+                <Product linkimg={camisa7} />
 
 
-                <div className="products-opcoes">
-                    <div>
-
-                        <img src={camisa7} alt="" />
-
-                        <img className='favorite-icon' src={heart} alt="" />
-
-                        <p className='itensname-style' style={{ display: 'flex', justifyContent: 'start', height: 10 }}>
-                            Regata Fluminense Left Feminina
-                        </p>
-                        <h3 style={{ display: 'flex', justifyContent: 'start', fontWeight: 'bold' }}>R$ 59,90</h3>
-
-                    </div>
+                <Product linkimg={camisa9} />
 
 
-
-                </div>
-
-
-                <div className="products-opcoes">
-                    <div>
-                        <img src={camisa9} alt="" />
-
-                        <p className='itensname-style' style={{ display: 'flex', justifyContent: 'start', height: 10 }}>
-                            Regata Fluminense Left Feminina
-                        </p>
-                        <h3 style={{ display: 'flex', justifyContent: 'start', fontWeight: 'bold' }}>R$ 59,90</h3>
-                    </div>
+                <Product linkimg={camisa8} />
 
 
-
-                </div>
-
-
-                <div className="products-opcoes">
-                    <div>
-                        <img src={camisa8} alt="" />
+                <Product linkimg={camisa10} />
 
 
-                        <p className='itensname-style' style={{ display: 'flex', justifyContent: 'start', height: 10 }}>
-                            Regata Fluminense Left Feminina
-                        </p>
-                        <h3 style={{ display: 'flex', justifyContent: 'start', fontWeight: 'bold' }}>R$ 59,90</h3>
-                    </div>
-
-                </div>
+                <Product linkimg={camisa6} />
 
 
-                <div className="products-opcoes">
-
-                    <div>
-                        <img src={camisa10} alt="" />
-
-                        <p className='itensname-style' style={{ display: 'flex', justifyContent: 'start', height: 10 }}>
-                            Regata Fluminense Left Feminina
-                        </p>
-                        <h3 style={{ display: 'flex', justifyContent: 'start', fontWeight: 'bold' }}>R$ 59,90</h3>
-                    </div>
-
-                </div>
-
-
-                <div className="products-opcoes">
-
-                    <div>
-                        <img src={camisa6} alt="" />
-
-                        <p className='itensname-style' style={{ display: 'flex', justifyContent: 'start', height: 10 }}>
-                            Regata Fluminense Left Feminina
-                        </p>
-                        <h3 style={{ display: 'flex', justifyContent: 'start', fontWeight: 'bold' }}>R$ 59,90</h3>
-                    </div>
-
-                </div>
-
-
-                <div className="products-opcoes">
-                    <div>
-                        <img src={camisa5} alt="" />
-
-                        <p className='itensname-style' style={{ display: 'flex', justifyContent: 'start', height: 10 }}>
-                            Regata Fluminense Left Feminina
-                        </p>
-                        <h3 style={{ display: 'flex', justifyContent: 'start', fontWeight: 'bold' }}>R$ 59,90</h3>
-                    </div>
-
-                </div>
+                <Product linkimg={camisa5} />
 
             </div>
 

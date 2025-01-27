@@ -30,7 +30,7 @@
 .container-homepag {
     /* border: 1px solid red; */
     width: 1600px;
-    height: 3390px;
+    height: 4590px;
     position: absolute;
     left: 120px;
 }
@@ -106,21 +106,105 @@
 }
 
 .container-maisvendido {
-    /* border: 1px solid red; */
+    /* border: 1px solid red;  */
     height: 120px;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 120px;
+    
 }
 
 .maisvendido-style {
-    /* Rectangle 20 */
-    position: absolute;
+    /* position: absolute; */
     width: 250px;
     height: 58px;
-    left: 155px;
-    top: 30px;
+    /* left: 155px;
+    top: 30px; */
     background: #47B868;
     border-radius: 0px 100px 0px 0px;
     transform: matrix(1, 0, 0, -1, 0, 0);
 
+}
+
+.icon-addcart {
+   
+    /*Rectangle 20 */
+    /* position: absolute; */
+    border: 1px solid rgba(0, 0, 0, 0.39);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* left: 155px;
+    top: 30px; */
+    background: #47B868;
+    transition: 1s;
+    border-radius: 5px;
+    /* border-radius: 0px 100px 0px 0px; */
+    
+}
+
+.icon-addcart:hover {
+    background: white;
+
+}
+
+.container-choose-size {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: 1px solid red; */
+    height: 58px;
+    padding-bottom: 10px;
+}
+
+.font-addcart {
+    /* border: 1px solid red; */
+    /* height: 50px; */
+    color: white;
+    font-family: 'Teko';
+    font-size: 30px;
+    text-align: end;
+}
+
+.container-roll-sizes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: 1px solid red; */
+    width: 250px;
+    height: 60px;
+}
+
+.imgcarrinhocompras-style {
+    color: white;
+}
+
+
+.icon-addcart:hover .imgcarrinhocompras-style,
+.icon-addcart:hover .font-addcart {
+  color: black; /* Muda a cor para preto */
+}
+
+.sun-sizes:hover h4 {
+    color: white;
+}
+
+.sun-sizes {
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.452);
+    width: 60px;
+    height: 40px;
+    transition: 1s;
+}
+
+.sun-sizes:hover  {
+    background-color: #47B868;
 }
 
 .style-textmaisvendido {
@@ -130,14 +214,15 @@
     position: absolute;
     width: 250px;
     height: 57px;
-    left: 140px;
-    top: 5px;
+    right: 10px;
+    top: 3px;
     font-family: 'Teko';
     font-style: normal;
     font-weight: 400;
     font-size: 45px;
-    line-height: 57px;
+    line-height: 120px;
     color: #ffffff;
+    transform: matrix(1, 0, 0, -1, 0, 0);
 
 }
 
@@ -153,10 +238,19 @@
     padding: 0px;
     gap: 30px 15px;
     position: absolute;
-    width: 1290.83px;
-    height: 820px;
+    width: 1500.83px;
+    height: 1300px;
     left: 155px;
-    top: 125px;
+    top: 250px;
+}
+
+
+.container-adicionarcarrinho {
+    /* border: 1px solid red; */
+    height: 130px;
+    width: 300px;
+    display: none;
+
 }
 
 
@@ -173,13 +267,16 @@
     gap: 30px 20px;
     position: absolute;
     width: 1290.83px;
-    height: 772px;
+    height: 1260px;
     left: 155px;
-    top: 1150px;
+    top: 1760px;
 }
 
 .container-bigproductdestaque {
-    /* border: 1px solid blue; */
+    /* border: 1px solid blue;  */
+    display: flex;
+    width: 900px;
+    height: 750px;
 }
 
 
@@ -188,30 +285,39 @@
     height: 120px;
     width: 100%;
     position: absolute;
-    top: 1000px;
+    top: 1600px;
+    
 }
 
 .products-opcoes {
 
-    /* Camisa 11 */
-    /* Auto layout */
     /* border: 1px solid red;  */
-    background-color: rgba(228, 226, 226, 0.363);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding-top: 20px;
+    padding-left: 20px;
     gap: 9px;
     isolation: isolate;
-    width: 305.21px;
-    height: 375px;
-
+    width: 320.21px;
+    height: 620px;
     /* Inside auto layout */
     flex: none;
     order: 0;
     flex-grow: 0;
+    cursor: pointer;
 
 }
+
+.products-opcoes:hover {
+    background-color: rgba(228, 226, 226, 0.349);
+}
+
+
+.products-opcoes:hover .container-adicionarcarrinho {
+    display: block;
+
+}
+
 
 
 .imgstyle-products {
@@ -236,20 +342,16 @@
 
 .itensname-style {
     /* Regata Vasco Alone Infantil R$ 59,90 */
-
+    /* border: 1px solid red; */
+    text-align: start;
     width: 300.21px;
-    height: 0;
+    height: 50px;
     font-family: 'Montserrat Alternates';
     font-style: normal;
-    font-weight: 300;
-    font-size: 16px;
+    font-weight: 600;
+    font-size: 19px;
     /* line-height: 25px; */
     color: #000000;
-    
-    
-    
-
-
     /* Inside auto layout */
     /* flex: none;
     order: 1;
@@ -290,7 +392,7 @@
     height: 120px;
     width: 100%;
     position: absolute;
-    top: 2000px;
+    top: 3090px;
 }
 
 
@@ -300,16 +402,15 @@
     position: absolute;
     width: 315px;
     height: 49px;
-    left: 107px;
-    top: 35px;
-
+    right: 0px;
+    top: 0px;
     font-family: 'Teko';
     font-style: normal;
     font-weight: 400;
-    font-size: 38px;
-    line-height: 0px;
-
+    font-size: 45px;
+    line-height: 100px;
     color: #FFFFFF;
+    transform: matrix(1, 0, 0, -1, 0, 0);
 
 
 }
@@ -320,14 +421,15 @@
     position: absolute;
     width: 380px;
     height: 57px;
-    left: 110px;
-    top: 5px;
+    right: 0px;
+    top: 0px;
     font-family: 'Teko';
     font-style: normal;
     font-weight: 400;
     font-size: 45px;
-    line-height: 57px;
+    line-height: 120px;
     color: #ffffff;
+    transform: matrix(1, 0, 0, -1, 0, 0);
 }
 
 
@@ -336,7 +438,7 @@
     position: absolute;
     width: 340px;
     height: 58px;
-    left: 155px;
+    left: 0px;
     top: 30px;
     background: #47B868;
     border-radius: 0px 100px 0px 0px;
@@ -348,9 +450,9 @@
 .maisfiltrartime-style {
     /* Rectangle 20 */
     position: absolute;
-    width: 250px;
+    width: 290px;
     height: 58px;
-    left: 155px;
+    left: 0px;
     top: 30px;
     background: #47B868;
     border-radius: 0px 100px 0px 0px;
@@ -375,7 +477,7 @@
     width: 1290.83px;
     height: 430px;
     left: 155px;
-    top: 2120px;
+    top: 3270px;
 
 }
 
@@ -407,12 +509,9 @@
     font-style: normal;
     font-weight: 400px;
     font-size: 25px;
-    line-height: 35px;
+    line-height: 32px;
     text-align: center;
-    
     color: #000000;
-    
-    
     /* Inside auto layout */
     flex: none;
     order: 1;
@@ -425,7 +524,7 @@
     /* border: 1px solid red; */
     display: flex;
     position: absolute;
-    width: 1096px;
+    width: 1406px;
     height: 100px;
     left: 400px;
     top: max(0px, min(2850px, 3400px));
@@ -433,8 +532,10 @@
 
 
 .container-info {
-    /* border: 1px solid red; */
-    width: 500px;
+    border: 1px solid rgba(0, 0, 0, 0.37);
+    border-radius: 15px;
+    width: 450px;
+    margin-left: 10px;
 }
 
 .info-title-style {
@@ -471,10 +572,13 @@
 }
 
 .cont-sun-atendimento {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     width: 1300px;
     display: flex;
-    
+    position: absolute;
+    left: 300px;
+    top: 80px;
+  
 }
 
 .infos-atendimentos {
@@ -487,6 +591,20 @@
     margin: 0px;
     gap: 0px;
     
+}
+
+.style-infos-title-atendimento {
+    padding: 0px;
+    margin: 0px;
+    gap: 0px;
+    text-Align: start;
+    color: white;
+    font-family: 'Russo One';
+    font-style: normal;
+    font-weight: 400;
+    background: #363537;
+    border-radius: 0px; 
+    cursor: pointer;
 }
 
 .style-infos-atendimento {
@@ -540,7 +658,7 @@
     color: white;
     width: 1903px;
     position: absolute;
-    height: 100px;
+    height: 60px;
     /* border: 1px solid rgb(5, 5, 5); */
     background-color:#47B868;
    
