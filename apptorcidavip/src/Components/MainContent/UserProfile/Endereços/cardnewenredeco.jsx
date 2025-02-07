@@ -7,7 +7,9 @@ export default function cardnewendereco () {
     return (
 
         <div className="container-cardnewendereco">
+
             <div className='cardnewendereco'>
+
                 <div className='nome-info'>
 
                     <div className='name-endereco'>
@@ -29,6 +31,7 @@ export default function cardnewendereco () {
                 </div>
             
             </div>
+            
         </div>
     )
 }

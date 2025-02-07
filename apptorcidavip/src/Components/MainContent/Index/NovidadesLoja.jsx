@@ -1,13 +1,13 @@
 
 import casacodestaque from '../../../imgs/casacovascodestaque.png';
-import camisa1 from '../../../imgs/15195641246_15170945177_D40-1332-014_zoom1-2.png';
-import camisa2 from '../../../imgs/Bull-Bot.png';
 import heart from '../../../imgs/heart.png';
 import Product from '../Product/DesigneProduct';
+import { useContext } from 'react';
+import ContextProducts from '../../../context/ContextProduct';
 
 export default function NovidadesLoja ( ) {
 
-
+    // const {produtos} = useContext(ContextProducts)
 
     return ( 
         <>
@@ -22,11 +22,11 @@ export default function NovidadesLoja ( ) {
 
                 <div style={{display: 'grid', padding: 0}}>
 
-                    <Product linkimg={camisa1} nomeitem={'Regata Fluminense Left Feminina'} />
+                    {/* {produtos.slice(0,2).map((produto) => (
+                        <Product key={produto.id} produto={produto} />
+                    )) } */}
+                    
 
-                    <Product linkimg={camisa2} nomeitem={'Regata Fluminense Left Feminina'} />
-                    
-                    
                 </div>  
 
                 <div className='container-bigproductdestaque'>

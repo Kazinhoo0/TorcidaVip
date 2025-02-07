@@ -1,39 +1,49 @@
 import './Endereços.css';
 import { IoMdAddCircle } from "react-icons/io";
 import Cardnewendereco from './cardnewenredeco';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import Novoendereco from './Novoendereco';
 
 
 
 export default function Enderecos () {
 
-    const navigate = useNavigate
+
+    const [onclicknovoendereco, setnovoendereco] = useState(false);
 
     const handlenovoendereco = () => {
-         navigate('/novoendereco')
+        setnovoendereco(!onclicknovoendereco)
     }
     
     return ( 
+        <>
+           
+            <div className="container-enderecos">
+                {onclicknovoendereco && (
+                    <Novoendereco/>
+                )}
 
-        <div className="container-enderecos">
-            <div className='title-enderecos'>
-                <h3>Meus Endereços</h3>
-            </div>
-
-
-            <div onClick={handlenovoendereco} className='container-addendereco'>
+        
+                {!onclicknovoendereco && (
+                    <>
                 
-                <h2>Adicionar endereço</h2>
-                <IoMdAddCircle className='img-addendereco-style'/>
-            </div>
+                        <div className='title-enderecos'>
+                            <h3 style={{fontSize: 23}}>Meus Endereços</h3>
+                        </div>
 
-            <Cardnewendereco/>
-            <Cardnewendereco/>
-            <Cardnewendereco/>
-            
-             
-            
-            
-        </div>  
+                        <div onClick={handlenovoendereco}  className='container-addendereco'>
+                        <h2>Adicionar endereço</h2>
+                        <IoMdAddCircle className='img-addendereco-style'/>
+                        </div>
+                    
+                        <Cardnewendereco/> 
+                  
+                    </>  
+                )}
+  
+            </div>  
+        </>
+    
     )
 }

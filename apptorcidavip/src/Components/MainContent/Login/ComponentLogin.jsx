@@ -1,28 +1,107 @@
+import { useContext } from 'react';
 import './login.css';
 import { FcGoogle } from "react-icons/fc";
+import ContextProducts from '../../../context/ContextProduct';
+import { useNavigate } from 'react-router-dom';
+import Toastify from 'toastify-js';
+import 'toastify-js/src/toastify.css';
 
 
 export default function ComponentLogin () {
+
+    const {dadosuserlogin, setDadosUserLogin} = useContext(ContextProducts);
+
+
+
+    const navigate = useNavigate();
+
+    const handleefetuarlogin = async (e) => {
+        e.preventDefault();
+
+        setTimeout(async () => {
+            const response = await fetch('http://localhost:3000/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    email: dadosuserlogin.email, 
+                    senha: dadosuserlogin.senha
+                })
+            });
+
+            const data = await response.json();
+
+            console.log(data)
+
+
+            if (data.success) {
+            
+                Toastify({
+                    text: 'Login efetuado com sucesso!',
+                    position: 'center',
+                    style: {
+                        background: '#33ff00',
+                        color: '#ffffff'
+                    }
+                }).showToast();
+
+                // Garantindo que o loader seja visível por pelo menos 2 segundos
+                setTimeout(() => {
+                    navigate('/gerenciarpratos');
+                }, 2000);
+
+            }
+            else {
+                Toastify({
+                    text: 'Usuário não cadastrado, porfavor crie uma conta!',
+                    position: 'center',
+                    style: {
+                        background: '#db2d0e',
+                        color: '#ffffff'
+                    }
+                }).showToast();
+            }
+
+            if (!dadosuserlogin.senha || !dadosuserlogin.email) {
+                Toastify({
+                    text: 'Todos os campos precisam estar preenchidos!',
+                    position: 'center',
+                    style: {
+                        background: '#db2d0e',
+                        color: '#ffffff'
+                    }
+                }).showToast();
+            }
+
+        }, 2000);
+    };
 
     return (
 
         <div className="container-inputs">
             <h2 className='titleloginregister'>JÁ SOU CLIENTE</h2>
 
-            <form action="">
-                <input placeholder="E-MAIL" className="inputs-style" type="text" />
+            <form onSubmit={handleefetuarlogin} action="">
 
-                <input  placeholder="SENHA" className="inputs-style" type="password" />
+                <input
+                    placeholder="E-MAIL"
+                    className="inputs-style"
+                    type="text" 
+                    onChange={(e) => setDadosUserLogin({...dadosuserlogin, email: e.target.value})}
+                />
+
+                <input  
+                    placeholder="SENHA"
+                    className="inputs-style"
+                    type="password"
+                    onChange={(e) => setDadosUserLogin({...dadosuserlogin, senha: e.target.value})}
+                />
+
+                <div className='container-buttonentrar'>
+                    <button className="buttonentrar-style">ENTRAR</button>
+                </div>
+
             </form>
 
-            <div style={{height: 80, display: 'flex', justifyContent: 'start' }}>
-                <button className="text-recoverypass">Esqueci minha senha</button>
-            </div>
-
-            <div className='container-buttonentrar'>
-                <button className="buttonentrar-style">ENTRAR</button>
-            </div>
-            
             <div style={{height: 200, display: 'flex', alignItems:'center', justifyContent: 'center'}}>
                 <div className="container-logingoogle">
                     <FcGoogle className="googleicon"/>

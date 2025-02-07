@@ -3,18 +3,23 @@ import InfoSite from '../Index/InfoSite';
 import TopFlap from '../Index/TopFlap';
 import './searchproduct.css';
 import icon10 from '../../../imgs/Icon (10).png';
-import vector from '../../../imgs/Vector.png';
-import camisa11 from '../../../imgs/image.png';
-import heart from '../../../imgs/heart.png';
+// import vector from '../../../imgs/Vector.png';
+// import camisa11 from '../../../imgs/image.png';
+// import heart from '../../../imgs/heart.png';
 import Product from '../Product/DesigneProduct';
 import FilterCategory from './FilterCategory';
-
+import ContextProducts from '../../../context/ContextProduct';
+import { useContext } from 'react';
 
 
 
 export default function SearchProduct() {
 
+    const { produtos, loading, error} = useContext(ContextProducts)
 
+    if (loading) return <p>Carregando produtos...</p>;
+    if (error) return <p>Erro ao carregar os produtos: {error}</p>;
+    
     return (
 
 
@@ -54,18 +59,10 @@ export default function SearchProduct() {
 
                 <div className='container-renderproducts-searched'>
 
-                    <Product linkimg={camisa11} favoriteicon={heart} />
-                    <Product linkimg={camisa11} favoriteicon={heart} />
-                    <Product linkimg={camisa11} favoriteicon={heart} />
-                    <Product linkimg={camisa11} favoriteicon={heart} />
-                    <Product linkimg={camisa11} favoriteicon={heart} />
-                    <Product linkimg={camisa11} favoriteicon={heart} />
-                    <Product linkimg={camisa11} favoriteicon={heart} />
-                    <Product linkimg={camisa11} favoriteicon={heart} />
-                    <Product linkimg={camisa11} favoriteicon={heart} />
-                    <Product linkimg={camisa11} favoriteicon={heart} />
-                    <Product linkimg={camisa11} favoriteicon={heart} />
-
+                    {produtos.slice(0,15).map((produto) => (
+                                   <Product key={produto.id} produto={produto} />
+                    ))}  
+                
                 </div>
 
             </div>

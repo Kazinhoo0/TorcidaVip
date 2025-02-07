@@ -1,0 +1,57 @@
+.background-commentpag {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 2px;
+    left: 0px;
+    /* border: 1px solid red; */
+    background-color: rgba(0, 0, 0, 0.678);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container_boxcomment {
+    /* border: 1px solid red;  */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    position: absolute;
+    width: 1000px;
+    height: 700px;
+    top: 15%;       
+    left: 25%; 
+    border-radius: 5px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; ;
+}
+
+.son-boxcomment {
+    /* border: 1px solid red; */
+    width: 90%;
+    height: 90%;
+}
+
+.title-and-closedpag {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.inputs-comment {
+    /* border: 1px solid red; */
+  display: grid;
+}
+
+.container-itemrecommend {
+     /* border: 1px solid red; */
+  display: grid;
+}
+
+.btn-send-comment {
+    /* border: 1px solid red; */
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}

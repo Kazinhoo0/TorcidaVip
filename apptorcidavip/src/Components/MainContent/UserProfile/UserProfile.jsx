@@ -13,18 +13,26 @@ import icon7 from '../../../imgs/Icon (9).png';
 import { CiLogout } from "react-icons/ci";
 import { TiWarningOutline } from "react-icons/ti";
 import Enderecos from './Endereços/Endereços'
-// import Devolução from './Devolução/Devolução';
-// import Enviado from './Endereços/Endereços';
-// import MinhaAvaliacoes from './Endereços/Endereços';
-// import OpPagamento from './Endereços/Endereços';
-// import Processamento from './Endereços/Endereços';
-// import Sair from './Endereços/Endereços';
-// import TodosOsPedidos from './Endereços/Endereços';
-
+import { useState } from 'react';
+import TodosOspedidos from './TodosOsPedidos/TodosPedidos';
+import OpPagamento from './OpPagamento.jsx/Pagamento';
+import Minhasavaliacoes from './MinhasAvaliações.jsx/Avaliações';
+import DeletarConta from './DeletarConta/DeletarContar';
+import Processando from './Processando/Processamento';
+import Devolução from './Devolução/Devolução';
+import Enviados from './Enviado/Enviado';
 
 
 
 export default function UserProfile () {
+
+    const [showingpageclicked, setShowingpageclicked] = useState(null)
+
+    const onclickpage = (pageName) => {
+        setShowingpageclicked(pageName)        
+    }
+
+    
 
 
     return (
@@ -43,15 +51,15 @@ export default function UserProfile () {
 
                         <h3 className='font-title-profilepage'>Informações de Usuário</h3>
                         <div>
-                            <p className='sun-optionsprofile'>
+                            <p onClick={() => onclickpage('enderecos')} className='sun-optionsprofile'>
                                 <img src={icon1} alt="" />
                                 <p className='font-text-profilepage'>Endereços de Entrega</p>
                             </p>
-                            <p className='sun-optionsprofile'>
+                            <p  onClick={() => onclickpage('cartoes')} className='sun-optionsprofile'>
                                 <img src={icon2} alt="" />
                                 <p className='font-text-profilepage'>Opções de Pagamento</p>
                             </p>
-                            <p className='sun-optionsprofile'>
+                            <p onClick={() => onclickpage('avaliacoes')}  className='sun-optionsprofile'>
                                 <img  src={icon3} alt="" />
                                 <p className='font-text-profilepage'>Minhas Avaliações</p>
                             </p>
@@ -63,19 +71,19 @@ export default function UserProfile () {
 
                         <h3 className='font-title-profilepage'>Meus Pedidos</h3>
                         <div>
-                            <p className='sun-optionsprofile'>
+                            <p onClick={() => onclickpage('todospedidos')} className='sun-optionsprofile'>
                                 <img src={icon5} alt="" />
                                 <p className='font-text-profilepage'>Todos os Pedidos</p>
                             </p>
-                            <p className='sun-optionsprofile'>
+                            <p onClick={() => onclickpage('processando')}  className='sun-optionsprofile'>
                                 <img src={icon7} alt="" />
                                 <p className='font-text-profilepage'>Processando</p>
                             </p>
-                            <p className='sun-optionsprofile'>
+                            <p onClick={() => onclickpage('enviado')} className='sun-optionsprofile'>
                                 <img  src={icon6} alt="" />
                                 <p className='font-text-profilepage'>Enviado</p>
                             </p>
-                            <p className='sun-optionsprofile'>
+                            <p onClick={() => onclickpage('devolucao')} className='sun-optionsprofile'>
                                 <img  src={icon4} alt="" />
                                 <p className='font-text-profilepage'>Devolução</p>
                             </p>
@@ -91,7 +99,7 @@ export default function UserProfile () {
                                 <CiLogout className='iconsprofile-style'/>
                                 <p className='font-text-profilepage'>Sair</p>
                             </p>
-                            <p className='sun-optionsprofile'>
+                            <p onClick={() => onclickpage('deletar')}  className='sun-optionsprofile'>
                                 <TiWarningOutline className='iconsprofile-style' color='red'/>
                                 <p  style={{color:'red'}}  className='font-text-profilepage'>Deletar Conta</p>
                             </p>
@@ -103,9 +111,24 @@ export default function UserProfile () {
 
                 <div className='container-profile-right'>
 
-                    <Enderecos/>
-          
+                    {showingpageclicked === 'todospedidos' && <TodosOspedidos/>}
 
+                    {showingpageclicked === 'enderecos' && <Enderecos/>}
+
+                    {showingpageclicked === 'cartoes' && <OpPagamento/>}
+
+                    {showingpageclicked === 'avaliacoes' && <Minhasavaliacoes/>}
+
+                    {showingpageclicked === 'cartoes' && <OpPagamento/>}
+
+                    {showingpageclicked === 'deletar' && <DeletarConta/>}
+
+                    {showingpageclicked === 'processando' && <Processando/>}
+
+                    {showingpageclicked === 'enviado' && <Enviados/>}
+
+                    {showingpageclicked === 'devolucao' && <Devolução/>}
+          
                 </div>
 
             </div>

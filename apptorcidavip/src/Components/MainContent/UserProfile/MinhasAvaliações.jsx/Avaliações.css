@@ -1,0 +1,79 @@
+.container-avaliacoes {
+    border: 1px solid rgba(39, 37, 37, 0.404);
+    position: absolute;
+    left: 550px;
+    width: 1300px;
+    height: 900px;
+}
+
+.title-avaliacoes {
+    padding-left: 50px;
+    /* border: 1px solid red; */
+    font-size: 18px;
+    display: flex;
+    align-items: end;
+}
+
+
+.realizadas-pendentes {
+    /* border: 1px solid red; */
+    border-bottom: 1px solid grey;
+    height: 50px;
+    display: flex;
+    justify-content: start;
+    align-items: end;
+    padding-left: 30px;
+}
+
+.container-cardavaliacoes {
+    display: flex;
+    /* border: 1px solid red; */
+    margin-bottom: 5px;
+    border: 5px;
+    width: 1000px;
+    height: 100px;
+    box-shadow: rgba(2, 2, 0, 0.24) 0px 3px 2px;
+}
+
+.cont-cards-avaliacoes {
+    /* border: 1px solid red; */
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 40px;
+    padding-top: 20px;
+
+}
+
+.imagem-produtodo-avalicoes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: 1px solid red; */
+    width: 120px;
+    height: 98px;
+}
+
+.border-imagem-avaliacoes {
+    border: 1px solid grey;
+    border-radius: 10px;
+    width: 80px;
+    height: 80px;
+}
+.nome-item-avaliacoes {
+    /* border: 1px solid red; */
+    width: 300px;
+}
+
+.estrelas-avaliacoes {
+    border: 1px solid red;
+    width: 300px;
+}
+
+.date-compra {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid red; */
+    width: 300px;
+}

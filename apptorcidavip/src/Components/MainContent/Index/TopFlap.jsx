@@ -53,7 +53,7 @@ export default function TopFlap () {
             <div className='container-searchbar'>
                 <input className='borderinput'/>
                 
-                <div style={{width: 47.03, height: 47.03, left: 9, top: 4, position: 'absolute', background: '#47B868', borderRadius: 9999}} />
+                <div style={{width: 52.10, height: 55.03, left: 3.3, top: 2, position: 'absolute', background: '#47B868', borderRadius: 9999}} />
                 
                 <div className='inputstyle' >
                     <input 
@@ -64,7 +64,7 @@ export default function TopFlap () {
                     />
                 </div>
                 
-               <div style={{width: 36.80, height: 35.44, left: 12, top: 8, position: 'absolute'}}>
+               <div style={{width: 36.80, height: 35.44, left: 10, top: 12, position: 'absolute'}}>
                     <img src={iconlupa} alt="" />
                 </div>
 
@@ -99,15 +99,17 @@ export default function TopFlap () {
 
             </div>
 
-            <div style={{width: 384, height: 26, left: 400, top: 53, position: 'absolute', justifyContent: 'flex-start', alignItems: 'center', gap: 40, display: 'inline-flex'}}>
+            <div style={{width: 384, height: 50, left: 450, top: 35, position: 'absolute', justifyContent: 'flex-start', alignItems: 'center', gap: 40, display: 'inline-flex',fontFamily: 'Teko'}}>
                 <div style={{width: 109, height: 26, position: 'relative'}}>
-                <div style={{left: 0, top: 0, position: 'absolute', color: 'white', fontSize: 25, fontFamily: 'Teko', fontWeight: '500', wordWrap: 'break-word'}}>Masculino</div>
+                    <div style={{left: 0, top: 0, position: 'absolute', color: 'white', fontSize: 25, fontWeight: '500', wordWrap: 'break-word'}}>Masculino</div>
                 </div>
+
                 <div style={{width: 99, height: 26, position: 'relative'}}>
-                <div style={{left: 0, top: 0, position: 'absolute', color: 'white', fontSize: 20, fontFamily: 'Roboto Mono', fontWeight: '700', wordWrap: 'break-word'}}>Feminino</div>
+                    <div style={{left: 0, top: 0, position: 'absolute', color: 'white', fontSize: 25, fontWeight: '500', wordWrap: 'break-word'}}>Feminino</div>
                 </div>
+
                 <div style={{width: 97, height: 26, position: 'relative'}}>
-                <div style={{left: 0, top: 0, position: 'absolute', color: 'white', fontSize: 20, fontFamily: 'Roboto Mono', fontWeight: '700', wordWrap: 'break-word'}}>Infantil</div>
+                    <div style={{left: 0, top: 0, position: 'absolute', color: 'white', fontSize: 25, fontWeight: '500', wordWrap: 'break-word'}}>Infantil</div>
                 </div>
             </div>
 

@@ -1,16 +1,46 @@
-import camisa11 from '../../../imgs/Cmisafluminenseleftfeminina.png';
-import camisa10 from '../../../imgs/Alone.png';
-import camisa9 from '../../../imgs/15195641015_15171215674_M_0087_002004314_01-2 (11).png';
-import camisa8 from '../../../imgs/image (1).png';
-import gorro from '../../../imgs/image.png';
-import camisa7 from '../../../imgs/imagem_2023-01-14_012135193 (1).png';
-import camisa6 from '../../../imgs/imagem_2023-11-21_191507162.png';
-import camisa5 from '../../../imgs/Change-Flu.png';
-import heart from '../../../imgs/heart.png';
 import Product from '../Product/DesigneProduct';
+import ContextProducts from '../../../context/ContextProduct';
+import { useContext} from 'react';
+import './Index.css'
+
 
 
 export default function MaisVendidos() {
+    
+
+    const { produtosdbImgandProd ,produtosdb, produtosapi, loading, error} = useContext(ContextProducts)
+
+    if (loading) return <p>Carregando produtos...</p>;
+
+    if (error) {
+        console.log(error)
+    }
+         
+    console.log("Dados do db no frontend:", produtosdb);
+    console.log("Dados da api frontend:", produtosapi);
+
+
+    // const produtosComImagens = produtosdb.map(produto => {
+    //     // Filtrar as imagens relacionadas ao produto
+    //     const imagensRelacionadas = produtosdbImgandProd.filter(imagem => imagem.produto_id === produto.id);
+    //     return {
+    //       ...produto,
+    //       imagens: imagensRelacionadas,
+    //     };
+    //   });
+
+
+    //    // Criar uma lista de produtos combinando os dados da API com as imagens do BD
+    //    const produtosComImagens = produtosapi.map(produto => {
+    //     // Encontrar as imagens no produtosdb com base no idprodutopai
+    //     const imagensProduto = produtosdb.filter(img => img.idprodutopai === produto.idprodutopai);
+
+    //     return {
+    //         ...produto,  // Mantém os dados do produto original
+    //         // imagens: imagensProduto.map(img => img.caminho)
+    //         caminho: imagensProduto ? imagensProduto.caminho : null, // Adiciona as imagens
+    //     };
+    // });
 
 
     return (
@@ -24,38 +54,15 @@ export default function MaisVendidos() {
 
             <div className="products-maisvendidos">
 
-                <Product linkimg={camisa11} />
-
                 
-                <Product linkimg={gorro} />
-
-
-                <Product linkimg={camisa7} />
-
-
-                <Product linkimg={camisa9} />
-
-
-                <Product linkimg={camisa8} />
-
-
-                <Product linkimg={camisa10} />
-
-
-                <Product linkimg={camisa6} />
-
-
-                <Product linkimg={camisa5} />
-
+                {produtosdb.slice(0, 10).map((produto) => {
+                    // console.log('produtos dentro do api:' , produto); 
+                    return <Product key={produto.id} produto={produto} />
+                })} 
+               
+              
             </div>
 
         </>
-
-
-
-
-
-
-
     )
 }

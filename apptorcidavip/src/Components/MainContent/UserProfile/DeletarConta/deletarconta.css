@@ -1,0 +1,119 @@
+.container-deletarconta {
+    border: 1px solid rgba(39, 37, 37, 0.404);
+    position: absolute;
+    left: 550px;
+    width: 1300px;
+    height: 900px;
+}
+
+.title-deletarconta {
+    padding-left: 50px;
+    /* border: 1px solid red; */
+    font-size: 18px;
+    display: flex;
+    align-items: end;
+}
+
+.container-aviso-deletarconta {
+    /* border: 1px solid red; */
+    height: 250px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding-left: 50px;
+}
+
+.aviso-deletarconta {
+    padding-left: 10px;
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    border: 2px solid #ffaf38;
+    width: 900px;
+    height: 120px;
+}
+
+.background-commentpag {
+    width: 100%;
+    height: 1865px;
+    position: fixed;
+    top: 2px;
+    left: 0px;
+    /* border: 1px solid red; */
+    background-color: rgba(128, 78, 78, 0.678);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+}
+
+.container-boxcomment {
+    /* border: 1px solid red;  */
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    position: absolute;
+    width: 1000px;
+    height: 700px;
+    top: 15%;       
+    left: 25%; 
+    border-radius: 5px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; ;
+}
+
+.cont-motivofecharconta {
+    border: 1px solid #d1cfcf6e;
+    height: 300px;
+    text-align: start;
+    padding-left: 50px;
+}
+
+.container-btn-excluirconta {
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding-left: 100px;
+    height: 130px;
+}
+
+.btn-excluirconta {
+    border: 1px solid grey;
+    background-color: white;
+    border-radius: 5px;
+    width: 250px;
+    height: 50px;
+    font-family: 'Teko';
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.8s;
+}
+
+.style-input-newcomment {
+    border: 1px solid rgba(63, 61, 61, 0.438);
+    border-radius: 3px;
+    padding: 10px;
+    padding-left: 15px;
+}
+
+.btn-enviar {
+    padding: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    border: none;
+    background-color: #47B868;
+    color: white;
+    cursor: pointer;
+}
+
+.btn-excluirconta:hover {
+    background-color: red;
+    color: white;
+}
+
+.title-and-closedpag {
+    font-family: 'Teko';
+}

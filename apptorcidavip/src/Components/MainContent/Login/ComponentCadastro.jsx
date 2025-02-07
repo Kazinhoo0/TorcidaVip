@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom"
+import ContextProducts from "../../../context/ContextProduct";
 
 
 export default function ComponentCadastro () {
@@ -10,15 +12,26 @@ export default function ComponentCadastro () {
         navigate('/register')
     }   
 
+    const {Dadosnewuser, setDadosNewUser} = useContext(ContextProducts)
 
     return (
         <div className="container-inputs">
             <h2 className='titleloginregister'>CADASTRO DE USUÁRIO</h2>
 
             <form action="">
-                <input placeholder="NOME" className="inputs-style" type="text" />
+                <input 
+                    placeholder="NOME"
+                    className="inputs-style"
+                    type="text"
+                    onChange={(e) => setDadosNewUser({...Dadosnewuser, nome: e.target.value}) }
+                  />
 
-                <input placeholder="ENDEREÇO DE E-MAIL"  className="inputs-style" type="password" />
+                <input 
+                    placeholder="ENDEREÇO DE E-MAIL"
+                    className="inputs-style"
+                    type="email"
+                    onChange={(e) => setDadosNewUser({...Dadosnewuser, email: e.target.value}) }
+                  />
 
             </form>
 

@@ -1,0 +1,68 @@
+.container-cartoes {
+    border: 1px solid rgba(39, 37, 37, 0.404);
+    position: absolute;
+    left: 550px;
+    width: 1300px;
+    height: 900px;
+}
+
+.container-tittle-cartoes {
+    padding-left: 50px;
+    /* border: 1px solid red; */
+    font-size: 18px;
+    display: flex;
+    align-items: end;
+}
+
+.container-rendercarts {
+    /* border: 1px solid red; */
+    height: 500px;
+    padding: 10px;
+    padding-left: 50px;
+}
+
+.container-cardcartoes {
+    display: flex;
+    margin-top: 10px;
+    border: 1px solid rgba(128, 128, 128, 0.24); 
+    border-radius: 6px;
+    border-top-left-radius: 6px;
+    background-color: rgba(230, 225, 225, 0.075);
+    /* border-bottom: 1px solid grey; */
+    width: 650px;
+    height: 120px;
+}
+
+.cont-marcacart {
+    /* border: 1px solid red; */
+    width: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.photo-marca {
+    border: 1px solid rgba(192, 190, 190, 0.808);
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+}
+
+.cont-infocart {
+    /* border: 1px solid red; */
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+}
+
+.cont-excluircart {
+    /* border: 1px solid red; */
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding-right: 30px;
+    color: rgba(0, 0, 255, 0.671);
+    
+}

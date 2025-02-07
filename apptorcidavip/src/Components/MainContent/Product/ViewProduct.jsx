@@ -1,7 +1,7 @@
 import InfoAtendimentos from '../Index/InfoAtendimentos';
 import InfoSite from '../Index/InfoSite';
 import TopFlap from '../Index/TopFlap';
-import CartAvaliations from './CartAvaliations'
+import CartAvaliations from './comments/CartAvaliations'
 import './viewproduct.css';
 import iconmercadopago from '../../../imgs/Mercado Pago.png';
 import iconestrela from '../../../imgs/Icon (11).png';
@@ -14,19 +14,31 @@ import gorro from '../../../imgs/Change-Flu.png';
 import camisafluminense from '../../../imgs/image (1).png';
 import casacovasco from '../../../imgs/15195639859_15186736348_imagem_2023-04-17_115903763.png';
 import Product from './DesigneProduct';
+import { useState } from 'react';
+import CartNewComment from './comments/CartNewComments';
 
 export default function ViewProduct () {
+
+    const [clickednewcomment, setClickednewcomment] = useState(false)
+
+    const handlecreatenewcomment = () => {
+        setClickednewcomment(!clickednewcomment)
+    }
 
 
     return (
 
         <div className="container-viewprod">
+            {clickednewcomment && <CartNewComment closecart={handlecreatenewcomment}/>}
 
             <TopFlap />
 
             <div className='sun-viewprod'>
 
+    
                 <div className='aligndiv-viewprod'>
+
+                
 
                     <div style={{ paddingLeft: 20, height: '80px', display: 'flex', alignItems: 'end', justifyContent: 'start' }} >
                         <p>Início - Femínino - Camisas - Regata Fluminense Left Feminino</p>
@@ -43,27 +55,18 @@ export default function ViewProduct () {
                                 <small style={{fontFamily:'Montserrat Alternates', fontWeight: '500', marginLeft: 10}} ><small style={{fontWeight: '800'}}>Até 12x sem cartão</small> com a linha de Crédito</small>
                             </p>
                             
-                            <ul style={{listStyle: 'none', display: 'flex', alignItems: 'center', justifyContent: 'start'}}>
-                                <li>
-                                    <button className='style-feedback-start'><img className='style-iconestrela' src={iconestrela} alt="" /></button>
-                                </li>
-
-                                <li>
-                                    <button className='style-feedback-start'><img className='style-iconestrela' src={iconestrela} alt="" /></button>
-                                </li>
-
-                                <li >
-                                    <button className='style-feedback-start'><img className='style-iconestrela' src={iconestrela} alt="" /></button>
-                                </li>
-
-                                <li>
-                                    <button className='style-feedback-start'><img className='style-iconestrela' src={iconestrela} alt="" /></button>
-                                </li>
-
-                                <li>
-                                    <button className='style-feedback-start'><img className='style-iconestrela' src={iconestrela} alt="" /></button>
-                                </li>
-                            </ul>
+                            <div className="rating">
+                                <input type="radio" id="star5" name="rate" value="5" />
+                                <label for="star5" title="5 estrelas"></label>
+                                <input type="radio" id="star4" name="rate" value="4" />
+                                <label for="star4" title="4 estrelas"></label>
+                                <input type="radio" id="star3" name="rate" value="3" />
+                                <label for="star3" title="3 estrelas"></label>
+                                <input type="radio" id="star2" name="rate" value="2" />
+                                <label for="star2" title="2 estrelas"></label>
+                                <input checked="" type="radio" id="star1" name="rate" value="1" />
+                                <label for="star1" title="1 estrelas"></label>
+                            </div>
 
                             <p>Ver comentários 0</p>
                                                     
@@ -98,11 +101,11 @@ export default function ViewProduct () {
 
                                 </div>
 
-                                <div>
-                                    <div className= 'container-buttonadicionarcarrinho' >
-                                        <h1 className="style-textpagproduto">Adicionar ao carrinho</h1>
-                                    </div>
-                                </div>  
+                                
+                                <div className= 'container-buttonadicionarcarrinho' >
+                                    <button >Adicionar ao carrinho</button>
+                                </div>
+                                
 
                             </div>
                         </div>
@@ -166,7 +169,7 @@ export default function ViewProduct () {
                                 <div style={{width: '50%', display: 'flex', justifyContent: 'end', paddingRight: '30px'}}>
 
                                     <div className='cont-fazeravaliacao'>
-                                        <p className='text-fazeravaliacao'>Fazer uma avaliacão</p>
+                                        <p onClick={handlecreatenewcomment} className='text-fazeravaliacao'>Fazer uma avaliacão</p>
                                     </div>
 
                                 </div>
@@ -180,9 +183,7 @@ export default function ViewProduct () {
                                 </div>
 
                                 <div className= 'sun-avalicaoes'>
-                                    <CartAvaliations title={'teste'}/>
-                                    <CartAvaliations title={'teste'}/>
-                                    <CartAvaliations title={'teste'}/>
+                                    <CartAvaliations title={'Muito bom!'} description={'Tadawdawdwadawdawdawdawdwadawdaw'}/>
                                 </div>
                                 
                             </div>

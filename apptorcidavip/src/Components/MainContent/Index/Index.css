@@ -30,7 +30,7 @@
 .container-homepag {
     /* border: 1px solid red; */
     width: 1600px;
-    height: 4590px;
+    height: 4490px;
     position: absolute;
     left: 120px;
 }
@@ -61,7 +61,7 @@
     width: 460px;
     /* border: 1px solid red; */
     height: 53.16px;
-    left: 950px;
+    left: 1050px;
     position: absolute;
     top: 40px;
 }
@@ -106,16 +106,19 @@
 }
 
 .container-maisvendido {
-    /* border: 1px solid red;  */
+    /* border: 1px solid red; */
+    width: 100%;
     height: 120px;
     display: flex;
     align-items: center;
     position: absolute;
-    top: 120px;
+    right: 45px;
+    top: 110px;
     
 }
 
 .maisvendido-style {
+    cursor: default;
     /* position: absolute; */
     width: 250px;
     height: 58px;
@@ -229,7 +232,7 @@
 .products-maisvendidos {
     /* Opções */
     /* Auto layout */
-    /* border: 1px solid black; */
+    border: 1px solid black;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -238,10 +241,10 @@
     padding: 0px;
     gap: 30px 15px;
     position: absolute;
-    width: 1500.83px;
+    width: 1800.83px;
     height: 1300px;
-    left: 155px;
-    top: 250px;
+    left: 0px;
+    top: 260px;
 }
 
 
@@ -285,6 +288,7 @@
     height: 120px;
     width: 100%;
     position: absolute;
+    right: 45px;
     top: 1600px;
     
 }
@@ -392,6 +396,7 @@
     height: 120px;
     width: 100%;
     position: absolute;
+    right: 45px;
     top: 3090px;
 }
 
@@ -434,6 +439,7 @@
 
 
 .maisnovidadeloja-style {
+    cursor: default;
     /* Rectangle 20 */
     position: absolute;
     width: 340px;
@@ -448,6 +454,7 @@
 
 
 .maisfiltrartime-style {
+    cursor: default;
     /* Rectangle 20 */
     position: absolute;
     width: 290px;
@@ -604,7 +611,7 @@
     font-weight: 400;
     background: #363537;
     border-radius: 0px; 
-    cursor: pointer;
+    cursor: default;
 }
 
 .style-infos-atendimento {
@@ -622,7 +629,7 @@
 }
 
 .style-infos-atendimento:hover {
-    color: #008000;
+    color: #c5c5c5;
 }
 
 .container-sun-infos {

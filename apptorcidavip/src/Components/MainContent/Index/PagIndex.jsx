@@ -32,10 +32,6 @@ export default function IndexComponent () {
                 <InfoAtendimentos customcopyrightcontainer={4500} customTop={4150}/>
             </div>
             
-
-            
-            
-
         </div>
     
     )

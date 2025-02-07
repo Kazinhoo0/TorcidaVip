@@ -3,7 +3,7 @@
     position: relative;
     /* border: 1px solid rgb(255, 2, 255);  */
     width: 1900px;
-    height: 3900px; 
+    height: 3850px; 
     overflow-x: hidden;
     overflow-y: hidden;
 }
@@ -21,6 +21,12 @@
     width: 1600px;
     position: absolute;
     top: 150px;
+}
+
+.shirt-image {
+    border: 1px solid red;
+    width: auto;
+    height: auto;
 }
 
 .cont-descricao-prod {
@@ -48,6 +54,40 @@
     background: #47B868;
     border-radius: 0px 100px 0px 0px;
     transform: matrix(1, 0, 0, -1, 0, 0);
+}
+
+.container-description {
+    /* border: 1px solid red; */
+    width: 380px;
+    max-height: 150px;
+    align-Items: center;
+    justify-Content: start;
+    padding-Left: 20px;
+    overflow: hidden;
+}
+.container-description p {
+    word-wrap: break-word; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.container-imgsprod {
+    /* border: 1px solid red; */
+    border-top: 1px solid rgba(128, 128, 128, 0.267);
+    height: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-imgsprod img {
+    padding: 5px;
+    width: 60px;
+    height: 50px;
+    margin-Left: 10px;
+    border: 1px solid rgba(128, 128, 128, 0.274);
+    border-radius: 5px ;
 }
 
 .sun-header-vocepodegostar h2 {
@@ -111,6 +151,7 @@
 
 .qtn-start-review {
     /* border: 1px solid red; */
+    padding-top: 10px;
     display: flex;
     align-items: center;
     justify-content: start;
@@ -316,31 +357,36 @@
 }
 
 .container-buttonadicionarcarrinho {
-    /* position: absolute; */
-    width: 320px;
-    height: 58px;
+    /* border: 1px solid red; */
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding-top: 5px;
+}
+
+.container-buttonadicionarcarrinho button {
+    font-family: 'Teko';
+    font-weight: 600;
+    font-size: 30px;
+    color: white;
+    border: none;
+    font-weight: 400;
+    /* border: 1px solid red; */
+    height: 37px;
+    width: 250px;
+    height: 55px;
     /* left: 155px;
     top: 30px; */
     background: #47B868;
-    border-radius: 0px 100px 0px 0px;
-    transform: matrix(1, 0, 0, -1, 0, 0);
-
+    border-radius: 0px;
+    cursor: pointer;
+    transition: 0.8s;
 }
 
-
-.style-textpagproduto {
-    position: absolute;
-    width: 300px;
-    height: 57px;
-    right: 10px;
-    top: 3px;
-    font-family: 'Teko';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 120px;
-    color: #ffffff;
-    transform: matrix(1, 0, 0, -1, 0, 0);
+.container-buttonadicionarcarrinho:hover button {
+    background: #edeeee;
+    color: black;
+    
 }
 
 .text-descricaoproduct {
@@ -367,4 +413,51 @@
     width: 20px;
 }
 
+
+/* BOX RADIO ESTRELAS */
+
+.rating {
+    /* border: 1px solid red; */
+    height: 30px;
+    width: 130px;
+    
+}
+.rating:not(:checked) > input {
+    position: absolute;
+    appearance: none;
+}
+
+.rating:not(:checked) > label {
+    float: right;
+    cursor: pointer;
+    font-size: 30px;
+    color: #666;
+    padding: 0px;
+    margin: 0px;
+}
+
+.rating:not(:checked) > label:before {
+    content: '★';
+}
+
+    .rating > input:checked + label:hover,
+    .rating > input:checked + label:hover ~ label,
+    .rating > input:checked ~ label:hover,
+    .rating > input:checked ~ label:hover ~ label,
+    .rating > label:hover ~ input:checked ~ label {
+    color: #e58e09;
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    color: #ff9e0b;
+}
+
+.rating > input:checked ~ label {
+    color: #ffa723;
+}
+  
+  
+  
+  
 

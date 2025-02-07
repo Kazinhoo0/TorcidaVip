@@ -6,9 +6,10 @@ import iconboleto from '../../../imgs/icons8-boleto-48.png';
 import iconmastercard from '../../../imgs/icons8-mastercard-64.png';
 import iconvisa from '../../../imgs/icons8-visa-50.png';
 import iconseguranca from '../../../imgs/icons8-segurança-verificada-96.png';
-import instagram from '../../../imgs/instagram (1).png'
-import facebook from '../../../imgs/facebook.png'
-import whatsapp from '../../../imgs/whatsapp.png'
+import instagram from '../../../imgs/instagram (1).png';
+import facebook from '../../../imgs/facebook.png';
+import whatsapp from '../../../imgs/whatsapp.png';
+import sslseguro from '../../../imgs/iamgem ssl.jpg'
 
 
 export default function InfoAtendimentos ({customTop,customcopyrightcontainer}) {
@@ -115,9 +116,12 @@ export default function InfoAtendimentos ({customTop,customcopyrightcontainer}) 
 
                         </div>
 
-                        <div style={{display: 'grid' }}>
+                        <div style={{display: 'grid'}}>
                             <h2 className='style-infos-title-atendimento'>Site Seguro</h2>
-                            <img src={iconseguranca} alt="" />
+                            <div style={{display: 'flex', alignItems: 'center'}}>
+                                <img style={{width: 115, height: 50 }} src={sslseguro} alt="" />
+                                <img style={{width: '60px'}} src={iconseguranca} alt="" />
+                            </div>
                         </div>
 
                     </div>

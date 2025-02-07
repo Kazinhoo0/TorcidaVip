@@ -2,7 +2,7 @@
     position: relative; /* Define o limite do posicionamento absoluto */
     /* border: 1px solid rgb(255, 2, 255); */
     width: 1900px;
-    height: 1800px; /* Altura definida para limitar o filho */
+    height: 1700px; /* Altura definida para limitar o filho */
     overflow-x: hidden;
 }
 
@@ -127,6 +127,11 @@
     cursor: pointer;
 }
 
+/* .container-buttonentrar:hover { 
+   background-color:#edeeee ;
+   color: black;
+} */
+
 .buttonentrar-style {
     width: 300px;
     height: 57px;
@@ -141,6 +146,9 @@
     transform: matrix(1, 0, 0, -1, 0, 0);
     cursor: pointer;
 }
+
+
+
 
 
 .titleloginregister {
