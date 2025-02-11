@@ -24,9 +24,9 @@
 }
 
 .shirt-image {
-    border: 1px solid red;
-    width: auto;
-    height: auto;
+    /* border: 1px solid red; */
+    width: 300.21px;
+    height: 300px;
 }
 
 .cont-descricao-prod {

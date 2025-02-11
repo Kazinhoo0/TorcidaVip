@@ -74,35 +74,35 @@ export default function Provider ({ children }) {
     //     fetchprodwithimg();
     // }, []);
 
-    useEffect(() => {
-        console.log("useEffect foi disparado!");
+    // useEffect(() => {
+    //     console.log("useEffect foi disparado!");
     
-        const fetchProdutosApi = async () => {
-            try {
-                const response = await fetch('http://localhost:3000/api/get/produtos');
-                if (!response.ok) {
-                    throw new Error(`Erro: ${response.statusText}`);
-                }
-                const data = await response.json();
-                if (data && Array.isArray(data)) {
-                    const produtosUnicos = data.filter((produto, index, self) => 
-                        index === self.findIndex((p) => (
-                            p.idProdutoPai === produto.idProdutoPai
-                        ))
-                    );
-                    setProdutosApi(produtosUnicos);
-                } else {
-                    throw new Error("A resposta não contém dados válidos.");
-                }
-            } catch (err) {
-                setError(err.message);
-            } finally {
-                setLoading(false);
-            }
-        };
+    //     const fetchProdutosApi = async () => {
+    //         try {
+    //             const response = await fetch('http://localhost:3000/api/get/produtos');
+    //             if (!response.ok) {
+    //                 throw new Error(`Erro: ${response.statusText}`);
+    //             }
+    //             const data = await response.json();
+    //             if (data && Array.isArray(data)) {
+    //                 const produtosUnicos = data.filter((produto, index, self) => 
+    //                     index === self.findIndex((p) => (
+    //                         p.idProdutoPai === produto.idProdutoPai
+    //                     ))
+    //                 );
+    //                 setProdutosApi(produtosUnicos);
+    //             } else {
+    //                 throw new Error("A resposta não contém dados válidos.");
+    //             }
+    //         } catch (err) {
+    //             setError(err.message);
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     };
     
-        fetchProdutosApi();
-    }, []);
+    //     fetchProdutosApi();
+    // }, []);
 
     useEffect(() => {
         console.log('Useeffect do banco de dados disparado');
@@ -141,7 +141,7 @@ export default function Provider ({ children }) {
 
 
     useEffect(() => {
-        console.log('Useeffect do banco de dados disparado');
+        console.log('GET IMAGENS DISPARADO');
     
         const fetchProductsDB = async () => {
             try {              
@@ -153,14 +153,14 @@ export default function Provider ({ children }) {
                 });
     
                 if (!response.ok) {
-                    throw new Error('Erro ao buscar dados');
+                    throw new Error('Erro ao buscar imagens');
                 }
     
                 const data = await response.json();
     
                 if (data.success) {
                     setProdutosDb(data.data);
-                    console.log('produtos do db no provider', data);
+                    console.log('imagens recuperada do banco de dados', data);
                 } else {
                     setError(data.message);
                 }

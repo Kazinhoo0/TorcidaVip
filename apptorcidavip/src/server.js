@@ -21,7 +21,7 @@ const { error } = require('console');
 app.use(cors());
 app.use(express.urlencoded({ extended: true })); 
 app.use(express.json());
-
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -83,34 +83,34 @@ app.use(bodyParser.json());
 
 app.use(express.json());
 
-app.get('/api/get/produtos', async (req, res) => {
-    try {
-        const response = await fetch('https://api.bling.com.br/v3/produtos?pagina=1limite=10', {
-            method: 'GET',
-            headers: {
-                Authorization: `Bearer ${process.env.API_KEY}`
-            }
-        });
+// app.get('/api/get/produtos', async (req, res) => {
+//     try {
+//         const response = await fetch('https://api.bling.com.br/v3/produtos?pagina=2', {
+//             method: 'GET',
+//             headers: {
+//                 Authorization: `Bearer ${process.env.API_KEY}`
+//             }
+//         });
 
-        if (!response.ok) {
-            throw new Error(`Erro ao acessar a API do Bling: ${response.status} - ${response.statusText}`);
-        }
-        const data = await response.json();
+//         if (!response.ok) {
+//             throw new Error(`Erro ao acessar a API do Bling: ${response.status} - ${response.statusText}`);
+//         }
+//         const data = await response.json();
 
-        if (!data) {
-          throw new Error('Resposta da API do Bling não contém produtos');
-      }
-        saveProdutosToDB(data.data);
+//         if (!data) {
+//           throw new Error('Resposta da API do Bling não contém produtos');
+//       }
+//         saveProdutosToDB(data.data);
 
-        // console.log('Dados da resposta:', data);
+//         // console.log('Dados da resposta:', data);
 
-        res.json(data.data);
+//         res.json(data.data);
         
-    } catch (error) {
-        console.error('Erro:', error.message);
-        res.status(500).json({ error: 'Erro ao acessar a API do Bling' });
-    }
-});
+//     } catch (error) {
+//         console.error('Erro:', error.message);
+//         res.status(500).json({ error: 'Erro ao acessar a API do Bling' });
+//     }
+// });
 
 
 // Configuração para servir os arquivos estáticos do React
@@ -321,24 +321,39 @@ app.post('/upload-image', uploadUser.single('image'), async (req, res) => {
 
 app.post('/api/get/imgs', async (req, res) => {
   try {
-      const query = `SELECT * FROM imagensprod`;
+      const query = `
+        SELECT 
+        p.id AS produto_id, 
+          p.nome, 
+          p.preco, 
+          i.caminho AS imagem
+        FROM Produtos p
+        LEFT JOIN imagensprod i ON p.id = i.produto_id
+        WHERE p.idprodutopai IS NULL;
+      `;
+      
       const [rows] = await db.execute(query); 
 
       if (rows.length > 0) {
-          res.status(200).json({
+          return res.status(200).json({
               success: true,
               message: "Produtos retornados com sucesso!",
               data: rows,
           });
-        } else {
-        return res.status(404).json({
+      } else {
+          return res.status(404).json({
+              success: false,
+              message: "Nenhum produto encontrado",
+          });
+      }
+  } catch (erro) {
+      console.error("Erro ao buscar produtos:", erro);
+      return res.status(500).json({
           success: false,
-          message: "Nenhum produto encontrado",
-        });
+          message: "Erro interno do servidor",
+          error: erro.message
+      });
   }
-} catch (erro) {
-  console.error(error)
-}
 });
 
 app.post('/upload-image/product', upload.array('image', 10), async (req, res) => {

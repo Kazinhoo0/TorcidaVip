@@ -7,7 +7,18 @@ import ContextProducts from '../../../context/ContextProduct';
 
 export default function NovidadesLoja ( ) {
 
-    // const {produtos} = useContext(ContextProducts)
+    const { produtosdbImgandProd ,produtosdb, produtosapi, loading, error} = useContext(ContextProducts)
+
+    if (loading) return <p>Carregando produtos...</p>;
+
+    if (error) {
+        console.log(error)
+    }
+
+
+    const produtosUnicos = Array.from(
+        new Map(produtosdb.map((produto) => [produto.produto_id, produto])).values()
+    );
 
     return ( 
         <>
@@ -22,9 +33,9 @@ export default function NovidadesLoja ( ) {
 
                 <div style={{display: 'grid', padding: 0}}>
 
-                    {/* {produtos.slice(0,2).map((produto) => (
-                        <Product key={produto.id} produto={produto} />
-                    )) } */}
+                    {produtosUnicos.slice(11, 13).map((produto) => (
+                        <Product key={produto.produto_id} produto={produto} />
+                    ))}
                     
 
                 </div>  

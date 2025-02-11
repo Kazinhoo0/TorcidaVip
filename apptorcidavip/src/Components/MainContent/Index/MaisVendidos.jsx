@@ -19,6 +19,10 @@ export default function MaisVendidos() {
     console.log("Dados do db no frontend:", produtosdb);
     console.log("Dados da api frontend:", produtosapi);
 
+    const produtosUnicos = Array.from(
+        new Map(produtosdb.map((produto) => [produto.produto_id, produto])).values()
+    );
+
 
     // const produtosComImagens = produtosdb.map(produto => {
     //     // Filtrar as imagens relacionadas ao produto
@@ -28,19 +32,6 @@ export default function MaisVendidos() {
     //       imagens: imagensRelacionadas,
     //     };
     //   });
-
-
-    //    // Criar uma lista de produtos combinando os dados da API com as imagens do BD
-    //    const produtosComImagens = produtosapi.map(produto => {
-    //     // Encontrar as imagens no produtosdb com base no idprodutopai
-    //     const imagensProduto = produtosdb.filter(img => img.idprodutopai === produto.idprodutopai);
-
-    //     return {
-    //         ...produto,  // Mantém os dados do produto original
-    //         // imagens: imagensProduto.map(img => img.caminho)
-    //         caminho: imagensProduto ? imagensProduto.caminho : null, // Adiciona as imagens
-    //     };
-    // });
 
 
     return (
@@ -55,10 +46,9 @@ export default function MaisVendidos() {
             <div className="products-maisvendidos">
 
                 
-                {produtosdb.slice(0, 10).map((produto) => {
-                    // console.log('produtos dentro do api:' , produto); 
-                    return <Product key={produto.id} produto={produto} />
-                })} 
+            {produtosUnicos.slice(0, 10).map((produto) => (
+                <Product key={produto.produto_id} produto={produto} />
+            ))}
                
               
             </div>

@@ -18,14 +18,14 @@ export default function Product({ favoriteicon, produto }) {
             
             <div>
 
-                <img className='shirt-image' src={'produto.caminho'} alt="" />
+                <img className='shirt-image' src={produto.imagem} alt="" />
 
                 <img className='favorite-icon' src={favoriteicon} alt="" />
 
                 <p className='itensname-style' style={{ display: 'flex', justifyContent: 'start' }}>
-                    {'produto.nome'}
+                    {produto.nome}
                 </p>
-                <h3 style={{ display: 'flex', justifyContent: 'start', fontWeight: 'bold', fontSize: '30px' }}>R${'produto.preco'}</h3>
+                <h3 style={{ display: 'flex', justifyContent: 'start', fontWeight: 'bold', fontSize: '30px' }}>R${produto.preco}</h3>
 
             </div>
 

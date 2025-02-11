@@ -232,7 +232,7 @@
 .products-maisvendidos {
     /* Opções */
     /* Auto layout */
-    border: 1px solid black;
+    /* border: 1px solid black; */
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
