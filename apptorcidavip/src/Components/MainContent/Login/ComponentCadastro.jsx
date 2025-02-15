@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom"
 import ContextProducts from "../../../context/ContextProduct";
+import { Helmet } from "react-helmet";
 
 
 export default function ComponentCadastro () {
@@ -16,6 +17,10 @@ export default function ComponentCadastro () {
 
     return (
         <div className="container-inputs">
+
+            <Helmet>
+                <title>Torcida Vip | Registrar conta</title>
+            </Helmet>
             <h2 className='titleloginregister'>CADASTRO DE USUÁRIO</h2>
 
             <form action="">

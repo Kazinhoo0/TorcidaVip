@@ -1,4 +1,4 @@
-
+import { Helmet } from "react-helmet"
 
 
 export default function Cardavaliacoes () {
@@ -6,6 +6,10 @@ export default function Cardavaliacoes () {
     return (
 
         <div className="container-cardavaliacoes">
+
+            <Helmet>
+                <title>Torcida Vip | Avaliacôes</title>
+            </Helmet>
 
             <div className="imagem-produtodo-avalicoes">
                 <div className="border-imagem-avaliacoes">

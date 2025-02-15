@@ -13,16 +13,16 @@
     position: absolute;
     left: 0px;
     top: 360px;
-    /* border: 1px solid red; */
-    width: 1900px;
+    /* border: 1px solid rgb(55, 255, 6); */
+    width: 1850px;
     height: 1950px;
     display: flex;
     justify-content: center;
 }
 
 .container-filtercategory {
-    /* border: 1px solid rgb(12, 12, 12); */
-    width: 220px;
+    border: 1px solid rgb(12, 12, 12);
+    width: 250px;
     height: 1200px;
     border-top: none;
 }
@@ -174,13 +174,13 @@ input[type="checkbox"]:checked {
     line-height: 24px;
     color: #000000;
     margin-right: 10px;
-   
 }
 
 .container-renderproducts-searched {
+    /* border: 1px solid red; */
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    /* border: 1px solid red; */
+    width: 1300px;
     height: 1720px;
     padding-left: 100px;
 }

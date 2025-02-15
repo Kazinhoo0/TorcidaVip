@@ -4,11 +4,57 @@ import { IoMdClose } from "react-icons/io";
 import ContextProducts from '../../../../context/ContextProduct';
 
 
-export default function CartNewComment ({closecart}) {
+export default function CartNewComment ({closecart, idproduto}) {
 
     const {novocomentario , setNovocomentario} = useContext(ContextProducts);
 
     const [imagens, setImagens] = useState([]);
+
+    console.log('idproduto no componente de novo comentario',idproduto)
+
+    const handlecreatenewcomment = async (e) => {
+        e.preventDefault();
+
+        console.log(novocomentario)
+
+        if (imagens.length === 0) {
+            console.error("Nenhuma imagem selecionada.");
+            return;
+        }
+
+        try {
+            const formData = new FormData();
+
+
+            // Adiciona cada imagem individualmente ao formData
+            imagens.forEach((imagem, index) => {
+                console.log('url da imagem', imagem)
+                formData.append("image", imagem);
+            });
+            formData.append("idproduto", idproduto);
+            formData.append("title", novocomentario.title);
+            formData.append("description", novocomentario.description);
+            formData.append("avaliacao", novocomentario.avaliacao);
+
+            console.log('novo comentario infomacoes:',novocomentario)
+
+            const response = await fetch("http://localhost:3000/api/add/newcomment", {
+                method: "POST",
+                body: formData
+            });
+
+            const data = await response.json();
+            console.log("Resposta recebida:", data);
+
+            if (!data.erro) {
+                console.log("Imagens enviadas com sucesso!");
+            } else {
+                console.error("Erro ao enviar as imagens.");
+            }
+        } catch (error) {
+            console.error("Erro na requisição:", error);
+        }
+    };
 
     return (
 
@@ -26,7 +72,7 @@ export default function CartNewComment ({closecart}) {
                         <small style={{color: 'black'}}>*Todos os campos são obrigatórios, a menos que sejam marcados como opcionais.</small>
                     </div>
 
-                    <form className="form-comment" action="">
+                    <form onSubmit={handlecreatenewcomment} className="form-comment" action="">
 
                         <div className="inputs-comment">
                             <span style={{display: 'flex', paddingTop: '20px', paddingBottom: '15px'}}>Titulo</span>
@@ -47,7 +93,6 @@ export default function CartNewComment ({closecart}) {
                              className='style-input-newcomment'
                             />
 
-                            <span style={{display: 'flex', paddingTop: '20px', paddingBottom: '15px'}}>Descrição</span>
                             <small style={{display: 'flex', paddingBottom: '15px'}}>*Utilize este campo para adicionar imagens do seu produto</small>
                             <div className="img-preview">
                                 {/* Exibe as imagens selecionadas */}
@@ -75,30 +120,33 @@ export default function CartNewComment ({closecart}) {
 
                         <div className="container-itemrecommend">
                             <div style={{display: 'flex', alignItems: 'center', paddingTop: '10px'}}>
-                                <span>Você Recomendaria este produto ?</span>
+                                <span>Avaliação do produto:</span>
                             </div>
                         
                             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'start'}}>
-                                <input 
-                                 type="radio"
-                                 name="sim"
-                                 id=""
-                                />
-                                <span>Sim</span>
+                                <select 
+                                    className="style-avaliacaoprod"
+                                    name="avaliacao"
+                                    id="avaliacao"
+                                    onChange={(e) => {
+                                        setNovocomentario({... novocomentario, avaliacao: e.target.value })
+                                        console.log("Valor selecionado:", e.target.value);
+                                    }}
+                                    value={novocomentario.avaliacao}
+                                  >
+                                    <option value="">...</option>
+                                    <option value="muito_ruim">Muito Ruim</option>
+                                    <option value="ruim">Ruim</option>
+                                    <option value="bom">Bom</option>
+                                    <option value="muito_bom">Muito bom</option>
+                                    <option value="excelente">Excelente</option>
+                                </select>
                             </div>
                             
-                            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'start'}}>
-                                <input 
-                                 type="radio"
-                                 name="nao"
-                                 id=""
-                                />
-                                <span>Não</span>
-                            </div>
                         </div>
 
                         <div className="btn-send-comment">
-                            <button className="btn-enviar">Adicionar comentário</button>
+                            <button type='submit' className="btn-enviar">Adicionar comentário</button>
                         </div>
 
                     </form>

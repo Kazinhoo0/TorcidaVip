@@ -6,7 +6,7 @@ import ComponentAreaTorcedor from "./ComponentAreaTorcedor";
 import ComponentCadastro from "./ComponentCadastro";
 import ComponentLogin from "./ComponentLogin";
 import './login.css';
-
+import { Helmet } from "react-helmet";
 
 
 
@@ -18,6 +18,10 @@ export default function PagLogin () {
     return (
       
         <div className="container-login-register">
+
+            <Helmet>
+                <title>Torcida Vip | Entre na sua conta</title>
+            </Helmet>
 
             <TopFlap/>
             

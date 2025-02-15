@@ -1,0 +1,302 @@
+import InfoAtendimentos from '../../Index/InfoAtendimentos';
+import InfoSite from '../../Index/InfoSite';
+import TopFlap from '../../Index/TopFlap';
+import CartAvaliations from '../comments/CartAvaliations'
+import './viewproduct.css';
+import iconmercadopago from '../../../../imgs/Mercado Pago.png';
+import Product from '../Designe/DesigneProduct';
+import { useContext, useState, useEffect } from 'react';
+import CartNewComment from '../comments/CartNewComments';
+import ContextProducts from '../../../../context/ContextProduct';
+import { Helmet } from 'react-helmet';
+
+export default function ViewProduct() {
+
+    const [clickednewcomment, setClickednewcomment] = useState(false);
+
+    const [infocartcomments, setinfocartcomments] = useState([]);
+
+    
+    const handlecreatenewcomment = () => {
+        setClickednewcomment(!clickednewcomment)
+    }
+
+
+    const {produtosdb, produtosapi, loading, error, productdetails } = useContext(ContextProducts)
+
+
+    useEffect(() => {
+        const fetchGetComments = async () => {
+            try {              
+                const response = await fetch('http://localhost:3000/api/get/infocomments', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ idproduto: productdetails[0].produto_id })
+                });
+    
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar os comentários');
+                }
+    
+                const data = await response.json();
+    
+                if (data.success) {
+                    setinfocartcomments(data.data);
+                    console.log('comentários retornados', data);
+                } else {
+                    console.log(data.message);
+                }
+    
+            } catch (err) {
+                console.log(err.message);
+            }
+        };
+    
+        fetchGetComments();
+    }, [])
+
+    if (loading) return <p>Carregando produtos...</p>;
+
+    if (error) {
+        console.log(error)
+    }
+         
+    console.log("Dados do db no frontend:", produtosdb);
+    console.log("Dados da api frontend:", produtosapi);
+
+    const produtosUnicos = Array.from(
+        new Map(produtosdb.map((produto) => [produto.produto_id, produto])).values()
+    );
+
+    console.log('Useeffect getcomments disparado');
+    console.log('idproduto cartcomentarios:', productdetails[0].produto_id)
+    console.log('no viewproduct :',productdetails);
+    console.log('informacoes dos comentarios',infocartcomments);
+
+    return (
+
+        <div className="container-viewprod">
+            {clickednewcomment && <CartNewComment idproduto={productdetails[0].produto_id} closecart={handlecreatenewcomment} />}
+
+            <TopFlap />
+
+            <div className='sun-viewprod'>
+
+            <Helmet>
+                <title> {productdetails[0].nome} | Torcida Vip </title>
+            </Helmet>
+
+
+                <div className='aligndiv-viewprod'>
+
+
+
+                    <div style={{ paddingLeft: 20, height: '80px', display: 'flex', alignItems: 'end', justifyContent: 'start' }} >
+                        <p>Início - Femínino - Camisas - Regata Fluminense Left Feminino</p>
+                    </div>
+
+                    <div style={{ height: '900px', display: 'flex', justifyContent: 'center' }}>
+
+                        <div className='container-info-prod'>
+                            <h2 className='h2-product-style'>{productdetails[0].nome}</h2>
+                            <h3 className='text-price-product-style'>R${productdetails[0].preco}</h3>
+
+                            <p style={{ display: 'flex', alignItems: 'center', justifyContent: 'start', width: '500px' }}>
+                                <img src={iconmercadopago} alt="" />
+                                <small style={{ fontFamily: 'Montserrat Alternates', fontWeight: '500', marginLeft: 10 }} ><small style={{ fontWeight: '800' }}>Até 12x sem cartão</small> com a linha de Crédito</small>
+                            </p>
+
+                            <div className="rating">
+                                <input type="radio" id="star5" name="rate" value="5" />
+                                <label htmlFor="star5" title="5 estrelas"></label>
+                                <input type="radio" id="star4" name="rate" value="4" />
+                                <label htmlFor="star4" title="4 estrelas"></label>
+                                <input type="radio" id="star3" name="rate" value="3" />
+                                <label htmlFor="star3" title="3 estrelas"></label>
+                                <input type="radio" id="star2" name="rate" value="2" />
+                                <label htmlFor="star2" title="2 estrelas"></label>
+                                <input checked="" type="radio" id="star1" name="rate" value="1" />
+                                <label htmlFor="star1" title="1 estrelas"></label>
+                            </div>
+
+                            <p>Ver comentários 0</p>
+
+                            <p className='text-descricaoproduct'>Regata feminina em mix de Sport Dry com superfície texturizada e Dry Max que  absorve e elimina o suor, garantindo melhor transpiração.
+                                A peça possui decote V, lateral transpassada e estampa com zero toque.</p>
+
+                            <div className='container-choose-size-adicionarcarrinho'>
+
+                                <div style={{ width: '730px', display: 'flex' }}>
+
+                                    <div style={{ display: 'grid' }}>
+                                        <label htmlhtmlFor="tamanho">Tamanho</label>
+                                        <select className='stylecelect' name="tamanho" id="">
+                                            <option value="">Escolha uma opcão...</option>
+                                            <option value="">P</option>
+                                            <option value="">M</option>
+                                            <option value="">G</option>
+                                            <option value="">GG</option>
+                                        </select>
+                                    </div>
+
+                                    <div style={{ display: 'grid' }}>
+                                        <label htmlhtmlFor="Cor">Cor</label>
+                                        <select className='stylecelect' name="cor" id="">
+                                            <option value="">Escolha uma opcão...</option>
+                                            <option value="">Amarelo</option>
+                                            <option value="">Vermelho</option>
+                                            <option value="">Preto</option>
+                                            <option value="">Branco</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+
+                                <div className='container-buttonadicionarcarrinho' >
+                                    <button >Adicionar ao carrinho</button>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                        <div className='container-info-prod'>
+                            <img className='style-productimggrande' src={productdetails[0].imagem} alt="" />
+                            <div className='container-carroselpic'>
+
+                                {productdetails[1]?.imagem && (
+                                    <div className="sun-carroselpic">
+                                        <img className='style-productimgpequeno' src={productdetails[1].imagem} alt="" />
+                                    </div>
+                                )}
+
+
+                                {productdetails[2]?.imagem && (
+                                    <div className="sun-carroselpic">
+                                        <img className='style-productimgpequeno' src={productdetails[2].imagem} alt="" />
+                                    </div>
+                                )}
+
+                                {productdetails[3]?.imagem && (
+                                    <div className="sun-carroselpic">
+                                        <img className='style-productimgpequeno' src={productdetails[3].imagem} alt="" />
+                                    </div>
+                                )}
+
+                                {productdetails[4]?.imagem && (
+                                    <div className="sun-carroselpic">
+                                        <img className='style-productimgpequeno' src={productdetails[4].imagem} alt="" />
+                                    </div>
+                                )}
+
+                                {/* <div className="sun-carroselpic">
+                                    <img className='style-productimgpequeno' src={camisafluminensecarrosel2} alt="" />
+                                </div>
+
+                                <div className="sun-carroselpic">
+                                    <img className='style-productimgpequeno' src={camisafluminensecarrosel1} alt="" />
+                                </div> */}
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div className='cont-descricao-prod'>
+                        <div className='sun-descricaoprod'>
+                            <h2>Descricão</h2>
+                            <ul>
+                                <li className='style-list-descriprod'><p>Nome:Regata Fluminense Left Feminina</p></li>
+                                <li className='style-list-descriprod'><p>Nome:Regata Fluminense Left Feminina</p></li>
+                                <li className='style-list-descriprod'><p>Nome:Regata Fluminense Left Feminina</p></li>
+                                <li className='style-list-descriprod'><p>Nome:Regata Fluminense Left Feminina</p></li>
+                                <li className='style-list-descriprod'><p>Nome:Regata Fluminense Left Feminina</p></li>
+                                <li className='style-list-descriprod'><p>Nome:Regata Fluminense Left Feminina</p></li>
+                                <li className='style-list-descriprod'><p>Nome:Regata Fluminense Left Feminina</p></li>
+                            </ul>
+
+                            <h2>Informacão Adicional</h2>
+                            <ul>
+
+                                <li className='style-list-descriprod'>
+                                    <p>Nome:Regata Fluminense Left Feminina</p>
+                                </li>
+
+                                <li className='style-list-descriprod'>
+                                    <p>Nome:Regata Fluminense Left Feminina</p>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                        <div className='container-comentarios'>
+
+                            <div className='cont-top-title'>
+
+                                <div style={{ width: '50%' }}>
+                                    <h2>Opiniões do produto</h2>
+                                </div>
+
+                                <div style={{ width: '50%', display: 'flex', justifyContent: 'end', paddingRight: '30px' }}>
+
+                                    <div className='cont-fazeravaliacao'>
+                                        <p onClick={handlecreatenewcomment} className='text-fazeravaliacao'>Fazer uma avaliacão</p>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div className='cont-top-showavaliacoes'>
+
+                                <div className='sun-infosavaliacoes'>
+                                    <h2>Avaliacões</h2>
+                                </div>
+
+                                <div className='sun-avalicaoes'>
+                                    
+                                    {infocartcomments.map((infoscomment) => (
+                                        <CartAvaliations key={infoscomment.produto_id} infoscomment= {infoscomment} />
+                                    ))}   
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div className='container-vocepodegostar'>
+
+                            <header className='header-vocepodegostar'>
+                                <div className='sun-header-vocepodegostar'>
+                                    <h2>VOCÊ PODE GOSTAR</h2>
+                                </div>
+                            </header>
+
+                            <div className='prod-vocepodegostar'>
+                                    {produtosUnicos.slice(34, 38).map((produto) => (
+                                            <Product key={produto.produto_id} produto={produto} />
+                                    ))}
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+
+            </div>
+
+            <InfoSite customTop={3220} />
+
+            <InfoAtendimentos customcopyrightcontainer={3800} customTop={3400} />
+
+
+        </div>
+    )
+}       

@@ -2,13 +2,18 @@ import imgimprovissada from '../../../../imgs/do-utilizador.png';
 import { BiDislike } from "react-icons/bi";
 import { BiLike } from "react-icons/bi";
 import { FaRegStar } from "react-icons/fa6";
+import { useState } from 'react';
 
 
 
 
-export default function CartAvaliations ({title, datapost, description}) {
+export default function CartAvaliations ({infoscomment}) {
 
+    const [commentliked, setCommentliked] = useState('');
 
+    const handlecommentclicked = () => {
+        setCommentliked(commentliked + 1)
+    }
 
     return  (
 
@@ -17,9 +22,9 @@ export default function CartAvaliations ({title, datapost, description}) {
 
                 <div className="user-info-review">
                     <img className="img-user-review" src={imgimprovissada} alt="" />
-                    <p className="titlecoment">{title}</p>
+                    <p className="titlecoment">{infoscomment.titulo}</p>
                     
-                    <p className=''>{datapost}</p>
+                    <p></p>
                     
                 </div>
 
@@ -29,31 +34,29 @@ export default function CartAvaliations ({title, datapost, description}) {
 
                 <div className='container-description'>
                     <p>
-                        {description}
+                        {infoscomment.descricao}
                     </p>
                 </div>
                 
 
                 {/* <small style={{display: 'flex', alignItems: 'center', justifyContent: 'start', paddingLeft: '20px'}}>Nobisi qui vel amet fugit facere.</small> */}
 
-                <h4 style={{display: 'flex', alignItems: 'center', justifyContent: 'start', paddingLeft: '20px'}}>Recomenda este produto:</h4>
+                <h4 style={{display: 'flex', alignItems: 'center', justifyContent: 'start', paddingLeft: '20px'}}>Avaliaçâo do produto: {infoscomment.avaliacao}</h4>
 
                 <div style={{color: 'grey',display: 'flex', alignItems: 'center', justifyContent: 'start', paddingLeft: '20px', fontWeight: 'bold'}}>
 
                     <small >Te ajudou ?</small>
 
-                    <BiLike style={{width: '50px', width: '70px', height: '30px', cursor: 'pointer'}} color="black" />
-                    <small style={{color: 'black' }}>2</small>
+                    <BiLike onClick={handlecommentclicked} style={{width: '50px', width: '70px', height: '30px', cursor: 'pointer'}} color="black" />
+                    <small style={{color: 'black' }}>{commentliked}</small>
 
                     <BiDislike style={{width: '50px', width: '70px', height: '30px', cursor: 'pointer'}}  color="black"/>
-                    <small style={{color: 'black' }}>2</small>
+                    <small style={{color: 'black' }}></small>
 
                 </div>
 
                 <div className='container-imgsprod'>
-                    <img  src={imgimprovissada} alt="" />
-                    <img  src={imgimprovissada} alt="" />
-                    <img  src={imgimprovissada} alt="" />
+                    <img src={infoscomment.userimgprod} alt="" />
                 </div>
 
             </div>

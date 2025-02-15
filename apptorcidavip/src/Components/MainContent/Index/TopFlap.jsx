@@ -18,6 +18,10 @@ export default function TopFlap () {
         navigate('/')
     }
 
+    const handlenavigatesearchprod = () => {
+        navigate('/searchproduct')
+    }
+
     const handlenavigatemakelogin = () => {
         navigate('/Login')
     }
@@ -57,14 +61,13 @@ export default function TopFlap () {
                 
                 <div className='inputstyle' >
                     <input 
-                    placeholder='BUSCAR...'
-                    style={{width: 370, height: 36.80, border: 'none', paddingLeft: 15}}
-                    type="text" 
-
+                        placeholder='BUSCAR...'
+                        style={{width: 370, height: 36.80, border: 'none', paddingLeft: 15}}
+                        type="text" 
                     />
                 </div>
                 
-               <div style={{width: 36.80, height: 35.44, left: 10, top: 12, position: 'absolute'}}>
+               <div onClick={handlenavigatesearchprod} style={{width: 36.80, height: 35.44, left: 10, top: 12, position: 'absolute', cursor:'pointer'}}>
                     <img src={iconlupa} alt="" />
                 </div>
 

@@ -1,6 +1,6 @@
-import Product from '../Product/DesigneProduct';
+import Product from '../Product/Designe/DesigneProduct';
 import ContextProducts from '../../../context/ContextProduct';
-import { useContext} from 'react';
+import { useContext } from 'react';
 import './Index.css'
 
 
@@ -32,6 +32,7 @@ export default function MaisVendidos() {
     //       imagens: imagensRelacionadas,
     //     };
     //   });
+    
 
 
     return (

@@ -3,6 +3,7 @@ import TopFlap from "../Index/TopFlap";
 import CardItemCarrinho from "./CardItemCarrinho";
 import './carrinho.css';
 import FreteeResumo from "./FreteeResumo";
+import { Helmet } from "react-helmet";
 
 
 
@@ -12,6 +13,10 @@ export default function CarrinhoCompras () {
     return (
         
         <div className="container-carrinhocompras">
+
+            <Helmet>
+                <title>Torcida Vip | Carrinho compras</title>
+            </Helmet>   
 
             <TopFlap/>
 

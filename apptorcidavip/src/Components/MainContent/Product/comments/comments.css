@@ -26,6 +26,11 @@
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; ;
 }
 
+.style-avaliacaoprod {
+  width: 150px;
+  height: 25px;
+}
+
 .son-boxcomment {
     /* border: 1px solid red; */
     width: 90%;

@@ -1,5 +1,6 @@
 import UserProfile from '../UserProfile';
 import './Endereços.css';
+import { Helmet } from 'react-helmet';
 
 
 export default function Novoendereco () {
@@ -9,6 +10,10 @@ export default function Novoendereco () {
     return ( 
 
         <div className="container-novoendereco">
+
+<           Helmet>
+                <title>Torcida Vip | Enderecos</title>
+            </Helmet>
 
             <div>
 

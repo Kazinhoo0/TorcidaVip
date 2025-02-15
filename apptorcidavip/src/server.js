@@ -83,33 +83,32 @@ app.use(bodyParser.json());
 
 app.use(express.json());
 
-// app.get('/api/get/produtos', async (req, res) => {
-//     try {
-//         const response = await fetch('https://api.bling.com.br/v3/produtos?pagina=2', {
-//             method: 'GET',
-//             headers: {
-//                 Authorization: `Bearer ${process.env.API_KEY}`
-//             }
-//         });
+//  app.get('/api/get/produtos', async (req, res) => {
+//    try {
+//          const response = await fetch('https://api.bling.com.br/v3/produtos?pagina=4', {
+//              method: 'GET',
+//              headers: {
+//                  Authorization: `Bearer ${process.env.API_KEY}`
+//              }
+//          });
 
-//         if (!response.ok) {
-//             throw new Error(`Erro ao acessar a API do Bling: ${response.status} - ${response.statusText}`);
-//         }
-//         const data = await response.json();
+//          if (!response.ok) {
+//              throw new Error(`Erro ao acessar a API do Bling: ${response.status} - ${response.statusText}`);
+//          }
+//          const data = await response.json();
 
-//         if (!data) {
-//           throw new Error('Resposta da API do Bling não contém produtos');
-//       }
-//         saveProdutosToDB(data.data);
+//          if (!data) {
+//            throw new Error('Resposta da API do Bling não contém produtos');
+//        }
+//          saveProdutosToDB(data.data);
 
-//         // console.log('Dados da resposta:', data);
-
-//         res.json(data.data);
+//           console.log('Dados da resposta:', data);
+//                  res.json(data.data);
         
-//     } catch (error) {
-//         console.error('Erro:', error.message);
-//         res.status(500).json({ error: 'Erro ao acessar a API do Bling' });
-//     }
+//      } catch (error) {
+//          console.error('Erro:', error.message);
+//          res.status(500).json({ error: 'Erro ao acessar a API do Bling' });
+//      }
 // });
 
 
@@ -239,34 +238,49 @@ app.post('/api/register', async (req, res) => {
 });
 
 
+app.post('/api/add/newcomment', upload.array('image', 10), async (req, res) => {
 
-app.post('/api/add/newcomment', async (req, res) => {
-  const { userid, title, description, idproduct } = req.body;
+  const {idproduto , title , description, avaliacao} = req.body;
+  
+  console.log('req.body no backend:', req.body);
+  console.log(idproduto);
+  
 
-  console.log('Dados no backend:', req.body)
-  console.log('Titulo do comentário no backend:', title);
-  console.log('descrição no backend:', description);
-  console.log('idproduto backend:', idproduct);
-  console.log('Tipo do userid vindo do frontend : ', typeof userid);
+  const userid = 5
 
-  // Verifica se todos os campos estão presentes
-  if (!userid || !title || !description, !idproduct) {
-    return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
+
+  if (!req.files || req.files.length === 0) {
+    return res.status(400).json({error: 'nenhuma imagem encontrada'})
+  }
+
+
+  if (!idproduto) {
+    return res.status(400).json({ error: 'idprodutopai é obrigatório' });
   }
 
   try {
-    // Insere os itens comprados no banco de dados
-    const queryinsertnewcomment = `INSERT INTO comentarios (titulo, descricao ,user_id, produto_id) VALUES (?, ? , ? , ?)`;
+    // Cria um array de URLs das imagens
+    const imagensUrls = req.files.map(file => `/uploads/${file.filename}`);
 
+    // Para adicionar cada imagem ao banco associada ao idprodutopai
+    for (const caminho of imagensUrls) {
+      const queryInsertNewComment = 'INSERT INTO comentarios (titulo, descricao ,user_id, produto_id , userimgprod, avaliacao) VALUES (?, ? , ? , ?, ?, ?)';
+      await db.execute(queryInsertNewComment, [title, description , userid, idproduto, caminho, avaliacao]);
+    }
 
-    await db.query(queryinsertnewcomment, [title, description, userid, idproduct]);
+    console.log('Imagens salvas no banco de dados');
+    
+    return res.json({
+      erro: false,
+      mensagem: 'Comentário enviado com sucesso!',
+      imagens: imagensUrls
+    });
 
-    res.status(201).json({ success: true, message: 'Novo comentário adicionado' });
-
-  } catch (err) {
-    console.error('Erro:', err.message);
-    res.status(500).json({ success: false, error: err.message });
+  } catch {
+    console.error(error)
+    return res.status(500).json({erro: true , mensagem: 'Erro ao salvar imagens'})
   }
+
 });
 
 
@@ -391,7 +405,80 @@ app.post('/upload-image/product', upload.array('image', 10), async (req, res) =>
     return res.status(500).json({erro: true , mensagem: 'Erro ao salvar imagens'})
   }
 
-})
+});
+
+app.post('/viewproduct/:id', async (req, res) => {
+  const { id } = req.params;  
+
+  console.log('id backend: ',id)
+  try {
+      const query = `SELECT 
+          p.id AS produto_id, 
+          p.nome, 
+          p.preco, 
+          i.caminho AS imagem
+      FROM Produtos p
+      LEFT JOIN imagensprod i ON p.id = i.produto_id
+      WHERE p.idprodutopai IS NULL
+        AND p.id = ?;`;
+        
+      const [rows] = await db.execute(query, [id]); 
+
+      if (rows.length > 0) {
+          res.status(200).json({
+              success: true,
+              message: "Produtos retornados com sucesso!",
+              data: rows,
+          });
+      } else {
+          return res.status(404).json({
+              success: false,
+              message: "Nenhum produto encontrado",
+          });
+      }
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({
+          success: false,
+          message: "Erro interno do servidor"
+      });
+  }
+});
+
+
+app.post('/api/get/infocomments', async (req, res) => {
+
+  const {idproduto} = req.body;
+
+  try {
+      const queryGetComments = `
+      SELECT * FROM comentarios WHERE produto_id = ? 
+      `;
+      
+      const [rows] = await db.execute(queryGetComments, [idproduto]); 
+
+      if (rows.length > 0) {
+          return res.status(200).json({
+              success: true,
+              message: "comentários retornados com sucesso!",
+              data: rows,
+          });
+      } else {
+          return res.status(404).json({
+              success: false,
+              message: "Nenhum comentário encontrado",
+          });
+      }
+  } catch (erro) {
+      console.error("Erro ao buscar comentários:", erro);
+      return res.status(500).json({
+          success: false,
+          message: "Erro interno do servidor",
+          error: erro.message
+      });
+  }
+});
+
 
 
 app.listen(3000, () => {

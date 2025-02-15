@@ -5,6 +5,7 @@ import NovidadesLoja from "./NovidadesLoja";
 import FiltragemTimes from "./FiltragemTimes";
 import InfoSite from "./InfoSite";
 import InfoAtendimentos from "./InfoAtendimentos";
+import { Helmet } from 'react-helmet';
 
 
 
@@ -13,6 +14,9 @@ export default function IndexComponent () {
     return ( 
 
         <div className="container">
+            <Helmet>
+                <title>Torcida Vip</title>
+            </Helmet>
 
             <TopFlap/>
 

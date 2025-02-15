@@ -12,8 +12,6 @@ export default function Provider ({ children }) {
 
     const [produtosdbImgandProd, setProdutosdbImgandProd ] = useState([]);
 
-    // const [imagensprod, setimagensprod] = useState([]);
-
     const [loading, setLoading] = useState(true);
 
     const [error, setError] = useState(null);
@@ -21,8 +19,7 @@ export default function Provider ({ children }) {
     const [novocomentario , setNovocomentario] = useState({
         title:'',
         description: '',
-        idproduct: '',
-        recomendar: ''
+        avaliacao: ''
     });
 
     const [Dadosnewuser, setDadosNewUser] = useState({
@@ -47,62 +44,42 @@ export default function Provider ({ children }) {
         senha: ''
     });
 
+    const [productdetails, setProductDetails] = useState({});
 
-    // useEffect(() => {
-    //     const fetchprodwithimg = async () => {
-    //         try {
-    //             const response = await fetch('http://localhost:3000/api/get/prodandimg');
-    //             if (!response.ok) {
-    //                 throw new Error('Erro ao buscar imagens');
-    //             }
-    
-    //             const data = await response.json();
-    
-    //             if (data.success) {  // Corrigido de 'sucess' para 'success'
-    //                 setimagensprod(data.data);
-    //                 console.log('produtos com imagem:', data);
-    //             } else {
-    //                 setError(data.message);
-    //             }
-    //         } catch (err) {
-    //             setError(err.message);
-    //         } finally {
-    //             setLoading(false);
-    //         }
-    //     };
-    
-    //     fetchprodwithimg();
-    // }, []);
+    const [produtoid, setProdutoId] = useState('');
 
-    // useEffect(() => {
-    //     console.log("useEffect foi disparado!");
+    console.log('productdetails no provider', productdetails)
+   
+    //  useEffect(() => {
+    //      console.log("useEffect foi disparado!");
     
-    //     const fetchProdutosApi = async () => {
-    //         try {
-    //             const response = await fetch('http://localhost:3000/api/get/produtos');
-    //             if (!response.ok) {
-    //                 throw new Error(`Erro: ${response.statusText}`);
-    //             }
-    //             const data = await response.json();
-    //             if (data && Array.isArray(data)) {
-    //                 const produtosUnicos = data.filter((produto, index, self) => 
-    //                     index === self.findIndex((p) => (
-    //                         p.idProdutoPai === produto.idProdutoPai
-    //                     ))
-    //                 );
-    //                 setProdutosApi(produtosUnicos);
-    //             } else {
-    //                 throw new Error("A resposta não contém dados válidos.");
-    //             }
-    //         } catch (err) {
-    //             setError(err.message);
-    //         } finally {
-    //             setLoading(false);
-    //         }
-    //     };
+    //      const fetchProdutosApi = async () => {
+    //          try {
+    //              const response = await fetch('http://localhost:3000/api/get/produtos');
+    //              if (!response.ok) {
+    //                  throw new Error(`Erro: ${response.statusText}`);
+    //              }
+    //              const data = await response.json();
+    //              if (data && Array.isArray(data)) {
+    //                  const produtosUnicos = data.filter((produto, index, self) => 
+    //                      index === self.findIndex((p) => (
+    //                          p.idProdutoPai === produto.idProdutoPai
+    //                      ))
+    //                  );
+    //                  setProdutosApi(produtosUnicos);
+    //              } else {
+    //                  throw new Error("A resposta não contém dados válidos.");
+    //              }
+    //          } catch (err) {
+    //              setError(err.message);
+    //          } finally {
+    //              setLoading(false);
+    //          }
+    //      };  
     
-    //     fetchProdutosApi();
-    // }, []);
+    //      fetchProdutosApi();
+    //  }, []);
+
 
     useEffect(() => {
         console.log('Useeffect do banco de dados disparado');
@@ -138,7 +115,6 @@ export default function Provider ({ children }) {
     
         fetchProductsDB();
     }, []);
-
 
     useEffect(() => {
         console.log('GET IMAGENS DISPARADO');
@@ -176,32 +152,6 @@ export default function Provider ({ children }) {
     }, []);
 
 
-    // useEffect(() => {
-    //     const fetchImagensprod = async () => {
-    //         try {
-    //             const response = await fetch('http://localhost:3000/api/get/imgprod');
-    //             if (!response.ok) {
-    //                 throw new Error('Erro ao buscar imagens')
-    //             }
-
-    //             const data = await response.json();
-
-    //             if(data.sucess) {
-    //                 setimagensprod(data.data)
-    //                 console.log('produtos api no provider', data);
-    //             } else {
-    //                 setError(data.message)
-    //             }
-    //         } catch (err) {
-    //             setError(err.message);
-    //         } finally {
-    //             setLoading(false);
-    //         }
-    //     };
-    
-    //     fetchImagensprod();
-    // }, []);
-
 
     // console.log('imagens do produto:', imagensprod);
     // console.log('produtos API no provider', produtosapi);
@@ -219,8 +169,11 @@ export default function Provider ({ children }) {
         setDadosUserLogin,
         novocomentario,
         setNovocomentario,
-        produtosdbImgandProd
-
+        produtosdbImgandProd,
+        productdetails, 
+        setProductDetails,
+        produtoid, 
+        setProdutoId
     }
     return (
         <ContextProducts.Provider value={ value }>

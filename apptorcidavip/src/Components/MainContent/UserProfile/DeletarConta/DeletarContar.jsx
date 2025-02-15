@@ -1,5 +1,6 @@
 import './deletarconta.css';
-import alert from '../../../../imgs/crisis.png'
+import alert from '../../../../imgs/crisis.png';
+import { Helmet } from 'react-helmet';
 
 
 export default function DeletarConta () {
@@ -8,6 +9,10 @@ export default function DeletarConta () {
     return (
 
         <div className='container-deletarconta'>
+
+            <Helmet>
+                <title>Torcida Vip | Deletar conta</title>
+            </Helmet>
 
             <div className='title-deletarconta'>
                 <h3>Deletar conta</h3>

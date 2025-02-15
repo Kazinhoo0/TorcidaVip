@@ -55,7 +55,6 @@ export default function InfoAtendimentos ({customTop,customcopyrightcontainer}) 
                             </small>
                         </div>
                        
-
                     </div>
 
                 </div>
@@ -67,10 +66,11 @@ export default function InfoAtendimentos ({customTop,customcopyrightcontainer}) 
                         <div>
 
                             <h2 className='style-infos-title-atendimento'>Nos Acompanhe</h2>
-
-                            <img className='style-imgs-nosacompanhe' src={facebook} alt="" />
-                            <img className='style-imgs-nosacompanhe' src={instagram} alt="" />
-                            <img className='style-imgs-nosacompanhe' src={whatsapp} alt="" />
+                            
+                            <a href=""><img  className='style-imgs-nosacompanhe' src={facebook} alt="" /></a>
+                            <a href="https://www.instagram.com/lojatorcidavip/"><img className='style-imgs-nosacompanhe' src={instagram} alt="" /></a>
+                            <a href="https://api.whatsapp.com/send?phone=5521988520793&text=Boa%20tarde%20somos%20somos%20o%20suporte%20da%20TorcidaVip,%20como%20posso%20lhe%20ajudar%20?%20"><img className='style-imgs-nosacompanhe' src={whatsapp} alt="" /></a>
+                            
 
                         </div>
                         

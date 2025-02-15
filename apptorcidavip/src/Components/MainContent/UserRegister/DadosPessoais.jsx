@@ -16,40 +16,6 @@ export default function Dadospessoais ({buttonclicked}) {
 
     console.log('dadosnewuser:', Dadosnewuser);
 
-    // const [imagem, setimagem] = useState('');
-    
-    // const handleUploadImage = async (e) => {
-    // e.preventDefault();
-
-    // // Verifique se a imagem foi selecionada
-    // if (!imagem) {
-    //     console.error("Nenhuma imagem selecionada.");
-    //     return;
-    // }
-
-    // try {
-    //     const formData = new FormData();
-    //     formData.append("image", imagem);
-
-    //     const response = await fetch("http://localhost:3000/upload-image", {
-    //         method: "POST",
-    //         body: formData, // Não precisa de 'Content-Type', pois FormData define automaticamente
-    //     });
-
-    //     const data = await response.json();
-    //     console.log("Resposta recebida:", data);
-
-    //     if (!data.erro) {
-    //     console.log("Imagem enviada com sucesso!");
-    //     } else {
-    //         console.error("Erro ao enviar a imagem.");
-    //     }
-    //     } catch (error) {
-    //     console.error("Erro na requisição:", error);
-    //     }
-    // };
-    
-
     return ( 
 
         <>
