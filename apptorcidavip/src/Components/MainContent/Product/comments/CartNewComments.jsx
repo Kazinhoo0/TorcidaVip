@@ -6,7 +6,7 @@ import ContextProducts from '../../../../context/ContextProduct';
 
 export default function CartNewComment ({closecart, idproduto}) {
 
-    const {novocomentario , setNovocomentario} = useContext(ContextProducts);
+    const {novocomentario , setNovocomentario, dadosuserlogon} = useContext(ContextProducts);
 
     const [imagens, setImagens] = useState([]);
 
@@ -35,8 +35,10 @@ export default function CartNewComment ({closecart, idproduto}) {
             formData.append("title", novocomentario.title);
             formData.append("description", novocomentario.description);
             formData.append("avaliacao", novocomentario.avaliacao);
+            formData.append("userid", dadosuserlogon.id )
 
-            console.log('novo comentario infomacoes:',novocomentario)
+            console.log('novo comentario infomacoes:', novocomentario)
+            console.log('novo comentario user id:', dadosuserlogon.id)
 
             const response = await fetch("http://localhost:3000/api/add/newcomment", {
                 method: "POST",

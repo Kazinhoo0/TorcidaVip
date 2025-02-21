@@ -9,70 +9,71 @@ import 'toastify-js/src/toastify.css';
 
 export default function ComponentLogin () {
 
-    const {dadosuserlogin, setDadosUserLogin} = useContext(ContextProducts);
-
-
+    const {dadosuserlogin, setDadosUserLogin, setDadosUserLogOn} = useContext(ContextProducts);
 
     const navigate = useNavigate();
 
     const handleefetuarlogin = async (e) => {
         e.preventDefault();
 
-        setTimeout(async () => {
-            const response = await fetch('http://localhost:3000/api/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 
-                    email: dadosuserlogin.email, 
-                    senha: dadosuserlogin.senha
-                })
-            });
+        const response = await fetch('http://localhost:3000/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                email: dadosuserlogin.email, 
+                senha: dadosuserlogin.senha
+            })
+        });
 
-            const data = await response.json();
+        const data = await response.json();
 
-            console.log(data)
+        if (data.success) {
+        
+            Toastify({
+                text: 'Login efetuado com sucesso!',
+                position: 'center',
+                style: {
+                    background: '#33ff00',
+                    color: '#ffffff'
+                }
+            }).showToast();
 
+            // console.log('infomacoes do usuario vindo do backend: ', data)
+            localStorage.setItem('authToken', data.token);
 
-            if (data.success) {
+            // Garantindo que o loader seja visível por pelo menos 2 segundos
+            setTimeout(() => {
+                navigate('/');
+            }, 2000);
             
-                Toastify({
-                    text: 'Login efetuado com sucesso!',
-                    position: 'center',
-                    style: {
-                        background: '#33ff00',
-                        color: '#ffffff'
-                    }
-                }).showToast();
+            setTimeout(() => {
+                window.location.reload();
+            }, 2010)
+           
 
-                // Garantindo que o loader seja visível por pelo menos 2 segundos
-                setTimeout(() => {
-                    navigate('/gerenciarpratos');
-                }, 2000);
 
-            }
-            else {
-                Toastify({
-                    text: 'Usuário não cadastrado, porfavor crie uma conta!',
-                    position: 'center',
-                    style: {
-                        background: '#db2d0e',
-                        color: '#ffffff'
-                    }
-                }).showToast();
-            }
+        }
+        else {
+            Toastify({
+                text: 'Usuário não cadastrado, porfavor crie uma conta!',
+                position: 'center',
+                style: {
+                    background: '#db2d0e',
+                    color: '#ffffff'
+                }
+            }).showToast();
+        }
 
-            if (!dadosuserlogin.senha || !dadosuserlogin.email) {
-                Toastify({
-                    text: 'Todos os campos precisam estar preenchidos!',
-                    position: 'center',
-                    style: {
-                        background: '#db2d0e',
-                        color: '#ffffff'
-                    }
-                }).showToast();
-            }
-
-        }, 2000);
+        if (!dadosuserlogin.senha || !dadosuserlogin.email) {
+            Toastify({
+                text: 'Todos os campos precisam estar preenchidos!',
+                position: 'center',
+                style: {
+                    background: '#db2d0e',
+                    color: '#ffffff'
+                }
+            }).showToast();
+        }
     };
 
     return (
@@ -81,7 +82,7 @@ export default function ComponentLogin () {
 
             <h2 className='titleloginregister'>JÁ SOU CLIENTE</h2>
 
-            <form onSubmit={handleefetuarlogin} action="">
+            <form action="">
 
                 <input
                     placeholder="E-MAIL"
@@ -97,7 +98,7 @@ export default function ComponentLogin () {
                     onChange={(e) => setDadosUserLogin({...dadosuserlogin, senha: e.target.value})}
                 />
 
-                <div className='container-buttonentrar'>
+                <div onClick={handleefetuarlogin} className='container-buttonentrar'>
                     <button className="buttonentrar-style">ENTRAR</button>
                 </div>
 
@@ -108,7 +109,8 @@ export default function ComponentLogin () {
                     <FcGoogle className="googleicon"/>
                     <p className="textfazerlogincomgoogle"> Fazer login com o Google</p>
                 </div>
-            </div>                
+            </div> 
+                           
         </div>  
 
     )

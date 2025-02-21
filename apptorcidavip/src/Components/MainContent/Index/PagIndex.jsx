@@ -6,10 +6,20 @@ import FiltragemTimes from "./FiltragemTimes";
 import InfoSite from "./InfoSite";
 import InfoAtendimentos from "./InfoAtendimentos";
 import { Helmet } from 'react-helmet';
+import { useContext } from "react";
+import ContextProducts from "../../../context/ContextProduct";
 
 
 
 export default function IndexComponent () {
+
+    const {dadosuserlogon} = useContext(ContextProducts)
+
+    // console.log('Dados do usuario cadastrado :', dadosuserlogon)
+
+    // const userinfo = JSON.parse(localStorage.getItem('user'))
+    // console.log('localstorage infos: ',userinfo);
+
 
     return ( 
 
@@ -18,15 +28,15 @@ export default function IndexComponent () {
                 <title>Torcida Vip</title>
             </Helmet>
 
-            <TopFlap/>
+            <TopFlap dadosuserlogado={dadosuserlogon}/>
 
             <div className="container-homepag">
 
-                <MaisVendidos/>
+                <MaisVendidos dadosuserlogado={dadosuserlogon} />
 
-                <NovidadesLoja/>
+                <NovidadesLoja dadosuserlogado={dadosuserlogon}/>
 
-                <FiltragemTimes/>
+                <FiltragemTimes dadosuserlogado={dadosuserlogon}/>
 
 
             </div>

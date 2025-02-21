@@ -8,7 +8,7 @@ import './Index.css'
 export default function MaisVendidos() {
     
 
-    const { produtosdbImgandProd ,produtosdb, produtosapi, loading, error} = useContext(ContextProducts)
+    const { produtosdb, produtosapi, loading, error} = useContext(ContextProducts)
 
     if (loading) return <p>Carregando produtos...</p>;
 

@@ -2,10 +2,17 @@
 import './favoriteproduct.css';
 import { IoMdClose } from "react-icons/io";
 import cartfavorit from '../../imgs/add-to-favorites.png'
+import { useNavigate } from 'react-router-dom';
 
 
 export default function FavotireProductEmpity ({handlefavoriteopened}) {
 
+
+    const navigate = useNavigate();
+
+    const handlenavigatelogin = () => {
+        navigate('/login')
+    }
     
 
     return ( 
@@ -39,7 +46,7 @@ export default function FavotireProductEmpity ({handlefavoriteopened}) {
                             <small style={{paddingbottom: '0px', paddingTop: '0px', color: 'grey', fontWeight: '600px'}}>Para favoritar os seus produtos, basta apenas clicar <br/> no que ele será salvo aqui.</small>
                         </div>
 
-                        <div className='cont-btn-acessarminhaconta'>
+                        <div onClick={handlenavigatelogin} className='cont-btn-acessarminhaconta'>
                             <button>Acessar minha conta</button>
                         </div>
                     </div>

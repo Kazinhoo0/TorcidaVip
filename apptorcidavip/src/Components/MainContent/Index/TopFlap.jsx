@@ -5,12 +5,27 @@ import cart from '../../../imgs/cart.png'
 import './Index.css';
 import { useNavigate } from 'react-router-dom';
 import iconlupa from '../../../imgs/Icon (14).png';
-import { useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import FavotireProductEmpity from '../../Favorite/FavoriteProductEmpity';
-
+import ContextProducts from '../../../context/ContextProduct';
+import FavotireProduct from '../../Favorite/FavoriteProduct';
+import Exit from '../../../imgs/exit (1).png'
 
 
 export default function TopFlap () {
+
+    const {addonfavorite, setaddonfavorite, dadosuserlogon} = useContext(ContextProducts);
+
+    const finalizarsessão = () => {
+        localStorage.removeItem('authToken')
+
+        window.location.reload();
+
+    }
+
+    const renderpage = () => {
+        window.location.reload();
+    }
 
     const navigate = useNavigate();
 
@@ -23,15 +38,24 @@ export default function TopFlap () {
     }
 
     const handlenavigatemakelogin = () => {
-        navigate('/Login')
+
+        if (dadosuserlogon && dadosuserlogon.id) {
+            navigate('/Profile')
+        } else {
+            navigate('/login')
+        }
+
+       
     }
 
-    const handlenavigatefavorite = () => {
-        navigate('/Login')
-    }
-    
     const handlenavigatecarrinhocompras = () => {
-        navigate('/carrinhocompras')
+
+        if (dadosuserlogon && dadosuserlogon.id) {
+            navigate('/carrinhocompras')
+        } else {
+            navigate('carrinhocomprasvazio')
+        }
+
     }
 
     const [favoriteopened, setfavoriteopened] = useState(false)
@@ -39,13 +63,70 @@ export default function TopFlap () {
     const handlefavoriteopened = () => {
         setfavoriteopened(!favoriteopened)
     }
+    
+    // console.log('dadosuserlogon no topflap:', dadosuserlogon)
 
+    const {produtosoncarrinho} = useContext(ContextProducts);
 
+    const totprodutoscarrinho = produtosoncarrinho.length
+
+    useEffect(() => {
+        const fetchGetFavoritesprods  = async () => {
+            
+            const userid =  dadosuserlogon.id
+
+            try {
+                const response = await fetch ('http://localhost:3000/api/get/addfavoriteprod', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type' : 'application/json',
+                    },
+                    body: JSON.stringify({
+                        userid: userid
+                    })
+                })
+
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar dados');
+                }
+    
+                const data = await response.json();
+
+                console.log('resposta da API: ', data);
+    
+                if (data.success && data.data.length > 0) {
+                    setTimeout(() => {
+                        setaddonfavorite(data.data);
+                    }, 2000)
+                } else {
+                    setaddonfavorite([]); 
+                }
+    
+            } catch (err) {
+                return console.log(err.message)
+            }
+        };
+
+        fetchGetFavoritesprods();
+    }, [])
+
+    useEffect(() => {
+        console.log('produtos favoritos:', addonfavorite);
+    }, [addonfavorite]);
+    
     return (
 
         <div style={{zIndex: 5,width: 1905, height: 108, position: 'relative', position: 'fixed'}}>
-             {favoriteopened && (
-                <FavotireProductEmpity handlefavoriteopened={handlefavoriteopened}/>
+            {favoriteopened && addonfavorite.length > 0 && (
+                
+                <FavotireProduct 
+                handlefavoriteopened={handlefavoriteopened}
+                />
+                
+            )}
+
+            {favoriteopened && addonfavorite.length === 0 && (
+                <FavotireProductEmpity handlefavoriteopened={handlefavoriteopened} />
             )}
             <div style={{width: 1905, height: 108, left: 0, top: 0, position: 'absolute', background: 'linear-gradient(0deg,rgb(2, 2, 2) 0%,rgb(25, 25, 26) 100%), linear-gradient(0deg, #1E1E1E 0%, #1E1E1E 100%)', borderBottomLeftRadius: 142.5}} />
             
@@ -81,7 +162,11 @@ export default function TopFlap () {
                     </div>
                 </div>
 
-                <div onClick={handlefavoriteopened} style={{width: 49.75, height: 49.75, position: 'relative'}}>
+                <div onClick=
+                {() => {
+                    handlefavoriteopened();
+                }} 
+                style={{width: 49.75, height: 49.75, position: 'relative'}}>
                     <div style={{cursor: 'pointer',width: 39.92, height: 34.10, left: 4.98, top: 9.83, position: 'absolute'}}>
                         <img src={heart} alt="" />
                     </div>
@@ -92,15 +177,35 @@ export default function TopFlap () {
                 <div style={{width: 42.95, height: 39.53, position: 'relative'}}>
                     <div style={{width: 39.31, height: 39.31, left: 0, top: 0.22, position: 'absolute'}}>
                         <div style={{cursor: 'pointer',width: 31.44, height: 31.13, left: 3.93, top: 4.90, position: 'absolute'}}>
-                            <img onClick={handlenavigatecarrinhocompras} src={cart} alt="" />
+                            <img onClick={() => {
+                                handlenavigatecarrinhocompras();
+                            }} src={cart} alt="" />
                         </div>
                     </div>
 
                     <div style={{width: 19, height: 19, left: 23.95, top: 0, position: 'absolute', background: '#47B868', borderRadius: 9999}} />
-                    <div style={{left: 28.95, top: 2, position: 'absolute', color: 'white', fontSize: 14, fontFamily: 'Lustria', fontWeight: '400', wordWrap: 'break-word'}}>0</div>
+                    <div style={{left: 28.95, top: 2, position: 'absolute', color: 'white', fontSize: 14, fontFamily: 'Lustria', fontWeight: '400', wordWrap: 'break-word'}}>{produtosoncarrinho.length}</div>
                 </div>
 
+            
+                {/* <div>
+                    <button style={{background: 'none', border:'none',cursor: 'pointer',width: 31.44, height: 31.13, left: 0, top: 4.90, position: 'absolute'}} onClick={finalizarsessão}>
+                        <img style={{width: 30}} src={Exit} alt="" />
+                    </button>
+                </div> */}
+
+
+                {dadosuserlogon && Object.keys(dadosuserlogon).length > 0 && 
+                    <div style={{backgroundColor: 'while',width: 39.31, height: 39.31, left: 165, top: 7, position: 'absolute'}}>
+                        <div style={{cursor: 'pointer',width: 31.44, height: 31.13, left: 3.93, top: 4.90, position: 'absolute'}}>
+                            <img onClick={finalizarsessão} style={{width: 30}} src={Exit} alt="" />
+                        </div>
+                    </div>
+                }
+               
             </div>
+
+            
 
             <div style={{width: 384, height: 50, left: 450, top: 35, position: 'absolute', justifyContent: 'flex-start', alignItems: 'center', gap: 40, display: 'inline-flex',fontFamily: 'Teko'}}>
                 <div style={{width: 109, height: 26, position: 'relative'}}>

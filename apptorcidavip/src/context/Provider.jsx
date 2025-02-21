@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import ContextProducts from './ContextProduct';
 import propTypes from 'prop-types';
+import { jwtDecode } from "jwt-decode";
 
 
 
@@ -44,11 +45,28 @@ export default function Provider ({ children }) {
         senha: ''
     });
 
+    const [dadosuserlogon, setDadosUserLogOn] = useState([]);
+
+    useEffect(() => {
+        const token = (localStorage.getItem('authToken'));
+
+        if (token) {
+            const DecodeToken = jwtDecode(token);
+            setDadosUserLogOn(DecodeToken);
+        } else {
+            setDadosNewUser('')
+        }
+    }, []);
+
     const [productdetails, setProductDetails] = useState({});
 
     const [produtoid, setProdutoId] = useState('');
 
-    console.log('productdetails no provider', productdetails)
+    const [addonfavorite, setaddonfavorite] = useState([]);
+
+    const [produtosoncarrinho , setProdutosOnCarrinho] = useState([]);
+
+    // console.log('productdetails no provider', productdetails)
    
     //  useEffect(() => {
     //      console.log("useEffect foi disparado!");
@@ -116,6 +134,49 @@ export default function Provider ({ children }) {
         fetchProductsDB();
     }, []);
 
+
+    // useEffect(() => {
+    //     console.log('UseEffect renderitenscarrinho disparado!');
+
+    //     const userid = 5
+    
+    //     const fetchRenderItensCarrinho = async () => {
+    //         try {              
+    //             const response = await fetch('http://localhost:3000/api/post/renderitenscarrinho', {
+    //                 method: 'POST',
+    //                 headers: {
+    //                     'Content-Type': 'application/json',
+    //                 },
+    //                 body: JSON.stringify({
+    //                     userid: userid
+    //                 })
+    //             });
+    
+    //             if (!response.ok) {
+    //                 throw new Error('Erro ao buscar produtos no carrinho');
+    //             }
+    
+    //             const data = await response.json();
+    
+    //             if (data.success) {
+    //                 setProdutosOnCarrinho(data.items);
+    //                 console.log('produtosoncarrinho no frontend:', produtosoncarrinho)
+    //                 console.log('produtos no carrinho:', data);
+    //             } else {
+    //                 setError(data.message);
+    //             }
+    
+    //         } catch (err) {
+    //             setError(err.message);
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     };
+    
+    //     fetchRenderItensCarrinho();
+    // }, []);
+
+
     useEffect(() => {
         console.log('GET IMAGENS DISPARADO');
     
@@ -136,7 +197,7 @@ export default function Provider ({ children }) {
     
                 if (data.success) {
                     setProdutosDb(data.data);
-                    console.log('imagens recuperada do banco de dados', data);
+                    // console.log('imagens recuperada do banco de dados', data);
                 } else {
                     setError(data.message);
                 }
@@ -156,7 +217,7 @@ export default function Provider ({ children }) {
     // console.log('imagens do produto:', imagensprod);
     // console.log('produtos API no provider', produtosapi);
     // console.log('produtos DB no provider', produtosdb);
-    console.log('produto com imagem:', produtosdbImgandProd)
+    // console.log('produto com imagem:', produtosdbImgandProd)
 
     const value = {
         produtosapi,
@@ -173,7 +234,13 @@ export default function Provider ({ children }) {
         productdetails, 
         setProductDetails,
         produtoid, 
-        setProdutoId
+        setProdutoId,
+        produtosoncarrinho,
+        setProdutosOnCarrinho,
+        addonfavorite, 
+        setaddonfavorite,
+        dadosuserlogon, 
+        setDadosUserLogOn
     }
     return (
         <ContextProducts.Provider value={ value }>

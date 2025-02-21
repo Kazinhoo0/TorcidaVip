@@ -1,8 +1,8 @@
 import { IoHomeOutline } from "react-icons/io5";
 
 
+export default function FreteeResumo ({totalpedido}) {
 
-export default function FreteeResumo () {
 
     return ( 
 
@@ -29,7 +29,7 @@ export default function FreteeResumo () {
                </header>
                <small style={{display: 'flex', justifyContent: 'space-between', paddingLeft: 23, paddingRight: 20, borderBottom: '3px solid grey'}}>
                     <small>Subtotal</small>
-                    <small>R$190,00</small>
+                    <small>R${totalpedido.toFixed(2)}</small>
                </small>
 
                <small style={{display: 'flex', justifyContent: 'space-between', paddingLeft: 23, paddingRight: 20}}>
@@ -39,7 +39,7 @@ export default function FreteeResumo () {
                     </smal>
 
                     <smal>
-                        <small>190,00</small><br/>
+                        <small>R${totalpedido.toFixed(2)}</small><br/>
                     </smal>
                </small>
             </div>

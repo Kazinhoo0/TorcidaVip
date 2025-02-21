@@ -19,12 +19,12 @@ export default function AddNewImgProduct () {
         try {
             const formData = new FormData();
 
-            console.log('id do produto comentário:', idproduto);
+            // console.log('id do produto comentário:', idproduto);
             formData.append("idproduto", idproduto);
 
             // Adiciona cada imagem individualmente ao formData
             imagens.forEach((imagem, index) => {
-                console.log('url da imagem', imagem)
+                // console.log('url da imagem', imagem)
                 formData.append("image", imagem);
             });
 

@@ -76,16 +76,19 @@
 .container-imgsprod {
     /* border: 1px solid red; */
     border-top: 1px solid rgba(128, 128, 128, 0.267);
+    width: 400px;
     height: 110px;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+    overflow-x: auto;
 }
 
 .container-imgsprod img {
     padding: 5px;
-    width: 60px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
     margin-Left: 10px;
     border: 1px solid rgba(128, 128, 128, 0.274);
     border-radius: 5px ;
@@ -170,6 +173,8 @@
     justify-content: center;
     /* border: 1px solid red; */
     width: 1400px;
+    max-width: 1400px;
+    overflow-x: auto;
 }
 
 .cont-top-showavaliacoes {
@@ -321,8 +326,10 @@
 
 .h2-product-style {
     /* border: 1px solid red; */
+    overflow: hidden;
     width: 548px;
-    height: 117px;
+    height: 170px;
+    max-height: 200px;
     font-family: 'Montserrat Alternates';
     font-style: normal;
     font-weight: 500;
@@ -371,6 +378,7 @@
 
 .container-buttonadicionarcarrinho {
     /* border: 1px solid red; */
+    width: 450px;
     display: flex;
     align-items: center;
     justify-content: start;
@@ -384,9 +392,12 @@
     color: white;
     border: none;
     font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     /* border: 1px solid red; */
     height: 37px;
-    width: 250px;
+    width: 350px;
     height: 55px;
     /* left: 155px;
     top: 30px; */

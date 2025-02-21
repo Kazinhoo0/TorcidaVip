@@ -9,6 +9,11 @@ import { useContext, useState, useEffect } from 'react';
 import CartNewComment from '../comments/CartNewComments';
 import ContextProducts from '../../../../context/ContextProduct';
 import { Helmet } from 'react-helmet';
+import { useRef } from 'react';
+import { CiHeart } from "react-icons/ci";
+import Toastify from 'toastify-js';
+import 'toastify-js/src/toastify.css';
+
 
 export default function ViewProduct() {
 
@@ -21,9 +26,64 @@ export default function ViewProduct() {
         setClickednewcomment(!clickednewcomment)
     }
 
+    const sectionRef = useRef(null);
 
-    const {produtosdb, produtosapi, loading, error, productdetails } = useContext(ContextProducts)
+    const scrollToSection = () => {
+        sectionRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
+    
 
+
+    const {produtosdb , loading, error, productdetails, setaddonfavorite, addonfavorite,dadosuserlogon} = useContext(ContextProducts);
+
+
+    const fetchaddfavoriteprod = async () => {
+
+        const userid = dadosuserlogon.id;
+        
+        try {
+            const response = await fetch ('http://localhost:3000/api/post/addfavoriteprod', {
+                method: 'POST',
+               headers: {
+                        'Content-Type': 'application/json',
+                    },
+                body: JSON.stringify({
+                    userid: userid,
+                    itemid: productdetails[0].produto_id,
+                    imgprod: productdetails[0].imagem,
+                    title: productdetails[0].nome
+                })
+            })
+
+            const data = await response.json();
+
+            if (data.success) {
+                console.log('item adicionado aos favoritos')
+                Toastify({  
+                    text: 'item adicionado aos favoritos',
+                    position: 'center',
+                    style: {
+                        background: '#33ff00',
+                        color: '#ffffff'
+                    }
+                }).showToast();
+                console.log(data.message)
+            } else {
+                console.log(data.message)
+            }
+
+        } catch (err) {
+            console.log(err.message)
+            Toastify({
+                text: 'Item já favoritado!',
+                position: 'center',
+                style: {
+                    background: '#db2d0e',
+                    color: '#ffffff'
+                }
+            })
+        }
+    }
 
     useEffect(() => {
         const fetchGetComments = async () => {
@@ -63,17 +123,17 @@ export default function ViewProduct() {
         console.log(error)
     }
          
-    console.log("Dados do db no frontend:", produtosdb);
-    console.log("Dados da api frontend:", produtosapi);
+    // console.log("Dados do db no frontend:", produtosdb);
+    // console.log("Dados da api frontend:", produtosapi);
 
     const produtosUnicos = Array.from(
         new Map(produtosdb.map((produto) => [produto.produto_id, produto])).values()
     );
 
-    console.log('Useeffect getcomments disparado');
-    console.log('idproduto cartcomentarios:', productdetails[0].produto_id)
-    console.log('no viewproduct :',productdetails);
-    console.log('informacoes dos comentarios',infocartcomments);
+    // console.log('Useeffect getcomments disparado');
+    // console.log('idproduto cartcomentarios:', productdetails[0].produto_id)
+    // console.log('no viewproduct :',productdetails);
+    // console.log('informacoes dos comentarios',infocartcomments);
 
     return (
 
@@ -120,11 +180,10 @@ export default function ViewProduct() {
                                 <input checked="" type="radio" id="star1" name="rate" value="1" />
                                 <label htmlFor="star1" title="1 estrelas"></label>
                             </div>
+                            
+                            <a style={{color: 'black', cursor: 'pointer'}} onClick={scrollToSection} >Ver comentários {infocartcomments.length}</a>
 
-                            <p>Ver comentários 0</p>
-
-                            <p className='text-descricaoproduct'>Regata feminina em mix de Sport Dry com superfície texturizada e Dry Max que  absorve e elimina o suor, garantindo melhor transpiração.
-                                A peça possui decote V, lateral transpassada e estampa com zero toque.</p>
+                            <p className='text-descricaoproduct'>{productdetails[0].descricaoprod}</p>
 
                             <div className='container-choose-size-adicionarcarrinho'>
 
@@ -133,7 +192,7 @@ export default function ViewProduct() {
                                     <div style={{ display: 'grid' }}>
                                         <label htmlhtmlFor="tamanho">Tamanho</label>
                                         <select className='stylecelect' name="tamanho" id="">
-                                            <option value="">Escolha uma opcão...</option>
+                                            <option value="">Escolha uma opção...</option>
                                             <option value="">P</option>
                                             <option value="">M</option>
                                             <option value="">G</option>
@@ -154,12 +213,14 @@ export default function ViewProduct() {
 
                                 </div>
 
-
                                 <div className='container-buttonadicionarcarrinho' >
                                     <button >Adicionar ao carrinho</button>
                                 </div>
 
-
+                                <div onClick={fetchaddfavoriteprod} className="container-buttonadicionarcarrinho">
+                                    <button><CiHeart/> Adicionar aos Favoritos </button>
+                                </div>
+                               
                             </div>
                         </div>
 
@@ -207,7 +268,7 @@ export default function ViewProduct() {
 
                     <div className='cont-descricao-prod'>
                         <div className='sun-descricaoprod'>
-                            <h2>Descricão</h2>
+                            <h2>Descrição</h2>
                             <ul>
                                 <li className='style-list-descriprod'><p>Nome:Regata Fluminense Left Feminina</p></li>
                                 <li className='style-list-descriprod'><p>Nome:Regata Fluminense Left Feminina</p></li>
@@ -218,7 +279,7 @@ export default function ViewProduct() {
                                 <li className='style-list-descriprod'><p>Nome:Regata Fluminense Left Feminina</p></li>
                             </ul>
 
-                            <h2>Informacão Adicional</h2>
+                            <h2>Informação Adicional</h2>
                             <ul>
 
                                 <li className='style-list-descriprod'>
@@ -253,10 +314,10 @@ export default function ViewProduct() {
                             <div className='cont-top-showavaliacoes'>
 
                                 <div className='sun-infosavaliacoes'>
-                                    <h2>Avaliacões</h2>
+                                    <h2>Avaliações</h2>
                                 </div>
 
-                                <div className='sun-avalicaoes'>
+                                <div ref={sectionRef} className='sun-avalicaoes'>
                                     
                                     {infocartcomments.map((infoscomment) => (
                                         <CartAvaliations key={infoscomment.produto_id} infoscomment= {infoscomment} />

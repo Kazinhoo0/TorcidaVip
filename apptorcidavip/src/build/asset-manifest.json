@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.f6bc9c7f.css",
-    "main.js": "/static/js/main.250254cb.js",
+    "main.css": "/static/css/main.364ef114.css",
+    "main.js": "/static/js/main.5e58af9e.js",
     "static/js/488.17b092e6.chunk.js": "/static/js/488.17b092e6.chunk.js",
     "static/media/casacovascodestaque.png": "/static/media/casacovascodestaque.4356db81a10702ddabc0.png",
     "static/media/Teko-VariableFont_wght.ttf": "/static/media/Teko-VariableFont_wght.2c304a82d8b73b2829fa.ttf",
@@ -13,16 +13,15 @@
     "static/media/15195639859_15186736348_imagem_2023-04-17_115903763.png": "/static/media/15195639859_15186736348_imagem_2023-04-17_115903763.6be9bd3312aea9f54c63.png",
     "static/media/moonhouse.ttf": "/static/media/moonhouse.27ab573368b14c8ed14f.ttf",
     "static/media/Bull-Bot.png": "/static/media/Bull-Bot.598ad5f87e21d1781208.png",
-    "static/media/imgcarrinho200px.png": "/static/media/imgcarrinho200px.f9f3a55fa74de8f8cf43.png",
     "static/media/do-utilizador.png": "/static/media/do-utilizador.c920752422c11377083e.png",
     "static/media/iamgem ssl.jpg": "/static/media/iamgem ssl.022c143376b32ace4306.jpg",
     "index.html": "/index.html",
-    "main.f6bc9c7f.css.map": "/static/css/main.f6bc9c7f.css.map",
-    "main.250254cb.js.map": "/static/js/main.250254cb.js.map",
+    "main.364ef114.css.map": "/static/css/main.364ef114.css.map",
+    "main.5e58af9e.js.map": "/static/js/main.5e58af9e.js.map",
     "488.17b092e6.chunk.js.map": "/static/js/488.17b092e6.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f6bc9c7f.css",
-    "static/js/main.250254cb.js"
+    "static/css/main.364ef114.css",
+    "static/js/main.5e58af9e.js"
   ]
 }
