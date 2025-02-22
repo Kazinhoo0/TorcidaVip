@@ -21,7 +21,7 @@ export default function Product({ favoriteicon, produto }) {
                 try {
                     const id = produto.produto_id;
                     // console.log('id a ser enviado pro backend: ',id)
-                    const response = await fetch(`http://localhost:3000/viewproduct/${id}`, {
+                    const response = await fetch(`https://torcidavipoficial-teste.onrender.com/viewproduct/${id}`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ export default function Product({ favoriteicon, produto }) {
             }).showToast();
             }
 
-            const response = await fetch(`/api/post/additemcarrinho`, {
+            const response = await fetch(`https://torcidavipoficial-teste.onrender.com/api/post/additemcarrinho`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
