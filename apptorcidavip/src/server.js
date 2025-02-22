@@ -21,7 +21,7 @@ const { resourceLimits } = require('worker_threads');
 
 
 app.use(cors({
-  origin: 'https://torcidavipoficial-teste.onrender.com/',
+  origin: ['https://torcidavipoficial-teste.onrender.com/','https://torcidavip.com/'],
   methods: ['POST', 'GET', 'DELETE', 'PUT'],
   credentials: true,
 
