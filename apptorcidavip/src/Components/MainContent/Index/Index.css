@@ -56,6 +56,25 @@
     position: relative;
 }
 
+.container-topflap {
+    z-Index: 5;
+    width: 1905px;
+    height: 108px;
+    position: relative;
+    position: fixed;
+    /* border: 1px solid red; */
+}   
+
+.container-sun-topflap {
+    width: 1905px;
+    height: 108px;
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    background: linear-gradient(0deg,rgb(2, 2, 2) 0%,rgb(25, 25, 26) 100%), linear-gradient(0deg, #1E1E1E 0%, #1E1E1E 100%);
+    border-bottom-left-radius: 142.5;
+}
+
 
 .container-searchbar {
     width: 460px;
@@ -712,6 +731,29 @@ line-height: 24px;
 
 color: #FFFFFF; */
 
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 800px) {
+
+    .container-topflap {
+        width: 500px;
+      
+    }   
+
+    .container-sun-topflap {
+        width: 1905px;
+    }
+
+    .container-searchbar {
+        left: 880px;
+    }
+
+    .containercartuserheart {
+        left: 1450px;
+    }
+
+}
 
 
 

@@ -116,7 +116,7 @@ export default function TopFlap () {
     
     return (
 
-        <div style={{zIndex: 5,width: 1905, height: 108, position: 'relative', position: 'fixed'}}>
+        <div className='container-topflap'>
             {favoriteopened && addonfavorite.length > 0 && (
                 
                 <FavotireProduct 
@@ -128,7 +128,7 @@ export default function TopFlap () {
             {favoriteopened && addonfavorite.length === 0 && (
                 <FavotireProductEmpity handlefavoriteopened={handlefavoriteopened} />
             )}
-            <div style={{width: 1905, height: 108, left: 0, top: 0, position: 'absolute', background: 'linear-gradient(0deg,rgb(2, 2, 2) 0%,rgb(25, 25, 26) 100%), linear-gradient(0deg, #1E1E1E 0%, #1E1E1E 100%)', borderBottomLeftRadius: 142.5}} />
+            <div className='container-sun-topflap'/>
             
             <div style={{width: 302.25, height: 84.51, left: 67.75, top: 14.99, position: 'absolute'}}>
                 <img style={{width: 43.62, height: 84.51, left: 0, top: 0, position: 'absolute'}} src={Logobranca}/>
