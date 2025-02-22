@@ -88,7 +88,7 @@ export default function ViewProduct() {
     useEffect(() => {
         const fetchGetComments = async () => {
             try {              
-                const response = await fetch('http://localhost:3000/api/get/infocomments', {
+                const response = await fetch('https://torcidavipoficial-teste.onrender.com/api/get/infocomments', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
