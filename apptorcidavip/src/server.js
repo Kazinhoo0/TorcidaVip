@@ -19,7 +19,13 @@ const db = require('./Database/db');
 const { error } = require('console');
 const { resourceLimits } = require('worker_threads');
 
-app.use(cors());
+
+app.use(cors({
+  origin: 'https://torcidavipoficial-teste.onrender.com/',
+  methods: ['POST', 'GET', 'DELETE', 'PUT'],
+  credentials: true,
+
+}))
 app.use(express.urlencoded({ extended: true })); 
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
