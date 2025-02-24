@@ -692,6 +692,63 @@
 
 
 
+.result-searchbar {
+    /* border: 1px solid red; */
+    border-radius: 5px;
+    height: 270px;
+    overflow-y: auto;
+    list-style: none;
+}
+
+.result-searchbar li {
+   border: 1px solid rgba(68, 68, 68, 0.322);
+   background-color: rgba(226, 226, 226, 0.411);
+   height: 40px;
+   padding: 5px;
+   font-family: 'Montserrat Alternates';
+   font-size: 15px;
+   font-weight: 750;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   cursor: pointer;
+}
+
+
+.result-searchbar img {
+    order: 1px solid red;
+    width: 40px;
+    height: 40px;
+    z-index: 5;
+}
+
+.style-preco-searchbar {
+    width: 80px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.input-searchbar {
+    border: 1px solid red;
+}
+
+
+.style-nome-searchbar  {
+    display: flex;
+    align-items: center;
+    width: 300px;
+    height: 40px;
+    white-space: nowrap;
+    /* border: 1px solid red; */
+    overflow: hidden;
+
+}
+
+.container-img-seachbar {
+    /* border: 1px solid red; */
+    padding-right: 10px;
+}
+
 
 /* Heart */
 

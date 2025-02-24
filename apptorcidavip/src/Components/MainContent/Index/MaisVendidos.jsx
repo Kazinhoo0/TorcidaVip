@@ -16,8 +16,8 @@ export default function MaisVendidos() {
         console.log(error)
     }
          
-    console.log("Dados do db no frontend:", produtosdb);
-    console.log("Dados da api frontend:", produtosapi);
+    // console.log("Dados do db no frontend:", produtosdb);
+    // console.log("Dados da api frontend:", produtosapi);
 
     const produtosUnicos = Array.from(
         new Map(produtosdb.map((produto) => [produto.produto_id, produto])).values()

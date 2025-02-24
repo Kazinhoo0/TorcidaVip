@@ -21,7 +21,7 @@ const { resourceLimits } = require('worker_threads');
 
 
 app.use(cors({
-  origin: ['https://torcidavipoficial-teste.onrender.com/','https://torcidavip.com'],
+  origin: ['https://torcidavipoficial-teste.onrender.com/','https://torcidavip.com','http://localhost:3000/'],
   methods: ['POST', 'GET', 'DELETE', 'PUT'],
   credentials: true,
 
@@ -410,6 +410,7 @@ app.post('/api/get/imgs', async (req, res) => {
   }
 });
 
+
 app.post('/upload-image/product', upload.array('image', 10), async (req, res) => {
 
   if (!req.files || req.files.length === 0) {
@@ -446,6 +447,7 @@ app.post('/upload-image/product', upload.array('image', 10), async (req, res) =>
   }
 
 });
+
 
 app.post('/viewproduct/:id', async (req, res) => {
   const { id } = req.params;  
@@ -486,7 +488,6 @@ app.post('/viewproduct/:id', async (req, res) => {
       });
   }
 });
-
 
 
 app.post('/api/post/renderitenscarrinho' , async (req,res) => {
@@ -630,7 +631,6 @@ app.post('/api/post/addfavoriteprod' , async (req,res) => {
 });
 
 
-
 app.post('/api/get/addfavoriteprod' , async (req,res) => {
   
   const {userid} = req.body
@@ -683,6 +683,84 @@ app.post('/api/post/removeitemfavorito', async (req, res) => {
   }
 });
 
+
+app.post ('/api/configitens' , async (req , res) => {
+
+  const {codigo, tamanho, descricao, cor} = req.body
+
+
+  console.log('req.body no backend: ' ,req.body)
+
+  try {
+
+    const queryAddConfigItens = `UPDATE Produtos SET tamanho = ?, descricaoprod = ? , cor = ? WHERE codigo = ?`;
+    const [result] = await db.query(queryAddConfigItens, [tamanho, descricao, cor , codigo]);
+  
+
+    if (result.affectedRows > 0) {
+      return res.status(200).json({
+        success: true,
+        message: 'configuracoes adicionadas com sucesso',
+        data: result
+      })
+    } else (err) => {
+      return res.status(400).json({
+        success: false,
+        message: 'erro ao adicionar',
+        erro: err.message
+      })
+    }
+    
+
+  } catch (err) {
+    res.status(500).json({messagem: 'Erro interno do servidor' , erro: err.message})
+  }
+
+});
+
+
+app.post('/api/get/searchbar' , async (req, res) => {
+
+  const {nome} = req.body;
+
+
+  console.log('item sendo pesquisado ', nome)
+
+  try {
+
+    const queryGetSearchbaritens = ` SELECT 
+    p.id AS produto_id, 
+    p.nome, 
+    p.preco, 
+    (SELECT i.caminho 
+     FROM imagensprod i 
+     WHERE i.produto_id = p.id 
+     ORDER BY i.id ASC 
+     LIMIT 1) AS imagem -- Garante apenas uma imagem por produto
+FROM Produtos p
+WHERE p.idprodutopai IS NULL 
+AND p.nome LIKE CONCAT('%', ?, '%');`
+    const [result] = await db.query(queryGetSearchbaritens, [`%${nome}%`])
+
+
+    if (result.length > 0) {
+      return res.status(200).json({
+        success: true,
+        message: 'Buscando itens!',
+        data: result
+      })
+    } else {
+      return res.status(500).json ({
+        success: false,
+        message: 'erro ao buscar itens'
+      })
+    }
+
+  } catch (err) {
+    return res.status(500).json({message:'Erro ao buscar item', error: err.message})
+  }
+
+})
 
 
 

@@ -1,0 +1,22 @@
+
+
+.container-configtitens {
+    width: 100%;
+    height: 800px;
+    /* border: 1px solid red; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-form-configitens {
+    padding: 50px;
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+
+}
+
+.input_style_configitens {
+    padding: 5px;
+}

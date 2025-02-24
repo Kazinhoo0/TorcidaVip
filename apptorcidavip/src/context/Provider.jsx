@@ -5,6 +5,7 @@ import { jwtDecode } from "jwt-decode";
 
 
 
+
 export default function Provider ({ children }) {
 
     const [produtosapi, setProdutosApi] = useState([]);
@@ -16,6 +17,15 @@ export default function Provider ({ children }) {
     const [loading, setLoading] = useState(true);
 
     const [error, setError] = useState(null);
+
+    const [configitens, setConfigItens] = useState({
+        codigo: '',
+        tamanho: '',
+        cor: '',
+        descricao: ''
+    })
+
+    const [searchitem, setSearchitem] = useState('');
 
     const [novocomentario , setNovocomentario] = useState({
         title:'',
@@ -104,7 +114,7 @@ export default function Provider ({ children }) {
     
         const fetchProductsDB = async () => {
             try {              
-                const response = await fetch('https://torcidavipoficial-teste.onrender.com/api/get/infosprod', {
+                const response = await fetch(`http://localhost:3000/api/get/infosprod`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -119,7 +129,7 @@ export default function Provider ({ children }) {
     
                 if (data.success) {
                     setProdutosDb(data.data);
-                    console.log('produtos do db no provider', data);
+                    // console.log('produtos do db no provider', data);
                 } else {
                     setError(data.message);
                 }
@@ -182,7 +192,7 @@ export default function Provider ({ children }) {
     
         const fetchProductsDB = async () => {
             try {              
-                const response = await fetch('https://torcidavipoficial-teste.onrender.com/api/get/imgs', {
+                const response = await fetch(`http://localhost:3000/api/get/imgs`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -240,7 +250,11 @@ export default function Provider ({ children }) {
         addonfavorite, 
         setaddonfavorite,
         dadosuserlogon, 
-        setDadosUserLogOn
+        setDadosUserLogOn,
+        configitens,
+        setConfigItens,
+        searchitem,
+        setSearchitem
     }
     return (
         <ContextProducts.Provider value={ value }>

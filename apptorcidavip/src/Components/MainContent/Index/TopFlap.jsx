@@ -10,6 +10,7 @@ import FavotireProductEmpity from '../../Favorite/FavoriteProductEmpity';
 import ContextProducts from '../../../context/ContextProduct';
 import FavotireProduct from '../../Favorite/FavoriteProduct';
 import Exit from '../../../imgs/exit (1).png'
+import Searchbar from './searchbar/searchbar';
 
 
 export default function TopFlap () {
@@ -76,7 +77,7 @@ export default function TopFlap () {
             const userid =  dadosuserlogon.id
 
             try {
-                const response = await fetch ('https://torcidavipoficial-teste.onrender.com/api/get/addfavoriteprod', {
+                const response = await fetch (`http://localhost:3000/api/get/addfavoriteprod`, {
                     method: 'POST',
                     headers: {
                         'Content-Type' : 'application/json',
@@ -92,7 +93,7 @@ export default function TopFlap () {
     
                 const data = await response.json();
 
-                console.log('resposta da API: ', data);
+                // console.log('resposta da API: ', data);
     
                 if (data.success && data.data.length > 0) {
                     setTimeout(() => {
@@ -135,24 +136,7 @@ export default function TopFlap () {
                 <div onClick={handlenavigatehomepage} style={{cursor: 'pointer',width: 259, height: 38, left: 15, top: 30, position: 'absolute', color: 'white', fontSize: 32, fontFamily: 'moonhouse', fontWeight: '400', wordWrap: 'break-word'}}>TorcidaVIP</div>
             </div>
 
-            <div className='container-searchbar'>
-                <input className='borderinput'/>
-                
-                <div style={{width: 52.10, height: 55.03, left: 3.3, top: 2, position: 'absolute', background: '#47B868', borderRadius: 9999}} />
-                
-                <div className='inputstyle' >
-                    <input 
-                        placeholder='BUSCAR...'
-                        style={{width: 370, height: 36.80, border: 'none', paddingLeft: 15}}
-                        type="text" 
-                    />
-                </div>
-                
-               <div onClick={handlenavigatesearchprod} style={{width: 36.80, height: 35.44, left: 10, top: 12, position: 'absolute', cursor:'pointer'}}>
-                    <img src={iconlupa} alt="" />
-                </div>
-
-            </div>
+            <Searchbar handlenavigate={handlenavigatesearchprod} />
 
             <div className='containercartuserheart'>
                 

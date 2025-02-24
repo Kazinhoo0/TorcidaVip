@@ -1,7 +1,6 @@
 import './App.css';
 import Rotas from '../src/Rotes/routes'
 
-
 function App() {
   return (
     <div className="App">

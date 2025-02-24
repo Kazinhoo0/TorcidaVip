@@ -8,8 +8,9 @@ import CarrinhoCompras from '../Components/MainContent/Carrinho/CarrinhoCompras'
 import Register from '../Components/MainContent/UserRegister/Registe';
 import Novoendereco from '../Components/MainContent/UserProfile/Endereços/Novoendereco';
 import MaisVendidos from '../Components/MainContent/Index/MaisVendidos';
-import AddNewImgProduct from '../Components/MainContent/AddNewImg/AddNewImgProduct';
+import AddNewImgProduct from '../Components/MainContent/ConfidenceContent/AddNewImg/AddNewImgProduct';
 import CardVazio from '../Components/MainContent/Carrinho/CardVazio';
+import ConfigItens from '../Components/MainContent/ConfidenceContent/ConfigItens/ConfigItens';
 
 
 const Rotas = () => {
@@ -30,7 +31,8 @@ const Rotas = () => {
             <Route element={<Novoendereco/>} path='/novoendereco'  ></Route>
             <Route element={<MaisVendidos/>} path='/api/produtoss'></Route>
             <Route element={<AddNewImgProduct/>} path='/api/addnewimageprod'></Route>
-            
+            <Route element={<ConfigItens/>} path='/configitens'></Route>
+
         </Routes>
     )
 }

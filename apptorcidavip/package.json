@@ -26,7 +26,7 @@
     "web-vitals": "^4.2.4"
   },
   "scripts": {
-    "start": "node apptorcidavip/src/server.js",
+    "start": "react-scripts start",
     "server": "node apptorcidavip/src/server.js",
     "client": "react-scripts start",
     "build": "react-scripts build",
