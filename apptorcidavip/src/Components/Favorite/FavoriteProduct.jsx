@@ -19,7 +19,7 @@ export default function FavotireProduct ({handlefavoriteopened}) {
                 const userid =  dadosuserlogon.id
     
                 try {
-                    const response = await fetch(`http://localhost:3000/api/get/addfavoriteprod`, {
+                    const response = await fetch(`https://torcidavipoficial-teste.onrender.com/api/get/addfavoriteprod`, {
                         method: 'POST',
                         headers: {
                             'Content-Type' : 'application/json',

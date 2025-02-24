@@ -114,7 +114,7 @@ export default function Provider ({ children }) {
     
         const fetchProductsDB = async () => {
             try {              
-                const response = await fetch(`http://localhost:3000/api/get/infosprod`, {
+                const response = await fetch(`https://torcidavipoficial-teste.onrender.com/api/get/infosprod`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -192,7 +192,7 @@ export default function Provider ({ children }) {
     
         const fetchProductsDB = async () => {
             try {              
-                const response = await fetch(`http://localhost:3000/api/get/imgs`, {
+                const response = await fetch(`https://torcidavipoficial-teste.onrender.com/api/get/imgs`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

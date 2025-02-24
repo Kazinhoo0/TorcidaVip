@@ -12,7 +12,7 @@ export default function CardItemCarrinho ({infoprodutos}) {
         const userid = dadosuserlogon.id
 
         try {
-        const response = await fetch(`http://localhost:3000/api/post/removeitemcarrinho`, {
+        const response = await fetch(`https://torcidavipoficial-teste.onrender.com/api/post/removeitemcarrinho`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 

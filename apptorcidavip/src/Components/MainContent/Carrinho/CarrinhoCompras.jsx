@@ -26,7 +26,7 @@ export default function CarrinhoCompras () {
         const fetchRenderItensCarrinho = async () => {
             const userid = dadosuserlogon.id
             try {
-            const response = await fetch(`http://localhost:3000/api/post/renderitenscarrinho`, {
+            const response = await fetch(`https://torcidavipoficial-teste.onrender.com/api/post/renderitenscarrinho`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
