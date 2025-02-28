@@ -2,6 +2,8 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom"
 import ContextProducts from "../../../context/ContextProduct";
 import { Helmet } from "react-helmet";
+import Toastify from 'toastify-js';
+import 'toastify-js/src/toastify.css';
 
 
 export default function ComponentCadastro () {
@@ -10,7 +12,19 @@ export default function ComponentCadastro () {
     const navigate = useNavigate();
 
     const handlenavigateregister = () => {
+        if (!Dadosnewuser || Dadosnewuser.length <= 0) {
+            Toastify({
+                text: 'Preencha os campos!',
+                position: 'center',
+                style: {
+                    background: '#db2d0e',
+                    color: '#ffffff'
+                }
+            }).showToast();
+        } else {
         navigate('/register')
+        }
+        
     }   
 
     const {Dadosnewuser, setDadosNewUser} = useContext(ContextProducts)

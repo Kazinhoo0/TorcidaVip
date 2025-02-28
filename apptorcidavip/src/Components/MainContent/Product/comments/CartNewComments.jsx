@@ -38,7 +38,7 @@ export default function CartNewComment ({closecart, idproduto}) {
             formData.append("userid", dadosuserlogon.id )
 
             console.log('novo comentario infomacoes:', novocomentario)
-            console.log('novo comentario user id:', dadosuserlogon.id)
+            // console.log('novo comentario user id:', dadosuserlogon.id)
 
             const response = await fetch(`https://torcidavipoficial-teste.onrender.com/api/add/newcomment`, {
                 method: "POST",

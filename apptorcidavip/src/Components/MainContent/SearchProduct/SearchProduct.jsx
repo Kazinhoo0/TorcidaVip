@@ -9,14 +9,14 @@ import icon10 from '../../../imgs/Icon (10).png';
 import Product from '../Product/Designe/DesigneProduct';
 import FilterCategory from './FilterCategory';
 import ContextProducts from '../../../context/ContextProduct';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Helmet } from 'react-helmet';
 
 
 
 export default function SearchProduct() {
 
-    const { produtosdbImgandProd, produtosdb, produtosapi, loading, error } = useContext(ContextProducts)
+    const { produtosdb, prodsearchbar,  produtossearched, searchitem,  loading, error } = useContext(ContextProducts)
 
     // if (loading) return <p>Carregando produtos...</p>;
 
@@ -24,10 +24,14 @@ export default function SearchProduct() {
         console.log(error)
     }
 
-
     const produtosUnicos = Array.from(
         new Map(produtosdb.map((produto) => [produto.produto_id, produto])).values()
     );
+
+    const Namesearched = localStorage.getItem('itemsearched')
+
+    const lengthprodsearched = produtossearched.length
+
 
     return (
 
@@ -37,16 +41,16 @@ export default function SearchProduct() {
 
 
             <Helmet>
-                <title>Torcida Vip | 'NAMEPROD'</title>
+                <title>Torcida Vip | {Namesearched}</title>
             </Helmet>  
 
             <TopFlap />
 
             <div className='aligndiv-searchproduct'>
 
-                <div style={{ paddingLeft: 20, height: '80px', display: 'flex', alignItems: 'end', justifyContent: 'start' }} >
+                {/* <div style={{ paddingLeft: 20, height: '80px', display: 'flex', alignItems: 'end', justifyContent: 'start' }} >
                     <p>Início Femínino</p>
-                </div>
+                </div> */}
 
                 <div style={{ height: '80px', display: 'flex', alignItems: 'center', justifyContent: 'start' }}>
                     <img style={{ height: '25px', paddingLeft: 20 }} src={icon10} alt="" />
@@ -58,11 +62,11 @@ export default function SearchProduct() {
             <div className='container-resultsearch'>
 
                 <div className='resultsearch' style={{ lineHeight: 3, height: 100, width: 300, display: 'flex', justifyContent: 'center', alignItems: 'start' }}>
-                    <p>BOTAFOGO</p>
+                    <p>{Namesearched}</p>
                 </div>
 
                 <div className='howmuchresults' style={{ height: 53, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <small>*100 produtos(s) encontrado(s)</small>
+                    <small>{lengthprodsearched} produto(s) encontrado(s)</small>
                 </div>
             </div>
 
@@ -76,7 +80,7 @@ export default function SearchProduct() {
 
                 <div className='container-renderproducts-searched'>
 
-                    {produtosUnicos.slice(15, 27).map((produto) => (
+                    {produtossearched.slice(0, 12).map((produto) => (
                         <Product key={produto.produto_id} produto={produto} />
                     ))}
 

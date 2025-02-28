@@ -1,25 +1,36 @@
 import Logobranca from '../../../imgs/Logo Branca 1 (1).png';
-import user from '../../../imgs/user.png';
 import heart from '../../../imgs/heart.png';
 import cart from '../../../imgs/cart.png'
 import './Index.css';
 import { useNavigate } from 'react-router-dom';
-import iconlupa from '../../../imgs/Icon (14).png';
 import { useContext, useState, useEffect } from 'react';
 import FavotireProductEmpity from '../../Favorite/FavoriteProductEmpity';
 import ContextProducts from '../../../context/ContextProduct';
 import FavotireProduct from '../../Favorite/FavoriteProduct';
 import Exit from '../../../imgs/exit (1).png'
 import Searchbar from './searchbar/searchbar';
+import Profile from './Profile/Profile';
+import CardProfile from './Profile/CardProfile';
+import TodosOspedidos from '../UserProfile/TodosOsPedidos/TodosPedidos';
+
 
 
 export default function TopFlap () {
 
-    const {addonfavorite, setaddonfavorite, dadosuserlogon} = useContext(ContextProducts);
+    const {addonfavorite, setaddonfavorite, dadosuserlogon, showingpageclicked} = useContext(ContextProducts);
+
+
+    const [clickedprofile, setClickedProfile] = useState(false);
+
+
+    const handleprofileclicked = () => {
+        setClickedProfile(!clickedprofile)
+    }
 
     const finalizarsessão = () => {
         localStorage.removeItem('authToken')
-
+        localStorage.removeItem('authTokenGoogle')
+        navigate('/')
         window.location.reload();
 
     }
@@ -34,9 +45,9 @@ export default function TopFlap () {
         navigate('/')
     }
 
-    const handlenavigatesearchprod = () => {
-        navigate('/searchproduct')
-    }
+    // const handlenavigatesearchprod = () => {
+    //     navigate('/searchproduct')
+    // }
 
     const handlenavigatemakelogin = () => {
 
@@ -44,9 +55,30 @@ export default function TopFlap () {
             navigate('/Profile')
         } else {
             navigate('/login')
-        }
+        } 
+    }
 
-       
+    const handlenavigatemeuspedidos = () => {
+
+        if (dadosuserlogon && dadosuserlogon.id) {
+            navigate('/profile')
+            {showingpageclicked === 'todospedidos' && <TodosOspedidos/>}
+        
+        } else {
+            navigate('/login')
+        } 
+
+    }
+
+
+    const handlenavigatecartoes = () => {
+
+        if (dadosuserlogon && dadosuserlogon.id) {
+            navigate('/Profile')
+        } else {
+            navigate('/login')
+        } 
+        
     }
 
     const handlenavigatecarrinhocompras = () => {
@@ -54,7 +86,7 @@ export default function TopFlap () {
         if (dadosuserlogon && dadosuserlogon.id) {
             navigate('/carrinhocompras')
         } else {
-            navigate('carrinhocomprasvazio')
+            navigate('/carrinhocomprasvazio')
         }
 
     }
@@ -69,7 +101,6 @@ export default function TopFlap () {
 
     const {produtosoncarrinho} = useContext(ContextProducts);
 
-    const totprodutoscarrinho = produtosoncarrinho.length
 
     useEffect(() => {
         const fetchGetFavoritesprods  = async () => {
@@ -136,15 +167,11 @@ export default function TopFlap () {
                 <div onClick={handlenavigatehomepage} style={{cursor: 'pointer',width: 259, height: 38, left: 15, top: 30, position: 'absolute', color: 'white', fontSize: 32, fontFamily: 'moonhouse', fontWeight: '400', wordWrap: 'break-word'}}>TorcidaVIP</div>
             </div>
 
-            <Searchbar handlenavigate={handlenavigatesearchprod} />
+            <Searchbar/>
 
             <div className='containercartuserheart'>
                 
-                <div style={{width: 42.29, height: 41.79, position: 'relative'}}>
-                    <div style={{cursor: 'pointer',width: 33.83, height: 33.43, left: 4.23, top: 4.18, position: 'absolute'}}>
-                        <img onClick={handlenavigatemakelogin} src={user} alt="" />
-                    </div>
-                </div>
+                <Profile handlenavigate={handleprofileclicked} />
 
                 <div onClick=
                 {() => {
@@ -158,7 +185,7 @@ export default function TopFlap () {
 
                
 
-                <div style={{width: 42.95, height: 39.53, position: 'relative'}}>
+                <div style={{width: 42.29, height: 39.53, position: 'relative'}}>
                     <div style={{width: 39.31, height: 39.31, left: 0, top: 0.22, position: 'absolute'}}>
                         <div style={{cursor: 'pointer',width: 31.44, height: 31.13, left: 3.93, top: 4.90, position: 'absolute'}}>
                             <img onClick={() => {
@@ -188,9 +215,19 @@ export default function TopFlap () {
                 }
                
             </div>
+                
+            {dadosuserlogon && Object.keys(dadosuserlogon).length > 0 && (
+                clickedprofile && (
+                    <CardProfile meuperfil={handlenavigatemakelogin} meuspedidos={handlenavigatemeuspedidos} meuscartoes={handlenavigatecartoes}/>  
+                )
+            )}
 
-            
-
+            {dadosuserlogon && Object.keys(dadosuserlogon).length <= 0 && (
+                clickedprofile && (
+                   navigate('/login')  
+                )
+            )}
+                
             <div style={{width: 384, height: 50, left: 450, top: 35, position: 'absolute', justifyContent: 'flex-start', alignItems: 'center', gap: 40, display: 'inline-flex',fontFamily: 'Teko'}}>
                 <div style={{width: 109, height: 26, position: 'relative'}}>
                     <div style={{left: 0, top: 0, position: 'absolute', color: 'white', fontSize: 25, fontWeight: '500', wordWrap: 'break-word'}}>Masculino</div>

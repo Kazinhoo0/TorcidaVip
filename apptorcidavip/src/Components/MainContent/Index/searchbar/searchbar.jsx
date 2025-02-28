@@ -1,17 +1,56 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import '../Index.css';
 import ContextProducts from '../../../../context/ContextProduct';
 import iconlupa from '../../../../imgs/Icon (14).png';
-import imgteste from '../../../../imgs/15195641246_15170945177_D40-1332-014_zoom1-2.png'
+import RenderSurchBar from './RenderSearchBar';
+import { useNavigate } from 'react-router-dom';
 // import Product from '../../Product/Designe/DesigneProduct';
 
-export default function Searchbar ({handlenavigate}) {
+export default function Searchbar () {
 
 
-    const {searchitem, setSearchitem } = useContext(ContextProducts)
+    const {searchitem, setSearchitem, prodsearchbar, setProdsearchbar, setProdutosSearched, setsearchitemnamer  } = useContext(ContextProducts);
 
-    const [prodsearchbar, setProdsearchbar] = useState([])
+    const navigate = useNavigate();
 
+    const searchbarRef = useRef(null); 
+
+    const fetchProductSearched = async (e) => {
+        e.preventDefault()
+        if (searchitem.length > 0) {
+            try {
+                const response = await fetch (`https://torcidavipoficial-teste.onrender.com/api/get/produtobuscado` , ({
+                    method: 'POST',
+                    headers: {'Content-Type' : 'application/json'},
+                    body: JSON.stringify({
+                        nome: searchitem
+                    })
+                }))
+
+                const data = await response.json();
+
+                console.log('itens sendo pesquisado searched api :' , data)
+
+                if (data.success) {
+                    setProdutosSearched(data.data);
+
+                    localStorage.setItem('itemsearched', searchitem)
+                    setSearchitem('')
+
+                    setTimeout(() => {
+                        navigate('/searchproduct')
+                    }, 500);
+                }
+
+            } catch (err) {
+                console.log('erro:', err)
+            }
+        
+        } else {
+            setProdutosSearched([])
+        }
+    } 
+    
 
     useEffect(() => {
         if (searchitem.length > 0) {
@@ -27,7 +66,7 @@ export default function Searchbar ({handlenavigate}) {
 
                     const data = await response.json();
 
-                    // console.log('item sendo pesquisado:' , data)
+                    console.log('item sendo pesquisado:' , data)
 
                     if (data.success) {
                         setProdsearchbar(data.data)
@@ -45,7 +84,22 @@ export default function Searchbar ({handlenavigate}) {
         }
 
     }, [searchitem])
-    
+
+    console.log('',prodsearchbar)
+
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (searchbarRef.current && !searchbarRef.current.contains(event.target)) {
+                setProdsearchbar([]); 
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
 
     return (
 
@@ -66,28 +120,12 @@ export default function Searchbar ({handlenavigate}) {
                     />
                 </div>
                 
-                <div onClick={handlenavigate} style={{width: 36.80, height: 35.44, left: 10, top: 12, position: 'absolute', cursor:'pointer'}}>
-                    <img src={iconlupa} alt="" />
-                </div>
+                <form onSubmit={fetchProductSearched} style={{display: 'flex',alignItems: 'center',justifyContent: 'center',width: 36.80, height: 35.44, left: 10, top: 12, position: 'absolute', cursor:'pointer'}}>
+                    <button className='btn-searchbar' type='submit' ><img src={iconlupa} alt="" /></button>
+                </form>
 
-                  {prodsearchbar.length > 0 && (
-
-                        <ul className='result-searchbar'>
-                            {prodsearchbar.map((produto, index) => (
-
-                                <li key={index}>  
-                                    <div className='container-img-seachbar'>
-                                        <img src={produto.imagem} alt="" /> 
-                                    </div>
-
-                                    <p className='style-nome-searchbar'>{produto.nome}</p>
-                                    <p className='style-preco-searchbar'>{produto.preco}</p>
-                                </li>
-
-                            ))}
-                        </ul>
-    
-                    )} 
+                {prodsearchbar.length > 0 && <RenderSurchBar produtos={prodsearchbar}/>}
+                  
 
                 {/* <ul className='result-searchbar'>
                    

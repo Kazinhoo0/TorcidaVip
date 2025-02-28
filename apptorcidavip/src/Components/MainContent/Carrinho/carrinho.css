@@ -3,7 +3,7 @@
     position: relative;
     /* border: 1px solid rgb(243, 6, 6); */
     width: 1900px;
-    height: 1600px; 
+    height: 1480px; 
     overflow-x: hidden;
     overflow-y: hidden;
 }
@@ -130,10 +130,16 @@
 }
 
 .style-nameitemcarrinho {
+    cursor: pointer;
     font-family: 'Montserrat Alternateso';
     font-weight: 500;
     font-size: 18px;
+    text-decoration: underline;
 }
+
+.style-nameitemcarrinho:hover {
+    color: rgba(0, 0, 255, 0.534);
+}   
 
 .style-lixeiracarrinho:hover {
     background: rgba(218, 216, 216, 0.74);
@@ -183,6 +189,7 @@
     width: 250px;
     height: 45px;
     background: #47B868;
+    color: white;
     border-radius: 0px 0px 0px 0px;
     font-family: 'Teko';
     font-size: 22px;
@@ -199,19 +206,109 @@
     height: 150px;
 }
 
+.container-freteeresumo-full {
+    display: flex;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.603);
+    border-top: 1px solid rgba(128, 128, 128, 0.527);
+    /* border: 1px solid red; */
+    width: 1300px;
+    height: 280px;
+}
+
+
+.btn-calcfrete {
+    cursor: pointer;
+    margin-left: 5px;
+    width: 120px;
+    padding: 1px;
+    color: white;
+    background-color: #47B868;
+    border: 1px solid rgba(128, 128, 128, 0.438);
+}
+
+
 .container-inputfrete {
     padding-left: 20px;
     /* border: 1px solid red; */
     display: flex;
-    align-items: start;
+    align-items: center;
 }
-.container-frete {
+
+.container-frete-empity {
     display: flex;
     flex-direction: column;
-    /* border: 1px solid rgb(29, 27, 27); */
+    /* border: 1px solid rgb(224, 4, 4); */
     width: 700px;
     height: 150px;
 
+}
+
+.container-frete-full {
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid rgb(224, 4, 4); */
+    width: 700px;
+    height: 250px;
+
+}
+
+.img-cardfrete {
+    width: 40px;
+}
+
+.sun-cardfrete {
+    padding-left: 5px;
+    text-align: start;
+    /* border: 1px solid green; */
+    width: 260px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    
+}
+
+
+.sun-cardfrete small {
+    font-size: 14px;
+    width: 280px;
+    overflow: hidden;
+}
+
+.name-cardfrete {
+    font-weight: 600;
+    text-decoration: underline;
+    /* border: 1px solid red; */
+}
+
+.input-choose-checkbox {
+    background-color: rgba(192, 191, 191, 0.514);
+    /* border: 1px solid red; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sun-pricefrete {
+    /* border: 1px solid red; */
+    width: 80px;
+    color: #2b7240;
+    text-align: center;
+}
+
+.container-cardfrete {
+    margin-top: 30px;
+    margin-left: 20px;
+    display: flex;
+    /* border: 1px solid red; */
+    width: 380px;
+    height: 50px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+
+.container-responsecalcdiv {
+    /* border: 1px solid red; */
+    height: 65px;
 }
 
 

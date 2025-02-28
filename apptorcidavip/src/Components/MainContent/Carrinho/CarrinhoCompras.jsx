@@ -7,6 +7,7 @@ import { Helmet } from "react-helmet";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ContextProducts from "../../../context/ContextProduct";
+import carrinhovazio from '../../../imgs/abandoned-cart.png'
 
 
 
@@ -58,7 +59,8 @@ export default function CarrinhoCompras () {
 
     const totalpedido = produtosoncarrinho.reduce((total, produto) => total + parseFloat(produto.preco), 0 )
 
-    
+    console.log('Estado atual do carrinho:', produtosoncarrinho);
+
 
     return (
         
@@ -76,15 +78,48 @@ export default function CarrinhoCompras () {
                    
                     <h3>Meu carrinho</h3>
 
+                </header>
+
+                <div className="container-render-productscarrinho">
+                    
+                    {produtosoncarrinho.map((produto) => {
+                        console.log('produto sendo enviado para o carrinho: ',produto)
+                        return <CardItemCarrinho key={produto.itemid} infoprodutos={produto} />;
+                    })}
+                    
+
+                </div>
+
+                <FreteeResumo totalpedido={totalpedido}/>;
+             
+                <div style={{display: 'flex', justifyContent: 'space-between', width: '1260px', paddingLeft: 25, paddingRight: 25, paddingTop
+                    : 20}}>
+                    <button onClick={handlenavigateproducts} style={{background: 'grey'}} className="style-buttoncontinuar">Escolher mais produtos</button>
+                    <button className="style-buttoncontinuar">Continuar</button>
+                </div>
+            </div>
+
+
+
+            {/* {dadosuserlogon && produtosoncarrinho && produtosoncarrinho.length > 0 ? (
+                <div className="sun-carrinhocompras">
+
+                <header className="container-headermeucarrinho">
+                   
+                    <h3>Meu carrinho</h3>
+
                     <button className="style-buttoncontinuar">Continuar</button>
                    
                 </header>
 
                 <div className="container-render-productscarrinho">
+                    
                     {produtosoncarrinho.map((produto) => {
                         console.log('produto sendo enviado para o carrinho: ',produto)
                         return <CardItemCarrinho key={produto.itemid} infoprodutos={produto} />;
                     })}
+                    
+
                 </div>
 
                 <FreteeResumo totalpedido={totalpedido}/>;
@@ -97,6 +132,33 @@ export default function CarrinhoCompras () {
 
             </div>
 
+               
+            ) : (
+                <div className="container-carrinhocompras">
+                    <Helmet>
+                        <title>Torcida Vip | Carrinho compras</title>
+                    </Helmet>   
+            
+            
+                    <div className="sun-carrinhocompras">
+            
+                        <header className="container-headermeucarrinho">
+                            
+                            <h3>Meu carrinho</h3>
+                            
+                        </header>
+            
+                        <div className="Imagem-carrinhovazio">
+                            <img style={{width: 150}} src={carrinhovazio} alt="" />
+                            <span>seu carrinho esta vazio!</span>
+                            <button className='btn-carrinhovazio'>Ir as compras</button>
+                        </div>
+            
+                    </div>
+                </div>
+            )} */}
+
+            
             <InfoAtendimentos customcopyrightcontainer={1500} customTop={1100}/>
 
         </div>

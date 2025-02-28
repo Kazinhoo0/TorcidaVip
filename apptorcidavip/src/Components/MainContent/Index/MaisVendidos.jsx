@@ -8,9 +8,16 @@ import './Index.css'
 export default function MaisVendidos() {
     
 
-    const { produtosdb, produtosapi, loading, error} = useContext(ContextProducts)
+    const { produtosdb, loading, error} = useContext(ContextProducts)
 
-    if (loading) return <p>Carregando produtos...</p>;
+    if (loading) return <div class="wrapper">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="shadow"></div>
+    <div class="shadow"></div>
+    <div class="shadow"></div>
+</div>;
 
     if (error) {
         console.log(error)

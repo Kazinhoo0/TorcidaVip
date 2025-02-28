@@ -11,6 +11,7 @@ const bodyParser = require('body-parser');
 
 
 
+
 // Configuração do banco de dados MySQL
 
 
@@ -182,13 +183,14 @@ app.post('/api/login', async (req, res) => {
       }
 
       // Gera um token JWT
-      const secretKey = "seuSegredoJWT"; // Substitua por um segredo seguro!
-      const token = jwt.sign({ id: user.id, email }, secretKey, { expiresIn: '1h' });
+      const secretKey = process.env.JWT_KEY; // Substitua por um segredo seguro!
+      const token = jwt.sign({ id: user.id, email, nome: user.nome }, secretKey, { expiresIn: '1h' });
 
       res.status(200).json({
           success: true,
           id: user.id,
           token: token,
+          nome: user.nome,
           message: 'Login bem-sucedido',
           nomecompleto: user.nome + user.sobrenome
       });
@@ -724,7 +726,7 @@ app.post('/api/get/searchbar' , async (req, res) => {
   const {nome} = req.body;
 
 
-  console.log('item sendo pesquisado ', nome)
+  // console.log('item sendo pesquisado ', nome)
 
   try {
 
@@ -760,7 +762,198 @@ AND p.nome LIKE CONCAT('%', ?, '%');`
     return res.status(500).json({message:'Erro ao buscar item', error: err.message})
   }
 
+});
+
+
+app.post('/auth/google', async (req,res) => {
+
+  try {
+    const {credential} = req.body; 
+
+    console.log(req.body);
+
+    if (!credential) {
+      return res.status(400).json({
+        success: false,
+        message: 'credential não encontrado'
+      })
+    }
+
+    const decodefic = jwt.decode(credential);
+
+
+    if (!decodefic) {
+      return res.status(400).json({
+        error:'Token inválido'
+      })
+    }
+
+    const {email, name, picture} = decodefic
+
+    console.log('decode dados:', decodefic);
+
+    const queryCheckuser = `SELECT * FROM users WHERE email = ?`
+    const [result] = await db.query(queryCheckuser, [email]);
+
+    const user = result[0]
+    const secretKey =  process.env.JWT_KEY
+    const token = jwt.sign({ id: user.id, email, nome: user.nome }, secretKey, { expiresIn: '1h' });
+
+
+    if (!result.length === 0) {
+      const queryInsertNewUser = `INSERT INTO users (email , nome) VALUES (?,?)`
+      const resultInsert = await db.query(queryInsertNewUser, [email,name]);
+
+      if (resultInsert.affectedRows > 0 ) {
+        return res.status(200).json({
+          success: true,
+          data: resultInsert,
+          message:'Novo usuário criado!'
+        })
+
+      } else {
+        return res.status(500).json({
+          success: false,
+          error: 'Erro ao adicionar novo usuário'
+        })
+      }
+
+    } else {
+      return res.status(200).json({
+        success: true,
+        message:'Usuário encontrado',
+        data: result[0],
+        token: token
+      })
+    }
+
+  } catch (err) {
+    console.error('Erro na api:', err)
+    return res.status(500).json({
+      success: false,
+      err: 'Erro na api do google'
+    })
+  }
 })
+
+
+app.post('/api/get/produtobuscado', async (req,res) => {
+
+  const {nome} = req.body
+
+  try {
+
+    const querygetprodsearched = `SELECT 
+      p.id AS produto_id, 
+      p.nome, 
+      p.preco, 
+      (SELECT i.caminho 
+      FROM imagensprod i 
+      WHERE i.produto_id = p.id 
+      ORDER BY i.id ASC 
+      LIMIT 1) AS imagem -- Garante apenas uma imagem por produto
+  FROM Produtos p
+  WHERE p.idprodutopai IS NULL 
+  AND p.nome LIKE CONCAT('%', ?, '%');` 
+
+  const [result] = await db.query(querygetprodsearched, [`%${nome}%`]);
+
+  if (result.length > 0) {
+    return res.status(200).json({
+      success: true,
+      message: 'Produto pesquisado',
+      data: result
+    })
+  } else {
+    return res.status(400).json({
+      success: false,
+      message: 'erro na API',
+    })
+  }
+    
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: err.message
+    })
+  }
+})
+
+
+app.post("/calcular-frete", async (req, res) => {
+  try {
+      const { cep_destino , qtnprodoncarrinho } = req.body;
+
+      if (qtnprodoncarrinho === 0) {
+        var peso = ''
+      }
+
+      if (qtnprodoncarrinho === 1) {
+        peso = 0.150
+      }
+
+      if (qtnprodoncarrinho === 2) {
+        peso = 0.300
+      } 
+
+      if (qtnprodoncarrinho === 5) {
+        peso = 0.600
+      } 
+
+      if (!cep_destino) {
+          return res.status(400).json({ error: "CEP de destino é obrigatório" });
+      }
+
+      console.log(peso)
+
+      const cep_origem = "24812128";
+      const largura = 20;
+      const altura = 4;
+      const comprimento = 20;
+      const Token = process.env.MELHOR_ENVIO_TOKEN;
+
+      const response = await fetch("https://www.melhorenvio.com.br/api/v2/me/shipment/calculate", {
+          method: "POST",
+          headers: {
+              "Authorization": `Bearer ${Token}`,
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+          },
+          body: JSON.stringify({
+              from: { postal_code: cep_origem },
+              to: { postal_code: cep_destino },
+              package: {
+                  weight: peso,
+                  width: largura,
+                  height: altura,
+                  length: comprimento
+              },
+              services: "1,2" // IDs dos serviços de transporte
+          })
+      });
+
+      const textResponse = await response.text(); // Pegando a resposta como texto
+
+      if (!textResponse) {
+          console.error("Resposta vazia da API Melhor Envio");
+          return res.status(500).json({ error: "Resposta vazia da API Melhor Envio" });
+      }
+
+      let data;
+      try {
+          data = JSON.parse(textResponse); // Convertendo a resposta para JSON manualmente
+      } catch (jsonError) {
+          console.error("Erro ao converter resposta para JSON:", textResponse);
+          return res.status(500).json({ error: "Resposta inválida da API Melhor Envio" });
+      }
+
+      res.json(data);
+  } catch (error) {
+      console.error("Erro ao calcular o frete:", error.message);
+      res.status(500).json({ error: "Erro ao calcular o frete" });
+  }
+});
+
 
 
 

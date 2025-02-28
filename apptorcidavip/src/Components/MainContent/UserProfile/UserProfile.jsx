@@ -13,7 +13,7 @@ import icon7 from '../../../imgs/Icon (9).png';
 import { CiLogout } from "react-icons/ci";
 import { TiWarningOutline } from "react-icons/ti";
 import Enderecos from './Endereços/Endereços'
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import TodosOspedidos from './TodosOsPedidos/TodosPedidos';
 import OpPagamento from './OpPagamento.jsx/Pagamento';
 import Minhasavaliacoes from './MinhasAvaliações.jsx/Avaliações';
@@ -21,18 +21,17 @@ import DeletarConta from './DeletarConta/DeletarContar';
 import Processando from './Processando/Processamento';
 import Devolução from './Devolução/Devolução';
 import Enviados from './Enviado/Enviado';
+import ContextProducts from '../../../context/ContextProduct';
 
 
 
 export default function UserProfile () {
 
-    const [showingpageclicked, setShowingpageclicked] = useState(null)
+    const {showingpageclicked, setShowingpageclicked} = useContext(ContextProducts)
 
     const onclickpage = (pageName) => {
         setShowingpageclicked(pageName)        
     }
-
-    
 
 
     return (

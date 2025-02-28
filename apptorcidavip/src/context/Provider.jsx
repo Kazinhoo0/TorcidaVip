@@ -12,8 +12,6 @@ export default function Provider ({ children }) {
 
     const [produtosdb, setProdutosDb] = useState([]);
 
-    const [produtosdbImgandProd, setProdutosdbImgandProd ] = useState([]);
-
     const [loading, setLoading] = useState(true);
 
     const [error, setError] = useState(null);
@@ -57,8 +55,19 @@ export default function Provider ({ children }) {
 
     const [dadosuserlogon, setDadosUserLogOn] = useState([]);
 
-    useEffect(() => {
+     useEffect(() => {
         const token = (localStorage.getItem('authToken'));
+
+         if (token) {
+             const DecodeToken = jwtDecode(token);
+             setDadosUserLogOn(DecodeToken);
+         } else {
+            setDadosNewUser('')
+         }
+     }, []);
+
+    useEffect(() => {
+        const token = (localStorage.getItem('authTokenGoogle'));
 
         if (token) {
             const DecodeToken = jwtDecode(token);
@@ -75,6 +84,12 @@ export default function Provider ({ children }) {
     const [addonfavorite, setaddonfavorite] = useState([]);
 
     const [produtosoncarrinho , setProdutosOnCarrinho] = useState([]);
+
+    const [showingpageclicked, setShowingpageclicked] = useState(null);
+
+    const [produtossearched, setProdutosSearched] = useState([]);
+    
+    const [prodsearchbar, setProdsearchbar] = useState([]);
 
     // console.log('productdetails no provider', productdetails)
    
@@ -240,7 +255,6 @@ export default function Provider ({ children }) {
         setDadosUserLogin,
         novocomentario,
         setNovocomentario,
-        produtosdbImgandProd,
         productdetails, 
         setProductDetails,
         produtoid, 
@@ -254,7 +268,13 @@ export default function Provider ({ children }) {
         configitens,
         setConfigItens,
         searchitem,
-        setSearchitem
+        setSearchitem,
+        showingpageclicked,
+        setShowingpageclicked,
+        produtossearched,
+        setProdutosSearched,
+        prodsearchbar,
+        setProdsearchbar,
     }
     return (
         <ContextProducts.Provider value={ value }>

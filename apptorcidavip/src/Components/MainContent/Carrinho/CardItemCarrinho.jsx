@@ -1,11 +1,14 @@
 import { useContext } from "react";
 import { CiTrash } from "react-icons/ci";
 import ContextProducts from "../../../context/ContextProduct";
+import { useNavigate } from "react-router-dom";
 
 
 export default function CardItemCarrinho ({infoprodutos}) {
 
-    const {setProdutosOnCarrinho, dadosuserlogon} = useContext(ContextProducts);
+    const {setProdutosOnCarrinho, dadosuserlogon, setProductDetails} = useContext(ContextProducts);
+
+    const navigate = useNavigate();
 
     const fetchRemoveItemCarrinho = async () => {
         
@@ -37,6 +40,45 @@ export default function CardItemCarrinho ({infoprodutos}) {
         }
     };
 
+
+    const handleClicked = (e) => {
+        e.preventDefault();
+        const fetchproductsDetails = async () => {
+            try {
+                const id = infoprodutos.itemid
+                // console.log('id a ser enviado pro backend: ',id)
+                const response = await fetch(`https://torcidavipoficial-teste.onrender.com/viewproduct/${id}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ id })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar dados');
+                }
+
+                const data = await response.json();
+
+                if (data.success) {
+                    setProductDetails(data.data);
+                } else {
+                    console.log(data.message);
+                }
+
+            } catch (err) {
+                console.error(err.message);
+            }
+        };
+
+        fetchproductsDetails();
+        setTimeout(() => {
+            navigate(`/viewproduct/${infoprodutos.itemid}`)
+        }, 500);
+    }    
+
+  
     
     return (
 
@@ -47,7 +89,7 @@ export default function CardItemCarrinho ({infoprodutos}) {
             </div>
 
             <div className="name-and-size-carrinho">
-                <a className="style-nameitemcarrinho" href="">{infoprodutos.nomeitem}</a>
+                <a onClick={handleClicked} className="style-nameitemcarrinho">{infoprodutos.nomeitem}</a>
                 <span>
                     <span>Tamanho: G</span>
                 </span>
@@ -56,7 +98,7 @@ export default function CardItemCarrinho ({infoprodutos}) {
                 </span>
                 <div>
                     <button onClick={fetchRemoveItemCarrinho} className="btn-carrinhodecompras" >Excluir</button>
-                    <button className="btn-carrinhodecompras">Compras Agora</button>
+                    <button className="btn-carrinhodecompras">Comprar Agora</button>
                 </div>
             </div>
 

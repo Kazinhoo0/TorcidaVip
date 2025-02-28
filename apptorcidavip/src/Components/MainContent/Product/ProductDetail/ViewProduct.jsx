@@ -16,13 +16,13 @@ import 'toastify-js/src/toastify.css';
 
 
 
+
 export default function ViewProduct() {
 
     const [clickednewcomment, setClickednewcomment] = useState(false);
 
     const [infocartcomments, setinfocartcomments] = useState([]);
 
-    
     const handlecreatenewcomment = () => {
         setClickednewcomment(!clickednewcomment)
     }
@@ -32,12 +32,12 @@ export default function ViewProduct() {
     const scrollToSection = () => {
         sectionRef.current?.scrollIntoView({ behavior: "smooth" });
     };
+
+    const {produtosdb , loading, error, productdetails , dadosuserlogon} = useContext(ContextProducts);
+
+
+    console.log('productsdetails depois do f5', productdetails)
     
-
-
-    const {produtosdb , loading, error, productdetails, setaddonfavorite, addonfavorite,dadosuserlogon} = useContext(ContextProducts);
-
-
     const fetchaddfavoriteprod = async () => {
 
         const userid = dadosuserlogon.id;
@@ -87,6 +87,7 @@ export default function ViewProduct() {
     }
 
     useEffect(() => {
+        if (!productdetails || productdetails.length === 0) return;
         const fetchGetComments = async () => {
             try {              
                 const response = await fetch(`https://torcidavipoficial-teste.onrender.com/api/get/infocomments`, {
@@ -118,11 +119,11 @@ export default function ViewProduct() {
         fetchGetComments();
     }, [])
 
-    if (loading) return <p>Carregando produtos...</p>;
+    // if (loading)  return <p>Carregando produtos...</p>;
 
-    if (error) {
-        console.log(error)
-    }
+    // if (error) {
+    //     console.log(error)
+    // }
          
     // console.log("Dados do db no frontend:", produtosdb);
     // console.log("Dados da api frontend:", produtosapi);
@@ -131,13 +132,9 @@ export default function ViewProduct() {
         new Map(produtosdb.map((produto) => [produto.produto_id, produto])).values()
     );
 
-    // console.log('Useeffect getcomments disparado');
-    // console.log('idproduto cartcomentarios:', productdetails[0].produto_id)
-    // console.log('no viewproduct :',productdetails);
-    // console.log('informacoes dos comentarios',infocartcomments);
+
 
     return (
-
         <div className="container-viewprod">
             {clickednewcomment && <CartNewComment idproduto={productdetails[0].produto_id} closecart={handlecreatenewcomment} />}
 

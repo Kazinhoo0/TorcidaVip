@@ -12,14 +12,17 @@ import 'toastify-js/src/toastify.css';
 
 export default function Product({ favoriteicon, produto }) {
 
-    const {setProductDetails, dadosuserlogon, produtosoncarrinho , setProdutosOnCarrinho } = useContext(ContextProducts)
+    const {setProductDetails, dadosuserlogon, setRefreshviewproduct, refreshviewproduct } = useContext(ContextProducts)
 
-
+ 
     const navigate = useNavigate();
+
+
 
     const handleClicked = () => {
             const fetchproductsDetails = async () => {
                 try {
+                    const nomeitem = produto.nome
                     const id = produto.produto_id;
                     // console.log('id a ser enviado pro backend: ',id)
                     const response = await fetch(`https://torcidavipoficial-teste.onrender.com/viewproduct/${id}`, {
@@ -52,12 +55,11 @@ export default function Product({ favoriteicon, produto }) {
     
         setTimeout(() => {
             navigate(`/viewproduct/${produto.produto_id}`)
-        }, 1000);
+        }, 500);
     }
 
+    console.log('id do produto:', refreshviewproduct)
     
-
-
     const HandlefetchAddOnCarrinho = async (e) => {
         e.stopPropagation();
 
@@ -83,7 +85,7 @@ export default function Product({ favoriteicon, produto }) {
             }).showToast();
             }
 
-            const response = await fetch(`https://torcidavipoficial-teste.onrender.com/api/post/additemcarrinho`, {
+            const response = await fetch(`http://localhost:3000/api/post/additemcarrinho`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -143,7 +145,7 @@ export default function Product({ favoriteicon, produto }) {
                 
                 <div>
 
-                    <img className='shirt-image' src={produto.imagem} alt="" />
+                    <img className='shirt-image' src={produto.imagem} alt={produto.nome} />
 
                     <img className='favorite-icon' src={favoriteicon} alt="" />
 

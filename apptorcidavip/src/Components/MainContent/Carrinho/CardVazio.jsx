@@ -6,6 +6,11 @@ import InfoAtendimentos from '../Index/InfoAtendimentos';
 export default function CardVazio () {
 
 
+    // const handleclickirparacompras = () => {
+    //     navigate("")
+    // }
+
+
     return ( 
 
         <div className="container-carrinhocompras">
@@ -21,8 +26,6 @@ export default function CardVazio () {
             <header className="container-headermeucarrinho">
                
                 <h3>Meu carrinho</h3>
-
-                <button className="style-buttoncontinuar">Continuar</button>
                
             </header>
 
