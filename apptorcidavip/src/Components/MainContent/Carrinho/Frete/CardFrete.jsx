@@ -26,7 +26,11 @@ export default function Cardfrete ({resultado}) {
                 </div>
                
                 <small>
-                    Data entrega:{resultado.delivery_range.min} a {resultado.delivery_range.max} dias úteis
+                    Data entrega: {resultado && resultado.delivery_range ? (
+                        `${resultado.delivery_range.min} a ${resultado.delivery_range.max} dias úteis`
+                    ) : (
+                        'Carregando...'
+                    )}
                 </small>
                 
             </div>
