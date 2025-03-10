@@ -26,13 +26,13 @@ export default function Cardfrete ({resultado}) {
                 </div>
                
                 <small>
-                    Data prevista: 05/03/2025 até 06/03/2025
+                    Data entrega:{resultado.custom_delivery_range.min} a {resultado.custom_delivery_range.max} dias úteis
                 </small>
                 
             </div>
 
             <div className='sun-pricefrete'>
-                <p>R$200</p>
+                <p>R${resultado.price}</p>
             </div>
 
         </div>
