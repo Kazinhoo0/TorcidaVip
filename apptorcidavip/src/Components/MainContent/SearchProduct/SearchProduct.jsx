@@ -11,6 +11,8 @@ import FilterCategory from './FilterCategory';
 import ContextProducts from '../../../context/ContextProduct';
 import { useContext, useState } from 'react';
 import { Helmet } from 'react-helmet';
+import ProductEmpity from '../Product/Designe/DesigneProductEmpity';
+
 
 
 
@@ -80,8 +82,12 @@ export default function SearchProduct() {
 
                 <div className='container-renderproducts-searched'>
 
-                    {produtossearched.slice(0, 12).map((produto) => (
+                    {produtossearched.slice(0, 10).map((produto) => (
+                        produto.estoque === "0" || produto.estoque === 0 ? (
+                        <ProductEmpity key={produto.produto_id} produto={produto} />
+                        ) : (
                         <Product key={produto.produto_id} produto={produto} />
+                        )
                     ))}
 
                 </div>

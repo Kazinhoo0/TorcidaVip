@@ -4,6 +4,7 @@ import heart from '../../../imgs/heart.png';
 import Product from '../Product/Designe/DesigneProduct';
 import { useContext } from 'react';
 import ContextProducts from '../../../context/ContextProduct';
+import ProductEmpity from '../Product/Designe/DesigneProductEmpity';
 
 export default function NovidadesLoja() {
 
@@ -33,10 +34,13 @@ export default function NovidadesLoja() {
 
                 <div style={{ display: 'grid', padding: 0 }}>
 
-                    {produtosUnicos.slice(11, 13).map((produto) => (
+                    {produtosUnicos.slice(20, 22).map((produto) => (
+                        produto.estoque === "0" || produto.estoque === 0 ? (
+                        <ProductEmpity key={produto.produto_id} produto={produto} />
+                        ) : (
                         <Product key={produto.produto_id} produto={produto} />
+                        )
                     ))}
-
 
                 </div>
 

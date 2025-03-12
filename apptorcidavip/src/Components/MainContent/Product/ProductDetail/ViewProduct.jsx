@@ -36,6 +36,8 @@ export default function ViewProduct() {
     const {produtosdb , loading, error, productdetails , dadosuserlogon} = useContext(ContextProducts);
 
 
+    const descricaoDetalhada = JSON.parse(productdetails[0].descricaodetalhada)
+
     console.log('productsdetails depois do f5', productdetails)
     
     const fetchaddfavoriteprod = async () => {
@@ -181,7 +183,7 @@ export default function ViewProduct() {
                             
                             <a style={{color: 'black', cursor: 'pointer'}} onClick={scrollToSection} >Ver comentários {infocartcomments.length}</a>
 
-                            <p className='text-descricaoproduct'>{productdetails[0].descricaoprod}</p>
+                            <p className='text-descricaoproduct'>{productdetails[0].descricaolonga}</p>
 
                             <div className='container-choose-size-adicionarcarrinho'>
 
@@ -266,27 +268,28 @@ export default function ViewProduct() {
 
                     <div className='cont-descricao-prod'>
                         <div className='sun-descricaoprod'>
-                            <h2>Descrição</h2>
+                            <h2>Informações Técnicas</h2>
                             <ul>
-                                <li className='style-list-descriprod'><p>Nome:Regata Fluminense Left Feminina</p></li>
-                                <li className='style-list-descriprod'><p>Nome:Regata Fluminense Left Feminina</p></li>
-                                <li className='style-list-descriprod'><p>Nome:Regata Fluminense Left Feminina</p></li>
-                                <li className='style-list-descriprod'><p>Nome:Regata Fluminense Left Feminina</p></li>
-                                <li className='style-list-descriprod'><p>Nome:Regata Fluminense Left Feminina</p></li>
-                                <li className='style-list-descriprod'><p>Nome:Regata Fluminense Left Feminina</p></li>
-                                <li className='style-list-descriprod'><p>Nome:Regata Fluminense Left Feminina</p></li>
+                                <li className='style-list-descriprod'><p>Composição: {descricaoDetalhada.Composicao}</p></li>
+                                <li className='style-list-descriprod'><p>Cor predominante: {descricaoDetalhada["Cor predominante"]}</p></li>
+                                <li className='style-list-descriprod'><p>Clube: {descricaoDetalhada.Clube}</p></li>
+                                <li className='style-list-descriprod'><p>Indicada para: {descricaoDetalhada["Indicada para"]}</p></li>
+                                <li className='style-list-descriprod'><p>Escudo: {descricaoDetalhada.Escudo}</p></li>
+                                <li className='style-list-descriprod'><p>Gênero: {descricaoDetalhada.Gênero}</p></li>
+                                <li className='style-list-descriprod'><p>Manga: {descricaoDetalhada.Manga}</p></li>
+                                <li className='style-list-descriprod'><p>Gola: {descricaoDetalhada.Gola}</p></li>
                             </ul>
 
-                            <h2>Informação Adicional</h2>
+                            <h2 style={{width: '500px'}}>Dimensões aproximadas (A x L):</h2>
                             <ul>
 
-                                <li className='style-list-descriprod'>
-                                    <p>Nome:Regata Fluminense Left Feminina</p>
+                                {/* <li className='style-list-descriprod'>
+                                    <p>Nome:{descricaoDetalhada.Composicao}</p>
                                 </li>
 
                                 <li className='style-list-descriprod'>
-                                    <p>Nome:Regata Fluminense Left Feminina</p>
-                                </li>
+                                    <p>Nome:{descricaoDetalhada.Composicao}</p>
+                                </li> */}
 
                             </ul>
                         </div>

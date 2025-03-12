@@ -18,7 +18,6 @@ export default function Product({ favoriteicon, produto }) {
     const navigate = useNavigate();
 
 
-
     const handleClicked = () => {
             const fetchproductsDetails = async () => {
                 try {
@@ -136,8 +135,7 @@ export default function Product({ favoriteicon, produto }) {
     };
     
 
-        
-
+    
     return (
         <>
 

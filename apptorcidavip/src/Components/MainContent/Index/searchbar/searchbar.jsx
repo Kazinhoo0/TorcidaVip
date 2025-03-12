@@ -4,7 +4,7 @@ import ContextProducts from '../../../../context/ContextProduct';
 import iconlupa from '../../../../imgs/Icon (14).png';
 import RenderSurchBar from './RenderSearchBar';
 import { useNavigate } from 'react-router-dom';
-// import Product from '../../Product/Designe/DesigneProduct';
+
 
 export default function Searchbar () {
 

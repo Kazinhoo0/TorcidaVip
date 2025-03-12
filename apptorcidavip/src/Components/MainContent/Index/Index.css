@@ -178,6 +178,24 @@
     
 }
 
+.icon-addcart-empity {
+   
+    /*Rectangle 20 */
+    /* position: absolute; */
+    border: 1px solid rgba(0, 0, 0, 0.39);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* left: 155px;
+    top: 30px; */
+    background: #7a7a7abb;
+    transition: 1s;
+    border-radius: 5px;
+    /* border-radius: 0px 100px 0px 0px; */
+    
+}
+
 .icon-addcart:hover {
     background: white;
 
@@ -323,9 +341,48 @@
     
 }
 
+.shirt-image-empity {
+    position: relative; 
+    /* border: 1px solid red; */
+    border-radius: 20px;
+}
+
+.shirt-image-empity::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 99%;
+    background-color: rgba(128, 128, 128, 0.774);
+    z-index: 2;
+    opacity: 0.5; 
+    border-radius: 20px;
+}
+
+.shirt-image-empity img {
+    position: relative;
+    z-index: 1;
+}
+
+.shirt-image-empity p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-size: 25px;
+    font-family: 'Teko';
+    font-weight: 560;
+    z-index: 3;
+    position: absolute;
+    border: 1px solid rgba(134, 134, 134, 0.733);
+    bottom: 10px;
+    width: 99%;
+}
+
 .products-opcoes {
 
-    /* border: 1px solid red;  */
+    /* border: 1px solid red; */
     display: flex;
     flex-direction: column;
     align-items: flex-start;

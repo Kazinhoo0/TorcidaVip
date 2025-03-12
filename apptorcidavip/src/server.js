@@ -71,14 +71,14 @@ app.use(bodyParser.json());
          console.log(`Produto ${safeCodigo} já existe. Atualizando...`);
           await db.execute(`
            UPDATE Produtos 
-           SET descricaoprod = ?, preco = ?, estoque = ?
+           SET descricaolonga = ?, preco = ?, estoque = ?
           WHERE codigo = ?
       `, [safeDescricaoCurta, safePreco, safeEstoque, safeCodigo]);
        } else {
        // Insere um novo produto
           console.log(`Produto ${safeCodigo} não encontrado. Inserindo...`);
           await db.execute(`
-            INSERT INTO Produtos (precocusto, formato, nome, tamanho, codigo, descricaoprod, preco, estoque, idprodutopai) 
+            INSERT INTO Produtos (precocusto, formato, nome, tamanho, codigo, descricaolonga, preco, estoque, idprodutopai) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
           `, [safePrecoCusto, safeFormato, safeNome, safeTipo, safeCodigo, safeDescricaoCurta, safePreco, safeEstoque, safeIdProdutopai]);
        }
@@ -381,7 +381,8 @@ app.post('/api/get/imgs', async (req, res) => {
         SELECT 
         p.id AS produto_id, 
           p.nome, 
-          p.preco, 
+          p.preco,
+          p.estoque, 
           i.caminho AS imagem
         FROM Produtos p
         LEFT JOIN imagensprod i ON p.id = i.produto_id
@@ -461,7 +462,9 @@ app.post('/viewproduct/:id', async (req, res) => {
           p.id AS produto_id, 
           p.nome, 
           p.preco, 
-          p.descricaoprod,
+          p.descricaolonga,
+          p.descricaodetalhada,
+          p.cor,
           i.caminho AS imagem
       FROM Produtos p
       LEFT JOIN imagensprod i ON p.id = i.produto_id
@@ -688,15 +691,15 @@ app.post('/api/post/removeitemfavorito', async (req, res) => {
 
 app.post ('/api/configitens' , async (req , res) => {
 
-  const {codigo, tamanho, descricao, cor} = req.body
+  const {codigo, tamanho, descricaoLonga, descricaoDetalhada , cor} = req.body
 
 
   console.log('req.body no backend: ' ,req.body)
 
   try {
 
-    const queryAddConfigItens = `UPDATE Produtos SET tamanho = ?, descricaoprod = ? , cor = ? WHERE codigo = ?`;
-    const [result] = await db.query(queryAddConfigItens, [tamanho, descricao, cor , codigo]);
+    const queryAddConfigItens = `UPDATE Produtos SET tamanho = ?, descricaolonga = ? , descricaodetalhada = ?, cor = ? WHERE codigo = ?`;
+    const [result] = await db.query(queryAddConfigItens, [tamanho, descricaoLonga, descricaoDetalhada , cor , codigo]);
   
 
     if (result.affectedRows > 0) {

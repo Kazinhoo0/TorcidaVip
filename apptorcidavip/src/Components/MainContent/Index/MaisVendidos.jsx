@@ -2,6 +2,7 @@ import Product from '../Product/Designe/DesigneProduct';
 import ContextProducts from '../../../context/ContextProduct';
 import { useContext } from 'react';
 import './Index.css'
+import ProductEmpity from '../Product/Designe/DesigneProductEmpity';
 
 
 
@@ -23,23 +24,12 @@ export default function MaisVendidos() {
         console.log(error)
     }
          
-    // console.log("Dados do db no frontend:", produtosdb);
+    console.log("Dados do db no frontend:", produtosdb);
     // console.log("Dados da api frontend:", produtosapi);
 
     const produtosUnicos = Array.from(
         new Map(produtosdb.map((produto) => [produto.produto_id, produto])).values()
     );
-
-
-    // const produtosComImagens = produtosdb.map(produto => {
-    //     // Filtrar as imagens relacionadas ao produto
-    //     const imagensRelacionadas = produtosdbImgandProd.filter(imagem => imagem.produto_id === produto.id);
-    //     return {
-    //       ...produto,
-    //       imagens: imagensRelacionadas,
-    //     };
-    //   });
-    
 
 
     return (
@@ -53,12 +43,20 @@ export default function MaisVendidos() {
 
             <div className="products-maisvendidos">
 
-                
-            {produtosUnicos.slice(0, 10).map((produto) => (
-                <Product key={produto.produto_id} produto={produto} />
-            ))}
-               
-              
+                {produtosUnicos.slice(0, 10).map((produto) => (
+                    produto.estoque === "0" || produto.estoque === 0 ? (
+                    <ProductEmpity key={produto.produto_id} produto={produto} />
+                    ) : (
+                    <Product key={produto.produto_id} produto={produto} />
+                    )
+                ))}
+
+                {/* {produtosUnicos.slice(0, 10).map((produto) => 
+                    (
+                        <ProductEmpity key={produto.produto_id} produto={produto} />
+                    )
+                )}  */}
+
             </div>
 
         </>

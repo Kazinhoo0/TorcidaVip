@@ -21,7 +21,8 @@ export default function ConfigItens () {
                 body: JSON.stringify({
                     codigo: configitens.codigo,
                     tamanho: configitens.tamanho,
-                    descricao: configitens.descricao,
+                    descricaoLonga: configitens.descricaoLonga,
+                    descricaoDetalhada: JSON.stringify(configitens.descricaoDetalhada),
                     cor: configitens.cor
                 })
             })
@@ -81,10 +82,19 @@ export default function ConfigItens () {
 
                     <input
                         className='input_style_configitens'
-                        placeholder='*Descricao prod'
+                        placeholder='*Descricao Longa'
                         type="text"
-                        onChange={(e) => setConfigItens({...configitens, descricao: e.target.value})}
+                        onChange={(e) => setConfigItens({...configitens, descricaoLonga: e.target.value})}
                     />
+
+                    <textarea 
+                        className='input_style_configitens'
+                        name="Jsoninput" 
+                        id=""
+                        placeholder='*Descrição Detalhada'
+                        value={configitens.descricaoDetalhada}
+                        onChange={(e) => setConfigItens({...configitens, descricaoDetalhada: e.target.value})}
+                    ></textarea>
 
                     <input
                         className='input_style_configitens'
