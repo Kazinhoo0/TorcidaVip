@@ -19,6 +19,7 @@ export default function ConfigItens () {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
+                    marca: configitens.marca,
                     codigo: configitens.codigo,
                     tamanho: configitens.tamanho,
                     descricaoLonga: configitens.descricaoLonga,
@@ -78,6 +79,13 @@ export default function ConfigItens () {
                         placeholder='*Tamanho item'
                         type="text"
                         onChange={(e) => setConfigItens({...configitens, tamanho: e.target.value})}
+                    />
+
+                    <input 
+                        className='input_style_configitens' 
+                        placeholder='*Marca'
+                        type="text"
+                        onChange={(e) => setConfigItens({...configitens, marca: e.target.value})}
                     />
 
                     <input

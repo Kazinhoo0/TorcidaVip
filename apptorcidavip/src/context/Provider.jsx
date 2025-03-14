@@ -17,11 +17,13 @@ export default function Provider ({ children }) {
     const [error, setError] = useState(null);
 
     const [configitens, setConfigItens] = useState({
+        marca: '',
         codigo: '',
         tamanho: '',
         cor: '',
         descricaoLonga: '',
-        descricaoDetalhada: '{"Composicao": "", "Corpredominante": "", "Clube": "", "Indicadapara": "", "Escudo": "" , "Gênero": "", "Gola": "", "Manga": ""}',
+        descricaoDetalhada: 
+        '{"Composicao": "", "Corpredominante": "", "Clube": "", "Indicadapara": "", "Escudo": "" , "Gênero": "", "Gola": "", "Manga": ""}',
     })
 
     const [searchitem, setSearchitem] = useState('');
@@ -92,6 +94,22 @@ export default function Provider ({ children }) {
     
     const [prodsearchbar, setProdsearchbar] = useState([]);
 
+    const [newendereco, setNewEndereco] = useState({
+
+        nomeendereco: '',
+        cep: '',
+        endereco: '',
+        numero: '',
+        complemento: '',
+        bairro: '',
+        cidade: '',
+        estado: '',
+        destinatario: ''
+
+    })
+
+    const [userenderecos, setUserEnderecos] = useState([]);
+    
     // console.log('productdetails no provider', productdetails)
    
     //  useEffect(() => {
@@ -246,6 +264,7 @@ export default function Provider ({ children }) {
     // console.log('produto com imagem:', produtosdbImgandProd)
 
     const value = {
+
         produtosapi,
         produtosdb,
         loading,
@@ -276,6 +295,11 @@ export default function Provider ({ children }) {
         setProdutosSearched,
         prodsearchbar,
         setProdsearchbar,
+        newendereco, 
+        setNewEndereco,
+        userenderecos,
+        setUserEnderecos
+
     }
     return (
         <ContextProducts.Provider value={ value }>

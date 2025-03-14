@@ -1,10 +1,11 @@
 import '../Index.css';
-// import meuspedidos from '../../../../imgs/imgsIcon (6).png'
-// import meuscartoes from '../../../../imgs/Icon (4).png'
-import pedidos from '../../../../imgs/Icon (4).png';
+import pedidos from '../../../../imgs/Icon (7).png';
 import cartoes from '../../../../imgs/Icon (6).png';
 import { useContext } from 'react';
 import ContextProducts from '../../../../context/ContextProduct';
+import { FiUser } from "react-icons/fi";
+
+
 // import sair from '../../../../imgs/log-out.png';
 
 
@@ -30,7 +31,7 @@ export default function CardProfile ({meuperfil, meuscartoes, meuspedidos}) {
                 <li onClick={meuperfil}>
 
                     <div>
-                        <img src={pedidos} alt="" />
+                        <FiUser style={{width: '27px', height: 27}} />
                     </div>
                    
                     <p>Meu perfil</p>

@@ -7,7 +7,7 @@ import ContextProducts from '../../../../context/ContextProduct';
 // import { jwtDecode } from "jwt-decode";
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
-import imgteste from '../../../../imgs/15195641246_15170945177_D40-1332-014_zoom1-2.png'
+// import imgteste from '../../../../imgs/15195641246_15170945177_D40-1332-014_zoom1-2.png'
 
 
 

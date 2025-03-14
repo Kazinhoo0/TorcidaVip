@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.eacb5c89.css",
-    "main.js": "/static/js/main.7c43b969.js",
+    "main.css": "/static/css/main.15e26c01.css",
+    "main.js": "/static/js/main.2bc9b5b3.js",
     "static/js/488.17b092e6.chunk.js": "/static/js/488.17b092e6.chunk.js",
     "static/media/casacovascodestaque.png": "/static/media/casacovascodestaque.4356db81a10702ddabc0.png",
     "static/media/Teko-VariableFont_wght.ttf": "/static/media/Teko-VariableFont_wght.2c304a82d8b73b2829fa.ttf",
@@ -16,12 +16,12 @@
     "static/media/do-utilizador.png": "/static/media/do-utilizador.c920752422c11377083e.png",
     "static/media/iamgem ssl.jpg": "/static/media/iamgem ssl.022c143376b32ace4306.jpg",
     "index.html": "/index.html",
-    "main.eacb5c89.css.map": "/static/css/main.eacb5c89.css.map",
-    "main.7c43b969.js.map": "/static/js/main.7c43b969.js.map",
+    "main.15e26c01.css.map": "/static/css/main.15e26c01.css.map",
+    "main.2bc9b5b3.js.map": "/static/js/main.2bc9b5b3.js.map",
     "488.17b092e6.chunk.js.map": "/static/js/488.17b092e6.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.eacb5c89.css",
-    "static/js/main.7c43b969.js"
+    "static/css/main.15e26c01.css",
+    "static/js/main.2bc9b5b3.js"
   ]
 }

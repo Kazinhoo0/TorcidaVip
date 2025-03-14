@@ -691,15 +691,15 @@ app.post('/api/post/removeitemfavorito', async (req, res) => {
 
 app.post ('/api/configitens' , async (req , res) => {
 
-  const {codigo, tamanho, descricaoLonga, descricaoDetalhada , cor} = req.body
+  const { marca ,codigo, tamanho, descricaoLonga, descricaoDetalhada , cor} = req.body
 
 
   console.log('req.body no backend: ' ,req.body)
 
   try {
 
-    const queryAddConfigItens = `UPDATE Produtos SET tamanho = ?, descricaolonga = ? , descricaodetalhada = ?, cor = ? WHERE codigo = ?`;
-    const [result] = await db.query(queryAddConfigItens, [tamanho, descricaoLonga, descricaoDetalhada , cor , codigo]);
+    const queryAddConfigItens = `UPDATE Produtos SET marca = ?,tamanho = ?, descricaolonga = ? , descricaodetalhada = ?, cor = ? WHERE codigo = ?`;
+    const [result] = await db.query(queryAddConfigItens, [marca , tamanho, descricaoLonga, descricaoDetalhada , cor , codigo]);
   
 
     if (result.affectedRows > 0) {
@@ -957,6 +957,79 @@ app.post("/calcular-frete", async (req, res) => {
   }
 });
 
+
+
+app.post('/api/newendereco', async (req, res) => {
+
+  const { userid , nomeendereco, cep , endereco , numero , complemento , bairro , cidade , estado , destinatario } = req.body;
+
+  console.log('body no backend:', req.body);
+
+  // Verifica se todos os campos estão presentes
+  if (!req.body) {
+    return res.status(500).json({ error: 'O corpo da requisição não foi retornado' });
+  }
+
+  try {
+    // Verifica se o endereço já existe no banco de dados
+      const queryCheckEndereco = `
+      SELECT endereco 
+      FROM enderecos 
+      WHERE user_id = ? AND (endereco = ? OR nomeendereco = ?)
+    `;
+    const rows = await db.query(queryCheckEndereco, [userid, endereco, nomeendereco]);
+
+    console.log(rows)
+
+    if (rows[0].length > 0) {  
+      return res.status(400).json({ success: false, message: 'Endereço ou nome do endereço já cadastrado.' });
+    }
+    // Insere o novo endereço no banco de dados
+    const queryInsertNewEndereco = `INSERT INTO enderecos (endereco, cidade, estado, numero, destinatario, cep, bairro, nomeendereco, complemento, user_id ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )`;
+    const result = await db.query(queryInsertNewEndereco, [endereco, cidade, estado, numero, destinatario, cep, bairro, nomeendereco, complemento, userid ]);
+
+    if (result.affectedRows > 0) {
+      return res.status(200).json({ success: true, message: 'Novo endereço registrado!' });
+    }
+   
+  } catch (err) {
+    console.error('Erro ao acessar o banco de dados:', err);
+    res.status(500).json({ success: false, error: 'Erro ao registrar o endereço.' });
+  }
+});
+
+
+
+app.post('/api/get/userenderecos', async (req,res) => {
+
+  const {userid} = req.body;
+
+
+  if (!req.body || !userid) {
+    return res.status(500).json({success: false, message: 'Erro ao buscar endereços, dados não encontrados'})
+  }
+
+
+  try {
+
+    const queryGetEnderecos = `SELECT * FROM enderecos WHERE user_id = ?`
+    const [result] = await db.query(queryGetEnderecos, userid);
+
+    if (result.length > 0) {
+      return res.status(200).json({
+        success: true,
+        message: 'Sucesso ao buscar endereços',
+        data: result
+      })
+    } else {
+      return res.status(400).json({success: false, message: 'Erro na api'})
+    }
+
+  } catch {
+    console.log('Caiu no catch')
+  }
+
+})
 
 
 

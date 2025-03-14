@@ -21,7 +21,7 @@
 }
 
 .container-filtercategory {
-    border: 1px solid rgb(12, 12, 12);
+    /* border: 1px solid rgb(12, 12, 12); */
     width: 250px;
     height: 1200px;
     border-top: none;
@@ -43,7 +43,7 @@
 
 .input-search-filters {
     padding-left: 20px;
-    border: 1px solid rgba(124, 121, 121, 0.801);
+    border: 1px solid rgba(124, 121, 121, 0.486);
     width: 195px;
     height: 30px;
 }
@@ -59,6 +59,7 @@
     justify-content: start;
     align-items: start;
     border-bottom: 1px solid rgba(128, 128, 128, 0.336);
+    transition: 1s;
 }
 
 .options-filter li {
@@ -94,15 +95,16 @@ input[type="checkbox"]:checked {
 
 
 .search-filters label {
-    color: rgba(26, 107, 26, 0.993);
+    color: rgb(71, 184, 104);
     font-size: 25px;
     padding: 5px;
     /* border: 1px solid red; */
-    border-bottom: 2px solid rgba(189, 189, 189, 0.685);
+    border-bottom: 1px solid rgba(189, 189, 189, 0.568);
     display: flex;
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
+    transition: 1s;
 }
 
 .title-filtercategory {
@@ -123,6 +125,11 @@ input[type="checkbox"]:checked {
 }
 
 .resultsearch {
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
     font-family: 'Teko';
     font-size: 30px;
 }

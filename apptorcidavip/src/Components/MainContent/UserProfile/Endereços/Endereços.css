@@ -31,6 +31,18 @@
     justify-content: center;
 }
 
+.container-addnewendereco {
+    /* border: 1px solid red; */
+    height: 350px;
+}
+
+.container-renderrenderecos {
+    width: 900px;
+    /* border: 1px solid red; */
+    height: 500px;
+    overflow: auto;
+}
+
 .img-addendereco-style {
     width: 50px;
     height: 60px;
@@ -46,14 +58,21 @@
 }
 
 .container-cardnewendereco {
+    padding-left: 40px;
     display: grid;
     /* border: 1px solid red; */
-    position: absolute;
-    top: 340px;
-    left: 40px;
     width: 900px;
-    height: 350px;
+    height: 150px;
 
+}
+
+.container-render-enderecos {
+    /* border: 1px solid red; */
+    width: 1000px;
+    height: 500px;
+    position: absolute;
+    top: 400px;
+    overflow-x: auto;
 }
 
 .input-novoendereco-style {

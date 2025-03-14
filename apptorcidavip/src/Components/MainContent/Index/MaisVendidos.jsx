@@ -49,7 +49,8 @@ export default function MaisVendidos() {
                     ) : (
                     <Product key={produto.produto_id} produto={produto} />
                     )
-                ))}
+                ))} 
+
 
                 {/* {produtosUnicos.slice(0, 10).map((produto) => 
                     (

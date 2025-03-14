@@ -42,19 +42,23 @@ export default function FilterCategory () {
                         <ul className="options-filter" >
                             <li>
                                 <input type="checkbox" name="" id="" />
-                                <span className="text-filter-search">Futebol</span>
+                                <span className="text-filter-search">Camisas de time</span>
                             </li>
                             <li>
                                 <input type="checkbox" name="" id="" />
-                                <span className="text-filter-search">Futebol</span>
+                                <span className="text-filter-search">Flamengo</span>
                             </li>
                             <li>
                                 <input type="checkbox" name="" id="" />
-                                <span className="text-filter-search">Futebol</span>
+                                <span className="text-filter-search">Vasco</span>
                             </li>
                             <li>
                                 <input type="checkbox" name="" id="" />
-                                <span className="text-filter-search">Futebol</span>
+                                <span className="text-filter-search">Fluminense</span>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="" id="" />
+                                <span className="text-filter-search">Botafogo</span>
                             </li>
                             <li></li>
                         </ul>
