@@ -225,7 +225,7 @@ export default function Provider ({ children }) {
             const userid =  dadosuserlogon.id
 
             try {
-                const response = await fetch(`http://localhost:3000/api/get/addfavoriteprod`, {
+                const response = await fetch(`https://torcidavipoficial-teste.onrender.com/api/get/addfavoriteprod`, {
                     method: 'POST',
                     headers: {
                         'Content-Type' : 'application/json',
@@ -263,7 +263,7 @@ export default function Provider ({ children }) {
         const fetchRenderItensCarrinho = async () => {
             const userid = dadosuserlogon.id
             try {
-            const response = await fetch(`http://localhost:3000/api/post/renderitenscarrinho`, {
+            const response = await fetch(`https://torcidavipoficial-teste.onrender.com/api/post/renderitenscarrinho`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
@@ -297,7 +297,7 @@ export default function Provider ({ children }) {
         const fetchGetEnderecos  = async () => {
             
             try {
-                const response = await fetch(`http://localhost:3000/api/get/userenderecos`, {
+                const response = await fetch(`https://torcidavipoficial-teste.onrender.com/api/get/userenderecos`, {
                     method: 'POST',
                     headers: {
                         'Content-Type' : 'application/json',
