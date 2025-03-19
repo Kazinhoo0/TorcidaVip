@@ -9,7 +9,7 @@ import ContextProducts from '../../context/ContextProduct';
 
 export default function CardFavoriteProd ({infoprods}) {
 
-    const {dadosuserlogon,setaddonfavorite} = useContext(ContextProducts)
+    const {dadosuserlogon , setaddonfavorite} = useContext(ContextProducts)
 
     const fetchRemoveItemFavorito = async () => {
         

@@ -20,38 +20,42 @@ export default function CarrinhoCompras () {
         navigate('/searchproduct')
     }
 
+    const handlenavigateCardPagamento = () => {
+        navigate('/paymentpage')
+    }
+
     const {produtosoncarrinho , setProdutosOnCarrinho, dadosuserlogon} = useContext(ContextProducts)
 
 
-     useEffect(() => {
-        const fetchRenderItensCarrinho = async () => {
-            const userid = dadosuserlogon.id
-            try {
-            const response = await fetch(`https://torcidavipoficial-teste.onrender.com/api/post/renderitenscarrinho`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 
-                    userid: userid
-                }),
-            });
+    // useEffect(() => {
+    //     const fetchRenderItensCarrinho = async () => {
+    //         const userid = dadosuserlogon.id
+    //         try {
+    //         const response = await fetch(`http://localhost:3000/api/post/renderitenscarrinho`, {
+    //             method: 'POST',
+    //             headers: { 'Content-Type': 'application/json' },
+    //             body: JSON.stringify({ 
+    //                 userid: userid
+    //             }),
+    //         });
     
-            const data = await response.json();
-            console.log("Itens recebidos do backend:", data.items);
-            // console.log(data)
-            if (data.success) {
-                // console.log(data.items)
-                setProdutosOnCarrinho(data.items);
+    //         const data = await response.json();
+    //         console.log("Itens recebidos do backend:", data.items);
+    //         // console.log(data)
+    //         if (data.success) {
+    //             // console.log(data.items)
+    //             setProdutosOnCarrinho(data.items);
                 
-            } else {
-                console.error('Erro ao carregar os itens do carrinho');
-            }
-            } catch (error) {
-            console.error('Erro:', error);
-            }
-        };
+    //         } else {
+    //             console.error('Erro ao carregar os itens do carrinho');
+    //         }
+    //         } catch (error) {
+    //         console.error('Erro:', error);
+    //         }
+    //     };
     
-        fetchRenderItensCarrinho();
-    }, []);
+    //     fetchRenderItensCarrinho();
+    // }, []);
 
     useEffect(() => {
         console.log('produtos carrinho:', produtosoncarrinho);
@@ -95,7 +99,7 @@ export default function CarrinhoCompras () {
                 <div style={{display: 'flex', justifyContent: 'space-between', width: '1260px', paddingLeft: 25, paddingRight: 25, paddingTop
                     : 20}}>
                     <button onClick={handlenavigateproducts} style={{background: 'grey'}} className="style-buttoncontinuar">Escolher mais produtos</button>
-                    <button className="style-buttoncontinuar">Continuar</button>
+                    <button onClick={handlenavigateCardPagamento} className="style-buttoncontinuar">Continuar</button>
                 </div>
             </div>
 

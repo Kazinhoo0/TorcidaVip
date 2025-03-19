@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+app.use(express.json());
 const uploadUser = require('./middlewares/uploadimage');
 const upload = require('./middlewares/uploadimage');
 const cors = require('cors');
@@ -8,17 +9,15 @@ require('dotenv').config();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
+const mercadopago = require('mercadopago');
 
 
 
 
 // Configuração do banco de dados MySQL
-
-
 console.log ('API KEY', process.env.API_KEY)
 const db = require('./Database/db');
 const { error } = require('console');
-const { resourceLimits } = require('worker_threads');
 
 
 app.use(cors({
@@ -27,11 +26,19 @@ app.use(cors({
   credentials: true,
 
 }))
+
 app.use(express.urlencoded({ extended: true })); 
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+
+const client = new mercadopago.MercadoPagoConfig({
+  accessToken: process.env.MERCADO_PAGO_PUBLIC_KEY,
+  options: { sandbox: true }
+});
+
 
 // Função para salvar produtos no banco de dados
   const saveProdutosToDB = async (produtos) => {
@@ -89,7 +96,7 @@ app.use(bodyParser.json());
     }
   };
 
-app.use(express.json());
+
 
 //  app.get('/api/get/produtos', async (req, res) => {
 //    try {
@@ -183,16 +190,17 @@ app.post('/api/login', async (req, res) => {
       }
 
       // Gera um token JWT
-      const secretKey = process.env.JWT_KEY; // Substitua por um segredo seguro!
-      const token = jwt.sign({ id: user.id, email, nome: user.nome }, secretKey, { expiresIn: '1h' });
+      const secretKey = process.env.JWT_KEY; 
+      const token = jwt.sign({ id: user.id, email:user.email, nome: user.nome, sobrenome: user.sobrenome}, secretKey, { expiresIn: '1h' });
 
       res.status(200).json({
           success: true,
           id: user.id,
           token: token,
+          email: user.email,
           nome: user.nome,
           message: 'Login bem-sucedido',
-          nomecompleto: user.nome + user.sobrenome
+          sobrenome: user.sobrenome
       });
 
   } catch (error) {
@@ -883,6 +891,7 @@ app.post('/api/get/produtobuscado', async (req,res) => {
 })
 
 
+
 app.post("/calcular-frete", async (req, res) => {
   try {
       const { cep_destino , qtnprodoncarrinho } = req.body;
@@ -1029,7 +1038,57 @@ app.post('/api/get/userenderecos', async (req,res) => {
     console.log('Caiu no catch')
   }
 
-})
+});
+
+
+
+app.post("/process_payment", async (req, res) => {
+  try {
+    const paymentData = {
+      token: req.body.token,
+      issuer_id: req.body.issuer_id || 24,
+      payment_method_id: req.body.payment_method_id,
+      transaction_amount: req.body.transaction_amount,
+      installments: req.body.installments,
+      payer: {
+        email: req.body.payer.email,
+        identification: req.body.payer.identification
+      },
+      description: req.body.description
+    };
+
+    if (!paymentData) {
+      console.log('Todos os campos precisam ser preenchidos')
+    }
+
+    console.log(paymentData)
+
+    if (!req.body.token || !req.body.payment_method_id || !req.body.transaction_amount) {
+      return res.status(400).send({ error: "Todos os campos precisam ser preenchidos" });
+    }
+  
+    const payment = new mercadopago.Payment(client);
+    const result = await payment.create({ body: req.body });
+    
+    console.log('teste')
+    res.status(200).send({
+      success: true,
+      payment,
+      id: result.id,
+      status: result.status,
+      payment_method: result.payment_method_id,
+      amount: result.transaction_amount
+
+    });
+
+
+  } catch (error) {
+    console.error("Erro no pagamento:", error);
+    res.status(500).send({ error: error.message });
+  }
+});
+
+
 
 
 

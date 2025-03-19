@@ -1,0 +1,272 @@
+
+.style-formulariopagamento {
+    /* border: 1px solid red; */
+    position: absolute;
+    top: 240px;
+    left: 790px;
+    display: grid;
+}
+
+.input-payment {
+    border: 1px solid rgba(0, 0, 0, 0.349);
+    border-radius: 5px;
+    width: 390px;
+    height: 30px;
+}
+
+.btn-payment {
+    cursor: pointer;
+    border: 1px solid rgb(255, 255, 255);
+    font-weight: 600;
+    color: white;
+    background-color: green;
+    border-radius: 5px;
+    padding: 10px;
+    transition: 1s;
+}
+
+.btn-payment:hover {
+    background-color: rgba(192, 190, 190, 0.767);
+    color: black;
+}
+
+.container-componentepagamentos {
+    /* border: 1px solid red; */
+    position: absolute;
+    top: 120px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sun-etapaspagamento {
+    /* border: 1px solid red; */
+    width: 1200px;
+    height: 820px;
+    display: flex;
+}
+
+.title-resumopedido {
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: start;
+    height: 50px;
+    text-align: start;
+}
+
+.container-etapaspagamento {
+    /* border: 1px solid red; */
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: 100%;
+}
+
+.container-infosetapas {
+    background-color: rgba(226, 226, 226, 0.486);
+    border: 1px solid rgba(156, 156, 156, 0.363);
+    width: 100%;
+    height: 230px;
+    margin-top: 15px;
+}
+
+
+.container-infosetapaspagamento {
+    border: 1px solid rgb(156, 156, 156);
+    width: 100%;
+    height: 600px;
+    margin-top: 15px;
+}
+
+.title {
+    margin: 5px;
+    /* border: 1px solid rgb(0, 0, 0); */
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.circlespan {
+    color: rgba(255, 255, 255, 0.986) !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(156, 156, 156, 0.068);
+    width: 32px;
+    height: 32px;
+    background-color: rgb(7, 7, 7);
+    border-radius: 50%;
+}
+
+.title span {
+    color: green;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-infosetapas .infopessoais {
+    margin: 5px;
+    /* border: 1px solid rgb(8, 8, 8); */
+
+}
+
+.infopessoais .Olá-email {
+    display: flex;
+    flex-direction: column;
+}
+
+.Olá-email span {
+    padding-left: 8px;
+    display: flex;
+
+}
+
+.Olá-email .email {
+    margin: 5px;
+    height: 55px;
+    padding-right: 5px;
+    border: 1px solid rgba(168, 168, 168, 0.651);
+    background-color: rgba(160, 160, 160, 0.151);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.infopessoais .nome-telefone {
+    /* border: 1px solid red; */
+    margin: 5px;
+
+}
+
+.nome-telefone ul {
+    margin-left: 10px;
+    padding: 0px;
+    list-style: none;
+    text-align: start;
+}
+
+.container-infosetapas .endereco {
+    background-color: rgba(160, 160, 160, 0.151);
+    border: 1px solid rgba(172, 172, 172, 0.247);
+    height: 150px;
+    display: flex;
+    margin: 5px;
+}
+
+.enderecotrueorfalse {
+    /* border: 1px solid red; */
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.infoendereco {
+    /* border: 1px solid red; */
+    width: 300px;
+}
+
+.editar {
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+}
+
+.infoendereco ul {
+    padding: 5px;
+    display: flex;
+    text-align: start;
+    flex-direction: column;
+}
+
+.container-infosetapas .envio {
+    background-color: rgba(160, 160, 160, 0.151);
+    border: 1px solid rgba(172, 172, 172, 0.247);
+    height: 120px;
+    display: flex;
+    margin: 5px;
+}
+
+.container-infosetapas .formapagamento {
+    /* border: 1px solid red; */
+    height: 150px;
+}
+
+.formas ul {
+    /* border: 1px solid red; */
+    list-style: none;
+    margin: 0px;
+    padding: 5px;
+}
+
+.formas li {
+    cursor: pointer;
+    border-radius: 2px;
+    background-color: rgba(230, 230, 230, 0.541);
+    box-shadow: rgba(33, 33, 34, 0.2) 0px 7px 29px 0px;
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2px;
+    margin-top: 20px;
+    height: 60px;
+    color: green;
+    font-weight: 500;
+}
+
+.formas li div {
+    text-align: start !important;
+    /* border: 1px solid red;  */
+    width: 250px;
+}
+
+
+.container-productpedido {
+    /* border: 1px solid red; */
+    height: 70px;
+    display: flex;
+}
+
+
+.container-productpedido .imageproduct {
+    /* border: 1px solid red; */
+    width: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.container-productpedido .nameproduct {
+    /* border: 1px solid red; */
+    width: 200px;
+    text-align: start;
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 5px;
+}
+
+.nameproduct p {
+    /* border: 1px solid red; */
+    overflow: hidden;
+    font-weight: 500;
+    height: 30px;
+}
+
+.nameproduct span {
+    height: 30px;
+}
+/* .envio . {
+
+
+} */

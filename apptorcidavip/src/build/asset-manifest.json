@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.15e26c01.css",
-    "main.js": "/static/js/main.2bc9b5b3.js",
-    "static/js/488.17b092e6.chunk.js": "/static/js/488.17b092e6.chunk.js",
+    "main.css": "/static/css/main.48d0e53e.css",
+    "main.js": "/static/js/main.db9ed42f.js",
+    "static/js/488.e44aab31.chunk.js": "/static/js/488.e44aab31.chunk.js",
     "static/media/casacovascodestaque.png": "/static/media/casacovascodestaque.4356db81a10702ddabc0.png",
     "static/media/Teko-VariableFont_wght.ttf": "/static/media/Teko-VariableFont_wght.2c304a82d8b73b2829fa.ttf",
     "static/media/MontserratAlternates-ExtraLight.ttf": "/static/media/MontserratAlternates-ExtraLight.9cdbca51b74ed2b1427e.ttf",
@@ -13,15 +13,16 @@
     "static/media/15195639859_15186736348_imagem_2023-04-17_115903763.png": "/static/media/15195639859_15186736348_imagem_2023-04-17_115903763.6be9bd3312aea9f54c63.png",
     "static/media/moonhouse.ttf": "/static/media/moonhouse.27ab573368b14c8ed14f.ttf",
     "static/media/Bull-Bot.png": "/static/media/Bull-Bot.598ad5f87e21d1781208.png",
+    "static/media/15195641015_15171215674_M_0087_002004314_01-2 (11).png": "/static/media/15195641015_15171215674_M_0087_002004314_01-2 (11).aa92b748ffb4377c38d6.png",
     "static/media/do-utilizador.png": "/static/media/do-utilizador.c920752422c11377083e.png",
     "static/media/iamgem ssl.jpg": "/static/media/iamgem ssl.022c143376b32ace4306.jpg",
     "index.html": "/index.html",
-    "main.15e26c01.css.map": "/static/css/main.15e26c01.css.map",
-    "main.2bc9b5b3.js.map": "/static/js/main.2bc9b5b3.js.map",
-    "488.17b092e6.chunk.js.map": "/static/js/488.17b092e6.chunk.js.map"
+    "main.48d0e53e.css.map": "/static/css/main.48d0e53e.css.map",
+    "main.db9ed42f.js.map": "/static/js/main.db9ed42f.js.map",
+    "488.e44aab31.chunk.js.map": "/static/js/488.e44aab31.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.15e26c01.css",
-    "static/js/main.2bc9b5b3.js"
+    "static/css/main.48d0e53e.css",
+    "static/js/main.db9ed42f.js"
   ]
 }

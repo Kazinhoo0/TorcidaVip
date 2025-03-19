@@ -11,45 +11,8 @@ import CardFavoriteProd from './CardComponentFavorite';
 export default function FavotireProduct ({handlefavoriteopened}) {
 
 
-    const {addonfavorite, setaddonfavorite, dadosuserlogon} = useContext(ContextProducts);
+    const {addonfavorite} = useContext(ContextProducts);
 
-    useEffect(() => {
-            const fetchGetFavoritesprods  = async () => {
-                
-                const userid =  dadosuserlogon.id
-    
-                try {
-                    const response = await fetch(`https://torcidavipoficial-teste.onrender.com/api/get/addfavoriteprod`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type' : 'application/json',
-                        },
-                        body: JSON.stringify({
-                            userid: userid
-                        })
-                    })
-    
-                    if (!response.ok) {
-                        throw new Error('Erro ao buscar dados');
-                    }
-        
-                    const data = await response.json();
-    
-                    // console.log('resposta da API: ', data);
-        
-                    if (data.success && data.data.length > 0) {  
-                        setaddonfavorite(data.data);
-                    } else {
-                        setaddonfavorite([]);
-                    }
-        
-                } catch (err) {
-                    return console.log(err.message)
-                }
-            };
-    
-            fetchGetFavoritesprods();
-        }, [])
 
     return ( 
 

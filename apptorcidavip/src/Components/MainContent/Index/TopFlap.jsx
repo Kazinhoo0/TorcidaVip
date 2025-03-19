@@ -17,7 +17,7 @@ import TodosOspedidos from '../UserProfile/TodosOsPedidos/TodosPedidos';
 
 export default function TopFlap () {
 
-    const {addonfavorite, setaddonfavorite, dadosuserlogon, showingpageclicked} = useContext(ContextProducts);
+    const {addonfavorite, dadosuserlogon, showingpageclicked} = useContext(ContextProducts);
 
 
     const [clickedprofile, setClickedProfile] = useState(false);
@@ -100,51 +100,6 @@ export default function TopFlap () {
     // console.log('dadosuserlogon no topflap:', dadosuserlogon)
 
     const {produtosoncarrinho} = useContext(ContextProducts);
-
-
-    useEffect(() => {
-        const fetchGetFavoritesprods  = async () => {
-            
-            const userid =  dadosuserlogon.id
-
-            try {
-                const response = await fetch (`https://torcidavipoficial-teste.onrender.com/api/get/addfavoriteprod`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type' : 'application/json',
-                    },
-                    body: JSON.stringify({
-                        userid: userid
-                    })
-                })
-
-                if (!response.ok) {
-                    throw new Error('Erro ao buscar dados');
-                }
-    
-                const data = await response.json();
-
-                // console.log('resposta da API: ', data);
-    
-                if (data.success && data.data.length > 0) {
-                    setTimeout(() => {
-                        setaddonfavorite(data.data);
-                    }, 2000)
-                } else {
-                    setaddonfavorite([]); 
-                }
-    
-            } catch (err) {
-                return console.log(err.message)
-            }
-        };
-
-        fetchGetFavoritesprods();
-    }, [])
-
-    useEffect(() => {
-        console.log('produtos favoritos:', addonfavorite);
-    }, [addonfavorite]);
     
     return (
 

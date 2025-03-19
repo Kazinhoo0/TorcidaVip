@@ -6,14 +6,14 @@ import FiltragemTimes from "./FiltragemTimes";
 import InfoSite from "./InfoSite";
 import InfoAtendimentos from "./InfoAtendimentos";
 import { Helmet } from 'react-helmet';
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import ContextProducts from "../../../context/ContextProduct";
 
 
 
 export default function IndexComponent () {
 
-    const {dadosuserlogon} = useContext(ContextProducts)
+    const {dadosuserlogon, setUserEnderecos} = useContext(ContextProducts)
 
     // console.log('Dados do usuario cadastrado :', dadosuserlogon)
 

@@ -10,6 +10,8 @@ export default function Provider ({ children }) {
 
     const [produtosapi, setProdutosApi] = useState([]);
 
+    const [infocartão, setInfoCartão] = useState([])
+
     const [produtosdb, setProdutosDb] = useState([]);
 
     const [loading, setLoading] = useState(true);
@@ -48,12 +50,6 @@ export default function Provider ({ children }) {
         bairro:'',
         cidade:'',
         pais: ''
-    });
-
-
-    const [dadosuserlogin, setDadosUserLogin] = useState ({
-        email: '',
-        senha: ''
     });
 
     const [dadosuserlogon, setDadosUserLogOn] = useState([]);
@@ -107,6 +103,7 @@ export default function Provider ({ children }) {
         destinatario: ''
 
     })
+
 
     const [userenderecos, setUserEnderecos] = useState([]);
     
@@ -220,6 +217,115 @@ export default function Provider ({ children }) {
     //     fetchRenderItensCarrinho();
     // }, []);
 
+    useEffect(() => {
+        if (!dadosuserlogon?.id) return;
+
+        const fetchGetFavoritesprods  = async () => {
+            
+            const userid =  dadosuserlogon.id
+
+            try {
+                const response = await fetch(`http://localhost:3000/api/get/addfavoriteprod`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type' : 'application/json',
+                    },
+                    body: JSON.stringify({
+                        userid: userid
+                    })
+                })
+
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar dados');
+                }
+    
+                const data = await response.json();
+
+                // console.log('resposta da API: ', data);
+    
+                if (data.success && data.data.length > 0) {  
+                    setaddonfavorite(data.data);
+                } else {
+                    setaddonfavorite([]);
+                }
+    
+            } catch (err) {
+                return console.log(err.message)
+            }
+        };
+
+        fetchGetFavoritesprods();
+    }, [dadosuserlogon])
+
+    useEffect(() => {
+        if (!dadosuserlogon?.id) return;
+
+        const fetchRenderItensCarrinho = async () => {
+            const userid = dadosuserlogon.id
+            try {
+            const response = await fetch(`http://localhost:3000/api/post/renderitenscarrinho`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    userid: userid
+                }),
+            });
+    
+            const data = await response.json();
+            console.log("Itens recebidos do backend:", data.items);
+            // console.log(data)
+            if (data.success) {
+                // console.log(data.items)
+                setProdutosOnCarrinho(data.items);
+                
+            } else {
+                console.error('Erro ao carregar os itens do carrinho');
+            }
+            } catch (error) {
+            console.error('Erro:', error);
+            }
+        };
+    
+        fetchRenderItensCarrinho();
+    }, [dadosuserlogon]);
+
+
+    useEffect(() => {
+
+        if (!dadosuserlogon?.id) return;
+
+        const fetchGetEnderecos  = async () => {
+            
+            try {
+                const response = await fetch(`http://localhost:3000/api/get/userenderecos`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type' : 'application/json',
+                    },
+                    body: JSON.stringify({
+                        userid: dadosuserlogon.id,
+                    })
+                })
+
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar dados');
+                }
+    
+                const data = await response.json();
+
+                // console.log('resposta da API: ', data);
+    
+                if (data.success && data.data.length > 0) {  
+                    setUserEnderecos(data.data);
+                } 
+            } catch (err) {
+                return console.log(err.message)
+            }
+        };
+
+        fetchGetEnderecos();
+    }, [dadosuserlogon])
+
 
     useEffect(() => {
         console.log('GET IMAGENS DISPARADO');
@@ -271,8 +377,6 @@ export default function Provider ({ children }) {
         error,
         Dadosnewuser,
         setDadosNewUser,
-        dadosuserlogin,
-        setDadosUserLogin,
         novocomentario,
         setNovocomentario,
         productdetails, 
@@ -298,7 +402,9 @@ export default function Provider ({ children }) {
         newendereco, 
         setNewEndereco,
         userenderecos,
-        setUserEnderecos
+        setUserEnderecos,
+        infocartão,
+        setInfoCartão
 
     }
     return (

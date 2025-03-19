@@ -11,6 +11,7 @@ import MaisVendidos from '../Components/MainContent/Index/MaisVendidos';
 import AddNewImgProduct from '../Components/MainContent/ConfidenceContent/AddNewImg/AddNewImgProduct';
 import CardVazio from '../Components/MainContent/Carrinho/CardVazio';
 import ConfigItens from '../Components/MainContent/ConfidenceContent/ConfigItens/ConfigItens';
+import CardPagamento from '../Components/MainContent/Carrinho/PaymentComp/Pagamento';
 
 
 const Rotas = () => {
@@ -32,6 +33,7 @@ const Rotas = () => {
             <Route element={<MaisVendidos/>} path='/api/produtoss'></Route>
             <Route element={<AddNewImgProduct/>} path='/api/addnewimageprod'></Route>
             <Route element={<ConfigItens/>} path='/configitens'></Route>
+            <Route element={<CardPagamento/>} path='/paymentpage'></Route>
 
         </Routes>
     )
