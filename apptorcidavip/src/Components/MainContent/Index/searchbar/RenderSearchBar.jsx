@@ -12,7 +12,6 @@ export default function RenderSurchBar ({produtos}) {
     const handleClicked = (produto) => {
         const fetchproductsDetails = async () => {
             try {
-                const nomeitem = produto.nome
                 const id = produto.produto_id;
                 // console.log('id a ser enviado pro backend: ',id)
                 const response = await fetch(`https://torcidavipoficial-teste.onrender.com/viewproduct/${id}`, {
@@ -47,6 +46,8 @@ export default function RenderSurchBar ({produtos}) {
             navigate(`/viewproduct/${produtos.produto_id}`)
         }, 500);
     }    
+
+    
 
 
     return (

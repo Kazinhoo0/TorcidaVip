@@ -10,9 +10,17 @@ import instagram from '../../../imgs/instagram (1).png';
 import facebook from '../../../imgs/facebook.png';
 import whatsapp from '../../../imgs/whatsapp.png';
 import sslseguro from '../../../imgs/iamgem ssl.jpg'
+import { useNavigate } from 'react-router-dom';
+
 
 
 export default function InfoAtendimentos ({customTop,customcopyrightcontainer}) {
+
+    const navigate = useNavigate();
+
+    const handlenavigatepolitica = () => {
+        navigate('/politicas-de-privacidade/devolucoes-trocas/entregas-prazos')
+    }
 
     return (
 
@@ -85,9 +93,9 @@ export default function InfoAtendimentos ({customTop,customcopyrightcontainer}) 
                         <div style={{ display: 'grid', gap: 0, padding: 0, margin: 0}}>
 
                             <h2 className='style-infos-title-atendimento'>Ajuda</h2>
-                            <small className="style-infos-atendimento" >Políticas de devoluções e Trocas</small>
-                            <small className="style-infos-atendimento" >Políticas de Privacidade</small>
-                            <small className="style-infos-atendimento" >Entregas e Prazos</small>
+                            <small onClick={handlenavigatepolitica} className="style-infos-atendimento" >Políticas de devoluções e Trocas</small>
+                            <small onClick={handlenavigatepolitica}className="style-infos-atendimento" >Políticas de Privacidade</small>
+                            <small onClick={handlenavigatepolitica} className="style-infos-atendimento" >Entregas e Prazos</small>
 
                         </div>
                         

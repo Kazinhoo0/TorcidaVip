@@ -8,7 +8,7 @@ import ProductEmpity from '../Product/Designe/DesigneProductEmpity';
 
 export default function NovidadesLoja() {
 
-    const { produtosdbImgandProd, produtosdb, produtosapi, loading, error } = useContext(ContextProducts)
+    const { allprodutosdb, produtosdb, loading, error } = useContext(ContextProducts)
 
     if (loading) return <p>Carregando produtos...</p>;
 
@@ -17,9 +17,47 @@ export default function NovidadesLoja() {
     }
 
 
+    const getNomeBase = (nomeCompleto) => {
+        if (nomeCompleto.includes('Tamanho:')) {
+          return nomeCompleto.split('Tamanho:')[0].trim();
+        }
+        return nomeCompleto.trim();
+      };
+      
+      // Função para agrupar os tamanhos com seus respectivos estoques
+    const agruparTamanhosComEstoque = (produtos) => {
+    return produtos.reduce((acc, item) => {
+        // Extrai o nome base para agrupar o produto
+        const nomeBase = getNomeBase(item.nome);
+        if (item.tamanho) {
+        if (!acc[nomeBase]) {
+            acc[nomeBase] = [];
+        }
+        // Adiciona o objeto com tamanho e estoque
+        acc[nomeBase].push({
+            tamanho: item.tamanho,
+            estoque: item.estoque
+        });
+        }
+        return acc;
+    }, {});
+    };
+
+    // Exemplo de uso com o array allprodutosdb:
+    const tamanhosComEstoque = agruparTamanhosComEstoque(allprodutosdb);
+
     const produtosUnicos = Array.from(
         new Map(produtosdb.map((produto) => [produto.produto_id, produto])).values()
     );
+
+    const produtosComTamanhos = produtosUnicos.map((produto) => {
+        return {
+          ...produto,
+          // Usa a função getNomeBase para pegar a parte "limpa" do nome do produto
+          tamanhos: tamanhosComEstoque?.[getNomeBase(produto.nome)] || []
+        };
+    });
+      
 
     return (
         <>
@@ -34,13 +72,13 @@ export default function NovidadesLoja() {
 
                 <div style={{ display: 'grid', padding: 0 }}>
 
-                    {produtosUnicos.slice(20, 22).map((produto) => (
-                        produto.estoque === "0" || produto.estoque === 0 ? (
+                    {produtosComTamanhos.slice(11, 13).map((produto) => (
+                        produto.tamanhos.every((tamanho) => tamanho.estoque === '' || tamanho.estoque === 0) ? (
                         <ProductEmpity key={produto.produto_id} produto={produto} />
                         ) : (
                         <Product key={produto.produto_id} produto={produto} />
                         )
-                    ))}
+                    ))} 
 
                 </div>
 

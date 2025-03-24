@@ -41,7 +41,7 @@ export default function EtapaInfos ({dadosuserlogon, userendereco}) {
 
                         <div className='nome-telefone'>
                             <ul>
-                                <li>{dadosuserlogon.nomecompleto}</li>
+                                <li>{dadosuserlogon.nome} {dadosuserlogon.sobrenome}</li>
                                 <li>21982852484</li>
                             </ul>
                         </div>

@@ -21,7 +21,7 @@ export default function AddNewImgProduct () {
             const formData = new FormData();
 
             // console.log('id do produto comentário:', idproduto);
-            formData.append("idproduto", idproduto);
+            // formData.append("idproduto", idproduto);
 
             // Adiciona cada imagem individualmente ao formData
             imagens.forEach((imagem, index) => {
@@ -35,7 +35,7 @@ export default function AddNewImgProduct () {
             });
 
             const data = await response.json();
-            console.log("Resposta recebida:", data);
+            // console.log("Resposta recebida:", data);
 
             if (!data.erro) {
                 console.log("Imagens enviadas com sucesso!");

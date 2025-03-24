@@ -26,7 +26,7 @@ export default function ComponentProductpedido ({infoproduto}) {
                 </div>
 
                 <div className='imageproduct'>
-                    <span>{infoproduto.preco}</span>
+                    <span>R${infoproduto.preco}</span>
                 </div>
 
             </div>

@@ -8,15 +8,40 @@ import { jwtDecode } from "jwt-decode";
 
 export default function Provider ({ children }) {
 
-    const [produtosapi, setProdutosApi] = useState([]);
+    const [idproductview, setIdProductView] = useState('')
+
+    // const [produtosapi, setProdutosApi] = useState([]);
 
     const [infocartão, setInfoCartão] = useState([])
 
     const [produtosdb, setProdutosDb] = useState([]);
 
+    const [allprodutosdb, setAllProdutosDb] = useState([]);
+
     const [loading, setLoading] = useState(true);
 
+    const [freteSelecionado, setFreteSelecionado] = useState('');
+
     const [error, setError] = useState(null);
+    
+    const [productdetails, setProductDetails] = useState({});
+
+    const [produtoid, setProdutoId] = useState('');
+
+    const [resumopedido, setResumoPedido] = useState({
+        totalpedido: '',
+        totalpedidowithfrete: ''
+    })
+
+    const [addonfavorite, setaddonfavorite] = useState([]);
+
+    const [produtosoncarrinho , setProdutosOnCarrinho] = useState([]);
+
+    const [showingpageclicked, setShowingpageclicked] = useState(null);
+
+    const [produtossearched, setProdutosSearched] = useState([]);
+    
+    const [prodsearchbar, setProdsearchbar] = useState([]);
 
     const [configitens, setConfigItens] = useState({
         marca: '',
@@ -36,6 +61,11 @@ export default function Provider ({ children }) {
         avaliacao: ''
     });
 
+    const [dadosuserlogin, setDadosUserLogin] = useState ({
+        email: '',
+        senha: ''
+    });
+
     const [Dadosnewuser, setDadosNewUser] = useState({
         nome:'',
         sobrenome:'',
@@ -45,6 +75,8 @@ export default function Provider ({ children }) {
         tipoendereco:'',
         destinatario:'',
         cep:'',
+        cpf: '',
+        telefone: '',
         endereco:'',
         numero:'',
         bairro:'',
@@ -75,20 +107,6 @@ export default function Provider ({ children }) {
             setDadosNewUser('')
         }
     }, []);
-
-    const [productdetails, setProductDetails] = useState({});
-
-    const [produtoid, setProdutoId] = useState('');
-
-    const [addonfavorite, setaddonfavorite] = useState([]);
-
-    const [produtosoncarrinho , setProdutosOnCarrinho] = useState([]);
-
-    const [showingpageclicked, setShowingpageclicked] = useState(null);
-
-    const [produtossearched, setProdutosSearched] = useState([]);
-    
-    const [prodsearchbar, setProdsearchbar] = useState([]);
 
     const [newendereco, setNewEndereco] = useState({
 
@@ -141,39 +159,77 @@ export default function Provider ({ children }) {
 
 
     // useEffect(() => {
-    //     console.log('Useeffect do banco de dados disparado');
+    //      console.log('Useeffect do banco de dados disparado');
     
-    //     const fetchProductsDB = async () => {
-    //         try {              
-    //             const response = await fetch(`http://localhost:3000/api/get/infosprod`, {
-    //                 method: 'POST',
-    //                 headers: {
-    //                     'Content-Type': 'application/json',
-    //                 },
-    //             });
+    //      const fetchProductsDB = async () => {
+    //          try {              
+    //              const response = await fetch(`http://localhost:3000/api/get/infoprodpai`, {
+    //                  method: 'POST',
+    //                  headers: {
+    //                      'Content-Type': 'application/json',
+    //                  },
+    //              });
     
-    //             if (!response.ok) {
-    //                 throw new Error('Erro ao buscar dados');
-    //             }
+    //              if (!response.ok) {
+    //                  throw new Error('Erro ao buscar dados');
+    //              }
     
-    //             const data = await response.json();
+    //              const data = await response.json();
     
-    //             if (data.success) {
-    //                 setProdutosDb(data.data);
-    //                 // console.log('produtos do db no provider', data);
-    //             } else {
-    //                 setError(data.message);
-    //             }
+    //              if (data.success) {
+    //                  setProdutosDb(data.data);
+    //                  // console.log('produtos do db no provider', data);
+    //              } else {
+    //                  setError(data.message);
+    //              }
     
-    //         } catch (err) {
+    //          } catch (err) {
     //             setError(err.message);
-    //         } finally {
-    //             setLoading(false);
-    //         }
-    //     };
+    //          } finally {
+    //              setLoading(false);
+    //          }
+    //      };
     
-    //     fetchProductsDB();
+    //      fetchProductsDB();
     // }, []);
+
+
+
+
+    useEffect(() => {
+    
+          const fetchAllProductDB = async () => {
+              try {              
+                const response = await fetch(`https://torcidavipoficial-teste.onrender.com/api/get/infoallprod`, {
+                      method: 'POST',
+                      headers: {
+                          'Content-Type': 'application/json',
+                      },
+                  });
+    
+                  if (!response.ok) {
+                      throw new Error('Erro ao buscar dados');
+                 }
+    
+                  const data = await response.json();
+    
+                  if (data.success) {
+                     setAllProdutosDb(data.data);
+                     console.log('produtos do db no provider', data);
+                  } else {
+                      setError(data.message);
+                  }
+    
+              } catch (err) {
+                  setError(err.message);
+              } finally {
+                  setLoading(false);
+              }
+          };
+    
+          fetchAllProductDB();
+    }, []);
+
 
 
     // useEffect(() => {
@@ -256,6 +312,7 @@ export default function Provider ({ children }) {
 
         fetchGetFavoritesprods();
     }, [dadosuserlogon])
+
 
     useEffect(() => {
         if (!dadosuserlogon?.id) return;
@@ -371,9 +428,10 @@ export default function Provider ({ children }) {
 
     const value = {
 
-        produtosapi,
+        // produtosapi,
         produtosdb,
         loading,
+        setLoading,
         error,
         Dadosnewuser,
         setDadosNewUser,
@@ -404,7 +462,17 @@ export default function Provider ({ children }) {
         userenderecos,
         setUserEnderecos,
         infocartão,
-        setInfoCartão
+        setInfoCartão,
+        dadosuserlogin, 
+        setDadosUserLogin,
+        idproductview, 
+        setIdProductView,
+        resumopedido, 
+        setResumoPedido,
+        freteSelecionado, 
+        setFreteSelecionado,
+        allprodutosdb, 
+        setAllProdutosDb
 
     }
     return (

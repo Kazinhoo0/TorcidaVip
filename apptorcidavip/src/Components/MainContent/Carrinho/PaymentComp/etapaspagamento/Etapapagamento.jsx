@@ -1,13 +1,17 @@
 import '../pagamento.css';
 import { FaCreditCard } from "react-icons/fa";
 import { FaPix } from "react-icons/fa6";
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import CardCartao from '../Tipospagamentos/CardCartão';
 import CardPix from '../Tipospagamentos/CardPix';
+import ContextProducts from '../../../../../context/ContextProduct';
 
 
 export default function EtapasPagamento () {
 
+    const {resumopedido} = useContext(ContextProducts);
+
+    // console.log('resumo pedido na paginad e pagamento', resumopedido)
 
     const [clickedformpayment, setClickedFormpayment] = useState({
         cartaocredito : false,
@@ -52,9 +56,12 @@ export default function EtapasPagamento () {
                                     <div style={{width: 150}} >Até 10x sem juros</div>
                                 </li>
 
-                                {clickedformpayment.cartaocredito &&  (
-                                    <CardCartao/>
-                                )} 
+                                <div>
+                                    {clickedformpayment.cartaocredito &&  (
+                                        <CardCartao totalpedido={resumopedido.totalpedidowithfrete}/>
+                                    )} 
+                                </div>
+
                                 
 
                                 <li onClick={ () =>openpaymentmethod('pix')}>
@@ -63,10 +70,12 @@ export default function EtapasPagamento () {
                                     <div style={{width: 120}}>Á vista</div>
                                 </li>
 
-
-                                {clickedformpayment.pix &&  (
-                                    <CardPix/>
-                                )} 
+                                <div>
+                                    {clickedformpayment.pix &&  (
+                                        <CardPix totalpedido={resumopedido.totalpedidowithfrete}/>
+                                    )} 
+                                </div>
+                                
 
                             </ul>
 

@@ -3,7 +3,7 @@ import InfoAtendimentos from "../Index/InfoAtendimentos";
 import InfoSite from "../Index/InfoSite";
 import TopFlap from "../Index/TopFlap";
 import ComponentAreaTorcedor from "./ComponentAreaTorcedor";
-import ComponentCadastro from "./ComponentCadastro";
+import ComponentCadastro from "../Register/ComponentCadastro";
 import ComponentLogin from "./ComponentLogin";
 import './login.css';
 import { Helmet } from "react-helmet";

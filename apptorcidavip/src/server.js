@@ -10,8 +10,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 const mercadopago = require('mercadopago');
-
-
+const {Payment, MercadoPagoConfig}  = require('mercadopago');
 
 
 // Configuração do banco de dados MySQL
@@ -38,6 +37,8 @@ const client = new mercadopago.MercadoPagoConfig({
   accessToken: process.env.MERCADO_PAGO_PUBLIC_KEY,
   options: { sandbox: true }
 });
+
+const payment = new Payment(client);
 
 
 // Função para salvar produtos no banco de dados
@@ -135,7 +136,7 @@ app.get('*', (req, res) => {
 });
 
 
-app.post('/api/get/infosprod', async (req, res) => {
+app.post('/api/get/infoprodpai', async (req, res) => {
     try {
         const query = `SELECT * FROM Produtos WHERE idprodutopai IS NULL`;
         const [rows] = await db.execute(query); 
@@ -155,6 +156,30 @@ app.post('/api/get/infosprod', async (req, res) => {
   } catch (erro) {
     console.error(error)
   }
+});
+
+
+
+app.post('/api/get/infoallprod', async (req, res) => {
+  try {
+      const query = `SELECT * FROM Produtos WHERE idprodutopai IS NOT NULL`;
+      const [rows] = await db.execute(query); 
+
+      if (rows.length > 0) {
+          res.status(200).json({
+              success: true,
+              message: "Produtos retornados com sucesso!",
+              data: rows,
+          });
+        } else {
+        return res.status(404).json({
+          success: false,
+          message: "Nenhum produto encontrado",
+        });
+  }
+} catch (erro) {
+  console.error(error)
+}
 });
 
 
@@ -191,7 +216,7 @@ app.post('/api/login', async (req, res) => {
 
       // Gera um token JWT
       const secretKey = process.env.JWT_KEY; 
-      const token = jwt.sign({ id: user.id, email:user.email, nome: user.nome, sobrenome: user.sobrenome}, secretKey, { expiresIn: '1h' });
+      const token = jwt.sign({ id: user.id, email:user.email, nome: user.nome, sobrenome: user.sobrenome, cpf:user.cpf}, secretKey, { expiresIn: '1h' });
 
       res.status(200).json({
           success: true,
@@ -200,7 +225,8 @@ app.post('/api/login', async (req, res) => {
           email: user.email,
           nome: user.nome,
           message: 'Login bem-sucedido',
-          sobrenome: user.sobrenome
+          sobrenome: user.sobrenome,
+          cpf: user.cpf
       });
 
   } catch (error) {
@@ -211,18 +237,15 @@ app.post('/api/login', async (req, res) => {
 
 
 app.post('/api/register', async (req, res) => {
-  const { nome , sobrenome , senha , confirmarsenha , email, tipoendereco, destinatario, bairro, cep,endereco, numero,cidade,pais } = req.body;
+  const { nome , sobrenome , senha , confirmarsenha , email, tipoendereco, destinatario, bairro, cep, endereco, numero, cidade, pais, cpf, telefone } = req.body;
 
   console.log('body no backend:', req.body);
 
   // Verifica se todos os campos estão presentes
-  if (!req.body) {
-    return res.status(400).json({ error: 'O corpo da requisição não foi retornado' });
+  if (!nome || !sobrenome || !senha || !confirmarsenha || !email || !tipoendereco || !destinatario || !bairro || !cep || !endereco || !numero || !cidade || !pais || !cpf || !telefone) {
+    return res.status(400).json({ error: 'Preencha todos os campos obrigatórios.' });
   }
 
-  if (!nome || !sobrenome || !tipoendereco) {
-    console.log('Error sem o tipoendereco')
-  }
   // Verifica se as senhas coincidem
   if (senha != confirmarsenha) {
     return res.status(400).json({ error: 'As senhas não coincidem.' });
@@ -242,8 +265,8 @@ app.post('/api/register', async (req, res) => {
     }
 
     // Insere o novo usuário no banco de dados
-    const queryInsertNewuser = `INSERT INTO users (nome, sobrenome, email, senha) VALUES ( ?, ?, ?, ? )`;
-    const [result] = await db.query(queryInsertNewuser, [nome, sobrenome, email, hashedPassword,]);
+    const queryInsertNewuser = `INSERT INTO users (nome, sobrenome, email, senha, cpf, telefone) VALUES ( ?, ?, ?, ?, ?, ? )`;
+    const [result] = await db.query(queryInsertNewuser, [nome, sobrenome, email, hashedPassword,cpf, telefone]);
 
     const userId = result.insertId
 
@@ -523,7 +546,6 @@ app.post('/api/post/renderitenscarrinho' , async (req,res) => {
       success: true,
       message:'itens retornados com sucesso', 
       items: result
-      
     })
    
 
@@ -536,7 +558,7 @@ app.post('/api/post/renderitenscarrinho' , async (req,res) => {
 
 app.post('/api/post/additemcarrinho', async (req, res) => {
 
-  const {userid , itemid, nomeitem, preco, thumbnail} = req.body;
+  const {userid , itemid, nomeitem, preco, thumbnail, tamanho} = req.body;
 
   console.log('Info itens add carrinho:',req.body);
 
@@ -544,8 +566,8 @@ app.post('/api/post/additemcarrinho', async (req, res) => {
 
   console.log(userid, itemid, nomeitem, preco, thumbnail);
   
-  if (!userid || !itemid || !nomeitem || !preco || !thumbnail) {
-    return res.status(400).json({error: 'Todos os campos precisam ser preenchidos'})
+  if (!userid || !itemid || !nomeitem || !preco || !thumbnail || !tamanho) {
+      return res.status(400).json({error: 'Todos os campos precisam ser preenchidos'})
   }
 
 
@@ -560,21 +582,21 @@ app.post('/api/post/additemcarrinho', async (req, res) => {
       return res.status(400).json({ success : false, message: 'Item já existe no banco de dados' });
     }
 
-    const queryAddItemCarrinho = `INSERT INTO carrinho_compras (itemid , nomeitem , preco , thumbnail , user_id) VALUES (?,?,?,?,?)`
-    const result = await db.query(queryAddItemCarrinho, [itemid , nomeitem , preco, thumbnail, userid]);
+    const queryAddItemCarrinho = `INSERT INTO carrinho_compras (itemid , nomeitem , preco , thumbnail , user_id, tamanho) VALUES (?,?,?,?,?,?)`
+    const result = await db.query(queryAddItemCarrinho, [itemid , nomeitem , preco, thumbnail, userid, tamanho]);
 
     
     return res.status(201).json({
+
       success: true,
       message: 'Item adicionado ao carrinho!',
+      body: result
     })
-   
 
-    
-  } catch (err) {
-    console.error('Erro:', err)
-    res.status(500).json({success:false, error: err.message })
-  }
+    } catch (err) {
+      console.error('Erro:', err)
+      res.status(500).json({success:false, error: err.message })
+    }
 
 })
 
@@ -857,7 +879,9 @@ app.post('/api/get/produtobuscado', async (req,res) => {
     const querygetprodsearched = `SELECT 
       p.id AS produto_id, 
       p.nome, 
-      p.preco, 
+      p.preco,
+      p.estoque,
+      p.tamanho, 
       (SELECT i.caminho 
       FROM imagensprod i 
       WHERE i.produto_id = p.id 
@@ -1089,6 +1113,38 @@ app.post("/process_payment", async (req, res) => {
 });
 
 
+app.post('/criarpix', async (req, res) => {
+  try {
+    const payment = new Payment(client);
+    
+    const body = {
+      transaction_amount: Number(req.body.transaction_amount),
+      description: req.body.description,
+      payment_method_id: 'pix',
+      payer: {
+        email: req.body.email,
+        identification: {
+          type: req.body.identificationType,
+          number: req.body.number
+        }
+      }
+    };
+
+    const result = await payment.create({ body });
+    
+    // Capturar dados relevantes do PIX
+    const pixData = {
+      qr_code: result.point_of_interaction.transaction_data.qr_code,
+      qr_code_base64: result.point_of_interaction.transaction_data.qr_code_base64,
+      transaction_id: result.id
+    };
+
+    res.status(200).json(pixData);
+  } catch (error) {
+    console.error('Erro no pagamento:', error);
+    res.status(500).json({ error: 'Erro ao processar pagamento' });
+  }
+});
 
 
 

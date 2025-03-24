@@ -6,16 +6,16 @@ import ContextProducts from '../../../../../context/ContextProduct';
 
 
 await loadMercadoPago();
-const mp = new window.MercadoPago('TEST-116fbde2-388a-40c2-bdfc-4146ed0691a3');
+const mp = new window.MercadoPago('TEST-db23d506-4b88-411d-98db-5fc84bcba6dd');
 
 
 
-export default function CardCartao() {
+export default function CardCartao({totalpedido}) {
 
 
     const { infocartão, setInfoCartão } = useContext(ContextProducts);
 
-    const totalPrice = 200;
+    const totalPrice = totalpedido;
 
     useEffect(() => {
         if (mp) {
@@ -61,12 +61,12 @@ export default function CardCartao() {
                                 }),
                             });
                             const paymentResponse = await response.json();
-                            console.log("Resposta do pagamento:", paymentResponse);
+                            // console.log("Resposta do pagamento:", paymentResponse);
                         } catch (error) {
                             console.error("Erro ao processar pagamento:", error);
                         }
 
-                        console.log("Dados do formulário:", data);
+                        // console.log("Dados do formulário:", data);
                     },
                     onFetching: (resource) => {
                         console.log("Carregando recurso:", resource);

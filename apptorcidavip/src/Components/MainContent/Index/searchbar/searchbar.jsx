@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Searchbar () {
 
 
-    const {searchitem, setSearchitem, prodsearchbar, setProdsearchbar, setProdutosSearched, setsearchitemnamer  } = useContext(ContextProducts);
+    const {searchitem, setSearchitem, prodsearchbar, setProdsearchbar, setProdutosSearched } = useContext(ContextProducts);
 
     const navigate = useNavigate();
 
@@ -17,6 +17,7 @@ export default function Searchbar () {
 
     const fetchProductSearched = async (e) => {
         e.preventDefault()
+        
         if (searchitem.length > 0) {
             try {
                 const response = await fetch (`https://torcidavipoficial-teste.onrender.com/api/get/produtobuscado` , ({
@@ -29,7 +30,7 @@ export default function Searchbar () {
 
                 const data = await response.json();
 
-                console.log('itens sendo pesquisado searched api :' , data)
+                // console.log('itens sendo pesquisado searched api :' , data)
 
                 if (data.success) {
                     setProdutosSearched(data.data);
@@ -85,7 +86,7 @@ export default function Searchbar () {
 
     }, [searchitem])
 
-    console.log('',prodsearchbar)
+    // console.log('prodsearchbar: ',prodsearchbar)
 
 
     useEffect(() => {

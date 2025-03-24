@@ -11,7 +11,7 @@ import { GoogleLogin } from '@react-oauth/google';
 
 export default function ComponentLogin () {
 
-    const {dadosuserlogin, setDadosUserLogin, setDadosUserLogOn} = useContext(ContextProducts);
+    const {dadosuserlogin, setDadosUserLogin} = useContext(ContextProducts);
 
     const navigate = useNavigate();
 
@@ -90,7 +90,7 @@ export default function ComponentLogin () {
 
         const data = await response.json();
 
-        console.log('informacoes vindo do banco no authgoogle:', data)
+        // console.log('informacoes vindo do banco no authgoogle:', data)
 
         if (data.success) {
         

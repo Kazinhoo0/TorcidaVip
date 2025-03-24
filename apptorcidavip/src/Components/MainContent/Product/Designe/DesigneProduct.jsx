@@ -2,7 +2,7 @@ import '../../Index/Index.css';
 import { MdOutlineAddShoppingCart } from "react-icons/md";
 import seta from '../../../../imgs/seta-direita.png'
 import { useNavigate } from 'react-router-dom';
-import { useContext} from 'react';
+import { useContext, useState} from 'react';
 import ContextProducts from '../../../../context/ContextProduct';
 // import { jwtDecode } from "jwt-decode";
 import Toastify from 'toastify-js';
@@ -12,16 +12,15 @@ import 'toastify-js/src/toastify.css';
 
 export default function Product({ favoriteicon, produto }) {
 
-    const {setProductDetails, dadosuserlogon, setRefreshviewproduct, refreshviewproduct } = useContext(ContextProducts)
-
- 
+    const {setProductDetails, dadosuserlogon, setIdProductView, setProdutosOnCarrinho } = useContext(ContextProducts)
+    
+    const [selectedSize, setSelectedSize] = useState(null);
+        
     const navigate = useNavigate();
-
 
     const handleClicked = () => {
             const fetchproductsDetails = async () => {
                 try {
-                    const nomeitem = produto.nome
                     const id = produto.produto_id;
                     // console.log('id a ser enviado pro backend: ',id)
                     const response = await fetch(`https://torcidavipoficial-teste.onrender.com/viewproduct/${id}`, {
@@ -40,7 +39,8 @@ export default function Product({ favoriteicon, produto }) {
     
                     if (data.success) {
                         setProductDetails(data.data);
-                        // console.log('produtos do db no provider', data);
+                        setIdProductView(produto.produto_id);
+                        console.log('detalhe do produto no data:', data);
                     } else {
                         console.log(data.message);
                     }
@@ -57,14 +57,21 @@ export default function Product({ favoriteicon, produto }) {
         }, 500);
     }
 
-    console.log('id do produto:', refreshviewproduct)
-    
     const HandlefetchAddOnCarrinho = async (e) => {
         e.stopPropagation();
+        // console.log('produto id:', produto.produto_id)
+        // console.log('Handleaddoncarrinho disparado!');
 
-        console.log('produto id:', produto.produto_id)
-
-        console.log('Handleaddoncarrinho disparado!');
+        if(!selectedSize) {
+            return Toastify({
+                text: 'Selecione um tamanho',
+                position: 'center',
+                style: {
+                    background: '#db2d0e',
+                    color: '#ffffff'
+                }
+        }).showToast();
+        }
 
         try {
             const userid = dadosuserlogon.id;
@@ -94,7 +101,8 @@ export default function Product({ favoriteicon, produto }) {
                     itemid: id,
                     nomeitem: nomeitem,
                     preco: preco,
-                    thumbnail: imagemitem
+                    thumbnail: imagemitem,
+                    tamanho: selectedSize
                  })
             });
 
@@ -104,7 +112,7 @@ export default function Product({ favoriteicon, produto }) {
 
             const data = await response.json();
 
-            console.log('Resposta do backend' , data)
+            // console.log('Resposta do backend' , data)
 
             if (data.success) {
                 console.log('retorno do datasuccess',data);
@@ -116,7 +124,9 @@ export default function Product({ favoriteicon, produto }) {
                         color: '#ffffff'
                     }
                 }).showToast();
-                
+                setSelectedSize(null);
+
+                setProdutosOnCarrinho(prev => [...prev, { itemid: id, nomeitem, preco, thumbnail: imagemitem, tamanho: selectedSize }]);
             } else {
                 console.log(data.message);
             }
@@ -164,18 +174,36 @@ export default function Product({ favoriteicon, produto }) {
 
                         <div className='container-roll-sizes'>
                             <ul style={{ paddingRight: 40, listStyle: 'none', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '180px' }}>
-                                <li className='sun-sizes'>
-                                    <h4>P</h4>
-                                </li>
-                                <li className='sun-sizes'>
-                                    <h4>M</h4>
-                                </li>
-                                <li className='sun-sizes'>
-                                    <h4>G</h4>
-                                </li>
+
+                                {produto.tamanhos?.map((item,index) => {
+                                    
+                                    return item.estoque === 0 || item.estoque === '0' ? (
+                                            <li style={{backgroundColor: 'rgba(128, 128, 128, 0.438'}} key={index} className='sun-sizes'>
+                                                <h4>{item.tamanho}</h4>
+                                            </li>
+                                        ) : (
+                                            <li 
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                setSelectedSize(item.tamanho)
+                                            }} 
+                                            key={index} 
+                                            className='sun-sizes'
+                                            style={{
+                                                cursor: 'pointer',
+                                                border: selectedSize === item.tamanho ? '2px solid blue' : 'none'
+                                            }}
+                                            >
+                                                <h4>{item.tamanho}</h4>
+                                            </li>
+                                        )
+                                   
+                                })}
+
                             </ul>
                         </div>
 
+                      
                         <div style={{ width: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                             <img style={{ height: 12 }} src={seta} alt="" />
                         </div>

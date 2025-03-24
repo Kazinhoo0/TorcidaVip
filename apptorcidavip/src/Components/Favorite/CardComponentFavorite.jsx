@@ -26,9 +26,9 @@ export default function CardFavoriteProd ({infoprods}) {
         });
 
         const data = await response.json();
-        console.log("Itens recebidos do backend:", data.items);
+        // console.log("Itens recebidos do backend:", data.items);
         if (data.success) {
-            console.log('item removido com sucesso!')
+            // console.log('item removido com sucesso!')
             setaddonfavorite((prevProdutos) => 
                 prevProdutos.filter((produto) => produto.itemid !== infoprods.itemid)
             );

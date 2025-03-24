@@ -9,7 +9,7 @@ import icon10 from '../../../imgs/Icon (10).png';
 import Product from '../Product/Designe/DesigneProduct';
 import FilterCategory from './FilterCategory';
 import ContextProducts from '../../../context/ContextProduct';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { Helmet } from 'react-helmet';
 import ProductEmpity from '../Product/Designe/DesigneProductEmpity';
 
@@ -18,7 +18,7 @@ import ProductEmpity from '../Product/Designe/DesigneProductEmpity';
 
 export default function SearchProduct() {
 
-    const { produtosdb, prodsearchbar,  produtossearched, searchitem,  loading, error } = useContext(ContextProducts)
+    const { allprodutosdb , produtossearched, loading, error } = useContext(ContextProducts)
 
     // if (loading) return <p>Carregando produtos...</p>;
 
@@ -26,13 +26,48 @@ export default function SearchProduct() {
         console.log(error)
     }
 
-    const produtosUnicos = Array.from(
-        new Map(produtosdb.map((produto) => [produto.produto_id, produto])).values()
-    );
-
     const Namesearched = localStorage.getItem('itemsearched')
 
     const lengthprodsearched = produtossearched.length
+
+
+    const getNomeBase = (nomeCompleto) => {
+        if (nomeCompleto.includes('Tamanho:')) {
+          return nomeCompleto.split('Tamanho:')[0].trim();
+        }
+        return nomeCompleto.trim();
+      };
+      
+      // Função para agrupar os tamanhos com seus respectivos estoques
+    const agruparTamanhosComEstoque = (produtos) => {
+    return produtos.reduce((acc, item) => {
+        // Extrai o nome base para agrupar o produto
+        const nomeBase = getNomeBase(item.nome);
+        if (item.tamanho) {
+        if (!acc[nomeBase]) {
+            acc[nomeBase] = [];
+        }
+        // Adiciona o objeto com tamanho e estoque
+        acc[nomeBase].push({
+            tamanho: item.tamanho,
+            estoque: item.estoque
+        });
+        }
+        return acc;
+    }, {});
+    };
+
+    // Exemplo de uso com o array allprodutosdb:
+    const tamanhosComEstoque = agruparTamanhosComEstoque(allprodutosdb);
+
+    const produtosComTamanhos = produtossearched.map((produto) => {
+        return {
+          ...produto,
+          // Usa a função getNomeBase para pegar a parte "limpa" do nome do produto
+          tamanhos: tamanhosComEstoque?.[getNomeBase(produto.nome)] || []
+        };
+    });
+      
 
 
     return (
@@ -82,13 +117,13 @@ export default function SearchProduct() {
 
                 <div className='container-renderproducts-searched'>
 
-                    {produtossearched.slice(0, 10).map((produto) => (
-                        produto.estoque === "0" || produto.estoque === 0 ? (
+                    {produtosComTamanhos.slice(0, 10).map((produto) => (
+                        produto.tamanhos.every((tamanho) => tamanho.estoque === '' || tamanho.estoque === 0) ? (
                         <ProductEmpity key={produto.produto_id} produto={produto} />
                         ) : (
                         <Product key={produto.produto_id} produto={produto} />
                         )
-                    ))}
+                    ))} 
 
                 </div>
 

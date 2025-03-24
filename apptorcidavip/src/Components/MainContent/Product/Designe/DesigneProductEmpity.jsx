@@ -5,15 +5,15 @@ import { useNavigate } from 'react-router-dom';
 import { useContext} from 'react';
 import ContextProducts from '../../../../context/ContextProduct';
 // import { jwtDecode } from "jwt-decode";
-import Toastify from 'toastify-js';
-import 'toastify-js/src/toastify.css';
+// import Toastify from 'toastify-js';
+// import 'toastify-js/src/toastify.css';
 // import imgteste from '../../../../imgs/15195641246_15170945177_D40-1332-014_zoom1-2.png'
 
 
 
 export default function ProductEmpity ({ favoriteicon, produto }) {
 
-    const {setProductDetails, dadosuserlogon, setRefreshviewproduct, refreshviewproduct } = useContext(ContextProducts)
+    const {setProductDetails, refreshviewproduct } = useContext(ContextProducts)
 
  
     const navigate = useNavigate();
@@ -23,7 +23,6 @@ export default function ProductEmpity ({ favoriteicon, produto }) {
     const handleClicked = () => {
             const fetchproductsDetails = async () => {
                 try {
-                    const nomeitem = produto.nome
                     const id = produto.produto_id;
                     // console.log('id a ser enviado pro backend: ',id)
                     const response = await fetch(`https://torcidavipoficial-teste.onrender.com/viewproduct/${id}`, {
@@ -61,83 +60,6 @@ export default function ProductEmpity ({ favoriteicon, produto }) {
 
     console.log('id do produto:', refreshviewproduct)
     
-    const HandlefetchAddOnCarrinho = async (e) => {
-        e.stopPropagation();
-
-        console.log('produto id:', produto.produto_id)
-
-        console.log('Handleaddoncarrinho disparado!');
-
-        try {
-            const userid = dadosuserlogon.id;
-            const id = produto.produto_id;
-            const nomeitem = produto.nome;
-            const preco = produto.preco;
-            const imagemitem = produto.imagem;
-
-            if (!userid) {
-                return Toastify({
-                    text: 'Você precisa estar logado!',
-                    position: 'center',
-                    style: {
-                        background: '#db2d0e',
-                        color: '#ffffff'
-                    }
-            }).showToast();
-            }
-
-            const response = await fetch(`https://torcidavipoficial-teste.onrender.com/api/post/additemcarrinho`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ 
-                    userid: userid,
-                    itemid: id,
-                    nomeitem: nomeitem,
-                    preco: preco,
-                    thumbnail: imagemitem
-                 })
-            });
-
-            if (!response.ok) {
-                throw new Error('Erro ao buscar dados');
-            }
-
-            const data = await response.json();
-
-            console.log('Resposta do backend' , data)
-
-            if (data.success) {
-                console.log('retorno do datasuccess',data);
-                Toastify({
-                    text:  data.message ||'Adicionado ao carrinho!',
-                    position: 'center',
-                    style: {
-                        background: '#33ff00',
-                        color: '#ffffff'
-                    }
-                }).showToast();
-                
-            } else {
-                console.log(data.message);
-            }
-
-        } catch (err) {
-            console.error(err.message);
-            Toastify({
-                text: 'O produto já está no carrinho!',
-                position: 'center',
-                style: {
-                    background: '#db2d0e',
-                    color: '#ffffff'
-                }
-        }).showToast();
-        }
-    };
-    
-
-    
     return (
         <>
 
@@ -171,15 +93,13 @@ export default function ProductEmpity ({ favoriteicon, produto }) {
 
                         <div className='container-roll-sizes'>
                             <ul style={{ paddingRight: 40, listStyle: 'none', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '180px' }}>
-                                <li className='sun-sizes'>
-                                    <h4>P</h4>
-                                </li>
-                                <li className='sun-sizes'>
-                                    <h4>M</h4>
-                                </li>
-                                <li className='sun-sizes'>
-                                    <h4>G</h4>
-                                </li>
+                                {produto.tamanhos?.map((item,index) => (
+                                
+                                    <li key={index} className='sun-sizes'>
+                                        <h4>{item.tamanho}</h4>
+                                    </li>
+                               
+                                ))}
                             </ul>
                         </div>
 

@@ -1,7 +1,7 @@
 import '../carrinho.css'
 
 
-export default function Cardfrete ({resultado}) {
+export default function Cardfrete ({resultado, onSelectFrete}) {
     console.log('resultados no componente:', resultado)
 
 
@@ -10,7 +10,12 @@ export default function Cardfrete ({resultado}) {
         <div className="container-cardfrete">
 
             <div className='input-choose-checkbox'>
-                <input type="checkbox" />
+                <input 
+                onChange={(e) => {
+                if (e.target.checked) {
+                    onSelectFrete(resultado.price);
+                }}}  
+                type="checkbox" />
             </div>
 
             <div className="sun-cardfrete">

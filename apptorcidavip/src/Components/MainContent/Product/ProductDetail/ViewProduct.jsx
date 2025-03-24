@@ -13,11 +13,18 @@ import { useRef } from 'react';
 import { CiHeart } from "react-icons/ci";
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
+import { useParams } from 'react-router-dom';
 
 
 
 
 export default function ViewProduct() {
+
+    const {id} = useParams();
+
+    // console.log('id do produto guardado pelo params',id)
+
+    const { produtosdb , error, productdetails , loading, setLoading,  setProductDetails , idproductview , dadosuserlogon } = useContext(ContextProducts);
 
     const [clickednewcomment, setClickednewcomment] = useState(false);
 
@@ -25,7 +32,7 @@ export default function ViewProduct() {
 
     const handlecreatenewcomment = () => {
         setClickednewcomment(!clickednewcomment)
-    }
+    };
 
     const sectionRef = useRef(null);
 
@@ -33,13 +40,39 @@ export default function ViewProduct() {
         sectionRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
-    const {produtosdb , loading, error, productdetails , dadosuserlogon} = useContext(ContextProducts);
-
-
-    const descricaoDetalhada = JSON.parse(productdetails[0].descricaodetalhada)
-
-    console.log('productsdetails depois do f5', productdetails)
     
+
+    // const descricaoDetalhada = JSON.parse(productdetails[0].descricaodetalhada);
+
+    useEffect(() => {
+        const fetchProductDetails = async () => {
+            try {
+                setLoading(true);
+                const response = await fetch(`https://torcidavipoficial-teste.onrender.com/viewproduct/${id}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id })
+                });
+
+                if (!response.ok) throw new Error('Erro ao buscar detalhes');
+                
+                const data = await response.json();
+                if (data.success) {
+                    setProductDetails(data.data);
+                }
+            } catch (err) {
+                console.error(err.message);
+            } finally {
+                setTimeout(() => {
+                    setLoading(false);
+                } , 3000)
+            }
+        };
+
+        fetchProductDetails();
+    }, [id]);
+    
+
     const fetchaddfavoriteprod = async () => {
 
         const userid = dadosuserlogon.id;
@@ -89,9 +122,8 @@ export default function ViewProduct() {
     }
 
     useEffect(() => {
-        if (!productdetails || productdetails.length === 0) return;
         const fetchGetComments = async () => {
-            try {              
+            try {             
                 const response = await fetch(`https://torcidavipoficial-teste.onrender.com/api/get/infocomments`, {
                     method: 'POST',
                     headers: {
@@ -121,20 +153,26 @@ export default function ViewProduct() {
         fetchGetComments();
     }, [])
 
-    // if (loading)  return <p>Carregando produtos...</p>;
+    if (loading) {
+        return <div style={{width:'100%', height: '1000px', justifyContent: 'center', display: 'flex', alignItems: 'center'}}>
+                    <div className="spinner"></div>
+                </div>
+    }
 
-    // if (error) {
-    //     console.log(error)
-    // }
-         
-    // console.log("Dados do db no frontend:", produtosdb);
-    // console.log("Dados da api frontend:", produtosapi);
+    // Verifique se productdetails existe antes de renderizar
+    if (!productdetails || productdetails.length === 0) {
+        return <div className="container-viewprod">Produto não encontrado.</div>;
+    }
 
+    if (error) {
+     console.log(error)
+    }
+        
     const produtosUnicos = Array.from(
         new Map(produtosdb.map((produto) => [produto.produto_id, produto])).values()
     );
 
-
+    console.log('productsdetails depois do f5', productdetails);
 
     return (
         <div className="container-viewprod">
@@ -269,16 +307,19 @@ export default function ViewProduct() {
                     <div className='cont-descricao-prod'>
                         <div className='sun-descricaoprod'>
                             <h2>Informações Técnicas</h2>
-                            <ul>
-                                <li className='style-list-descriprod'><p>Composição: {descricaoDetalhada.Composicao}</p></li>
-                                <li className='style-list-descriprod'><p>Cor predominante: {descricaoDetalhada["Cor predominante"]}</p></li>
-                                <li className='style-list-descriprod'><p>Clube: {descricaoDetalhada.Clube}</p></li>
-                                <li className='style-list-descriprod'><p>Indicada para: {descricaoDetalhada["Indicada para"]}</p></li>
-                                <li className='style-list-descriprod'><p>Escudo: {descricaoDetalhada.Escudo}</p></li>
-                                <li className='style-list-descriprod'><p>Gênero: {descricaoDetalhada.Gênero}</p></li>
-                                <li className='style-list-descriprod'><p>Manga: {descricaoDetalhada.Manga}</p></li>
-                                <li className='style-list-descriprod'><p>Gola: {descricaoDetalhada.Gola}</p></li>
-                            </ul>
+
+                            {/* {descricaoDetalhada && descricaoDetalhada.length > 0 && (
+                                <ul>
+                                    <li className='style-list-descriprod'><p>Composição: {descricaoDetalhada.Composicao || ''}</p></li>
+                                    <li className='style-list-descriprod'><p>Cor predominante: {descricaoDetalhada["Cor predominante"]}</p></li>
+                                    <li className='style-list-descriprod'><p>Clube: {descricaoDetalhada.Clube}</p></li>
+                                    <li className='style-list-descriprod'><p>Indicada para: {descricaoDetalhada["Indicada para"]}</p></li>
+                                    <li className='style-list-descriprod'><p>Escudo: {descricaoDetalhada.Escudo}</p></li>
+                                    <li className='style-list-descriprod'><p>Gênero: {descricaoDetalhada.Gênero}</p></li>
+                                    <li className='style-list-descriprod'><p>Manga: {descricaoDetalhada.Manga}</p></li>
+                                    <li className='style-list-descriprod'><p>Gola: {descricaoDetalhada.Gola}</p></li>
+                                </ul>
+                            )} */}
 
                             <h2 style={{width: '500px'}}>Dimensões aproximadas (A x L):</h2>
                             <ul>

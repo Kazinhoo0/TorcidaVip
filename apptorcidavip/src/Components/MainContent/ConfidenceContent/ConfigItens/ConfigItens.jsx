@@ -31,7 +31,7 @@ export default function ConfigItens () {
     
             const data = await response.json();
 
-            console.log('configitens no frontend:', data)
+            // console.log('configitens no frontend:', data)
     
     
             if (data.success) {

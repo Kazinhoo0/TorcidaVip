@@ -13,8 +13,8 @@ export default function CardPagamento() {
 
     const {dadosuserlogon, userenderecos, produtosoncarrinho} = useContext(ContextProducts);
 
-    console.log('endereços:',userenderecos);
-     console.log('dadosuserlogon', dadosuserlogon);
+    // console.log('endereços:',userenderecos);
+    // console.log('dadosuserlogon', dadosuserlogon);
 
     return (
 
