@@ -59,8 +59,8 @@ export default function Product({ favoriteicon, produto }) {
 
     const HandlefetchAddOnCarrinho = async (e) => {
         e.stopPropagation();
-        // console.log('produto id:', produto.produto_id)
-        // console.log('Handleaddoncarrinho disparado!');
+        console.log('produto id:', produto.produto_id)
+        console.log('Handleaddoncarrinho disparado!');
 
         if(!selectedSize) {
             return Toastify({
@@ -112,7 +112,7 @@ export default function Product({ favoriteicon, produto }) {
 
             const data = await response.json();
 
-            // console.log('Resposta do backend' , data)
+            console.log('Resposta do backend' , data)
 
             if (data.success) {
                 console.log('retorno do datasuccess',data);
