@@ -1,8 +1,8 @@
 .container-profile {
     position: relative;
     /* border: 1px solid rgb(255, 2, 255); */
-    width: 1900px;
-    height: 1920px; 
+    width: 100%;
+    height: 100%; 
     overflow-x: hidden;
     overflow-y: hidden;
 }
@@ -61,7 +61,6 @@
     height: 350px;
 }
 
-
 .font-text-profilepage {
     /* border: 1px solid red; */
     width: 180px;
@@ -71,7 +70,8 @@
     font-weight: 300;
     font-size: 24px;
     line-height: 46px;
-    color: #000000;
+    color: 
+#000000;
     text-align: start;
     padding-left: 15px;
 
@@ -86,7 +86,8 @@
     font-weight: 300;
     font-size: 24px;
     line-height: 46px;
-    color: #000000;
+    color: 
+#000000;
     text-align: start;
     padding-left: 15px;
 
@@ -107,7 +108,8 @@
     font-weight: 400;
     font-size: 36px;
     line-height: 52px;
-    color: #000000;
+    color: 
+#000000;
     text-align: center;
     text-align: start;
 }
@@ -121,7 +123,8 @@
     font-weight: 400;
     font-size: 36px;
     line-height: 2px;
-    color: #000000;
+    color: 
+#000000;
     text-align: center;
     text-align: start;
     padding-left: 40px;
@@ -165,10 +168,71 @@
 .linha {
     width: 1100px;
     height: 0px;
-    border: 1px solid #000000;
+    border: 1px solid 
+#000000;
     transform: rotate(-90deg);
 }
 
 
+@media only screen and (max-width: 768px) {
+    .container-profile {
+      border: 1px solid red;
+      width: 100%;
+      height: 1000px;
+      overflow-x: hidden;
+      padding: 10px;
+    }
+    
+    .container-sun-profile {
+      /* border: 1px solid rgb(55, 0, 255); */
+      flex-direction: flex;
+      width: 100%;
+      height: 1000px;
+    }
+    
+    .container-profile-left,
+    .container-profile-right {
+      position: relative;
+      top: 120px;
+      /* border: 1px solid rgb(9, 255, 0); */
+      width: 50%;
+      height: auto;
+      padding: 10px;
+    }
 
+    .container-profile-left {
+        justify-content: start;
+    }
 
+    .container-profile-right {
+        justify-content: start;
+        display: flex;
+    }
+    
+    .container-optionsprofile {
+      width: 90%;
+      margin: 10px auto;
+      height: auto;
+    }
+    
+    .font-text-profilepage {
+      font-size: 18px;
+      width: auto;
+    }
+    
+    .font-title-profilepage {
+        /* border: 1px solid red; */
+        font-size: 28px;
+        width: 120%;
+        text-align: start;
+    }
+    
+    .sun-optionsprofile {
+      padding: 5px;
+    }
+    
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }

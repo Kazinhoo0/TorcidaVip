@@ -2,29 +2,24 @@ import '../TodosOsPedidos/todosospedidos.css';
 import camisateste from '../../../../imgs/15195641246_15170945177_D40-1332-014_zoom1-2.png';
 
 
-export default function CardProcessando () {
+export default function CardProcessando ({infospedido}) {
 
     return ( 
 
         <div>
             <div className="container-cardpedidos">
         
-                <div className="title-cardpedidos">
-                        <h4 style={{fontSize: 15}}> 27 de Janeiro de 2025</h4>
-                        <h4 style={{paddingLeft: 15}}>Total: R$199,00</h4>
-                </div>
-                    
                     <div className='infos-cardpedidos'>
         
                         <div className='itemphoto'>
                             <div style={{borderRadius: '5px', border: '1px solid grey', width: 100, height: 100, padding: 5}}>
-                                <img  style={{width: 100, height: 100}} src={camisateste} alt="" />
+                                <img  style={{width: 100, height: 100}} src={infospedido.thumbnail} alt="" />
                             </div>
                         </div>
         
                         <div className='date-entregue'>
                             <small>
-                                <small style={{color: 'grey', fontSize: 17, fontWeight: 500}}>Em Análise</small>
+                                <small style={{color: 'grey', fontSize: 17, fontWeight: 500}}>Processando o pedido</small>
                             </small>
         
                             <small style={{color: 'black', fontWeight: 700, fontSize: 15}}>
@@ -32,9 +27,9 @@ export default function CardProcessando () {
                             </small>
         
                             <br/>
-        
-                            <small style={{color: 'grey'}}>Camiseta feminina vasco da gama</small>
-                            <small style={{color: 'grey'}}>1 unidade</small>
+                            
+                            <small style={{color: 'grey'}}>{infospedido.nomeitem}</small>
+                            <small style={{color: 'grey'}}>{infospedido.quantidade} unidade(s)</small>
                         </div>
         
                         <div className='enviarmensagem'>

@@ -12,46 +12,26 @@ import 'toastify-js/src/toastify.css';
 
 export default function Product({ favoriteicon, produto }) {
 
-    const {setProductDetails, dadosuserlogon, setIdProductView, setProdutosOnCarrinho } = useContext(ContextProducts)
+    const {dadosuserlogon, setProdutosOnCarrinho, fetchProductDetails} = useContext(ContextProducts)
     
     const [selectedSize, setSelectedSize] = useState(null);
         
     const navigate = useNavigate();
 
+    const handleNoStockReserved = () => {
+       return Toastify({
+            text: 'Tamanho não disponível!',
+            position: 'center',
+            style: {
+                background: '#db2d0e',
+                color: '#ffffff'
+            }
+    }).showToast();
+    }
+
     const handleClicked = () => {
-            const fetchproductsDetails = async () => {
-                try {
-                    const id = produto.produto_id;
-                    // console.log('id a ser enviado pro backend: ',id)
-                    const response = await fetch(`https://torcidavipoficial-teste.onrender.com/viewproduct/${id}`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ id })
-                    });
-    
-                    if (!response.ok) {
-                        throw new Error('Erro ao buscar dados');
-                    }
-    
-                    const data = await response.json();
-    
-                    if (data.success) {
-                        setProductDetails(data.data);
-                        setIdProductView(produto.produto_id);
-                        console.log('detalhe do produto no data:', data);
-                    } else {
-                        console.log(data.message);
-                    }
-    
-                } catch (err) {
-                    console.error(err.message);
-                }
-            };
-    
-            fetchproductsDetails();
-    
+        const id = produto.produto_id;
+        fetchProductDetails(id);
         setTimeout(() => {
             navigate(`/viewproduct/${produto.produto_id}`)
         }, 500);
@@ -79,6 +59,23 @@ export default function Product({ favoriteicon, produto }) {
             const nomeitem = produto.nome;
             const preco = produto.preco;
             const imagemitem = produto.imagem;
+            const tamanhoSelecionado = produto.tamanhos.find(t => t.tamanho === selectedSize);
+            const idproduto = tamanhoSelecionado.idproduto
+            const codigo = tamanhoSelecionado.codigo
+            if (!tamanhoSelecionado) {
+            // Opcional: trate o caso em que o tamanho não foi encontrado
+            return Toastify({
+                text: 'Tamanho selecionado não disponível!',
+                position: 'center',
+                style: {
+                background: '#db2d0e',
+                color: '#ffffff'
+                }
+            }).showToast();
+            }
+
+            const marca = tamanhoSelecionado.marca;
+            const estoque = tamanhoSelecionado.estoque;
 
             if (!userid) {
                 return Toastify({
@@ -102,7 +99,12 @@ export default function Product({ favoriteicon, produto }) {
                     nomeitem: nomeitem,
                     preco: preco,
                     thumbnail: imagemitem,
-                    tamanho: selectedSize
+                    tamanho: selectedSize,
+                    marca: marca,
+                    estoque: estoque,
+                    quantidade: 1,
+                    idproduto: idproduto,
+                    codigo: codigo
                  })
             });
 
@@ -126,7 +128,7 @@ export default function Product({ favoriteicon, produto }) {
                 }).showToast();
                 setSelectedSize(null);
 
-                setProdutosOnCarrinho(prev => [...prev, { itemid: id, nomeitem, preco, thumbnail: imagemitem, tamanho: selectedSize }]);
+                setProdutosOnCarrinho(prev => [...prev, { itemid: id, nomeitem, preco, thumbnail: imagemitem, tamanho: selectedSize, marca: marca, quantidade: 1, estoque:estoque, idproduto: idproduto, codigo: codigo }]);
             } else {
                 console.log(data.message);
             }
@@ -178,7 +180,10 @@ export default function Product({ favoriteicon, produto }) {
                                 {produto.tamanhos?.map((item,index) => {
                                     
                                     return item.estoque === 0 || item.estoque === '0' ? (
-                                            <li style={{backgroundColor: 'rgba(128, 128, 128, 0.438'}} key={index} className='sun-sizes'>
+                                            <li onClick={(e) => {
+                                                handleNoStockReserved();
+                                                e.stopPropagation();
+                                                }} style={{backgroundColor: 'rgba(128, 128, 128, 0.438'}} key={index} className='sun-sizes'>
                                                 <h4>{item.tamanho}</h4>
                                             </li>
                                         ) : (

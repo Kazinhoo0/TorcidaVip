@@ -7,7 +7,8 @@ import CardPix from '../Tipospagamentos/CardPix';
 import ContextProducts from '../../../../../context/ContextProduct';
 
 
-export default function EtapasPagamento () {
+
+export default function EtapasPagamento ({produtosoncarrinho}) {
 
     const {resumopedido} = useContext(ContextProducts);
 
@@ -25,7 +26,8 @@ export default function EtapasPagamento () {
         }))
     }
 
-    return (
+
+    return ( 
 
         <>
         
@@ -57,9 +59,11 @@ export default function EtapasPagamento () {
                                 </li>
 
                                 <div>
+
                                     {clickedformpayment.cartaocredito &&  (
                                         <CardCartao totalpedido={resumopedido.totalpedidowithfrete}/>
                                     )} 
+                                    
                                 </div>
 
                                 
@@ -72,7 +76,7 @@ export default function EtapasPagamento () {
 
                                 <div>
                                     {clickedformpayment.pix &&  (
-                                        <CardPix totalpedido={resumopedido.totalpedidowithfrete}/>
+                                        <CardPix produtosoncarrinho={produtosoncarrinho} totalpedido={resumopedido.totalpedidowithfrete}/>
                                     )} 
                                 </div>
                                 

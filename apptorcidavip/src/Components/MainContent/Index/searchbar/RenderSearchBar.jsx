@@ -1,53 +1,24 @@
 import { useContext } from "react";
 import ContextProducts from "../../../../context/ContextProduct";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 export default function RenderSurchBar ({produtos}) {
 
+    const {id} = useParams();
+
     const navigate = useNavigate();
 
-    const {setProductDetails, prodsearchbar, setSearchitem} = useContext(ContextProducts)
+    const  {fetchProductDetails , setSearchitem} = useContext(ContextProducts)
 
     const handleClicked = (produto) => {
-        const fetchproductsDetails = async () => {
-            try {
-                const id = produto.produto_id;
-                // console.log('id a ser enviado pro backend: ',id)
-                const response = await fetch(`https://torcidavipoficial-teste.onrender.com/viewproduct/${id}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ id })
-                });
-
-                if (!response.ok) {
-                    throw new Error('Erro ao buscar dados');
-                }
-
-                const data = await response.json();
-
-                if (data.success) {
-                    setProductDetails(data.data);
-                    // console.log('produtos do db no provider', data);
-                } else {
-                    console.log(data.message);
-                }
-
-            } catch (err) {
-                console.error(err.message);
-            }
-        };
-
-        fetchproductsDetails();
+        const id = produto.produto_id
+        fetchProductDetails(id);
         setSearchitem('')
         setTimeout(() => {
-            navigate(`/viewproduct/${produtos.produto_id}`)
+            navigate(`/viewproduct/${id}`)
         }, 500);
     }    
-
-    
 
 
     return (
@@ -61,7 +32,7 @@ export default function RenderSurchBar ({produtos}) {
                                 <img src={produto.imagem} alt={produto.nome} /> 
                             </div>
                             <p className='style-nome-searchbar'>{produto.nome}</p>
-                            <p className='style-preco-searchbar'>{produto.preco}</p>
+                            {/* <p className='style-preco-searchbar'>{produto.preco}</p> */}
                         </li>
                     ))}
                 </ul>

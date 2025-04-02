@@ -37,8 +37,8 @@ const Rotas = () => {
             <Route element={<AddNewImgProduct/>} path='/api/addnewimageprod'></Route>
             <Route element={<ConfigItens/>} path='/configitens'></Route>
             <Route element={<CardPagamento/>} path='/paymentpage'></Route>
-            <Route element={<Politics/>} path='./politicas-de-privacidade/devolucoes-trocas/entregas-prazos'></Route>
-            <Route element={<TestePoliticas/>} path='./testepoliticas'></Route>
+            <Route element={<Politics/>} path='/politicas-de-privacidade/devolucoes-trocas/entregas-prazos'></Route>
+            <Route element={<TestePoliticas/>} path='/testepoliticas'></Route>
 
         </Routes>
     )

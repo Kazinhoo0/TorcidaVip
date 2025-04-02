@@ -10,8 +10,6 @@ export default function ComponentAreaTorcedor () {
             <div className="Rectangleareatorcedor">
                 <h2 className='titlearetorcedor'>ÁREA DO TORCEDOR</h2>
             </div>
-
-        
         </>
     )
 }

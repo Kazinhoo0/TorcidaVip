@@ -1,22 +1,17 @@
 import './todosospedidos.css';
 import camisateste from '../../../../imgs/15195641246_15170945177_D40-1332-014_zoom1-2.png'
 
-export default function CardPedidos () {
+export default function CardPedidos ({nomeitem, thumbnail, preco}) {
 
     return (
 
         <div className="container-cardpedidos">
 
-            <div className="title-cardpedidos">
-                <h4 style={{fontSize: 15}}> 27 de Janeiro de 2025</h4>
-                <h4 style={{paddingLeft: 15}}>Total: R$199,00</h4>
-            </div>
-            
             <div className='infos-cardpedidos'>
 
                 <div className='itemphoto'>
                     <div style={{borderRadius: '5px', border: '1px solid grey', width: 100, height: 100, padding: 5}}>
-                        <img  style={{width: 100, height: 100}} src={camisateste} alt="" />
+                        <img  style={{width: 100, height: 100}} src={thumbnail} alt="" />
                     </div>
                 </div>
 
@@ -31,7 +26,8 @@ export default function CardPedidos () {
 
                     <br/>
 
-                    <small style={{color: 'grey'}}>Camiseta feminina vasco da gama</small>
+                    <small style={{color: 'grey'}}>{nomeitem}</small>
+                    <small style={{color: 'grey'}}>preco: R${preco}</small>
                     <small style={{color: 'grey'}}>1 unidade</small>
                 </div>
 

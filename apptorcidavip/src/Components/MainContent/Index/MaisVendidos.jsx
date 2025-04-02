@@ -11,36 +11,19 @@ export default function MaisVendidos() {
 
     const { produtosdb, loading, error, allprodutosdb} = useContext(ContextProducts)
 
-    if (loading) return <div class="wrapper">
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="shadow"></div>
-    <div class="shadow"></div>
-    <div class="shadow"></div>
-    </div>;
+    // if (loading) return <div class="wrapper">
+    // <div class="circle"></div>
+    // <div class="circle"></div>
+    // <div class="circle"></div>
+    // <div class="shadow"></div>
+    // <div class="shadow"></div>
+    // <div class="shadow"></div>
+    // </div>;
 
     if (error) {
         console.log(error)
     }
         
-
-    // // Função para agrupar os tamanhos por produto
-    // const agruparTamanhos = (produtos) => {
-    //     return produtos.reduce((acc, item) => {
-    //       // Verifica se existe um identificador do produto pai
-    //       const id = item.nome || item.id;
-    //       if (id) {
-    //         if (!acc[id]) {
-    //           acc[id] = [];
-    //         }
-    //         if (item.tamanho && !acc[id].includes(item.tamanho)) {
-    //           acc[id].push(item.tamanho);
-    //         }
-    //       }
-    //       return acc;
-    //     }, {});
-    //   };
 
     const getNomeBase = (nomeCompleto) => {
         if (nomeCompleto.includes('Tamanho:')) {
@@ -61,7 +44,10 @@ export default function MaisVendidos() {
         // Adiciona o objeto com tamanho e estoque
         acc[nomeBase].push({
             tamanho: item.tamanho,
-            estoque: item.estoque
+            estoque: item.estoque,
+            marca: item.marca,
+            idproduto: item.idproduto,
+            codigo: item.codigo
         });
         }
         return acc;
@@ -86,11 +72,10 @@ export default function MaisVendidos() {
       
     
    
-  
     // console.log("Dados do db no frontend:", produtosdb);
     // console.log('AllprodDb:' , allprodutosdb)
     // console.log('TamanhosAgrupados:' ,tamanhosComEstoque);
-    // console.log('produtosComTamanhos: ', produtosComTamanhos)
+    console.log('produtosComTamanhos: ', produtosComTamanhos)
 
     return (
 
@@ -103,20 +88,14 @@ export default function MaisVendidos() {
 
             <div className="products-maisvendidos">
 
-                {produtosComTamanhos.slice(0, 10).map((produto) => (
-                    produto.tamanhos.every((tamanho) => tamanho.estoque === '' || tamanho.estoque === 0) ? (
+                {produtosComTamanhos.slice(15, 25).map((produto) => (
+                    produto.tamanhos.length === 0 || produto.tamanhos.every(t => t.estoque <= 0) ? (
                     <ProductEmpity key={produto.produto_id} produto={produto} />
                     ) : (
                     <Product key={produto.produto_id} produto={produto} />
                     )
                 ))} 
 
-
-                {/* {produtosUnicos.slice(0, 10).map((produto) => 
-                    (
-                        <ProductEmpity key={produto.produto_id} produto={produto} />
-                    )
-                )}  */}
 
             </div>
 

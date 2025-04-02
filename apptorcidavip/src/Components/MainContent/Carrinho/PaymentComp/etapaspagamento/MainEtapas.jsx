@@ -6,7 +6,6 @@ import Resumopedido from './Resumopedido';
 
 export default function MainEtapas ({dadosuserlogon, enderecoentrega, produtooncarrinho }) {
 
-
     // Incluir as apis aqui e passar como props
 
     return (
@@ -18,7 +17,7 @@ export default function MainEtapas ({dadosuserlogon, enderecoentrega, produtoonc
 
                     <EtapaInfos dadosuserlogon={dadosuserlogon} userendereco={enderecoentrega}/>
 
-                    <EtapasPagamento/>
+                    <EtapasPagamento produtosoncarrinho={produtooncarrinho}/>
 
                     <Resumopedido produtosoncarrinho={produtooncarrinho}/>
 

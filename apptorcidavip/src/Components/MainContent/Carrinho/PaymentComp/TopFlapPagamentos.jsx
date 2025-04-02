@@ -1,4 +1,4 @@
-// import './Index.css';
+//import './Index.css';
 import Logobranca from '../../../../imgs/Logo Branca 1 (1).png';
 import { useNavigate } from 'react-router-dom';
 import { TbLockSquareRounded } from "react-icons/tb";
@@ -24,7 +24,9 @@ export default function TopFlapPagamentos () {
                     )} */}
                     <div className='container-sun-topflap'/>
                     
-                    <div style={{width: 302.25, height: 84.51, left: 300.75, top: 14.99, position: 'absolute'}}>
+                    <div onClick={() => {
+                        navigate('/')
+                    }} style={{width: 302.25, height: 84.51, left: 300.75, top: 14.99, position: 'absolute'}}>
                         <img style={{width: 43.62, height: 84.51, left: 0, top: 0, position: 'absolute'}} src={Logobranca}/>
                         <div  style={{cursor: 'pointer',width: 259, height: 38, left: 15, top: 30, position: 'absolute', color: 'white', fontSize: 32, fontFamily: 'moonhouse', fontWeight: '400', wordWrap: 'break-word'}}>TorcidaVIP</div>
                     </div>

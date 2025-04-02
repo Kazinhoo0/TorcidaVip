@@ -6,59 +6,163 @@ import '../../../Product/ProductDetail/viewproduct.css';
 import { useNavigate } from 'react-router-dom';
 import TicketPix from './TicketPix';
 
-export default function CardPix ({totalpedido}) {
+export default function CardPix ({totalpedido, produtosoncarrinho}) {
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const { loading, setLoading, dadosuserlogon } = useContext(ContextProducts);
+  const { loading, setLoading, dadosuserlogon, observacoespedido, depositoid } = useContext(ContextProducts);
 
-    const [pixData , setPixData] = useState(null);
+  const [pixData , setPixData] = useState(null);
 
-    if (loading) {
-        return <div style={{width:'100%', height: '1000px', justifyContent: 'center', display: 'flex', alignItems: 'center'}}>
-                    <div className="spinner"></div>
-                </div>
+  if (loading) {
+      return <div style={{width:'100%', height: '1000px', justifyContent: 'center',     display: 'flex', alignItems: 'center'}}>
+                  <div className="spinner"></div>
+              </div>
+  };
+
+  const handleupdateestoques = async () => {
+      try {
+        const response = await fetch(`https://torcidavipoficial-teste.onrender.com/post/upload/estoques`, {
+         method: 'POST',
+         headers: { 
+          'Content-Type': 'application/json'
+         },
+         body: JSON.stringify({
+           produtosoncarrinho: produtosoncarrinho,
+           depositoid: depositoid
+         })
+      });
+ 
+       if (!response.ok) {
+         throw new Error(`Erro ao tentar executar a api: ${response.status} - ${response.statusText}`);
+       }
+       
+       const data = await response.json();
+       
+       if (!data) {
+         throw new Error('Resposta da API do Bling não conseguiu alterar produto');
+       }
+       if(response.ok) {
+        console.log('DADOS DO UPLOAD ESTOQUES:', data);
+       }
+      
+     } catch (error) {
+       console.error('Erro:', error.message);
+       throw error;
+     }
+  };
+
+
+  const handlePucheInfosNotaFiscal = async () => {
+    try {
+      const response = await fetch('https://torcidavipoficial-teste.onrender.com/api/post/notasfiscais', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${process.env.API_KEY}`
+        },
+        body: JSON.stringify({
+          userid: dadosuserlogon.id,
+          totalpedido: totalpedido,
+          produtosoncarrinho: produtosoncarrinho,
+          observacoes: observacoespedido,
+          depositoid: depositoid,
+          dadosuserlogon: dadosuserlogon
+        })
+      });
+
+      const data = await response.json();
+      console.log('Resposta do servidor:', data)
+
+      if (!response.ok) {
+        throw new Error('Erro ao processar pagamento');
+      }
+
+      if(response.ok) {
+        console.log('NOTA FISCAL FRONTEND:', data)
+      }
+     
+     
+    } catch (err) {
+      console.log(err.message);
     }
+};
 
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-
-        const amount = totalpedido
-        const identificationType = 'CPF'
-        const email = dadosuserlogon.email
-        const usercpf = dadosuserlogon.cpf
-    
-        try {
-          const response = await fetch('https://torcidavipoficial-teste.onrender.com/criarpix', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              transaction_amount: Number(amount),
-              description: 'Descrição Pix',
-              paymentMethodId: 'pix',
-              email: email,
-              identificationType: identificationType,
-              number: usercpf
-            })
-          });
-    
-          if (!response.ok) {
-            throw new Error('Erro ao processar pagamento');
-          }
-    
-          const data = await response.json();
-          // console.log('info PIX :', data);
-          setPixData(data);
-        } catch (err) {
-          console.log(err.message);
-        } finally {
-          setLoading(false);
+  const handlePurchaseSuccess = async () => {
+      try {
+        const response = await fetch('https://torcidavipoficial-teste.onrender.com/api/post/sucessocompra', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${process.env.API_KEY}`
+          },
+          body: JSON.stringify({
+            userid: dadosuserlogon.id,
+            totalpedido: totalpedido,
+            produtosoncarrinho: produtosoncarrinho,
+            observacoes: observacoespedido,
+            depositoid: depositoid
+          })
+        });
+  
+        if (!response.ok) {
+          throw new Error('Erro ao processar pagamento');
         }
-      };
+  
+        const data = await response.json();
+        console.log('info PIX :', data);
+        if(response.ok) {
+          console.log('PEDIDO EFETUADO COM SUCESSO');
+          console.log('Resultado do pedido:', data)
+          navigate('/')
+        }
+      } catch (err) {
+        console.log(err.message);
+      }
+  };
+
+  const handleSubmit = async () => {
+      setLoading(true);
+
+      const amount = totalpedido
+      const identificationType = 'CPF'
+      const email = dadosuserlogon.email
+      const usercpf = dadosuserlogon.cpf
+  
+      try {
+        const response = await fetch('https://torcidavipoficial-teste.onrender.com/criarpix', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            transaction_amount: Number(amount),
+            description: 'Descrição Pix',
+            paymentMethodId: 'pix',
+            email: email,
+            identificationType: identificationType,
+            number: usercpf
+          })
+        });
+
+        const data = await response.json();
+        
+        if(response.ok) {
+          setPixData(data);
+          // handlePurchaseSuccess();
+          // console.log('info PIX :', data);
+        }
+  
+        if (!response.ok) {
+          throw new Error('Erro ao processar pagamento');
+        }
+        
+      } catch (err) {
+        console.log(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
 
     return (
@@ -76,11 +180,16 @@ export default function CardPix ({totalpedido}) {
                 
                 <p style={{}}>R$preço com desconto</p>
 
-                <button onClick={handleSubmit} className='btn-payment'>Finalizar pedido</button>
+                <button onClick={() => {
+                  handleSubmit();
+                  handleupdateestoques();
+                  handlePurchaseSuccess();
+                  handlePucheInfosNotaFiscal();
+                  }} className='btn-payment'>Finalizar pedido</button>
 
                 <div style={{display: 'flex', justifyContent: 'center' ,alignItems: 'center'}}>
                     <SiMercadopago style={{width: '100px', height: 40}}/>
-                    <p style={{textAlign: 'start'}}>Pagamento feito será concluido de uma forma totalmente segura com Mercado Pago.<br/><a href="">Para mais informações clique aqui!</a></p>
+                    <p style={{textAlign: 'start'}}>Pagamento feito será concluido de uma forma totalmente segura com Mercado Pago.<br/><a href="https://conteudo.mercadopago.com.br/como-funciona-banco-digital-mercado-pago">Para mais informações clique aqui!</a></p>
                 </div>
 
             </div>

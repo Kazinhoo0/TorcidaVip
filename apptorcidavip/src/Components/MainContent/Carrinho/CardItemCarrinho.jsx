@@ -1,17 +1,52 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CiTrash } from "react-icons/ci";
 import ContextProducts from "../../../context/ContextProduct";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
-
+import Toastify from 'toastify-js';
+import 'toastify-js/src/toastify.css';
 
 export default function CardItemCarrinho ({infoprodutos}) {
 
-    const {setProdutosOnCarrinho, setLoading , dadosuserlogon, setProductDetails} = useContext(ContextProducts);
+    const {setProdutosOnCarrinho, setLoading , dadosuserlogon, setProductDetails, fetchProductDetails} = useContext(ContextProducts);
 
     const navigate = useNavigate();
 
     const {id} = useParams();
+
+    const handleIncrementpedido = () => {
+        setProdutosOnCarrinho(prevProdutos =>
+          prevProdutos.map(produto => {
+            if (produto.itemid === infoprodutos.itemid) {
+              if (produto.quantidade < infoprodutos.estoque) {
+                return { ...produto, quantidade: produto.quantidade + 1 };
+              } else {
+                Toastify({
+                  text: 'Quantidade máxima atingida',
+                  position: 'center',
+                  style: {
+                    background: '#db2d0e',
+                    color: '#ffffff'
+                  }
+                }).showToast();
+                return produto;
+              }
+            }
+            return produto;
+          })
+        );
+    };
+
+    const handleDecrementpedido = () => {
+    setProdutosOnCarrinho(prevProdutos =>
+        prevProdutos.map(produto =>
+        produto.itemid === infoprodutos.itemid
+            ? { ...produto, quantidade: Math.max(produto.quantidade - 1, 0) }
+            : produto
+        )
+    );
+    };
+
 
     const fetchRemoveItemCarrinho = async () => {
         
@@ -43,33 +78,8 @@ export default function CardItemCarrinho ({infoprodutos}) {
         }
     };
 
-
-     useEffect(() => {
-            const fetchProductDetails = async () => {
-                try {
-                    setLoading(true);
-                    const response = await fetch(`https://torcidavipoficial-teste.onrender.com/viewproduct/${id}`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ id })
-                    });
-    
-                    if (!response.ok) throw new Error('Erro ao buscar detalhes');
-                    
-                    const data = await response.json();
-                    if (data.success) {
-                        setProductDetails(data.data);
-                    }
-                } catch (err) {
-                    console.error(err.message);
-                } finally {
-                    setTimeout(() => {
-                        setLoading(false);
-                    } , 3000)
-                }
-            };
-    
-            fetchProductDetails();
+    useEffect(() => {
+        fetchProductDetails(id);
     }, [id]);
 
 
@@ -136,9 +146,16 @@ export default function CardItemCarrinho ({infoprodutos}) {
 
             <div className="container-cont-itens">
                 
-                <button className="contsomeorsub">-</button>
-                <input className="inputsomeorsub" type="text" />
-                <button className="contsomeorsub">+</button>
+                <button onClick={handleDecrementpedido} className="contsomeorsub">-</button>
+
+                <input 
+                    className="inputsomeorsub"
+                    type="text"
+                    value={infoprodutos.quantidade}
+                    readOnly
+                />
+
+                <button onClick={handleIncrementpedido} className="contsomeorsub">+</button>
                 
             </div>
 

@@ -3,7 +3,7 @@ import './todosospedidos.css';
 import { Helmet } from 'react-helmet';
 
 
-export default function TodosOspedidos () {
+export default function TodosOspedidos ({userpedidos}) {
 
     return (
 
@@ -17,10 +17,9 @@ export default function TodosOspedidos () {
            </div>
             
             <div className='render-todospedidos'>
-                <CardPedidos/>
+             <CardPedidos/>
+             <CardPedidos/>
             </div>
-
-
 
         </div>
     )

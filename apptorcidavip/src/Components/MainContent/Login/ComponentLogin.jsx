@@ -40,7 +40,7 @@ export default function ComponentLogin () {
                 }
             }).showToast();
 
-            // console.log('infomacoes do usuario vindo do backend: ', data)
+            console.log('infomacoes do usuario vindo do backend: ', data)
             localStorage.setItem('authToken', data.token);
 
             // Garantindo que o loader seja visível por pelo menos 2 segundos
@@ -103,7 +103,7 @@ export default function ComponentLogin () {
                 }
             }).showToast();
 
-            // console.log('infomacoes do usuario vindo do backend: ', data)
+            console.log('infomacoes do usuario vindo do backend: ', data)
             localStorage.setItem('authTokenGoogle', data.token);
             // Garantindo que o loader seja visível por pelo menos 2 segundos
             setTimeout(() => {

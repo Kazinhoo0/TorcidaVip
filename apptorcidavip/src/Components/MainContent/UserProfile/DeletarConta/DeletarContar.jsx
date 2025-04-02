@@ -1,9 +1,43 @@
 import './deletarconta.css';
 import alert from '../../../../imgs/crisis.png';
 import { Helmet } from 'react-helmet';
+import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import ContextProducts from '../../../../context/ContextProduct';
 
 
 export default function DeletarConta () {
+
+    const {dadosuserlogon} = useContext(ContextProducts);
+
+    const navigate = useNavigate();
+
+    const deleteaccount  = async () => {
+        try {
+            const response = await fetch(`https://torcidavipoficial-teste.onrender.com/api/deleteaccount`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type' : 'application/json',
+                },
+                body: JSON.stringify({
+                    userid: dadosuserlogon.id,
+                })
+            })
+
+            if (!response.ok) {
+                throw new Error('Erro ao buscar dados');
+            }
+
+            const data = await response.json();
+
+            if (data.success) {  
+                console.log('usuario deletado com sucesso');
+                navigate('/')
+            } 
+        } catch (err) {
+            return console.log(err.message)
+        }
+    } 
 
 
     return (
@@ -57,7 +91,7 @@ export default function DeletarConta () {
                     <small>Sim, quero fechar permanentemente minha conta TorcidaVip e excluir meus dados.</small>
                 </div>
 
-                <div className='container-btn-excluirconta'>
+                <div onClick={deleteaccount} className='container-btn-excluirconta'>
                     <button className='btn-excluirconta'>EXCLUIR CONTA</button>
                 </div>
 

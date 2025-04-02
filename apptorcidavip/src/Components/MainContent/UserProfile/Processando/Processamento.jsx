@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 
 
 
-export default function Processando () {
+export default function Processando ({userpedidos}) {
 
 
     return ( 
@@ -21,7 +21,14 @@ export default function Processando () {
             </div>
             
             <div className='render-todospedidos'>
-                <CardProcessando/>
+                {userpedidos.map((pedido) => (
+                    <div key={pedido.id} className="pedido">
+                        <h3>Pedido realizado em: {new Date(pedido.data_compra).toLocaleString()}</h3>
+                        <h4 style={{paddingLeft: 15}}>Total: R${pedido.totalpedido}</h4>
+                        {/* Para cada produto dentro do pedido, renderize o CardPedidos */}
+                        <CardProcessando infospedido={pedido}/>      
+                    </div>
+                ))}
             </div>
         
         

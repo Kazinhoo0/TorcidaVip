@@ -22,7 +22,7 @@ export default function ComponentProductpedido ({infoproduto}) {
                         {infoproduto.nomeitem}
                     </p>
 
-                    <span>Tamanho: 36</span>
+                    <span>Tamanho: {infoproduto.tamanho}</span>
                 </div>
 
                 <div className='imageproduct'>

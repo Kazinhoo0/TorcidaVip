@@ -24,138 +24,102 @@ export default function InfoAtendimentos ({customTop,customcopyrightcontainer}) 
 
     return (
 
-        <>
-         <div style={{
-            display: 'flex',
-            justifycontent: 'center',
-            position: 'absolute',
-            width: 1903,
-            height: 400,
-            top: customTop, /* Limita o valor de top */
-            backgroundColor: '#363537'
-         }} >
+            <>
 
-            <div className="cont-sun-atendimento">
 
-                <div className="infos-atendimentos">
-
-                    <div className='container-sun-infos'>
-                        <div>
-                            <h2 className="style-infos-title-atendimento">Atendimento</h2>
-                            <p className="style-infos-atendimento">Horário de Funcionamento</p>
+            
+            <footer 
+                className='footer-container' 
+                style={{
+                    marginTop: customTop,
+                }}
+            >
+                <div className="footer-content">
+                    <div className="footer-section">
+                        <h2 className="footer-title">Atendimento</h2>
+                        <p className="footer-text">Horário de Funcionamento</p>
+                        <div className="footer-hours">
+                            <small className="footer-text">Segunda a Sexta - 08:00 ás 20:00</small>
+                            <small className="footer-text">Domingo e Feriados: 10:00 ás 18:00</small>
                         </div>
-                       
-
-                        <div style={{display: 'grid'}}>
-                            <small className="style-infos-atendimento" >Segunda a Sexta - 08:00 ás 20:00</small>
-                            <small className="style-infos-atendimento" >Domingo e Feriados: 10:00 ás 18:00</small>
+                        <div className="footer-contact">
+                            <div className="contact-item">
+                                <img src={phone} alt="Telefone" />
+                                <small className="footer-text">(21) 99613-4701</small>
+                            </div>
+                            <div className="contact-item">
+                                <img src={mensagem} alt="Mensagem" />
+                                <small className="footer-text">(21) 99613-4701</small>
+                            </div>
                         </div>
-                        
-                        <div style={{display: 'grid'}}>
-                            <small className="style-infos-atendimento">
-                                <img style={{paddingRight: '5px'}} src={phone} alt="" />
-                                (21) 99613-4701
-                            </small>
-
-                            <small className="style-infos-atendimento">
-                                <img style={{paddingRight: '5px'}} src={mensagem} alt="" />
-                                (21) 99613-4701
-                            </small>
-                        </div>
-                       
                     </div>
 
-                </div>
-
-                <div className="infos-atendimentos">
-
-                    <div className='container-sun-infos' >
-
-                        <div>
-
-                            <h2 className='style-infos-title-atendimento'>Nos Acompanhe</h2>
-                            
-                            <a href=""><img  className='style-imgs-nosacompanhe' src={facebook} alt="" /></a>
-                            <a href="https://www.instagram.com/lojatorcidavip/"><img className='style-imgs-nosacompanhe' src={instagram} alt="" /></a>
-                            <a href="https://api.whatsapp.com/send?phone=5521988520793&text=Boa%20tarde%20somos%20somos%20o%20suporte%20da%20TorcidaVip,%20como%20posso%20lhe%20ajudar%20?%20"><img className='style-imgs-nosacompanhe' src={whatsapp} alt="" /></a>
-                            
-
+                    <div className="footer-section">
+                        <h2 className="footer-title">Nos Acompanhe</h2>
+                        <div className="social-links">
+                            <a href="#" className="social-link">
+                                <img src={facebook} alt="Facebook" />
+                            </a>
+                            <a href="https://www.instagram.com/lojatorcidavip/" className="social-link">
+                                <img src={instagram} alt="Instagram" />
+                            </a>
+                            <a href="https://api.whatsapp.com/send?phone=5521988520793&text=Boa%20tarde%20somos%20somos%20o%20suporte%20da%20TorcidaVip,%20como%20posso%20lhe%20ajudar%20?%20" className="social-link">
+                                <img src={whatsapp} alt="WhatsApp" />
+                            </a>
                         </div>
-                        
                     </div>
 
-                </div>
-
-                <div className="infos-atendimentos">
-
-                    <div style={{display: 'grid', height: '220px'}}>
-
-                        <div style={{ display: 'grid', gap: 0, padding: 0, margin: 0}}>
-
-                            <h2 className='style-infos-title-atendimento'>Ajuda</h2>
-                            <small onClick={handlenavigatepolitica} className="style-infos-atendimento" >Políticas de devoluções e Trocas</small>
-                            <small onClick={handlenavigatepolitica}className="style-infos-atendimento" >Políticas de Privacidade</small>
-                            <small onClick={handlenavigatepolitica} className="style-infos-atendimento" >Entregas e Prazos</small>
-
+                    <div className="footer-section">
+                        <div className="footer-links">
+                            <h2 className="footer-title">Ajuda</h2>
+                            <small onClick={handlenavigatepolitica} className="footer-link">Políticas de devoluções e Trocas</small>
+                            <small onClick={handlenavigatepolitica} className="footer-link">Políticas de Privacidade</small>
+                            <small onClick={handlenavigatepolitica} className="footer-link">Entregas e Prazos</small>
                         </div>
                         
-                        <div style={{display: 'grid' }}>
-                            <h2 className='style-infos-title-atendimento'>Meus Pedidos</h2>
-                            <small className="style-infos-atendimento" >Acompanhe Seus Pedidos</small>
-                            <small className="style-infos-atendimento" >Editar Cadastro</small>
+                        <div className="footer-account">
+                            <h2 className="footer-title">Meus Pedidos</h2>
+                            <small className="footer-link">Acompanhe Seus Pedidos</small>
+                            <small className="footer-link">Editar Cadastro</small>
                         </div>
-                       
                     </div>
-                    
-                </div>
 
-                <div className="infos-atendimentos">
-
-
-                    <div style={{display: 'grid', height: '220px'}}>
-
-                        <div style={{gap: 0, padding: 0, margin: 0}}>
-
-                            <h2 className='style-infos-title-atendimento'>Formas de Pagamento</h2>
-                            <img src={iconmercadopago} alt="" />
-                            <img src={iconmastercard} alt="" />
-                            <img src={iconboleto} alt="" />
-                            <img src={iconvisa} alt="" />
-
-                        </div>
-
-                        <div style={{display: 'grid'}}>
-                            <h2 className='style-infos-title-atendimento'>Site Seguro</h2>
-                            <div style={{display: 'flex', alignItems: 'center'}}>
-                                <img style={{width: 115, height: 50 }} src={sslseguro} alt="" />
-                                <img style={{width: '60px'}} src={iconseguranca} alt="" />
+                    <div className="footer-section">
+                        <div className="payment-methods">
+                            <h2 className="footer-title">Formas de Pagamento</h2>
+                            <div className="payment-icons">
+                                <img src={iconmercadopago} alt="Mercado Pago" />
+                                <img src={iconmastercard} alt="Mastercard" />
+                                <img src={iconboleto} alt="Boleto" />
+                                <img src={iconvisa} alt="Visa" />
                             </div>
                         </div>
 
+                        <div className="security">
+                            <h2 className="footer-title">Site Seguro</h2>
+                            <div className="security-icons">
+                                <img src={sslseguro} alt="SSL Seguro" className="ssl-icon" />
+                                <img src={iconseguranca} alt="Segurança" className="security-icon" />
+                            </div>
+                        </div>
                     </div>
-
-
                 </div>
+            </footer>
 
-
+            <div 
+                className="copyright" 
+                style={{
+                    marginTop: customcopyrightcontainer
+                }}
+            >
+                <div className="copyright-company">
+                    <small>TORCIDA VIP</small>
+                    <small>CNPJ: 34.639.603/0001-50</small>
+                </div>
+                <div className="copyright-text">
+                    <small>© 2025 Todos os direitos reservados | Kauã Lopes | Torcida Vip.</small>
+                </div>
             </div>
-        </div>
-
-        <div style={{top: customcopyrightcontainer}} className='copyright-container'>
-
-            <div style={{display: 'grid', textAlign: 'start', paddingLeft: '20px'}}>
-                <small>TORCIDA VIP</small>
-                <small>CNPJ: 34.639.603/0001-50</small>
-            </div>
-
-            <div style={{paddingRight: '20px'}}>
-                <small>© 2025 Todos os direitos reservados | Kauã Lopes | Torcida Vip.</small>  
-            </div>
-
-        </div>
         </>
-
-       
-
-    )
+    );
 }

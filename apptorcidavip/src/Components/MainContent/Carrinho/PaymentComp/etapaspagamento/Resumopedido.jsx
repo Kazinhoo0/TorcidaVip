@@ -1,14 +1,14 @@
 import { useNavigate } from 'react-router-dom'
 import ComponentProductpedido from '../ComponentProdutospedido/ComponentProductspedido'
 import '../pagamento.css';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import ContextProducts from '../../../../../context/ContextProduct';
 
 
 
 export default function Resumopedido ({produtosoncarrinho}) {
 
-    const {resumopedido, freteSelecionado} = useContext(ContextProducts)
+    const {resumopedido, freteSelecionado,setObservacoesPedido} = useContext(ContextProducts);
 
     const navigate = useNavigate();
 
@@ -43,7 +43,13 @@ export default function Resumopedido ({produtosoncarrinho}) {
                     </div>
                    
 
-                    <textarea style={{maxWidth: 350, width: 340,height:200, maxHeight: 500}} placeholder='Adicione informações relacionadas ao seu pedido.' name="" id="observacoes"></textarea>
+                    <textarea 
+                    style={{maxWidth: 350, width: 340,height:200, maxHeight: 500}} 
+                    placeholder='Adicione informações relacionadas ao seu pedido.'
+                    name=""
+                    id="observacoes"
+                    onChange={(e) => setObservacoesPedido(e.target.value)}
+                      ></textarea>
                 </div>
 
                 <span></span>
@@ -70,7 +76,7 @@ export default function Resumopedido ({produtosoncarrinho}) {
                                 <span style={{fontWeight: 700}}>Total do pedido</span>
                             </div>
                         
-                            <span>R${(totalpedido).toFixed(2)}</span>
+                            <span>R${(totalpedido).toFixed(2)}</span> 
                         </li>
 
                     </ul>

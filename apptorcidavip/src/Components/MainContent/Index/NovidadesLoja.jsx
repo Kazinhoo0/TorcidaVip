@@ -1,4 +1,3 @@
-
 import casacodestaque from '../../../imgs/casacovascodestaque.png';
 import heart from '../../../imgs/heart.png';
 import Product from '../Product/Designe/DesigneProduct';
@@ -16,14 +15,13 @@ export default function NovidadesLoja() {
         console.log(error)
     }
 
-
     const getNomeBase = (nomeCompleto) => {
         if (nomeCompleto.includes('Tamanho:')) {
           return nomeCompleto.split('Tamanho:')[0].trim();
         }
         return nomeCompleto.trim();
       };
-      
+
       // Função para agrupar os tamanhos com seus respectivos estoques
     const agruparTamanhosComEstoque = (produtos) => {
     return produtos.reduce((acc, item) => {
@@ -57,13 +55,12 @@ export default function NovidadesLoja() {
           tamanhos: tamanhosComEstoque?.[getNomeBase(produto.nome)] || []
         };
     });
-      
 
     return (
         <>
-            <div className="container_destaques">
-                <div className="maisnovidadeloja-style">
-                    <h1 className="style-textnovidadesloja">NOVIDADES NA LOJA</h1>
+            <div className="container-maisvendido">
+                <div className="maisvendido-style">
+                    <h1 className="style-textmaisvendido">NOVIDADES NA LOJA</h1>
                 </div>
             </div>
 
@@ -92,7 +89,6 @@ export default function NovidadesLoja() {
 
             </div>
         </>
-
 
     )
 }

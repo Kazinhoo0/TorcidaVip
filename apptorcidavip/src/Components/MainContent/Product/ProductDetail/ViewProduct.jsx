@@ -20,11 +20,12 @@ import { useParams } from 'react-router-dom';
 
 export default function ViewProduct() {
 
+
     const {id} = useParams();
 
     // console.log('id do produto guardado pelo params',id)
 
-    const { produtosdb , error, productdetails , loading, setLoading,  setProductDetails , idproductview , dadosuserlogon } = useContext(ContextProducts);
+    const { produtosdb , error, productdetails , fetchProductDetails, loading, setLoading,  setProductDetails , dadosuserlogon } = useContext(ContextProducts);
 
     const [clickednewcomment, setClickednewcomment] = useState(false);
 
@@ -40,36 +41,15 @@ export default function ViewProduct() {
         sectionRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
-    
+    // const [viewimage, setViewImage] = useState(productdetails[0]?.imagem);
+
+    const [mainImage, setMainImage] = useState(productdetails[0]?.imagem);
+
 
     // const descricaoDetalhada = JSON.parse(productdetails[0].descricaodetalhada);
 
     useEffect(() => {
-        const fetchProductDetails = async () => {
-            try {
-                setLoading(true);
-                const response = await fetch(`https://torcidavipoficial-teste.onrender.com/viewproduct/${id}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ id })
-                });
-
-                if (!response.ok) throw new Error('Erro ao buscar detalhes');
-                
-                const data = await response.json();
-                if (data.success) {
-                    setProductDetails(data.data);
-                }
-            } catch (err) {
-                console.error(err.message);
-            } finally {
-                setTimeout(() => {
-                    setLoading(false);
-                } , 3000)
-            }
-        };
-
-        fetchProductDetails();
+        fetchProductDetails(id)
     }, [id]);
     
 
@@ -238,7 +218,7 @@ export default function ViewProduct() {
                                         </select>
                                     </div>
 
-                                    <div style={{ display: 'grid' }}>
+                                    {/* <div style={{ display: 'grid' }}>
                                         <label htmlhtmlFor="Cor">Cor</label>
                                         <select className='stylecelect' name="cor" id="">
                                             <option value="">Escolha uma opcão...</option>
@@ -247,7 +227,7 @@ export default function ViewProduct() {
                                             <option value="">Preto</option>
                                             <option value="">Branco</option>
                                         </select>
-                                    </div>
+                                    </div> */}
 
                                 </div>
 
@@ -262,43 +242,26 @@ export default function ViewProduct() {
                             </div>
                         </div>
 
-                        <div className='container-info-prod'>
-                            <img className='style-productimggrande' src={productdetails[0].imagem} alt="" />
-                            <div className='container-carroselpic'>
 
-                                {productdetails[1]?.imagem && (
-                                    <div className="sun-carroselpic">
-                                        <img className='style-productimgpequeno' src={productdetails[1].imagem} alt="" />
+                        <div className="container-info-prod">
+                            <img className="style-productimggrande" src={mainImage} alt="Imagem do produto" />
+                            <div className="container-carroselpic">
+                                {productdetails.map((produto, index) => (
+                                produto.imagem && (
+                                    <div
+                                    key={index}
+                                    className="sun-carroselpic"
+                                    onClick={() => setMainImage(produto.imagem)}
+                                    style={{ cursor: 'pointer' }} 
+                                    >
+                                    <img
+                                        className="style-productimgpequeno"
+                                        src={produto.imagem}
+                                        alt={`Imagem ${index}`}
+                                    />
                                     </div>
-                                )}
-
-
-                                {productdetails[2]?.imagem && (
-                                    <div className="sun-carroselpic">
-                                        <img className='style-productimgpequeno' src={productdetails[2].imagem} alt="" />
-                                    </div>
-                                )}
-
-                                {productdetails[3]?.imagem && (
-                                    <div className="sun-carroselpic">
-                                        <img className='style-productimgpequeno' src={productdetails[3].imagem} alt="" />
-                                    </div>
-                                )}
-
-                                {productdetails[4]?.imagem && (
-                                    <div className="sun-carroselpic">
-                                        <img className='style-productimgpequeno' src={productdetails[4].imagem} alt="" />
-                                    </div>
-                                )}
-
-                                {/* <div className="sun-carroselpic">
-                                    <img className='style-productimgpequeno' src={camisafluminensecarrosel2} alt="" />
-                                </div>
-
-                                <div className="sun-carroselpic">
-                                    <img className='style-productimgpequeno' src={camisafluminensecarrosel1} alt="" />
-                                </div> */}
-
+                                )
+                                ))}
                             </div>
                         </div>
 

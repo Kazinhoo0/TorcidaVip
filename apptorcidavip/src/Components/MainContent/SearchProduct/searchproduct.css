@@ -188,7 +188,7 @@ input[type="checkbox"]:checked {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     width: 1300px;
-    height: 1720px;
+    height: 1860px;
     padding-left: 100px;
 }
 

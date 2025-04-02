@@ -17,18 +17,6 @@
 }
 
 
-.Rectangleareatorcedor {
-    position: absolute;
-    width: 1905px;
-    height: 240px;
-    left: 0px;
-    top: 10px;
-    background: #47B868;
-    border-radius: 0px 0px 100.5px 0px;
-    /* z-index: 1; */
-
-}
-
 .container-inputs {
     /* border: 1px solid red; */
     width: 420px;
@@ -80,11 +68,6 @@
     line-height: 24px;
     color: #000000;
 }
-
-
-
-
-
 
 
 .style-infonewpassword {
@@ -144,9 +127,6 @@
 }
 
 
-
-
-
 .titleloginregister {
 
     width: 500px;
@@ -174,6 +154,44 @@
     line-height: 138px;
     color: #ffffff;
 }
+
+
+.Rectangleareatorcedor {
+    position: absolute;
+    width: 1905px;
+    height: 240px;
+    left: 0px;
+    top: 10px;
+    background: #47B868;
+    border-radius: 0px 0px 100.5px 0px;
+    /* z-index: 1; */
+
+}
+
+
+/* Media Query para dispositivos móveis */
+@media only screen and (max-width: 768px) {
+
+    .titlearetorcedor {
+        height: 50px;
+        position: static; /* ou position: relative, conforme a necessidade */
+        /* border: 1px solid rgb(255, 0, 0); */
+        font-size: 48px; /* reduz o tamanho da fonte */
+        line-height: 150px; /* ajuste na altura da linha */
+        padding-top: 15px;
+    }
+    
+    .Rectangleareatorcedor  {
+        width: 100%;
+        display: flex; 
+        justify-content: center;
+        align-items: center;
+        /* border: 1px solid red; */
+        border-radius: 0 0 50px 0; /* ajuste no border-radius se necessário */
+        padding: 5px 0;
+    }
+  }
+
 
 
 

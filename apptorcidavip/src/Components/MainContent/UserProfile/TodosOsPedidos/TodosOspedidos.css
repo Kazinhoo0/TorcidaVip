@@ -13,6 +13,7 @@
 }
 
 .render-todospedidos {
+    overflow: auto;
     padding: 5px;
     border: 1px solid rgba(0, 0, 0, 0.438);
     width: 1100px;
@@ -30,7 +31,6 @@
     border-bottom: 1px solid grey;
     height: 30px;
     display: flex;
-    
     align-items: center;
     padding-left: 15px;
 }
@@ -95,3 +95,69 @@
     margin: 3px;
     cursor: pointer;
 }
+
+@media only screen and (max-width: 768px) {
+    .container-meuspedidos {
+        /* border: 1px solid rgb(12, 12, 12); */
+        height: auto;
+    }
+    .container-cardpedidos {
+      /* Ajusta a altura e margem para telas menores */
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: start;
+      /* border: 1px solid red; */
+      width: 100%;
+      height: auto;
+      margin: 5px 0;
+    }
+    
+    .render-todospedidos {
+      border: none;
+    }
+  
+    .infos-cardpedidos {
+      /* Empilha os elementos verticalmente */
+      width: 30%;
+      /* border: 1px solid red; */
+      flex-direction: column;
+      height: auto;
+      padding: 10px;
+    }
+  
+    .itemphoto {
+      width: 100%;
+      height: auto;
+      margin-bottom: 10px;
+    }
+  
+    .itemphoto img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+    }
+  
+    .date-entregue {
+      width: 100%;
+      padding-left: 0;
+      margin-bottom: 10px;
+    }
+  
+    .enviarmensagem {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  
+    .btn-vercompra-comprarnovamente {
+      width: 100%;
+      align-items: center;
+      padding-right: 0;
+    }
+  
+    .btn-vercompra-comprarnovamente button {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0;
+    }
+  }

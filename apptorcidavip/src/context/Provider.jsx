@@ -10,7 +10,11 @@ export default function Provider ({ children }) {
 
     const [idproductview, setIdProductView] = useState('')
 
-    // const [produtosapi, setProdutosApi] = useState([]);
+    const [produtosapi, setProdutosApi] = useState([]);
+
+    const [depositoid, setDepositoId] = useState({})
+
+    const [userpedido, setUserPedido] = useState({});
 
     const [infocartão, setInfoCartão] = useState([])
 
@@ -34,6 +38,8 @@ export default function Provider ({ children }) {
     })
 
     const [addonfavorite, setaddonfavorite] = useState([]);
+
+    const [ observacoespedido ,setObservacoesPedido ] = useState('')
 
     const [produtosoncarrinho , setProdutosOnCarrinho] = useState([]);
 
@@ -90,8 +96,8 @@ export default function Provider ({ children }) {
         const token = (localStorage.getItem('authToken'));
 
          if (token) {
-             const DecodeToken = jwtDecode(token);
-             setDadosUserLogOn(DecodeToken);
+            const DecodeToken = jwtDecode(token);
+            setDadosUserLogOn(DecodeToken);
          } else {
             setDadosNewUser('')
          }
@@ -122,76 +128,134 @@ export default function Provider ({ children }) {
 
     })
 
-
     const [userenderecos, setUserEnderecos] = useState([]);
     
-    // console.log('productdetails no provider', productdetails)
-   
+     console.log('productdetails no provider', productdetails)
+    
+    useEffect(() => {
+        console.log("useEffect foi disparado!");
+
+        const fetchProdutosApi = async () => {
+            try {
+                const response = await fetch('https://torcidavipoficial-teste.onrender.com/api/get/produtos');
+                if (!response.ok) {
+                    throw new Error(`Erro: ${response.statusText}`);
+                }
+                const data = await response.json();
+                if (data && Array.isArray(data)) {
+                    const produtosUnicos = data.filter((produto, index, self) => 
+                        index === self.findIndex((p) => (
+                            p.idProdutoPai === produto.idProdutoPai
+                        ))
+                    );
+                    setProdutosApi(produtosUnicos);
+                } else {
+                    throw new Error("A resposta não contém dados válidos.");
+                }
+            } catch (err) {
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
+        };  
+
+        fetchProdutosApi();
+    }, []);
+
+
+    
+    useEffect(() => {
+        const fetchDepositoApi = async () => {
+            try {
+                const response = await fetch('https://torcidavipoficial-teste.onrender.com/api/get/deposito');
+                if (!response.ok) {
+                    throw new Error(`Erro: ${response.statusText}`);
+                }
+                const data = await response.json();
+                console.log('DEPOSITO INFOS:', data)
+                if(data.sucess) {
+                    setDepositoId(data);
+                }
+            } catch (err) {
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
+        };  
+        fetchDepositoApi();
+     }, []);
+
+
+     useEffect(() => {
+        console.log('Useeffect do banco de dados disparado');
+
+        const fetchProductsDB = async () => {
+          try {              
+                const response = await fetch(`https://torcidavipoficial-teste.onrender.com/api/post/update/estoque/bling`, {
+                    method: 'POST',
+                    body:JSON.stringify({
+                        
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${process.env.API_KEY}`
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar dados');
+                }
+
+                const data = await response.json();
+
+                if (data.success) {
+                    setProdutosDb(data.data);
+                } else {
+                    setError(data.message);
+                }
+
+            } catch (err) {
+               setError(err.message);
+            } 
+        };
+        fetchProductsDB();
+ }, []);
+
+
     //  useEffect(() => {
-    //      console.log("useEffect foi disparado!");
+    //         console.log('Useeffect do banco de dados disparado');
     
-    //      const fetchProdutosApi = async () => {
-    //          try {
-    //              const response = await fetch('http://localhost:3000/api/get/produtos');
-    //              if (!response.ok) {
-    //                  throw new Error(`Erro: ${response.statusText}`);
-    //              }
-    //              const data = await response.json();
-    //              if (data && Array.isArray(data)) {
-    //                  const produtosUnicos = data.filter((produto, index, self) => 
-    //                      index === self.findIndex((p) => (
-    //                          p.idProdutoPai === produto.idProdutoPai
-    //                      ))
-    //                  );
-    //                  setProdutosApi(produtosUnicos);
-    //              } else {
-    //                  throw new Error("A resposta não contém dados válidos.");
-    //              }
-    //          } catch (err) {
-    //              setError(err.message);
-    //          } finally {
-    //              setLoading(false);
-    //          }
-    //      };  
+    //         const fetchProductsDB = async () => {
+    //           try {              
+    //                 const response = await fetch(`https://torcidavipoficial-teste.onrender.com/api/get/infoprodpai`, {
+    //                     method: 'POST',
+    //                     headers: {
+    //                         'Content-Type': 'application/json',
+    //                    },
+    //                 });
     
-    //      fetchProdutosApi();
+    //                 if (!response.ok) {
+    //                     throw new Error('Erro ao buscar dados');
+    //                 }
+    
+    //                 const data = await response.json();
+    
+    //                 if (data.success) {
+    //                     setProdutosDb(data.data);
+    //                     // console.log('produtos do db no provider', data);
+    //                 } else {
+    //                     setError(data.message);
+    //                 }
+    
+    //             } catch (err) {
+    //                setError(err.message);
+    //             } finally {
+    //                 setLoading(false);
+    //           }
+    //         };
+    
+    //         fetchProductsDB();
     //  }, []);
-
-
-    // useEffect(() => {
-    //      console.log('Useeffect do banco de dados disparado');
-    
-    //      const fetchProductsDB = async () => {
-    //          try {              
-    //              const response = await fetch(`http://localhost:3000/api/get/infoprodpai`, {
-    //                  method: 'POST',
-    //                  headers: {
-    //                      'Content-Type': 'application/json',
-    //                  },
-    //              });
-    
-    //              if (!response.ok) {
-    //                  throw new Error('Erro ao buscar dados');
-    //              }
-    
-    //              const data = await response.json();
-    
-    //              if (data.success) {
-    //                  setProdutosDb(data.data);
-    //                  // console.log('produtos do db no provider', data);
-    //              } else {
-    //                  setError(data.message);
-    //              }
-    
-    //          } catch (err) {
-    //             setError(err.message);
-    //          } finally {
-    //              setLoading(false);
-    //          }
-    //      };
-    
-    //      fetchProductsDB();
-    // }, []);
 
 
 
@@ -239,7 +303,7 @@ export default function Provider ({ children }) {
     
     //     const fetchRenderItensCarrinho = async () => {
     //         try {              
-    //             const response = await fetch('http://localhost:3000/api/post/renderitenscarrinho', {
+    //             const response = await fetch('https://torcidavipoficial-teste.onrender.com/api/post/renderitenscarrinho', {
     //                 method: 'POST',
     //                 headers: {
     //                     'Content-Type': 'application/json',
@@ -272,6 +336,66 @@ export default function Provider ({ children }) {
     
     //     fetchRenderItensCarrinho();
     // }, []);
+
+
+    const fetchProductDetails = async (id) => {
+        try {
+            setLoading(true);
+            const response = await fetch(`https://torcidavipoficial-teste.onrender.com/viewproduct/${id}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id })
+            });
+
+            if (!response.ok) throw new Error('Erro ao buscar detalhes');
+            
+            const data = await response.json();
+            if (data.success) {
+                setProductDetails(data.data);
+            }
+        } catch (err) {
+            console.error(err.message);
+        } finally {
+            setTimeout(() => {
+                setLoading(false);
+            } , 3000)
+        }
+    };
+
+    useEffect(() => {
+        if (!dadosuserlogon?.id) return;
+
+        const handleReturnPedido = async () => {
+            try {
+            const response = await fetch('https://torcidavipoficial-teste.onrender.com/api/get/infospedido', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    userid: dadosuserlogon.id,
+                })
+            });
+        
+            const data = await response.json();
+    
+            if(response.ok) {
+                console.log('PEDIDO EFETUADO COM SUCESSO')
+                setUserPedido(data.data)
+            }
+            if (!response.ok) {
+                throw new Error('Erro ao processar pagamento');
+            }
+
+            } catch (err) {
+            console.log(err.message);
+            }
+        }
+
+        handleReturnPedido();
+
+    }, [dadosuserlogon]);
+
 
     useEffect(() => {
         if (!dadosuserlogon?.id) return;
@@ -429,6 +553,7 @@ export default function Provider ({ children }) {
     const value = {
 
         // produtosapi,
+        fetchProductDetails,
         produtosdb,
         loading,
         setLoading,
@@ -472,7 +597,13 @@ export default function Provider ({ children }) {
         freteSelecionado, 
         setFreteSelecionado,
         allprodutosdb, 
-        setAllProdutosDb
+        setAllProdutosDb,
+        userpedido,
+        setUserPedido,
+        observacoespedido,
+        setObservacoesPedido,
+        depositoid,
+        setDepositoId
 
     }
     return (
