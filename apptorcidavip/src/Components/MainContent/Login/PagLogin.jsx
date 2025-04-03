@@ -18,34 +18,22 @@ export default function PagLogin () {
     return (
       
         <div className="container-login-register">
-
             <Helmet>
                 <title>Torcida Vip | Entre na sua conta</title>
             </Helmet>
 
-            <TopFlap/>
+            <TopFlap />
             
-            <ComponentAreaTorcedor/>
+            <ComponentAreaTorcedor />
 
             <div className="container-sun-login">
-
-                <ComponentLogin/>
-                
-                <ComponentCadastro/>    
-            
+                <ComponentLogin />
+                <ComponentCadastro />    
             </div>
 
-           
-            <InfoSite customTop={1150} />
-
-            <InfoAtendimentos customcopyrightcontainer={1700} customTop={1300}/>
-
-            
-            
-
-
+            <InfoSite customTop={0} />
+            <InfoAtendimentos customcopyrightcontainer={0} customTop={50} />
         </div>
-        
-       
+    
     )
 }
