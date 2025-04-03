@@ -25,9 +25,12 @@ export default function CardPagamento() {
 
             <TopFlapPagamentos />
 
-            <MainEtapas dadosuserlogon={dadosuserlogon} produtooncarrinho={produtosoncarrinho} enderecoentrega={userenderecos}/>
+            <MainEtapas dadosuserlogon={dadosuserlogon} produtooncarrinho={produtosoncarrinho} enderecoentrega={userenderecos}/> 
 
-            <InfoAtendimentos customcopyrightcontainer={1340} customTop={950} />
+
+            {/* <MainEtapas/>  */}
+
+            <InfoAtendimentos customcopyrightcontainer={0} customTop={2700} />
         </>
 
     )

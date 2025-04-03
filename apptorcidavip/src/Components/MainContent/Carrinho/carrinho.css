@@ -3,7 +3,7 @@
     position: relative;
     /* border: 1px solid rgb(243, 6, 6); */
     width: 1900px;
-    height: 1480px; 
+    height: auto; 
     overflow-x: hidden;
     overflow-y: hidden;
 }
@@ -306,11 +306,11 @@
 }
 
 
-.container-responsecalcdiv {
+/* .container-responsecalcdiv {
     /* border: 1px solid red; */
-    height: 65px;
-}
-
+    /* height: 65px;
+} */
+ 
 
 .style-inputcep {
     padding-left: 20px;
@@ -333,3 +333,530 @@
     align-items: start;
     flex-direction: column;
 }
+
+/* CARRINHO DE COMRPAS */
+
+
+/* Base styles */
+.container-carrinhocompras {
+    position: relative;
+    width: 100%;
+    max-width: 1900px;
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    margin: 0 auto;
+  }
+  
+  .sun-carrinhocompras {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin: 0px;
+    gap: 0px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    top: 110px;
+    left: 0;
+    right: 0;
+    width: 90%;
+    max-width: 1300px;
+    height: auto;
+    min-height: 980px;
+    flex-direction: column;
+    margin: 0 auto;
+  }
+  
+  .container-headermeucarrinho {
+    padding: 0px;
+    margin: 0px;
+    border-bottom: 3px solid grey;
+    width: 100%;
+    max-width: 1260px;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-sizing: border-box;
+  }
+  
+  .container-render-productscarrinho {
+    width: 100%;
+    max-width: 1300px;
+    max-height: 500px;
+    overflow-y: auto;
+  }
+  
+  .style-buttoncontinuar {
+    width: 250px;
+    height: 45px;
+    background: #47B868;
+    color: white;
+    border-radius: 0px;
+    font-family: 'Teko';
+    font-size: 22px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Responsive styles */
+  @media screen and (max-width: 1400px) {
+    .sun-carrinhocompras {
+      width: 95%;
+      left: 0;
+      margin: 0 auto;
+    }
+    
+    .container-headermeucarrinho {
+      width: 95%;
+    }
+  }
+  
+  @media screen and (max-width: 1200px) {
+    .sun-carrinhocompras {
+      top: 90px;
+      width: 90%;
+    }
+    
+    .container-headermeucarrinho {
+      width: 100%;
+    }
+    
+    .style-buttoncontinuar {
+      width: 200px;
+      font-size: 20px;
+    }
+  }
+  
+  @media screen and (max-width: 992px) {
+    .sun-carrinhocompras {
+      top: 80px;
+      width: 95%;
+    }
+    
+    .container-headermeucarrinho {
+      height: 70px;
+    }
+    
+    .container-render-productscarrinho {
+      max-height: 450px;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .sun-carrinhocompras {
+      top: 70px;
+      width: 90%;
+    }
+    
+    .container-headermeucarrinho {
+      height: 60px;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+    
+    .container-headermeucarrinho h3 {
+      font-size: 1.3rem;
+    }
+    
+    .container-render-productscarrinho {
+      max-height: 400px;
+    }
+    
+    .style-buttoncontinuar {
+      width: 150px;
+      height: 40px;
+      font-size: 18px;
+    }
+  }
+  
+  @media screen and (max-width: 576px) {
+    .sun-carrinhocompras {
+      top: 60px;
+      width: 95%;
+    }
+    
+    .container-headermeucarrinho {
+      height: 50px;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    
+    .container-headermeucarrinho h3 {
+      font-size: 1.1rem;
+    }
+    
+    .container-render-productscarrinho {
+      max-height: 350px;
+    }
+    
+    .style-buttoncontinuar {
+      width: 120px;
+      height: 38px;
+      font-size: 16px;
+    }
+    
+    /* Handle the buttons container */
+    div[style*="display: flex; justify-content: space-between"] {
+      width: 100% !important;
+      padding-left: 10px !important;
+      padding-right: 10px !important;
+      box-sizing: border-box;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .sun-carrinhocompras {
+      top: 50px;
+    }
+    
+    .container-render-productscarrinho {
+      max-height: 300px;
+    }
+    
+    .style-buttoncontinuar {
+      width: 110px;
+      height: 35px;
+      font-size: 14px;
+    }
+    
+    /* Make the buttons stack on very small screens */
+    div[style*="display: flex; justify-content: space-between"] {
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+    
+    div[style*="display: flex; justify-content: space-between"] button {
+      width: 80%;
+      max-width: 200px;
+    }
+  }
+
+  /* Carrinho style */
+
+  /* CardItemCarrinho Component Styles */
+.container-CardItemCarrinho {
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 15px 0;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .container-itemcarrinho {
+    width: 110px;
+    height: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+  }
+  
+  .img-itemcarrinho {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+  
+  .name-and-size-carrinho {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 0 10px;
+  }
+  
+  .style-nameitemcarrinho {
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+    margin-bottom: 5px;
+    text-decoration: none;
+  }
+  
+  .style-nameitemcarrinho:hover {
+    text-decoration: underline;
+  }
+  
+  .btn-carrinhodecompras {
+    background: #f0f0f0;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  .btn-carrinhodecompras:hover {
+    background: #e0e0e0;
+  }
+  
+  .container-cont-itens {
+    display: flex;
+    align-items: center;
+    margin: 0 15px;
+  }
+  
+  .contsomeorsub {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ccc;
+    background: #f7f7f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  .inputsomeorsub {
+    width: 40px;
+    height: 30px;
+    border: 1px solid #ccc;
+    text-align: center;
+    margin: 0 5px;
+  }
+  
+  .container-pricecarrinho {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    min-width: 100px;
+  }
+
+
+
+
+  /* FRETE STYLE */
+
+  /* FreteeResumo Component Styles */
+.container-freteeresumo,
+.container-freteeresumo-full {
+  display: flex;
+  width: 100%;
+  max-width: 1260px;
+  margin: 20px auto;
+  gap: 20px;
+}
+
+.container-frete-empity,
+.container-frete-full {
+  flex: 1;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 15px;
+}
+
+.container-resumopedido {
+  width: 30%;
+  min-width: 300px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 15px;
+}
+
+.title-freteandresumocarrinho {
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.title-freteandresumocarrinho h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.container-inputfrete {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 15px;
+}
+
+.style-inputcep {
+  height: 35px;
+  width: 120px;
+  padding: 0 10px 0 25px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.btn-calcfrete {
+  height: 37px;
+  background: #47B868;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0 15px;
+  cursor: pointer;
+}
+
+.container-responsecalcdiv {
+  margin-top: 15px;
+}
+
+
+@media screen and (max-width: 1200px) {
+    .container-freteeresumo,
+    .container-freteeresumo-full {
+      max-width: 100%;
+      padding: 0 10px;
+    }
+    
+    .container-resumopedido {
+      min-width: 250px;
+    }
+  }
+  
+  @media screen and (max-width: 992px) {
+    .container-resumopedido {
+      width: 35%;
+      min-width: 220px;
+    }
+    
+    .style-nameitemcarrinho {
+      font-size: 16px;
+    }
+    
+    .btn-carrinhodecompras {
+      font-size: 12px;
+      padding: 4px 8px;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .container-freteeresumo,
+    .container-freteeresumo-full {
+      flex-direction: column;
+    }
+    
+    .container-resumopedido {
+      width: 100%;
+      min-width: auto;
+    }
+    
+    .container-CardItemCarrinho {
+      flex-wrap: wrap;
+      padding: 10px 0;
+    }
+    
+    .container-itemcarrinho {
+      width: 90px;
+      height: 90px;
+    }
+    
+    .name-and-size-carrinho {
+      flex: 100%;
+      order: 1;
+      padding: 10px 0;
+    }
+    
+    .container-cont-itens {
+      order: 2;
+      margin: 10px 0;
+    }
+    
+    .container-pricecarrinho {
+      order: 3;
+      align-items: flex-start;
+      width: 100%;
+      margin-top: 10px;
+    }
+    
+    .btn-carrinhodecompras {
+      margin-top: 5px;
+    }
+  }
+  
+  @media screen and (max-width: 576px) {
+    .container-inputfrete {
+      flex-wrap: wrap;
+      padding-left: 0;
+    }
+    
+    .container-inputfrete a {
+      margin-left: 0 !important;
+      margin-top: 10px;
+      display: block;
+      width: 100%;
+    }
+    
+    .style-inputcep {
+      margin-bottom: 10px;
+    }
+    
+    .btn-calcfrete {
+      margin-bottom: 10px;
+    }
+    
+    .container-itemcarrinho {
+      width: 80px;
+      height: 80px;
+    }
+    
+    .style-nameitemcarrinho {
+      font-size: 15px;
+    }
+    
+    small {
+      font-size: 12px;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .container-CardItemCarrinho {
+      padding: 15px 5px;
+    }
+    
+    .container-itemcarrinho {
+      width: 70px;
+      height: 70px;
+      margin-right: 10px;
+    }
+    
+    .contsomeorsub {
+      width: 25px;
+      height: 25px;
+    }
+    
+    .inputsomeorsub {
+      width: 30px;
+      height: 25px;
+    }
+    
+    .btn-carrinhodecompras {
+      padding: 3px 6px;
+      font-size: 11px;
+      margin-right: 5px;
+    }
+    
+    .title-freteandresumocarrinho h3 {
+      font-size: 18px;
+    }
+    
+    /* Adjust the layout for very small screens */
+    .container-CardItemCarrinho {
+      position: relative;
+      padding-bottom: 50px;
+    }
+    
+    .container-pricecarrinho {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+    }
+    
+    .container-cont-itens {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+    }
+  }

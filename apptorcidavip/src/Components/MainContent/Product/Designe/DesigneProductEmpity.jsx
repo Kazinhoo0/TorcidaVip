@@ -73,7 +73,48 @@ export default function ProductEmpity ({ favoriteicon, produto }) {
                         </div>
                         
 
-                        <img className='favorite-icon' src={favoriteicon} alt="" />
+                    
+
+                        {/* Heart Button - Replacing the existing favorite icon */}
+                        <div 
+                        className='favorite-icon'
+                        style={{
+                            position: 'absolute',
+                            top: '10px',
+                            right: '10px',
+                            zIndex: '10',
+                            cursor: 'pointer',
+                            background: 'rgba(255, 255, 255, 0.7)',
+                            borderRadius: '50%',
+                            width: '36px',
+                            height: '36px',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            transition: 'all 0.3s ease'
+                        }}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            // Add your favorite/wishlist logic here
+                            // For example: toggleFavorite(produto.id)
+                        }}
+                        >
+                        <svg 
+                            width="22" 
+                            height="20" 
+                            viewBox="0 0 22 20" 
+                            fill="none" 
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path 
+                            d="M11 19.25L9.55 17.9C4.4 13.36 1 10.28 1 6.5C1 3.42 3.42 1 6.5 1C8.24 1 9.91 1.81 11 3.09C12.09 1.81 13.76 1 15.5 1C18.58 1 21 3.42 21 6.5C21 10.28 17.6 13.36 12.45 17.9L11 19.25Z" 
+                            stroke="black" 
+                            strokeWidth="2" 
+                            fill="none"
+                            />
+                        </svg>
+                        </div>
+
 
                         <p className='itensname-style' style={{ display: 'flex', justifyContent: 'start' }}>
                             {produto.nome}

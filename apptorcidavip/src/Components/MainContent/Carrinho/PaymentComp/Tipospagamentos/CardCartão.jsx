@@ -11,10 +11,7 @@ const mp = new window.MercadoPago('TEST-db23d506-4b88-411d-98db-5fc84bcba6dd');
 
 
 export default function CardCartao({totalpedido}) {
-
-
     const { infocartão, setInfoCartão } = useContext(ContextProducts);
-
     const totalPrice = totalpedido;
 
     useEffect(() => {
@@ -73,23 +70,15 @@ export default function CardCartao({totalpedido}) {
                         return () => { };
                     },
                 },
-
-
             });
         }
     }, [mp]);
 
-
-
     return (
-
         <>
             <div className="style-formulariopagamento">
-
-                <form id="form-checkout" style={{ display: 'grid' }} action="">
-
-                    <div style={{ display: 'grid', justifyContent: 'center', alignItems: 'center' }}>
-
+                <form id="form-checkout" className="form-checkout">
+                    <div className="input-container">
                         <input
                             className="input-payment"
                             placeholder="Número do Cartão"
@@ -142,33 +131,26 @@ export default function CardCartao({totalpedido}) {
                             onChange={(e) => setInfoCartão({ ...infocartão, nomecompleto: e.target.value })}
                             max={25}
                         />
-                        <div style={{ border: '1px solid #c9c6c6', height: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '50px' }}>
-                            <select style={{ maxWidth: '300px' }} id="form-checkout__installments"></select>
-                            <select style={{ maxWidth: '300px' }} id="form-checkout__identificationType"></select>
-                            <select style={{ maxWidth: '300px' }} id="form-checkout__issuer"></select>
-
+                        
+                        <div className="select-container">
+                            <select className="form-select" id="form-checkout__installments"></select>
+                            <select className="form-select" id="form-checkout__identificationType"></select>
+                            <select className="form-select" id="form-checkout__issuer"></select>
                         </div>
-
                     </div>
 
-
-                    <div style={{ display: 'flex' }}>
-
-                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '50%' }}>
-                            <input type="checkbox" name="" id="" />
-                            <small>Li e aceito a <small style={{ color: 'blue', textDecoration: 'underline' }}>politica de Privacidade</small></small>
+                    <div className="actions-container">
+                        <div className="privacy-container">
+                            <input type="checkbox" id="privacy-checkbox" />
+                            <small>Li e aceito a <small className="privacy-link">politica de Privacidade</small></small>
                         </div>
 
-                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '50%' }}>
+                        <div className="button-container">
                             <button className="btn-payment">Finalizar compra</button>
                         </div>
-
                     </div>
-
                 </form>
-
             </div>
-
         </>
     )
 }

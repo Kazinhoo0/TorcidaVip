@@ -152,42 +152,62 @@ export default function Product({ favoriteicon, produto }) {
         <>
 
             <div onClick={handleClicked} className="products-opcoes">
-                
-                <div>
-
+                <div style={{ position: 'relative' }}>
                     <img className='shirt-image' src={produto.imagem} alt={produto.nome} />
 
-                    <img className='favorite-icon' src={favoriteicon} alt="" />
+                    {/* Heart Button - Agora usando a classe CSS para responsividade */}
+                    <div 
+                        className='favorite-icon'
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            // Adicione sua lógica de favorito/wishlist aqui
+                        }}
+                    >
+                        <svg 
+                            width="22" 
+                            height="20" 
+                            viewBox="0 0 22 20" 
+                            fill="none" 
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path 
+                                d="M11 19.25L9.55 17.9C4.4 13.36 1 10.28 1 6.5C1 3.42 3.42 1 6.5 1C8.24 1 9.91 1.81 11 3.09C12.09 1.81 13.76 1 15.5 1C18.58 1 21 3.42 21 6.5C21 10.28 17.6 13.36 12.45 17.9L11 19.25Z" 
+                                stroke="black" 
+                                strokeWidth="2" 
+                                fill="none"
+                            />
+                        </svg>
+                    </div>
 
-                    <p className='itensname-style' style={{ display: 'flex', justifyContent: 'start' }}>
+                    <p className='itensname-style'>
                         {produto.nome}
                     </p>
                     <h3 style={{ display: 'flex', justifyContent: 'start', fontWeight: 'bold', fontSize: '30px' }}>R${produto.preco}</h3>
-
                 </div>
 
                 <div className='container-adicionarcarrinho'>
-
                     <div className='container-choose-size'>
-
                         <div style={{ width: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                             <img style={{ height: 12, transform: 'rotate(176deg)' }} src={seta} alt="" />
                         </div>
 
                         <div className='container-roll-sizes'>
-                            <ul style={{ paddingRight: 40, listStyle: 'none', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '180px' }}>
-
-                                {produto.tamanhos?.map((item,index) => {
-                                    
+                            <ul>
+                                {produto.tamanhos?.map((item, index) => {
                                     return item.estoque === 0 || item.estoque === '0' ? (
-                                            <li onClick={(e) => {
+                                        <li 
+                                            onClick={(e) => {
                                                 handleNoStockReserved();
                                                 e.stopPropagation();
-                                                }} style={{backgroundColor: 'rgba(128, 128, 128, 0.438'}} key={index} className='sun-sizes'>
-                                                <h4>{item.tamanho}</h4>
-                                            </li>
-                                        ) : (
-                                            <li 
+                                            }} 
+                                            style={{backgroundColor: 'rgba(128, 128, 128, 0.438'}} 
+                                            key={index} 
+                                            className='sun-sizes'
+                                        >
+                                            <h4>{item.tamanho}</h4>
+                                        </li>
+                                    ) : (
+                                        <li 
                                             onClick={(e) => {
                                                 e.stopPropagation();
                                                 setSelectedSize(item.tamanho)
@@ -198,32 +218,24 @@ export default function Product({ favoriteicon, produto }) {
                                                 cursor: 'pointer',
                                                 border: selectedSize === item.tamanho ? '2px solid blue' : 'none'
                                             }}
-                                            >
-                                                <h4>{item.tamanho}</h4>
-                                            </li>
-                                        )
-                                   
+                                        >
+                                            <h4>{item.tamanho}</h4>
+                                        </li>
+                                    )
                                 })}
-
                             </ul>
                         </div>
 
-                      
                         <div style={{ width: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                             <img style={{ height: 12 }} src={seta} alt="" />
                         </div>
-
                     </div>
 
                     <div onClick={HandlefetchAddOnCarrinho} className='icon-addcart'>
-
                         <MdOutlineAddShoppingCart className='imgcarrinhocompras-style' style={{ height: 30, width: '50px' }} />
                         <p className='font-addcart'>Adicionar</p>
-
                     </div>
-
                 </div>
-
             </div>
           
         </>

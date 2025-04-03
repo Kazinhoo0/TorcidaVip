@@ -108,19 +108,18 @@ export default function IndexComponent() {
           <div className="container-homepage">
             <TopFlap />
             <div className="content-sections">
-                <div style={{position: 'relative', top: 100}}>
+                <div className="padding-components-maisvendidos">
                     <MaisVendidos dadosuserlogado={dadosuserlogon} />
                 </div> 
-                <div style={{position: 'relative', top: 2900}}>
+                <div className="padding-components-novidadesloja">
                     <NovidadesLoja dadosuserlogado={dadosuserlogon} />
                 </div>
-                <div style={{position: 'relative', top: 3200}}>
+                <div className="padding-components-filtragemtimes">
                     <FiltragemTimes dadosuserlogado={dadosuserlogon} />
                 </div>
-                
             </div>
           </div>
-          <div style={{position: 'relative', top: 3500}}>
+          <div className="padding-components-infos" style={{position: 'relative', top: 2100}}>
             <InfoSite  />
             <InfoAtendimentos customcopyrightcontainer={0}  />
           </div>

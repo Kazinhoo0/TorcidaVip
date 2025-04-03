@@ -87,99 +87,61 @@ export default function SearchProduct() {
 
 
         <div className='container-searchproduct'>
-
-
-            <Helmet>
-                <title>Torcida Vip | {Namesearched}</title>
-            </Helmet>  
-
-            <TopFlap />
-
-            <div className='aligndiv-searchproduct'>
-
-                {/* <div style={{ paddingLeft: 20, height: '80px', display: 'flex', alignItems: 'end', justifyContent: 'start' }} >
-                    <p>Início Femínino</p>
-                </div> */}
-
-                <div style={{ height: '80px', display: 'flex', alignItems: 'center', justifyContent: 'start' }}>
-                    <img style={{ height: '25px', paddingLeft: 20 }} src={icon10} alt="" />
-                    <h3 className='font-text-profilepage'>Filtrar por Categoria</h3>
-                </div>
-
+        <Helmet>
+            <title>Torcida Vip | {Namesearched}</title>
+        </Helmet>  
+    
+        <TopFlap />
+    
+        <div className='aligndiv-searchproduct'>
+            <div style={{ height: '80px', display: 'flex', alignItems: 'center', justifyContent: 'start' }}>
+                <img style={{ height: '25px', padding: '0 20px' }} src={icon10} alt="" />
+                <h3 className='font-text-profilepage'>Filtrar por Categoria</h3>
             </div>
-
-            <div className='container-resultsearch'>
-
-                <div className='resultsearch' style={{ lineHeight: 3, height: 100, width: 300, display: 'flex', justifyContent: 'center', alignItems: 'start' }}>
-                    <p>{Namesearched}</p>
-                </div>
-
-                <div className='howmuchresults' style={{ height: 53, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <small>{lengthprodsearched} produto(s) encontrado(s)</small>
-                </div>
-            </div>
-
-            <div className='sun-searchproduct'>
-
-                <div>
-                    <div style={{ width: '250px' }}>
-                        <FilterCategory />
-                    </div> 
-                </div>
-                
-                <div style={{width: '75%' }}>
-
-                    <div className='container-renderproducts-searched'>
-
-                        {currentProducts.map((produto) => (
-                            produto.tamanhos.every((tamanho) => tamanho.estoque === '' || tamanho.estoque === 0) ? (
-                            <ProductEmpity key={produto.produto_id} produto={produto} />
-                            ) : (
-                            <Product key={produto.produto_id} produto={produto} />
-                            )
-                        ))} 
-
-                    </div>
-
-                    {/* Controles de paginação */}
-                    <div className="pagination" style={{display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-                        {Array.from({ length: totalPages }, (_, index) => (
-                            <button
-                                key={index}
-                                onClick={() => handlePageChange(index + 1)}
-                                style={{
-                                margin: '0 5px',
-                                padding: '5px 10px',
-                                background: currentPage === index + 1 ? '#47B868' : '#ccc',
-                                border: 'none',
-                                borderRadius: '5px',
-                                cursor: 'pointer'
-                                }}
-                                disabled={currentPage === index + 1}
-                            >
-                                {index + 1}
-                            </button>
-                        ))}
-                        {/* <button
-                            style={{
-                            margin: '0 5px',
-                            padding: '5px 10px',
-                            border: 'none',
-                            borderRadius: '5px',
-                            cursor: 'pointer'
-                            }}>
-                            
-                        </button> */}
-                    </div>
-
-                </div>
-               
-            </div>
-
-            <InfoSite customTop={2330} />
-
-            <InfoAtendimentos customcopyrightcontainer={2900} customTop={2500} />
-
         </div>
+    
+        <div className='container-resultsearch'>
+            <div className='resultsearch'>
+                <p>{Namesearched}</p>
+            </div>
+    
+            <div className='howmuchresults'>
+                <small>{lengthprodsearched} produto(s) encontrado(s)</small>
+            </div>
+        </div>
+    
+        <div className='sun-searchproduct'>
+            <div className='container-filtercategory'>
+                <FilterCategory />
+            </div> 
+            
+            <div style={{ width: '100%' }}>
+                <div className='container-renderproducts-searched'>
+                    {currentProducts.map((produto) => (
+                         produto.tamanhos.length === 0 || produto.tamanhos.every(t => t.estoque <= 0) ? (
+                        <ProductEmpity key={produto.produto_id} produto={produto} />
+                        ) : (
+                        <Product key={produto.produto_id} produto={produto} />
+                        )
+                    ))} 
+                </div>
+    
+                <div className="pagination">
+                    {Array.from({ length: totalPages }, (_, index) => (
+                        <button
+                            key={index}
+                            onClick={() => handlePageChange(index + 1)}
+                            style={{
+                                background: currentPage === index + 1 ? '#47B868' : '#ccc',
+                            }}
+                            disabled={currentPage === index + 1}
+                        >
+                            {index + 1}
+                        </button>
+                    ))}
+                </div>
+            </div>
+        </div>
+    </div>
     )
 }

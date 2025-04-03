@@ -171,19 +171,19 @@ export default function ViewProduct() {
 
 
 
-                    <div style={{ paddingLeft: 20, height: '80px', display: 'flex', alignItems: 'end', justifyContent: 'start' }} >
+                    <div className="breadcrumb-path">
                         <p>Início - Femínino - Camisas - Regata Fluminense Left Feminino</p>
                     </div>
 
-                    <div style={{ height: '900px', display: 'flex', justifyContent: 'center' }}>
+                    <div className="product-display-container">
 
                         <div className='container-info-prod'>
                             <h2 className='h2-product-style'>{productdetails[0].nome}</h2>
                             <h3 className='text-price-product-style'>R${productdetails[0].preco}</h3>
 
-                            <p style={{ display: 'flex', alignItems: 'center', justifyContent: 'start', width: '500px' }}>
+                            <p className="payment-option" >
                                 <img src={iconmercadopago} alt="" />
-                                <small style={{ fontFamily: 'Montserrat Alternates', fontWeight: '500', marginLeft: 10 }} ><small style={{ fontWeight: '800' }}>Até 12x sem cartão</small> com a linha de Crédito</small>
+                                <small  className="payment-text"><small className="payment-text-bold">Até 12x sem cartão</small> com a linha de Crédito</small>
                             </p>
 
                             <div className="rating">
@@ -199,7 +199,7 @@ export default function ViewProduct() {
                                 <label htmlFor="star1" title="1 estrelas"></label>
                             </div>
                             
-                            <a style={{color: 'black', cursor: 'pointer'}} onClick={scrollToSection} >Ver comentários {infocartcomments.length}</a>
+                            <a className="comment-link" onClick={scrollToSection} >Ver comentários {infocartcomments.length}</a>
 
                             <p className='text-descricaoproduct'>{productdetails[0].descricaolonga}</p>
 
@@ -207,7 +207,7 @@ export default function ViewProduct() {
 
                                 <div style={{ width: '730px', display: 'flex' }}>
 
-                                    <div style={{ display: 'grid' }}>
+                                    <div className="size-selector-container">
                                         <label htmlhtmlFor="tamanho">Tamanho</label>
                                         <select className='stylecelect' name="tamanho" id="">
                                             <option value="">Escolha uma opção...</option>
@@ -302,11 +302,11 @@ export default function ViewProduct() {
 
                             <div className='cont-top-title'>
 
-                                <div style={{ width: '50%' }}>
+                                <div className="title-section">
                                     <h2>Opiniões do produto</h2>
                                 </div>
 
-                                <div style={{ width: '50%', display: 'flex', justifyContent: 'end', paddingRight: '30px' }}>
+                                <div className="action-section">
 
                                     <div className='cont-fazeravaliacao'>
                                         <p onClick={handlecreatenewcomment} className='text-fazeravaliacao'>Fazer uma avaliacão</p>
@@ -358,9 +358,9 @@ export default function ViewProduct() {
 
             </div>
 
-            <InfoSite customTop={3220} />
+            <InfoSite customTop={0} />
 
-            <InfoAtendimentos customcopyrightcontainer={3800} customTop={3400} />
+            <InfoAtendimentos customcopyrightcontainer={0} customTop={1500} />
 
 
         </div>

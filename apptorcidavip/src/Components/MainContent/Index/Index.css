@@ -27,7 +27,11 @@
     font-style: normal;
 }
 
-/*  TOP FLAP */
+
+.main-container {
+    height: auto;
+}
+ /* TOP FLAP
 .container-topflap {
     z-index: 5;
     width: 100%;
@@ -40,7 +44,7 @@
                 linear-gradient(0deg, #1E1E1E 0%, #1E1E1E 100%);
 }
 
-/* Logo e marca */
+Logo e marca
 .topflap-logo-container {
     position: absolute;
     width: 302px;
@@ -64,35 +68,39 @@
     font-family: 'moonhouse', sans-serif;
     font-weight: 400;
     word-wrap: break-word;
-}
+} */
+
 
 /* Searchbar */
-.topflap-searchbar-container {
+/* .topflap-searchbar-container {
     position: absolute;
     width: 460px;
     height: 53px;
     left: 1050px;
     top: 40px;
-}
+} */
 
 /* Ícones (Perfil, Favoritos, Carrinho, Exit) */
-.topflap-icons-container {
+/* .topflap-icons-container {
     position: absolute;
     right: 20px;
     top: 43px;
     display: flex;
     align-items: center;
     gap: 10px;
-}
+} */
 
+
+/* 
 .topflap-heart-container,
 .topflap-cart-container,
 .topflap-exit-container {
     position: relative;
     cursor: pointer;
 }
+*/
 
-.topflap-heart-container img,
+/* .topflap-heart-container img,
 .topflap-cart-container img {
     width: 100%;
     height: auto;
@@ -101,8 +109,8 @@
 .topflap-cart-container {
     width: 42px;
     height: 40px;
-}
-
+} */
+/* 
 .topflap-cart-notification {
     position: absolute;
     width: 19px;
@@ -117,9 +125,9 @@
     font-size: 14px;
     color: white;
     font-family: 'Lustria', sans-serif;
-}
+} */
 
-/* Categorias de navegação */
+/* Categorias de navegação
 .topflap-nav-categories {
     position: absolute;
     display: inline-flex;
@@ -131,16 +139,16 @@
     height: 50px;
     left: 450px;
     top: 35px;
-}
+} */
 
-.topflap-nav-category {
+/* .topflap-nav-category {
     width: 100px;
     height: 26px;
     color: white;
     font-size: 25px;
     font-weight: 500;
     word-wrap: break-word;
-}
+} */
 
 
 .container-homepag {
@@ -172,15 +180,6 @@
     position: relative;
 }
 
-.container-topflap {
-    z-Index: 5;
-    width: 1905px;
-    height: 108px;
-    position: relative;
-    position: fixed;
-    /* border: 1px solid red; */
-}   
-
 .container-sun-topflap {
     width: 1905px;
     height: 108px;
@@ -208,8 +207,8 @@
     height: 53px;
     left: 0;
     top: 0p;
-    position: 'absolute';
-    background: 'white';
+    position: absolute;
+    background: white;
     border-Radius: 46.50px;
 }
 
@@ -1147,29 +1146,6 @@ color: #FFFFFF; */
 
 }
 
-/* @media (max-width: 768px) {
-    .cont-sun-atendimento {
-        top: 40px;
-    }
-    
-    .infos-atendimentos {
-        width: 90%;
-    }
-    
-    .style-imgs-nosacompanhe {
-        margin: 0 5px;
-    }
-    
-    .style-infos-title-atendimento {
-        font-size: 20px;
-    }
-    
-    .style-infos-atendimento {
-        font-size: 14px;
-    }
-}
- */
-
 
  /* Footer styles with responsiveness built in */
 .footer-container {
@@ -1524,7 +1500,7 @@ color: #FFFFFF; */
   }
   
   .container-info {
-    width: 100%;
+    width: 85%;
     max-width: 450px;
   }
   
@@ -1539,6 +1515,7 @@ color: #FFFFFF; */
 
 @media (max-width: 480px) {
   .container-info {
+    width: 80%;
     padding: 10px;
   }
   
@@ -1805,6 +1782,11 @@ color: #FFFFFF; */
       max-width: 700px;
       order: 1;
     }
+
+    .padding-components-novidadesloja {
+        position: relative ;
+        top: 3500px;
+    }
   }
   
   @media (max-width: 768px) {
@@ -1859,12 +1841,52 @@ color: #FFFFFF; */
     overflow-x: hidden;
   }
 
+  .container-homepage {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1900px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .content-sections {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 40px; 
+    }
+
+
+  .padding-components-maisvendidos {
+    position: relative ;
+    top: 100px;
+  }
+
+  .padding-components-novidadesloja {
+    position: relative ;
+    top: 1700px;
+  }
+
+  .padding-components-filtragemtimes {
+    position: relative ;
+    top: 1900px;
+  }
+
+  .padding-components-infos {
+    position: relative ;
+    top: 2100px !important;
+    } 
+
+  
+
 /* MAIS VENDIDO */
 
 /* MaisVendidos Component Responsive Styling */
 
 /* Base styles - these build on your existing CSS */
 .container-maisvendido {
+    /* border: 1px solid red; */
     width: 100%;
     height: 120px;
     display: flex;
@@ -1973,9 +1995,25 @@ color: #FFFFFF; */
     }
     
     .products-maisvendidos {
+        border: 3px solid red;
         max-width: 800px;
         gap: 20px 10px;
         border: none;
+    }
+
+    .padding-components-novidadesloja {
+        position: relative ;
+        top: 3000px;
+    }
+
+    .padding-components-filtragemtimes {
+        position: relative ;
+        top: 3000px;
+    }
+
+    .padding-components-infos {
+        position: relative ;
+        top: 3250px !important;
     }
 }
 
@@ -2000,10 +2038,34 @@ color: #FFFFFF; */
     }
     
     .products-maisvendidos {
+        border: 3px solid red;
         max-width: 600px;
         gap: 15px;
         border: none;
     }
+
+    .products-maisvendidos {
+        border: 1px solid red;
+        max-width: 800px;
+        gap: 20px 10px;
+        border: none;
+    }
+
+    .padding-components-novidadesloja {
+        position: relative ;
+        top: 3200px ;
+    }
+
+    .padding-components-filtragemtimes {
+        position: relative ;
+        top: 3600px ;
+    }
+
+    .padding-components-infos {
+        position: relative ;
+        top: 3800px !important;
+    }
+
 }
 
 /* Small Tablets and Phones */
@@ -2025,11 +2087,28 @@ color: #FFFFFF; */
         line-height: 90px;
         padding-left: 10px;
     }
+
     
     .products-maisvendidos {
-        gap: 10px;
-        padding: 0 10px;
+        border: 1px solid red;
+        max-width: 800px;
+        gap: 20px 10px;
         border: none;
+    }
+
+    .padding-components-novidadesloja {
+        position: relative ;
+        top: 2900px;
+    }
+
+    .padding-components-filtragemtimes {
+        position: relative ;
+        top: 3500px;
+    }
+
+    .padding-components-infos {
+    position: relative ;
+    top: 3700px !important;
     }
 }
 
@@ -2052,6 +2131,7 @@ color: #FFFFFF; */
     }
     
     .products-maisvendidos {
+        border: 1px solid red;
         gap: 8px;
         border: none;
     }
@@ -2237,9 +2317,10 @@ color: #FFFFFF; */
 
 @media screen and (max-width: 992px) {
     .products-opcoes {
-        width: 240px;
+        width: 300px;
         height: 550px;
         padding-left: 15px;
+        padding-top: 40px;
     }
     
     .itensname-style {
@@ -2270,6 +2351,7 @@ color: #FFFFFF; */
         width: 200px;
         height: 500px;
         padding-left: 10px;
+        padding-top: 40px;
     }
     
     .favorite-icon {
@@ -2322,6 +2404,7 @@ color: #FFFFFF; */
         width: 160px;
         height: 420px;
         padding-left: 8px;
+        padding-top: 40px;
     }
     
     .itensname-style {
@@ -2373,6 +2456,7 @@ color: #FFFFFF; */
         width: 140px;
         height: 380px;
         padding-left: 5px;
+        padding-top: 40px;
     }
     
     .favorite-icon {
@@ -2417,4 +2501,418 @@ color: #FFFFFF; */
     .font-addcart {
         font-size: 16px;
     }
+}
+
+
+
+/* TOP FLAP  */
+
+/* Base styles - keeping original styles */
+.container-topflap {
+    z-index: 5;
+    width: 100%;
+    max-width: 1905px;
+    height: 108px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: linear-gradient(0deg, rgb(2, 2, 2) 0%, rgb(25, 25, 26) 100%), 
+                linear-gradient(0deg, #1E1E1E 0%, #1E1E1E 100%);
+}
+
+/* Logo e marca */
+.topflap-logo-container {
+    position: absolute;
+    width: 302px;
+    height: 85px;
+    left: 68px;
+    top: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.topflap-logo-image {
+    width: 44px;
+    height: 85px;
+}
+
+.topflap-brand {
+    cursor: pointer;
+    margin-left: 15px;
+    color: white;
+    font-size: 32px;
+    font-family: 'moonhouse', sans-serif;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+
+/* Searchbar */
+.topflap-searchbar-container {
+    position: absolute;
+    width: 460px;
+    height: 53px;
+    left: 1050px;
+    top: 40px;
+}
+
+/* Ícones (Perfil, Favoritos, Carrinho, Exit) */
+.topflap-icons-container {
+    position: absolute;
+    right: 20px;
+    top: 43px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.topflap-heart-container,
+.topflap-cart-container,
+.topflap-exit-container {
+    position: relative;
+    cursor: pointer;
+}
+
+.topflap-heart-container img,
+.topflap-cart-container img {
+    width: 100%;
+    height: auto;
+}
+
+.topflap-cart-container {
+    width: 42px;
+    height: 40px;
+}
+
+.topflap-cart-notification {
+    position: absolute;
+    width: 19px;
+    height: 19px;
+    left: calc(100% - 19px);
+    top: 0;
+    background: #47B868;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    color: white;
+    font-family: 'Lustria', sans-serif;
+}
+
+/* Categorias de navegação */
+.topflap-nav-categories {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 40px;
+    font-family: 'Teko', sans-serif;
+    width: 384px;
+    height: 50px;
+    left: 450px;
+    top: 35px;
+}
+
+.topflap-nav-category {
+    width: 100px;
+    height: 26px;
+    color: white;
+    font-size: 25px;
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+/* Mobile menu toggle button - new element to add in your component */
+.topflap-mobile-menu-toggle {
+    display: none;
+    position: absolute;
+    right: 20px;
+    top: 45px;
+    color: white;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+}
+
+/* Responsive Media Queries */
+@media screen and (max-width: 1400px) {
+    .topflap-searchbar-container {
+        left: 750px;
+        width: 360px;
+    }
+    
+    .topflap-nav-categories {
+        left: 400px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .topflap-searchbar-container {
+        left: 550px;
+        width: 300px;
+    }
+    
+    .topflap-nav-categories {
+        left: 350px;
+        width: 300px;
+        gap: 20px;
+    }
+    
+    .topflap-logo-container {
+        left: 40px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+
+    .container-searchbar {
+        display: none;
+    }
+    
+    
+    .container-topflap {
+        height: 90px;
+    }
+    
+    .topflap-logo-container {
+        width: 200px;
+        height: 70px;
+        left: 20px;
+        top: 10px;
+    }
+    
+    .topflap-logo-image {
+        width: 36px;
+        height: 70px;
+    }
+    
+    .topflap-brand {
+        font-size: 26px;
+    }
+    
+    .topflap-searchbar-container {
+        left: auto;
+        right: 200px;
+        width: 250px;
+        top: 30px;
+    }
+    
+    .topflap-nav-categories {
+        display: none;
+        left: 240px;
+        width: 250px;
+        gap: 15px;
+        top: 32px;
+    }
+    
+    .topflap-nav-category {
+        font-size: 20px;
+    }
+    
+    .topflap-icons-container {
+        top: 34px;
+        right: 15px;
+        gap: 8px;
+    }
+    
+    .topflap-cart-container {
+        width: 36px;
+        height: 34px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container-topflap {
+        height: 80px;
+    }
+    
+    /* Reorganize for mobile */
+    .topflap-logo-container {
+        width: 180px;
+        height: 60px;
+        left: 15px;
+        top: 10px;
+    }
+    
+    .topflap-logo-image {
+        width: 30px;
+        height: 58px;
+    }
+    
+    .topflap-brand {
+        font-size: 22px;
+    }
+    
+    /* Move searchbar below the header, make it full width when active */
+    .topflap-searchbar-container {
+        position: absolute;
+        left: 0;
+        top: 80px;
+        width: 100%;
+        background: #1E1E1E;
+        padding: 10px;
+        box-sizing: border-box;
+        z-index: 6;
+        height: 60px;
+    }
+    
+    /* Hide categories by default on mobile */
+    .topflap-nav-categories {
+        position: fixed;
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        left: 0;
+        top: 140px; /* Below searchbar */
+        background: #1E1E1E;
+        gap: 0;
+        padding: 10px 0;
+        z-index: 5;
+    }
+    
+    .topflap-nav-category {
+        width: 100%;
+        height: 40px;
+        font-size: 20px;
+        text-align: center;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Right-aligned icons */
+    .topflap-icons-container {
+        top: 25px;
+        right: 15px;
+    }
+    
+    .topflap-cart-container {
+        width: 30px;
+        height: 28px;
+    }
+    
+    .topflap-cart-notification {
+        width: 16px;
+        height: 16px;
+        font-size: 12px;
+    }
+    
+    /* Show mobile menu toggle */
+    .topflap-mobile-menu-toggle {
+        display: block;
+    }
+    
+    /* Optional: Classes for toggling mobile menu visibility */
+    .mobile-menu-hidden {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .container-topflap {
+        height: 70px;
+    }
+    
+    .topflap-logo-container {
+        width: 150px;
+        height: 50px;
+        left: 10px;
+        top: 10px;
+    }
+    
+    .topflap-logo-image {
+        width: 25px;
+        height: 48px;
+    }
+    
+    .topflap-brand {
+        font-size: 18px;
+    }
+    
+    .topflap-searchbar-container {
+        top: 70px;
+        height: 50px;
+    }
+    
+    .topflap-nav-categories {
+        top: 120px;
+    }
+    
+    .topflap-icons-container {
+        top: 22px;
+        right: 10px;
+        gap: 5px;
+    }
+    
+    /* Make icons smaller on very small screens */
+    .topflap-heart-container img,
+    .topflap-cart-container img,
+    .topflap-exit-container img {
+        width: 24px !important;
+        height: auto;
+    }
+
+    
+    .topflap-cart-container {
+        width: 24px;
+        height: 22px;
+    }
+    
+    .topflap-cart-notification {
+        width: 14px;
+        height: 14px;
+        font-size: 10px;
+    }
+}
+
+
+
+/* ICONE FAVORITOS */
+
+
+/* Estilos para tornar o ícone de coração responsivo */
+@media screen and (max-width: 1200px) {
+    /* Telas médias - Tablets e Laptops pequenos */
+    .favorite-icon {
+        width: 32px !important;
+        height: 32px !important;
+    }
+    
+    .favorite-icon svg {
+        width: 20px !important;
+        height: 18px !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    /* Telas pequenas - Celulares */
+    .favorite-icon {
+        width: 30px !important;
+        height: 30px !important;
+        top: 8px !important;
+        right: 8px !important;
+    }
+    
+    .favorite-icon svg {
+        width: 18px !important;
+        height: 16px !important;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    /* Telas muito pequenas */
+    .favorite-icon {
+        display: none;
+    }
+    
+    .favorite-icon svg {
+        display: none;
+    }
+}
+
+/* Adicionando efeito hover para melhor experiência do usuário */
+.favorite-icon:hover {
+    background: rgba(255, 255, 255, 0.9) !important;
+    transform: scale(1.1) !important;
 }

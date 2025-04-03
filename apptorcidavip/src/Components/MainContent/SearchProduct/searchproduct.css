@@ -1,30 +1,31 @@
+/* Base styles from the original CSS */
 .container-searchproduct {
-    
     position: relative;
-    /* border: 1px solid rgb(255, 2, 255); */
-    width: 1900px;
-    height: 2940px; 
+    width: 100%;
+    max-width: 1900px;
+    height: auto; 
     overflow-x: hidden;
     overflow-y: hidden;
-
+    margin: 0 auto;
 }
 
 .sun-searchproduct {
-    position: absolute;
-    left: 0px;
-    top: 360px;
-    /* border: 1px solid rgb(55, 255, 6); */
-    width: 1850px;
-    height: 1950px;
+    position: relative;
+    width: 100%;
+    max-width: 1850px;
+    height: auto;
+    min-height: 1000px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    margin: 0 auto;
+    padding-top: 360px;
 }
 
 .container-filtercategory {
-    /* border: 1px solid rgb(12, 12, 12); */
     width: 250px;
-    height: 1200px;
+    height: auto;
     border-top: none;
+    flex-shrink: 0;
 }
 
 .container-filter-cor {
@@ -32,13 +33,12 @@
     border-radius: 50%;
     width: 30px;
     height: 30px;
-
 }
 
-.container-filtercategory ul{
+.container-filtercategory ul {
     padding: 0px;
     list-style: none;
-    font-family: 'Russo One' ;
+    font-family: 'Russo One';
 }
 
 .input-search-filters {
@@ -46,10 +46,6 @@
     border: 1px solid rgba(124, 121, 121, 0.486);
     width: 195px;
     height: 30px;
-}
-
-.search-filters {
-    /* border: 1px solid red; */
 }
 
 .options-filter {
@@ -63,8 +59,8 @@
 }
 
 .options-filter li {
-    /* border: 1px solid red; */
-    width: 200px;
+    width: 100%;
+    max-width: 200px;
     display: flex;
     align-items: center;
     padding: 10px;
@@ -78,7 +74,7 @@
 }
 
 input[type="checkbox"] {
-    appearance: none; /* Remove o estilo padrão do checkbox */
+    appearance: none;
     width: 20px;
     height: 20px;
     border: 2px solid #ccc;
@@ -93,12 +89,10 @@ input[type="checkbox"]:checked {
     border-color: green;
 }
 
-
 .search-filters label {
     color: rgb(71, 184, 104);
     font-size: 25px;
     padding: 5px;
-    /* border: 1px solid red; */
     border-bottom: 1px solid rgba(189, 189, 189, 0.568);
     display: flex;
     align-items: center;
@@ -107,25 +101,20 @@ input[type="checkbox"]:checked {
     transition: 1s;
 }
 
-.title-filtercategory {
-    /* border: 1px solid red; */
-}
-
 .container-resultsearch {
-    /* border: 1px solid rgb(12, 243, 4); */
     border-bottom: 3px solid rgba(128, 128, 128, 0.281);
     position: absolute;
-    width: 1800px;
+    width: 95%;
+    max-width: 1800px;
     height: 100px;
     top: 250px;
-    left: 65px;
+    left: 2.5%;
     display: flex;
-    align-items: end;
-    justify-content: start;
+    align-items: flex-end;
+    justify-content: flex-start;
 }
 
 .resultsearch {
-    /* border: 1px solid red; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -142,22 +131,21 @@ input[type="checkbox"]:checked {
 
 .aligndiv-searchproduct {
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     flex-direction: column;
-    padding-left: 80px;
+    padding-left: 5%;
     position: absolute;
     top: 90px;
-    /* border: 1px solid red; */
-    width: 1450px;
+    width: 90%;
+    max-width: 1450px;
 }
 
 .filtrarporcategoria-style {
     display: flex;
     align-items: center;
-    justify-content: start;
-    /* border: 1px solid red; */
+    justify-content: flex-start;
     height: 80px;
-    padding-left: 20;
+    padding-left: 20px;
 }
 
 .rectangle-style {
@@ -184,19 +172,127 @@ input[type="checkbox"]:checked {
 }
 
 .container-renderproducts-searched {
-    /* border: 1px solid red; */
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    width: 1300px;
-    height: 1860px;
-    padding-left: 100px;
+    width: 100%;
+    max-width: 1300px;
+    gap: 20px;
+    margin: 0 auto;
 }
 
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
 
+.pagination button {
+    margin: 5px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
+/* Media Queries for Responsiveness */
 
+/* Large Screens */
+@media screen and (max-width: 1600px) {
+    .container-renderproducts-searched {
+        grid-template-columns: repeat(3, 1fr);
+        padding-left: 50px;
+    }
+}
 
+/* Medium Screens - Tablets and Small Laptops */
+@media screen and (max-width: 1200px) {
+    .sun-searchproduct {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .container-filtercategory {
+        width: 90%;
+        max-width: 600px;
+        margin-bottom: 30px;
+    }
+    
+    .container-renderproducts-searched {
+        grid-template-columns: repeat(2, 1fr);
+        padding-left: 0;
+        width: 90%;
+    }
+    
+    .container-resultsearch {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        padding-bottom: 20px;
+    }
+    
+    .resultsearch, .howmuchresults {
+        width: 100%;
+        text-align: center;
+        height: auto;
+    }
+}
 
+/* Small Screens - Mobile Phones */
+@media screen and (max-width: 768px) {
+    .container-renderproducts-searched {
+        grid-template-columns: 1fr;
+    }
+    
+    .aligndiv-searchproduct {
+        padding-left: 0;
+        align-items: center;
+        width: 100%;
+    }
+    
+    .container-resultsearch {
+        left: 0;
+        width: 100%;
+    }
+    
+    .input-search-filters {
+        width: 80%;
+    }
+    
+    .options-filter li {
+        width: 100%;
+    }
+    
+    .search-filters label {
+        font-size: 20px;
+    }
+    
+    .filtrarporcategoria-style {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .rectangle-style {
+        margin: 5px;
+    }
+}
 
-
-
+/* Extra Small Screens */
+@media screen and (max-width: 480px) {
+    .resultsearch {
+        font-size: 24px;
+    }
+    
+    .howmuchresults {
+        font-size: 16px;
+    }
+    
+    .text-filtrocategoria-style {
+        font-size: 15px;
+    }
+    
+    .pagination button {
+        padding: 3px 8px;
+        font-size: 14px;
+    }
+}

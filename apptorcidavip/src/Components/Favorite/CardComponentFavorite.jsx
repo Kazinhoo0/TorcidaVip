@@ -44,23 +44,21 @@ export default function CardFavoriteProd ({infoprods}) {
     return ( 
 
     
-        <div style={{paddingTop: 25,display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '0px', margin: '0px'}}>
-            
-            <div>
+        <div className="favorite-item-container">
+            <div className="favorite-item-img-container">
                 <img src={infoprods.imgprod} />
             </div>
 
-            <span style={{paddingLeft: 5 , width: 200 ,overflow: 'hidden', whiteSpace: 'nowrap',textAlign: 'start', alignContent: 'start',justifyContent: 'start'}}>
-                <p style={{padding: 0, margin: 0, fontSize: 14, fontWeight: 570}}>{infoprods.title}</p>
+            <span className="favorite-item-title-container">
+                <p className="favorite-item-title">{infoprods.title}</p>
             </span>
 
-            <span onClick={fetchRemoveItemFavorito} style={{width: 200 ,textAlign: 'start', alignContent: 'start',justifyContent: 'start', cursor: 'pointer'}}>
-                <span style={{padding: '2px', background: '#aca7a73a'}}>
+            <span onClick={fetchRemoveItemFavorito} className="favorite-item-delete-container">
+                <span className="favorite-item-delete-icon">
                     <SlTrash />
                 </span>
             </span>
-            
-        </div> 
+        </div>
 
         
     )

@@ -158,7 +158,7 @@ export default function CarrinhoCompras() {
 
             </div>
 
-            <InfoAtendimentos customcopyrightcontainer={1500} customTop={1100} />
+            <InfoAtendimentos customcopyrightcontainer={0} customTop={950} />
 
         </div>
     )

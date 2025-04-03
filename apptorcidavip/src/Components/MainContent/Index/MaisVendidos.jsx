@@ -96,7 +96,6 @@ export default function MaisVendidos() {
                     )
                 ))} 
 
-
             </div>
 
         </>

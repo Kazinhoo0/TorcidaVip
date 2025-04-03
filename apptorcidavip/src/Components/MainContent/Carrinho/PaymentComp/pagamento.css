@@ -4,12 +4,6 @@
     display: grid;
 }
 
-.input-payment {
-    border: 1px solid rgba(0, 0, 0, 0.349);
-    border-radius: 5px;
-    width: 390px;
-    height: 30px;
-}
 
 .btn-payment {
     display: flex;
@@ -359,7 +353,890 @@
 
 
 
-/* .envio . {
+/* ETAPAINFOS */
+
+/* CSS Responsivo para o componente de pagamento */
+
+/* Base styles - mantém o CSS atual */
+
+/* Media Queries para responsividade */
+@media screen and (max-width: 1200px) {
+    .sun-etapaspagamento {
+      width: 95%;
+      flex-direction: column;
+      height: auto;
+    }
+    
+    .container-etapaspagamento {
+      width: 100%;
+      padding-left: 0;
+    }
+    
+    .container-infosetapaspagamento {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .container-componentepagamentos {
+      position: relative;
+      top: 0;
+    }
+    
+    .container-infosetapas {
+      width: 100%;
+    }
+    
+    .input-payment {
+      width: 100%;
+    }
+    
+    .title {
+      flex-direction: column;
+      height: auto;
+      align-items: flex-start;
+    }
+    
+    .title span {
+      margin-bottom: 10px;
+    }
+    
+    .endereco, .envio {
+      flex-direction: column;
+      height: auto;
+      padding: 10px 0;
+    }
+    
+    .enderecotrueorfalse, .infoendereco, .editar {
+      width: 100%;
+      margin: 5px 0;
+    }
+    
+    .infoendereco ul {
+      padding: 0 15px;
+    }
+    
+    .editar {
+      justify-content: flex-start;
+      padding-left: 15px;
+    }
+    
+    .formas li {
+      flex-direction: column;
+      height: auto;
+      padding: 10px 0;
+    }
+    
+    .formas li div {
+      width: 100%;
+      padding: 0 10px;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .container-etapaspagamento {
+      padding: 0 10px;
+    }
+    
+    .Olá-email .email {
+      flex-direction: column;
+      height: auto;
+      padding: 10px 0;
+      align-items: flex-start;
+    }
+    
+    .nome-telefone ul {
+      margin-left: 0;
+    }
+    
+    .circlespan {
+      width: 25px;
+      height: 25px;
+      font-size: 14px;
+    }
+    
+    .container-productpedido {
+      flex-direction: column;
+      height: auto;
+      padding: 10px 0;
+    }
+    
+    .container-productpedido .imageproduct,
+    .container-productpedido .nameproduct {
+      width: 100%;
+      text-align: center;
+      padding: 5px 0;
+    }
+    
+    .nameproduct p, .nameproduct span {
+      height: auto;
+    }
+    
+    .totalsubtotalprod li {
+      flex-direction: column;
+    }
+    
+    .div-subtotal {
+      width: 100%;
+      text-align: center;
+    }
+  }
+  
+  /* Correção para o elemento lo (provavelmente deveria ser li) */
+  .infoendereco ul lo {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  /* Ajuste para o container pix em telas menores */
+  @media screen and (max-width: 480px) {
+    .cont-pg-pix {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+  }
 
 
-} */
+
+  /* ETAPAS PAGAMENTO */
+
+  /* Responsividade para EtapasPagamento */
+
+/* Ajustes para a forma de pagamento em telas maiores */
+.container-infosetapaspagamento {
+    transition: all 0.3s ease;
+}
+
+.formapagamento {
+    padding: 10px;
+}
+
+.formas li {
+    transition: all 0.3s ease;
+}
+
+/* Media Queries para responsividade */
+@media screen and (max-width: 1200px) {
+    .container-infosetapaspagamento {
+        width: 100%;
+        height: auto;
+        min-height: 500px;
+    }
+    
+    .formapagamento {
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container-infosetapaspagamento {
+        margin-top: 20px;
+    }
+    
+    .title {
+        flex-direction: row;
+        justify-content: flex-start;
+        padding: 0 10px;
+    }
+    
+    .formas ul {
+        padding: 0;
+    }
+    
+    .formas li {
+        flex-wrap: wrap;
+        padding: 15px 10px;
+    }
+    
+    .formas li div {
+        width: auto;
+        margin-right: 10px;
+    }
+    
+    .formas li div:first-child {
+        margin-right: 15px;
+    }
+    
+    .formas li div:last-child {
+        width: 100%;
+        margin-top: 5px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .container-infosetapaspagamento {
+        border-width: 1px;
+    }
+    
+    .title span {
+        font-size: 14px;
+    }
+    
+    .formapagamento p {
+        font-size: 14px;
+        padding-left: 5px;
+    }
+    
+    .formas li {
+        flex-direction: row;
+        flex-wrap: wrap;
+        height: auto;
+        padding: 12px 8px;
+        font-size: 14px;
+    }
+    
+    .formas li div {
+        width: auto !important;
+        margin-bottom: 5px;
+    }
+    
+    .formas li div:nth-child(1) {
+        width: 25px !important;
+        margin-right: 10px;
+    }
+    
+    .formas li div:nth-child(2) {
+        width: calc(100% - 145px) !important;
+    }
+    
+    .formas li div:nth-child(3) {
+        width: 100px !important;
+        text-align: right !important;
+    }
+}
+
+/* Responsividade para os formulários de pagamento */
+@media screen and (max-width: 768px) {
+    .input-payment {
+        width: 100%;
+        max-width: 390px;
+    }
+    
+    .style-formulariopagamento {
+        gap: 10px;
+        padding: 10px;
+    }
+    
+    .btn-payment {
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .style-formulariopagamento {
+        gap: 8px;
+    }
+    
+    .input-payment {
+        height: 35px;
+    }
+    
+    .btn-payment {
+        padding: 8px;
+        font-size: 14px;
+    }
+}
+
+/* Responsividade para os cards de pagamento (Cartão e Pix) */
+@media screen and (max-width: 768px) {
+    .container-pix {
+        margin: 5px;
+    }
+    
+    .cont-pg-pix {
+        width: 100%;
+        height: auto;
+        min-height: 400px;
+        position: relative;
+        bottom: auto;
+    }
+    
+    /* Ajustes para o container de cartão (se existir classe similar) */
+    .container-cartao {
+        margin: 5px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .container-pix {
+        font-size: 13px;
+    }
+    
+    .container-pix span, 
+    .container-pix button {
+        margin-bottom: 5px;
+    }
+    
+    .cont-pg-pix li {
+        flex-wrap: wrap;
+    }
+    
+    .cont-pg-pix span {
+        font-size: 12px;
+    }
+}
+
+
+
+/* RESUMO PEDIDO */
+.resumo-pedido-container {
+    border: 1px solid rgba(156, 156, 156, 0.363);
+    background-color: rgba(226, 226, 226, 0.486);
+    padding: 15px;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.resumo-pedido-title {
+    font-weight: 600;
+    display: flex;
+    justify-content: start;
+    height: 50px;
+    text-align: start;
+}
+
+.voltar-carrinho-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid rgb(255, 255, 255);
+    font-weight: 600;
+    color: white;
+    background-color: green;
+    border-radius: 5px;
+    padding: 10px;
+    transition: 1s;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.voltar-carrinho-btn:hover {
+    background-color: rgba(192, 190, 190, 0.767);
+    color: black;
+}
+
+.observacoes-container {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.observacoes-title {
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.observacoes-input {
+    width: 95%;
+    border: 1px solid rgba(0, 0, 0, 0.349);
+    border-radius: 5px;
+    min-height: 80px;
+    padding: 10px;
+    resize: vertical;
+}
+
+.resumo-valores {
+    border: 1px solid rgba(156, 156, 156, 0.363);
+    background-color: white;
+    padding: 10px;
+}
+
+.resumo-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(156, 156, 156, 0.2);
+}
+
+.resumo-item:last-child {
+    border-bottom: none;
+    font-weight: 700;
+}
+
+.resumo-label {
+    font-weight: 500;
+}
+
+.resumo-valor {
+    font-weight: 600;
+}
+
+/* Responsividade para Resumo do Pedido - seguindo padrões existentes */
+@media screen and (max-width: 1200px) {
+    .resumo-pedido-container {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .resumo-pedido-container {
+        padding: 10px;
+    }
+    
+    .resumo-pedido-title {
+        height: auto;
+        margin-bottom: 15px;
+    }
+    
+    .voltar-carrinho-btn {
+        padding: 8px;
+    }
+    
+    .observacoes-input {
+        min-height: 60px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .resumo-pedido-container {
+        padding: 8px;
+    }
+    
+    .resumo-pedido-title {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+    
+    .voltar-carrinho-btn {
+        padding: 6px;
+        font-size: 14px;
+    }
+    
+    .observacoes-title {
+        font-size: 14px;
+    }
+    
+    .observacoes-input {
+        padding: 8px;
+        min-height: 50px;
+    }
+    
+    .resumo-valores {
+        padding: 8px;
+    }
+    
+    .resumo-item {
+        padding: 8px 0;
+        font-size: 14px;
+    }
+}
+
+
+/* CARD CARTÃO */
+
+/* Enhanced styles for CardCartao component */
+
+/* Base styles */
+.style-formulariopagamento {
+    display: grid;
+    gap: 15px;
+    padding: 10px;
+}
+
+.input-payment {
+    border: 1px solid rgba(0, 0, 0, 0.349);
+    border-radius: 5px;
+    width: 340px;
+    height: 30px;
+    padding: 0 10px;
+    margin-bottom: 10px;
+}
+
+.form-checkout {
+    display: grid;
+    gap: 15px;
+}
+
+.input-container {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.select-container {
+    border: 1px solid #c9c6c6;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    margin: 10px 0;
+    padding: 0 10px;
+    border-radius: 5px;
+}
+
+.form-select {
+    max-width: 300px;
+    height: 30px;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 0 5px;
+}
+
+.actions-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.privacy-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    gap: 5px;
+}
+
+.privacy-link {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+.btn-payment {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid rgb(255, 255, 255);
+    font-weight: 600;
+    color: white;
+    background-color: green;
+    border-radius: 5px;
+    padding: 10px 15px;
+    transition: 1s;
+    width: 100%;
+    max-width: 200px;
+}
+
+.btn-payment:hover {
+    background-color: rgba(192, 190, 190, 0.767);
+    color: black;
+}
+
+/* Responsiveness */
+@media screen and (max-width: 1200px) {
+    .style-formulariopagamento {
+        width: 100%;
+    }
+    
+    .input-payment {
+        width: 100%;
+        max-width: 390px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .input-payment {
+        width: 100%;
+        height: 35px;
+    }
+    
+    .select-container {
+        flex-direction: column;
+        height: auto;
+        gap: 10px;
+        padding: 10px;
+    }
+    
+    .form-select {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .actions-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .privacy-container, 
+    .button-container {
+        width: 100%;
+    }
+    
+    .btn-payment {
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .style-formulariopagamento {
+        gap: 10px;
+        padding: 5px;
+    }
+    
+    .input-payment {
+        margin-bottom: 5px;
+        height: 40px;
+        font-size: 14px;
+    }
+    
+    .input-container {
+        gap: 8px;
+    }
+    
+    .select-container {
+        padding: 8px;
+        gap: 8px;
+    }
+    
+    .privacy-container {
+        font-size: 12px;
+    }
+    
+    .btn-payment {
+        padding: 12px 10px;
+        font-size: 14px;
+    }
+}
+
+
+/* CARD PIX *//* Enhance existing container-pix class */
+.container-pix {
+    margin: 15px;
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    max-width: 600px;
+    width: 100%;
+  }
+  
+  /* Container message about PIX payment */
+  .container-pix span {
+    margin-bottom: 20px;
+    line-height: 1.5;
+    color: #555;
+  }
+  
+  /* Price display styling */
+  .container-pix p {
+    font-size: 22px;
+    font-weight: 600;
+    color: #32a852;
+    margin: 15px 0;
+  }
+  
+  /* Payment button styling */
+  .btn-payment {
+    background-color: #32a852;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 15px 0;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-payment:hover {
+    background-color: #278a41;
+  }
+  
+  /* MercadoPago info section */
+  .mercado-pago-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 15px;
+    padding: 10px;
+    border-top: 1px solid #eee;
+  }
+  
+  .mercado-pago-info p {
+    font-size: 12px;
+    color: #666;
+    margin: 0;
+    font-weight: normal;
+  }
+  
+  .mercado-pago-info a {
+    color: #0099ff;
+    text-decoration: none;
+  }
+  
+  .mercado-pago-info a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Loading spinner styles */
+  .spinner-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .container-pix {
+      margin: 10px;
+      padding: 15px;
+    }
+    
+    .btn-payment {
+      padding: 12px;
+    }
+    
+    .mercado-pago-info {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .container-pix {
+      margin: 5px;
+      padding: 10px;
+      font-size: 13px;
+    }
+    
+    .container-pix p {
+      font-size: 18px;
+    }
+    
+    .btn-payment {
+      padding: 10px;
+      font-size: 14px;
+    }
+  }
+
+
+
+
+  /* PG PIX */
+
+  /* Styles for TicketPix component */
+.cont-pg-pix {
+    width: 400px;
+    height: auto;
+    min-height: 500px;
+    border: 1px solid rgb(0, 0, 0);
+    position: relative;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .cont-pg-pix p {
+    margin: 15px 0;
+    padding: 0 10px;
+    text-align: center;
+  }
+  
+  .cont-pg-pix ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+  }
+  
+  .cont-pg-pix li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 0 10px;
+  }
+  
+  .cont-pg-pix span {
+    font-size: 14px;
+    margin-left: 15px;
+    flex: 1;
+  }
+  
+  .cont-pg-pix svg {
+    flex-shrink: 0;
+  }
+  
+  .cont-pg-pix div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .cont-pg-pix img {
+    margin: 15px auto;
+    display: block;
+  }
+  
+  /* Responsiveness */
+  @media screen and (max-width: 768px) {
+    .cont-pg-pix {
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+      border-width: 1px;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .cont-pg-pix {
+      padding: 15px 10px;
+      min-height: 450px;
+    }
+    
+    .cont-pg-pix p {
+      font-size: 14px;
+      padding: 0 5px;
+    }
+    
+    .cont-pg-pix li {
+      padding: 0 5px;
+      margin-bottom: 15px;
+    }
+    
+    .cont-pg-pix span {
+      font-size: 13px;
+      margin-left: 10px;
+    }
+    
+    .cont-pg-pix div p {
+      font-size: 13px;
+    }
+    
+    .cont-pg-pix img {
+      width: 180px !important;
+      height: 180px !important;
+    }
+  }
+  
+  @media screen and (max-width: 320px) {
+    .cont-pg-pix {
+      padding: 10px 5px;
+      min-height: 400px;
+    }
+    
+    .cont-pg-pix li {
+      margin-bottom: 12px;
+    }
+    
+    .cont-pg-pix span {
+      font-size: 12px;
+    }
+    
+    .cont-pg-pix img {
+      width: 150px !important;
+      height: 150px !important;
+    }
+  }

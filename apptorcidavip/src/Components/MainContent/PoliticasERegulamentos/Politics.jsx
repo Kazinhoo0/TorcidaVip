@@ -155,7 +155,7 @@ export default function Politics () {
 
             </div>
             
-            <InfoAtendimentos customcopyrightcontainer={2100} customTop={1720}/>
+            <InfoAtendimentos customcopyrightcontainer={0} customTop={1620}/>
         </>
         
     )

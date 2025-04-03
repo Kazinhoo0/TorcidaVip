@@ -62,7 +62,9 @@ export default function EtapasPagamento ({produtosoncarrinho}) {
 
                                     {clickedformpayment.cartaocredito &&  (
                                         <CardCartao totalpedido={resumopedido.totalpedidowithfrete}/>
-                                    )} 
+                                    )}  
+
+                                    {/* <CardCartao/> */}
                                     
                                 </div>
 
@@ -78,6 +80,8 @@ export default function EtapasPagamento ({produtosoncarrinho}) {
                                     {clickedformpayment.pix &&  (
                                         <CardPix produtosoncarrinho={produtosoncarrinho} totalpedido={resumopedido.totalpedidowithfrete}/>
                                     )} 
+
+                                        {/* <CardPix /> */}
                                 </div>
                                 
 

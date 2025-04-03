@@ -120,9 +120,9 @@ export default function UserProfile () {
             </div>
         </div>
         
-            <InfoSite customTop={1290} />
+            {/* <InfoSite customTop={1290} /> */}
             
-            <InfoAtendimentos customcopyrightcontainer={1850} customTop={1450}/>
+            <InfoAtendimentos customcopyrightcontainer={0} customTop={0}/>
 
         </div>
         
