@@ -12,6 +12,7 @@ import Searchbar from './searchbar/searchbar';
 import Profile from './Profile/Profile';
 import CardProfile from './Profile/CardProfile';
 import TodosOspedidos from '../UserProfile/TodosOsPedidos/TodosPedidos';
+import MobileMenu from './Sidebar-Button/Sidebar';
 
 
 
@@ -33,6 +34,13 @@ export default function TopFlap () {
           navigate('/carrinhocomprasvazio');
       }
     }
+
+    // const toggleSidebar = () => {
+    //     console.log("Estado atual:", sidebaropen);
+    //     setSidebarOpen(!sidebaropen);
+    //     console.log("Novo estado:", !sidebaropen);
+    // };
+
     const finalizaSessao = () => {
         localStorage.removeItem('authToken');
         localStorage.removeItem('authTokenGoogle');
@@ -61,6 +69,12 @@ export default function TopFlap () {
             navigate('/login');
         }
     }
+
+    useEffect(() => {
+        if (dadosuserlogon && Object.keys(dadosuserlogon).length <= 0 && clickedprofile) {
+          navigate('/login');
+        }
+      }, [dadosuserlogon, clickedprofile, navigate]);
 
     return (
 
@@ -108,12 +122,14 @@ export default function TopFlap () {
                 )
             )}
 
-            {dadosuserlogon && Object.keys(dadosuserlogon).length <= 0 && (
-                clickedprofile && (
-                   navigate('/login')  
-                )
-            )}
-            
+            <MobileMenu 
+                OpenCarrinho={handleNavigateCart}
+                OpenMeuspedidos={handleNavigatePedidos}
+                OpenMeuperfil={handleNavigateProfile}
+                OpenFavoritos={handleFavoriteOpened}
+                ExecuteExit={finalizaSessao}
+            />
+
             <div className="topflap-nav-categories">
                 <div className="topflap-nav-category">Masculino</div>
                 <div className="topflap-nav-category">Feminino</div>

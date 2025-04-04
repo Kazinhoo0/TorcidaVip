@@ -472,3 +472,15 @@
     }
 }
 
+
+@media only screen and (max-width: 480px) {
+   
+    
+    .inputs-style {
+        height: 45px;
+    }
+    
+    .titleloginregister {
+        height: 30px;
+    }
+}

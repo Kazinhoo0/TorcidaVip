@@ -27,128 +27,9 @@
     font-style: normal;
 }
 
-
 .main-container {
     height: auto;
 }
- /* TOP FLAP
-.container-topflap {
-    z-index: 5;
-    width: 100%;
-    max-width: 1905px;
-    height: 108px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background: linear-gradient(0deg, rgb(2, 2, 2) 0%, rgb(25, 25, 26) 100%), 
-                linear-gradient(0deg, #1E1E1E 0%, #1E1E1E 100%);
-}
-
-Logo e marca
-.topflap-logo-container {
-    position: absolute;
-    width: 302px;
-    height: 85px;
-    left: 68px;
-    top: 15px;
-    display: flex;
-    align-items: center;
-}
-
-.topflap-logo-image {
-    width: 44px;
-    height: 85px;
-}
-
-.topflap-brand {
-    cursor: pointer;
-    margin-left: 15px;
-    color: white;
-    font-size: 32px;
-    font-family: 'moonhouse', sans-serif;
-    font-weight: 400;
-    word-wrap: break-word;
-} */
-
-
-/* Searchbar */
-/* .topflap-searchbar-container {
-    position: absolute;
-    width: 460px;
-    height: 53px;
-    left: 1050px;
-    top: 40px;
-} */
-
-/* Ícones (Perfil, Favoritos, Carrinho, Exit) */
-/* .topflap-icons-container {
-    position: absolute;
-    right: 20px;
-    top: 43px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-} */
-
-
-/* 
-.topflap-heart-container,
-.topflap-cart-container,
-.topflap-exit-container {
-    position: relative;
-    cursor: pointer;
-}
-*/
-
-/* .topflap-heart-container img,
-.topflap-cart-container img {
-    width: 100%;
-    height: auto;
-}
-
-.topflap-cart-container {
-    width: 42px;
-    height: 40px;
-} */
-/* 
-.topflap-cart-notification {
-    position: absolute;
-    width: 19px;
-    height: 19px;
-    left: calc(100% - 19px);
-    top: 0;
-    background: #47B868;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 14px;
-    color: white;
-    font-family: 'Lustria', sans-serif;
-} */
-
-/* Categorias de navegação
-.topflap-nav-categories {
-    position: absolute;
-    display: inline-flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 40px;
-    font-family: 'Teko', sans-serif;
-    width: 384px;
-    height: 50px;
-    left: 450px;
-    top: 35px;
-} */
-
-/* .topflap-nav-category {
-    width: 100px;
-    height: 26px;
-    color: white;
-    font-size: 25px;
-    font-weight: 500;
-    word-wrap: break-word;
-} */
 
 
 .container-homepag {
@@ -2915,4 +2796,202 @@ color: #FFFFFF; */
 .favorite-icon:hover {
     background: rgba(255, 255, 255, 0.9) !important;
     transform: scale(1.1) !important;
+}
+
+
+/* mobile menu button style */
+.mobile-menu-button {
+    display: none;
+    position: absolute;
+    right: 20px;
+    top: 33px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+    padding: 10px;
+}
+
+.mobile-menu-button:focus {
+    outline: none;
+}
+
+.hamburger-line {
+    display: block;
+    width: 30px;
+    height: 3px;
+    margin: 6px 0;
+    background-color: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+
+/* sidebar menu style */
+.mobile-sidebar {
+    /* display: block; */
+    text-align: end;
+    position: fixed;
+    top: 0;
+    right: 0px; /* Start off-screen */
+    width: 280px;
+    height: 100vh;
+    background: linear-gradient(0deg, rgb(2, 2, 2) 0%, rgb(25, 25, 26) 100%);
+    z-index: 9999;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+    transition: right 0.3s ease-in-out;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-title {
+    color: white;
+    font-family: 'moonhouse', sans-serif;
+    font-size: 24px;
+}
+
+.sidebar-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.sidebar-menu-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-menu-item {
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    font-family: 'Teko', sans-serif;
+    font-size: 18px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.sidebar-menu-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-menu-item img {
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+}
+
+.sidebar-categories {
+    padding: 10px 20px;
+}
+
+.sidebar-category-title {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    margin: 10px 0;
+}
+
+.sidebar-category {
+    color: white;
+    font-family: 'Teko', sans-serif;
+    font-size: 20px;
+    padding: 10px 0;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+    display: block;
+}
+
+
+@media only screen and (max-width: 992px) {
+    .mobile-menu-button {
+        display: block;
+        
+    }
+
+    .topflap-icons-container {
+        display: none;
+    }
+    
+    /* Add this class to show the sidebar */
+    .mobile-sidebar.open {
+        display: block !important;
+        right: 0;
+    }
+    
+    /* Add this class to show overlay */
+    .sidebar-overlay.open {
+        display: block;
+    }
+}
+
+
+@media only screen and (max-width: 768px) {
+    .mobile-menu-button {
+        display: block;
+        
+    }
+
+    .topflap-icons-container {
+        display: none;
+    }
+    
+    /* Add this class to show the sidebar */
+    .mobile-sidebar.open {
+        display: block;
+        right: 0;
+    }
+    
+    /* Add this class to show overlay */
+    .sidebar-overlay.open {
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+
+    .mobile-sidebar {
+        width: 200px;
+    }
+
+    .mobile-menu-button {
+        display: block;
+        
+    }
+
+    .topflap-icons-container {
+        display: none;
+    }
+    
+    /* Add this class to show the sidebar */
+    .mobile-sidebar.open {
+        right: 0;
+    }
+    
+    /* Add this class to show overlay */
+    .sidebar-overlay.open {
+        display: block;
+    }
 }
