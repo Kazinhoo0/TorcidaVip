@@ -79,6 +79,7 @@ import InfoSite from "./InfoSite";
 import InfoAtendimentos from "./InfoAtendimentos";
 import ContextProducts from "../../../context/ContextProduct";
 import './Index.css';
+import Carousel from "./Carrosel/Carousel";
 
 export default function IndexComponent() {
   const { dadosuserlogon } = useContext(ContextProducts);
@@ -107,6 +108,11 @@ export default function IndexComponent() {
         <>
           <div className="container-homepage">
             <TopFlap />
+
+            <div className="carousel-wrapper">
+              <Carousel />
+            </div>
+
             <div className="content-sections">
                 <div className="padding-components-maisvendidos">
                     <MaisVendidos dadosuserlogado={dadosuserlogon} />

@@ -198,10 +198,76 @@
     cursor: pointer;
 }
 
+/* Adicione isso ao seu CSS existente */
+
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1260px;
+  padding: 20px 25px;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+.more-products-button {
+  background: #808080; /* Cinza */
+}
+
+/* Responsividade */
+@media screen and (max-width: 1280px) {
+  .buttons-container {
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .style-buttoncontinuar {
+    width: 220px;
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .buttons-container {
+    padding: 15px 20px;
+  }
+  
+  .style-buttoncontinuar {
+    width: 180px;
+    height: 40px;
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .buttons-container {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+  
+  .style-buttoncontinuar {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .buttons-container {
+    padding: 10px 15px;
+  }
+  
+  .style-buttoncontinuar {
+    height: 38px;
+    font-size: 16px;
+  }
+}
+
 .container-freteeresumo {
     display: flex;
-    border-bottom: 1px solid rgba(128, 128, 128, 0.603);
-    border-top: 1px solid rgba(128, 128, 128, 0.527);
+    /* border-bottom: 1px solid rgba(128, 128, 128, 0.603);
+    border-top: 1px solid rgba(128, 128, 128, 0.527); */
     /* border: 1px solid red; */
     width: 1300px;
     height: 150px;
@@ -209,8 +275,8 @@
 
 .container-freteeresumo-full {
     display: flex;
-    border-bottom: 1px solid rgba(128, 128, 128, 0.603);
-    border-top: 1px solid rgba(128, 128, 128, 0.527);
+    /* border-bottom: 1px solid rgba(128, 128, 128, 0.603);
+    border-top: 1px solid rgba(128, 128, 128, 0.527); */
     /* border: 1px solid red; */
     width: 1300px;
     height: 280px;
@@ -249,7 +315,7 @@
     flex-direction: column;
     /* border: 1px solid rgb(224, 4, 4); */
     width: 700px;
-    height: 250px;
+    height: 350px;
 
 }
 

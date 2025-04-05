@@ -222,40 +222,40 @@ export default function Provider ({ children }) {
  }, []);
 
 
-    //  useEffect(() => {
-    //         console.log('Useeffect do banco de dados disparado');
+    //   useEffect(() => {
+    //          console.log('Useeffect do banco de dados disparado');
     
-    //         const fetchProductsDB = async () => {
-    //           try {              
-    //                 const response = await fetch(`https://torcidavipoficial-teste.onrender.com/api/get/infoprodpai`, {
-    //                     method: 'POST',
-    //                     headers: {
-    //                         'Content-Type': 'application/json',
-    //                    },
-    //                 });
+    //          const fetchProductsDB = async () => {
+    //            try {              
+    //                  const response = await fetch(`https://torcidavipoficial-teste.onrender.com/api/get/infoprodpai`, {
+    //                      method: 'POST',
+    //                      headers: {
+    //                          'Content-Type': 'application/json',
+    //                     },
+    //                  });
     
-    //                 if (!response.ok) {
-    //                     throw new Error('Erro ao buscar dados');
-    //                 }
+    //                  if (!response.ok) {
+    //                      throw new Error('Erro ao buscar dados');
+    //                  }
     
-    //                 const data = await response.json();
+    //                  const data = await response.json();
     
-    //                 if (data.success) {
-    //                     setProdutosDb(data.data);
-    //                     // console.log('produtos do db no provider', data);
-    //                 } else {
-    //                     setError(data.message);
-    //                 }
+    //                  if (data.success) {
+    //                      setProdutosDb(data.data);
+    //                       console.log('produtos do db no provider', data);
+    //                  } else {
+    //                      setError(data.message);
+    //                  }
     
-    //             } catch (err) {
-    //                setError(err.message);
-    //             } finally {
-    //                 setLoading(false);
-    //           }
-    //         };
+    //              } catch (err) {
+    //                 setError(err.message);
+    //              } finally {
+    //                  setLoading(false);
+    //            }
+    //          };
     
-    //         fetchProductsDB();
-    //  }, []);
+    //          fetchProductsDB();
+    //   }, []);
 
 
 

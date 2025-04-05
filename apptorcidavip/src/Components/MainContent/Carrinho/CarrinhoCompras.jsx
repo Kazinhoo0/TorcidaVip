@@ -145,12 +145,20 @@ export default function CarrinhoCompras() {
                         <FreteeResumo totalpedido={totalpedido} />;
 
 
-                        <div style={{
-                            display: 'flex', justifyContent: 'space-between', width: '1260px', paddingLeft: 25, paddingRight: 25, paddingTop
-                                : 20
-                        }}>
-                            <button onClick={handlenavigateproducts} style={{ background: 'grey' }} className="style-buttoncontinuar">Escolher mais produtos</button>
-                            <button onClick={handleQuantProdBuy} className="style-buttoncontinuar">Continuar</button>
+                        <div className="buttons-container">
+                            <button 
+                                onClick={handlenavigateproducts} 
+                                className="style-buttoncontinuar more-products-button"
+                            >
+                                Escolher mais produtos
+                            </button>
+                            
+                            <button 
+                                onClick={handleQuantProdBuy} 
+                                className="style-buttoncontinuar continue-button"
+                            >
+                                Continuar
+                            </button>
                         </div>
 
                     </>

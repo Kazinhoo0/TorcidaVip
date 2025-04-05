@@ -4,8 +4,10 @@ import Logobranca from '../../../../imgs/Logo Branca 1 (1).png';
 import Exit from '../../../../imgs/exit (1).png';
 import '../Index.css';
 import { useState } from 'react';
+import { IoMdClose } from "react-icons/io";
 
-export default function MobileMenu({ OpenMeuspedidos, OpenMeuperfil, OpenCarrinho, OpenFavoritos, ExecuteExit }) {
+
+export default function MobileMenu({ OpenMeuspedidos, OpenMeuperfil, OpenFavoritos, ExecuteExit }) {
 
     const [sidebaropen, setSidebarOpen] = useState(false);
 
@@ -32,8 +34,11 @@ export default function MobileMenu({ OpenMeuspedidos, OpenMeuperfil, OpenCarrinh
           <div className="sidebar-overlay"></div>
         
           <div className="mobile-sidebar">
-            <span style={{color: 'white', width: '100px', height: '100px'}} onClick={{toggleSidebar}}>X</span>
             <ul className="sidebar-menu-list">
+              <li className="sidebar-menu-item">
+                <IoMdClose onClick={toggleSidebar} color='white' style={{width: '30px', height: '30px'}}/>
+              </li>
+              
               <li onClick={OpenMeuperfil} className="sidebar-menu-item">
                 <span>Meu Perfil</span>
               </li>
@@ -43,10 +48,6 @@ export default function MobileMenu({ OpenMeuspedidos, OpenMeuperfil, OpenCarrinh
               <li onClick={OpenFavoritos} className="sidebar-menu-item">
                 <img src={heart} alt="Favoritos" />
                 <span>Favoritos</span>
-              </li>
-              <li onClick={OpenCarrinho} className="sidebar-menu-item">
-                <img src={cart} alt="Carrinho" />
-                <span>Carrinho</span>
               </li>
               <li onClick={ExecuteExit} className="sidebar-menu-item">
                 <img src={Exit} alt="Sair" />

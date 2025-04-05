@@ -22,7 +22,7 @@ export default function CardPix({ totalpedido, produtosoncarrinho }) {
 
   const handleupdateestoques = async () => {
     try {
-      const response = await fetch(`https://torcidavipoficial-teste.onrender.com/post/upload/estoques`, {
+      const response = await fetch(`https://torcidavipoficial-teste.onrender.com/api/post/upload/estoques`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -182,9 +182,9 @@ export default function CardPix({ totalpedido, produtosoncarrinho }) {
 
         <button onClick={() => {
           handleSubmit();
-          // handleupdateestoques();
-          // handlePurchaseSuccess();
-          // handlePucheInfosNotaFiscal();
+          handleupdateestoques();
+          handlePurchaseSuccess();
+          handlePucheInfosNotaFiscal();
         }} className='btn-payment'>Finalizar pedido</button>
 
         <div className="mercado-pago-info">

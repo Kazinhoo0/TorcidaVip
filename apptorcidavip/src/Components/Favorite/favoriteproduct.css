@@ -336,7 +336,7 @@
     .img-carrinho-empty-or-full img {
         position: relative;
         right: auto;
-        max-width: 80px;
+        max-width: 100px;
     }
     
     .infos-favorite {
@@ -390,7 +390,7 @@
     }
     
     .img-carrinho-empty-or-full img {
-        max-width: 60px;
+        max-width: 100px;
     }
     
     .infos-favorite h4 {

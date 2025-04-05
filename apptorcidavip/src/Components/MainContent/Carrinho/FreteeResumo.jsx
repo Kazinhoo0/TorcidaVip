@@ -24,7 +24,7 @@ export default function FreteeResumo ({totalpedido}) {
     }, [totalpedido, frete])
    
     const handleSelecionarFrete = (preco) => {
-        setFreteSelecionado(preco);
+        setFreteSelecionado(preco)
     };
 
     const fetchcalcularFrete = async () => {

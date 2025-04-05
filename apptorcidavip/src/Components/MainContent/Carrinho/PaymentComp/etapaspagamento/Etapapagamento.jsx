@@ -70,7 +70,8 @@ export default function EtapasPagamento ({produtosoncarrinho}) {
 
                                 
 
-                                <li onClick={ () =>openpaymentmethod('pix')}>
+                                <li onClick={ () =>
+                                    openpaymentmethod('pix')}>
                                     <div style={{width: 30, display: 'flex', alignItems: 'center', justifyContent: 'center'}}><FaPix/></div>
                                     <div>Pix</div>
                                     <div style={{width: 120}}>Á vista</div>

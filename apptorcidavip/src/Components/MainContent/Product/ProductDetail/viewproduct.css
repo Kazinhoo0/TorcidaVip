@@ -361,7 +361,7 @@
     display: grid;
     align-items: center;
     justify-content: center;
-    height: 150px;
+    height: 200px;
 }
 
 .stylecelect {
@@ -416,8 +416,9 @@
 .text-descricaoproduct {
 
     width: 542px;
-    max-height: 350px;
-    height: 250px;
+    max-height: 500px;
+    height: 320px;
+    max-height: 450px;
     font-family: 'Montserrat Alternates';
     font-style: normal;
     font-weight: 400;
