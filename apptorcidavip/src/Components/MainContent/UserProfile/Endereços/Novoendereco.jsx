@@ -18,7 +18,7 @@ export default function Novoendereco () {
             e.preventDefault();
     
             try {
-                const response = await fetch(`https://torcidavipoficial-teste.onrender.com/api/newendereco`, {
+                const response = await fetch(`http://localhost:3000/api/newendereco`, {
                     method: 'POST',
                     headers: {
                         "Content-Type": "application/json"
