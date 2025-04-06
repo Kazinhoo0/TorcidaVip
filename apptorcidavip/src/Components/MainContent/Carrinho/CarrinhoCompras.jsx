@@ -47,7 +47,7 @@ export default function CarrinhoCompras() {
         if (freteSelecionado) {
             const fetchproductbuy = async () => {
                 try {
-                    const response = await fetch(`http://localhost:3000/api/post/quantprodbuy`, {
+                    const response = await fetch(`https://torcidavipoficial-teste.onrender.com/api/post/quantprodbuy`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',

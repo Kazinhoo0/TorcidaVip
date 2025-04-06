@@ -29,7 +29,7 @@ export default function AddNewImgProduct () {
                 formData.append("image", imagem);
             });
 
-            const response = await fetch(`http://localhost:3000/upload-image/product`, {
+            const response = await fetch(`https://torcidavipoficial-teste.onrender.com/upload-image/product`, {
                 method: "POST",
                 body: formData
             });

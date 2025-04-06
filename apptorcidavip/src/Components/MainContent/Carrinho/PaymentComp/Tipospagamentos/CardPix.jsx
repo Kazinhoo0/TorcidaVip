@@ -22,7 +22,7 @@ export default function CardPix({ totalpedido, produtosoncarrinho }) {
 
   const handleupdateestoques = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/api/post/upload/estoques`, {
+      const response = await fetch(`https://torcidavipoficial-teste.onrender.com/api/post/upload/estoques`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -55,7 +55,7 @@ export default function CardPix({ totalpedido, produtosoncarrinho }) {
 
   const handlePucheInfosNotaFiscal = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/post/notasfiscais', {
+      const response = await fetch('https://torcidavipoficial-teste.onrender.com/api/post/notasfiscais', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -90,7 +90,7 @@ export default function CardPix({ totalpedido, produtosoncarrinho }) {
 
   const handlePurchaseSuccess = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/post/sucessocompra', {
+      const response = await fetch('https://torcidavipoficial-teste.onrender.com/api/post/sucessocompra', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -130,7 +130,7 @@ export default function CardPix({ totalpedido, produtosoncarrinho }) {
     const usercpf = dadosuserlogon.cpf
 
     try {
-      const response = await fetch('http://localhost:3000/criarpix', {
+      const response = await fetch('https://torcidavipoficial-teste.onrender.com/criarpix', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

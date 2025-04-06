@@ -30,7 +30,7 @@ export default function FreteeResumo ({totalpedido}) {
     const fetchcalcularFrete = async () => {
         try {
             const qtn = produtosoncarrinho.length
-        const response = await fetch("http://localhost:3000/calcular-frete", {
+        const response = await fetch("https://torcidavipoficial-teste.onrender.com/calcular-frete", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

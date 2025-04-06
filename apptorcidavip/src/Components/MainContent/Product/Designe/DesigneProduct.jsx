@@ -88,7 +88,7 @@ export default function Product({ favoriteicon, produto }) {
             }).showToast();
             }
 
-            const response = await fetch(`http://localhost:3000/api/post/additemcarrinho`, {
+            const response = await fetch(`https://torcidavipoficial-teste.onrender.com/api/post/additemcarrinho`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

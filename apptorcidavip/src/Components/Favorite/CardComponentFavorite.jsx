@@ -16,7 +16,7 @@ export default function CardFavoriteProd ({infoprods}) {
         const userid = dadosuserlogon.id
 
         try {
-        const response = await fetch(`http://localhost:3000/api/post/removeitemfavorito`, {
+        const response = await fetch(`https://torcidavipoficial-teste.onrender.com/api/post/removeitemfavorito`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
