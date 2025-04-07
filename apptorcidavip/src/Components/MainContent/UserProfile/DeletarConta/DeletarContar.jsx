@@ -14,7 +14,7 @@ export default function DeletarConta () {
 
     const deleteaccount  = async () => {
         try {
-            const response = await fetch(`https://torcidavipoficial-teste.onrender.com/api/deleteaccount`, {
+            const response = await fetch(`http://localhost:3000/api/deleteaccount`, {
                 method: 'POST',
                 headers: {
                     'Content-Type' : 'application/json',

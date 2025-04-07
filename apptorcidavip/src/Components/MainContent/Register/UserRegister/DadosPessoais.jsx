@@ -146,23 +146,22 @@ export default function Dadospessoais({ buttonclicked }) {
                 </div> */}
 
 
-                <label style={{ paddingLeft: 45, paddingBottom: 10 }} htmlFor="">*Seu Time do coração ?</label>
-
-                <select className="style-timecoracao" name="" id="">
-
-                    <option value="">...</option>
-                    <option value="">Outro</option>
-                    <option value="">Flamengo</option>
-                    <option value="">Fluminense</option>
-                    <option value="">Vasco</option>
-                    <option value="">Botafogo</option>
-
-                </select>
-
-
                 <div className="container-buttonregisternew">
-                    <button type="submit" className="button-registernewuser">Continuar</button>
+                  
+                    <label style={{ textAlign:'start' ,paddingLeft: 20 }} htmlFor="">*Seu Time do coração ?</label>
+                    
+                    <select className="style-timecoracao" name="" id="">
+                        <option value="">...</option>
+                        <option value="">Outro</option>
+                        <option value="">Flamengo</option>
+                        <option value="">Fluminense</option>
+                        <option value="">Vasco</option>
+                        <option value="">Botafogo</option>
+                    </select>
+            
                 </div>
+
+                <button type="submit" className="button-registernewuser">Continuar</button>
 
             </form>
 

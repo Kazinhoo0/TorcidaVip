@@ -1,28 +1,23 @@
-import { FaLongArrowAltLeft } from "react-icons/fa";
+import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import ContextProducts from "../../../../context/ContextProduct";
 import { useContext } from "react";
+import ContextProducts from "../../../../context/ContextProduct";
 import Toastify from 'toastify-js';
-import 'toastify-js/src/toastify.css'
-
+import 'toastify-js/src/toastify.css';
 
 export default function DadosEntrega() {
-
     const navigate = useNavigate();
-
-    const handlenavigatehome = () => {
-        navigate('/Login')
-    }
-
     const { Dadosnewuser, setDadosNewUser } = useContext(ContextProducts);
 
-    // console.log('dadosnewuser:', Dadosnewuser);
+    const handleNavigateHome = () => {
+        navigate('/Login');
+    };
 
-
-    const Handleregisternewuser = async (e) => {
+    const handleRegisterNewUser = async (e) => {
         e.preventDefault();
 
-        if (!Dadosnewuser.tipoendereco || !Dadosnewuser.destinatario || !Dadosnewuser.endereco || !Dadosnewuser.numero || !Dadosnewuser.bairro || !Dadosnewuser.cidade || !Dadosnewuser.pais ) {
+        if (!Dadosnewuser.tipoendereco || !Dadosnewuser.destinatario || !Dadosnewuser.endereco || 
+            !Dadosnewuser.numero || !Dadosnewuser.bairro || !Dadosnewuser.cidade || !Dadosnewuser.pais) {
             Toastify({
                 text: 'Preencha todos os campos para continuar!',
                 position: 'center',
@@ -31,12 +26,11 @@ export default function DadosEntrega() {
                     color: '#ffffff'
                 }
             }).showToast();
-
-            return
+            return;
         }
 
         try {
-            const response = await fetch(`https://torcidavipoficial-teste.onrender.com/api/register`, {
+            const response = await fetch(`http://localhost:3000/api/register`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json"
@@ -55,37 +49,31 @@ export default function DadosEntrega() {
                     bairro: Dadosnewuser.bairro,
                     cidade: Dadosnewuser.cidade,
                     pais: Dadosnewuser.pais,
-                    cpf:Dadosnewuser.cpf,
+                    cpf: Dadosnewuser.cpf,
                     telefone: Dadosnewuser.telefone
                 })
             });
 
             if (response.ok) {
-
                 const data = await response.json();
 
                 if (data.success) {
+                    console.log(data.message);
+                    console.log('dados pessoais entregues ao backend');
 
-                    console.log(data.message)
-                    console.log('dados pessoais entregues ao backend')
-
-                    Toastify(
-                        {
-                            text: 'Usuário criado com sucesso!',
-                            position: 'center',
-                            style: {
-                                background: '#33ff00',
-                                color: '#ffffff'
-                            }
+                    Toastify({
+                        text: 'Usuário criado com sucesso!',
+                        position: 'center',
+                        style: {
+                            background: '#33ff00',
+                            color: '#ffffff'
                         }
-                    ).showToast();
-                    // console.log("Usuário registrado com sucesso!", data);
+                    }).showToast();
+                    
                     setTimeout(() => {
                         navigate('/Login');
                     }, 2000);
-
                 }
-
             }
 
             if (!response.ok) {
@@ -93,127 +81,162 @@ export default function DadosEntrega() {
                 throw new Error(errorMessage || "Erro ao registrar usuário.");
             }
         } catch (error) {
-            console.log('Erro ao coletar dados pessoais!', error)
+            console.log('Erro ao coletar dados pessoais!', error);
+            Toastify({
+                text: 'Erro ao criar usuário. Tente novamente.',
+                position: 'center',
+                style: {
+                    background: '#db2d0e',
+                    color: '#ffffff'
+                }
+            }).showToast();
         }
-    }
+    };
 
-
-
-
-
-
+    const handleInputChange = (field, value) => {
+        setDadosNewUser({
+            ...Dadosnewuser,
+            [field]: value
+        });
+    };
 
     return (
-
-        <>
-            <div className='container-setavoltar'>
-                <FaLongArrowAltLeft className='styleseta' />
-                <a onClick={handlenavigatehome} style={{ fontSize: '17px', color: 'black', textDecoration: 'none' }} href="">Voltar</a>
-            </div>
-
-            <div className="container-title-register">
-                <h2 className='titleloginregister'>Dados de Entrega</h2>
-            </div>
-
-            <form onSubmit={Handleregisternewuser} className="container-inputs-registernewuser" action="">
-                <input
-                    placeholder="Tipo de Endereço"
-                    className="inputs-style"
-                    type="text"
-                    onChange={(e) => setDadosNewUser({ ...Dadosnewuser, tipoendereco: e.target.value })}
-                />
-
-                <input
-                    placeholder="*Destinátário"
-                    className="inputs-style"
-                    type="text"
-                    onChange={(e) => setDadosNewUser({ ...Dadosnewuser, destinatario: e.target.value })}
-                />
-
-                <input
-                    placeholder="*CEP"
-                    className="inputs-style"
-                    type="text"
-                    maxLength={8}
-                    onChange={(e) => setDadosNewUser({ ...Dadosnewuser, cep: e.target.value })}
-                />
-
-                <input
-                    placeholder='*Endereço'
-                    className="inputs-style"
-                    type="text"
-                    onChange={(e) => setDadosNewUser({ ...Dadosnewuser, endereco: e.target.value })}
-                />
-
-                <input
-                    placeholder="*N°"
-                    className="inputs-style"
-                    type="number"
-                    maxLength={10}
-                    onChange={(e) => setDadosNewUser({ ...Dadosnewuser, numero: e.target.value })}
-                />
-
-                <input
-                    placeholder="*Bairro"
-                    className="inputs-style"
-                    type="text"
-                    name="imagem"
-                    onChange={(e) => setDadosNewUser({ ...Dadosnewuser, bairro: e.target.value })}
-                />
-
-                <input
-                    placeholder="*Cidade"
-                    className="inputs-style"
-                    type="text"
-                    name="imagem"
-                    onChange={(e) => setDadosNewUser({ ...Dadosnewuser, cidade: e.target.value })}
-                />
-
-                <input
-                    placeholder="*Pais"
-                    className="inputs-style"
-                    type="text"
-                    name="imagem"
-                    onChange={(e) => setDadosNewUser({ ...Dadosnewuser, pais: e.target.value })}
-                />
-
-                <label style={{ paddingLeft: 45, paddingBottom: 10 }} htmlFor="estado">Estado:</label>
-                <select className="style-timecoracao" name="estados" id="estado">
-                    <option value=""></option>
-                    <option value="AC">Acre (AC)</option>
-                    <option value="AL">Alagoas (AL)</option>
-                    <option value="AP">Amapá (AP)</option>
-                    <option value="AM">Amazonas (AM)</option>
-                    <option value="BA">Bahia (BA)</option>
-                    <option value="CE">Ceará (CE)</option>
-                    <option value="DF">Distrito Federal (DF)</option>
-                    <option value="ES">Espírito Santo (ES)</option>
-                    <option value="GO">Goiás (GO)</option>
-                    <option value="MA">Maranhão (MA)</option>
-                    <option value="MT">Mato Grosso (MT)</option>
-                    <option value="MS">Mato Grosso do Sul (MS)</option>
-                    <option value="MG">Minas Gerais (MG)</option>
-                    <option value="PA">Pará (PA)</option>
-                    <option value="PB">Paraíba (PB)</option>
-                    <option value="PR">Paraná (PR)</option>
-                    <option value="PE">Pernambuco (PE)</option>
-                    <option value="PI">Piauí (PI)</option>
-                    <option value="RJ">Rio de Janeiro (RJ)</option>
-                    <option value="RN">Rio Grande do Norte (RN)</option>
-                    <option value="RS">Rio Grande do Sul (RS)</option>
-                    <option value="RO">Rondônia (RO)</option>
-                    <option value="RR">Roraima (RR)</option>
-                    <option value="SC">Santa Catarina (SC)</option>
-                    <option value="SP">São Paulo (SP)</option>
-                    <option value="SE">Sergipe (SE)</option>
-                    <option value="TO">Tocantins (TO)</option>
-                </select>
-
-                <div className="container-buttonregisternew">
-                    <button type="submit" className="button-registernewuser">Criar Conta</button>
+        <div className="delivery-form-container">
+            <div className="delivery-form-card">
+                <div className="delivery-form-back-button">
+                    <FaArrowLeft className="delivery-form-back-icon" />
+                    <button onClick={handleNavigateHome} className="delivery-form-back-text">Voltar</button>
                 </div>
-            </form>
 
-        </>
-    )
+                <div className="delivery-form-header">
+                    <h2 className="delivery-form-title">Dados de Entrega</h2>
+                </div>
+
+                <form onSubmit={handleRegisterNewUser} className="delivery-form">
+                    <div className="delivery-form-group">
+                        <input
+                            placeholder="Tipo de Endereço"
+                            className="delivery-form-input"
+                            type="text"
+                            onChange={(e) => handleInputChange('tipoendereco', e.target.value)}
+                        />
+                    </div>
+
+                    <div className="delivery-form-group">
+                        <input
+                            placeholder="*Destinatário"
+                            className="delivery-form-input"
+                            type="text"
+                            onChange={(e) => handleInputChange('destinatario', e.target.value)}
+                        />
+                    </div>
+
+                    <div className="delivery-form-row">
+                        <div className="delivery-form-group delivery-form-group-half">
+                            <input
+                                placeholder="*CEP"
+                                className="delivery-form-input"
+                                type="text"
+                                maxLength={8}
+                                onChange={(e) => handleInputChange('cep', e.target.value)}
+                            />
+                        </div>
+                        
+                        <div className="delivery-form-group delivery-form-group-half">
+                            <input
+                                placeholder="*N°"
+                                className="delivery-form-input"
+                                type="number"
+                                maxLength={10}
+                                onChange={(e) => handleInputChange('numero', e.target.value)}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="delivery-form-group">
+                        <input
+                            placeholder="*Endereço"
+                            className="delivery-form-input"
+                            type="text"
+                            onChange={(e) => handleInputChange('endereco', e.target.value)}
+                        />
+                    </div>
+
+                    <div className="delivery-form-row">
+                        <div className="delivery-form-group delivery-form-group-half">
+                            <input
+                                placeholder="*Bairro"
+                                className="delivery-form-input"
+                                type="text"
+                                onChange={(e) => handleInputChange('bairro', e.target.value)}
+                            />
+                        </div>
+                        
+                        <div className="delivery-form-group delivery-form-group-half">
+                            <input
+                                placeholder="*Cidade"
+                                className="delivery-form-input"
+                                type="text"
+                                onChange={(e) => handleInputChange('cidade', e.target.value)}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="delivery-form-row">
+                        <div className="delivery-form-group delivery-form-group-half">
+                            <input
+                                placeholder="*País"
+                                className="delivery-form-input"
+                                type="text"
+                                onChange={(e) => handleInputChange('pais', e.target.value)}
+                            />
+                        </div>
+                        
+                        <div className="delivery-form-group delivery-form-group-half">
+                            {/* <label htmlFor="estado" className="delivery-form-label">Estado:</label> */}
+                            <select 
+                                className="delivery-form-select" 
+                                name="estados" 
+                                id="estado"
+                                onChange={(e) => handleInputChange('estado', e.target.value)}
+                            >
+                                <option value=""></option>
+                                <option value="AC">Acre (AC)</option>
+                                <option value="AL">Alagoas (AL)</option>
+                                <option value="AP">Amapá (AP)</option>
+                                <option value="AM">Amazonas (AM)</option>
+                                <option value="BA">Bahia (BA)</option>
+                                <option value="CE">Ceará (CE)</option>
+                                <option value="DF">Distrito Federal (DF)</option>
+                                <option value="ES">Espírito Santo (ES)</option>
+                                <option value="GO">Goiás (GO)</option>
+                                <option value="MA">Maranhão (MA)</option>
+                                <option value="MT">Mato Grosso (MT)</option>
+                                <option value="MS">Mato Grosso do Sul (MS)</option>
+                                <option value="MG">Minas Gerais (MG)</option>
+                                <option value="PA">Pará (PA)</option>
+                                <option value="PB">Paraíba (PB)</option>
+                                <option value="PR">Paraná (PR)</option>
+                                <option value="PE">Pernambuco (PE)</option>
+                                <option value="PI">Piauí (PI)</option>
+                                <option value="RJ">Rio de Janeiro (RJ)</option>
+                                <option value="RN">Rio Grande do Norte (RN)</option>
+                                <option value="RS">Rio Grande do Sul (RS)</option>
+                                <option value="RO">Rondônia (RO)</option>
+                                <option value="RR">Roraima (RR)</option>
+                                <option value="SC">Santa Catarina (SC)</option>
+                                <option value="SP">São Paulo (SP)</option>
+                                <option value="SE">Sergipe (SE)</option>
+                                <option value="TO">Tocantins (TO)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div className="delivery-form-submit">
+                        <button type="submit" className="delivery-form-button">Criar Conta</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
 }

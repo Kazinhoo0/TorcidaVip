@@ -23,7 +23,7 @@ export default function Searchbar() {
     
     if (searchitem.length > 0) {
       try {
-        const response = await fetch('https://torcidavipoficial-teste.onrender.com/api/get/produtobuscado', {
+        const response = await fetch('http://localhost:3000/api/get/produtobuscado', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -54,7 +54,7 @@ export default function Searchbar() {
     if (searchitem.length > 0) {
       const fetchSearchbar = async () => {
         try {
-          const response = await fetch('https://torcidavipoficial-teste.onrender.com/api/get/searchbar', {
+          const response = await fetch('http://localhost:3000/api/get/searchbar', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

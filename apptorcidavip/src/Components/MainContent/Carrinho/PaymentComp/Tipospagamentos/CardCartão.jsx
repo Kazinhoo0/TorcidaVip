@@ -39,7 +39,7 @@ export default function CardCartao({totalpedido}) {
                         const data = cardForm.getCardFormData();
 
                         try {
-                            const response = await fetch('https://torcidavipoficial-teste.onrender.com/process_payment', {
+                            const response = await fetch('http://localhost:3000/process_payment', {
                                 method: 'POST',
                                 headers: { 'Content-Type': 'application/json' },
                                 body: JSON.stringify({

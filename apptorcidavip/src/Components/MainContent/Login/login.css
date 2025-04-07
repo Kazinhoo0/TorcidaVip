@@ -156,19 +156,6 @@
 }
 
 
-.Rectangleareatorcedor {
-    position: absolute;
-    width: 1905px;
-    height: 240px;
-    left: 0px;
-    top: 10px;
-    background: #47B868;
-    border-radius: 0px 0px 100.5px 0px;
-    /* z-index: 1; */
-
-}
-
-
 /* Media Query para dispositivos móveis */
 @media only screen and (max-width: 768px) {
 
