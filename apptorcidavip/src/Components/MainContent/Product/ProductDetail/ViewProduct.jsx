@@ -14,6 +14,8 @@ import { CiHeart } from "react-icons/ci";
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+
 
 
 
@@ -23,17 +25,39 @@ export default function ViewProduct() {
 
     const {id} = useParams();
 
-    // console.log('id do produto guardado pelo params',id)
+    console.log('ID SENDO MANTIDO NO USEPARAMS:', id)
 
-    const { produtosdb , error, productdetails , fetchProductDetails, loading, setLoading,  setProductDetails , dadosuserlogon } = useContext(ContextProducts);
+    const { 
+        produtosdb, error,
+        productdetails , 
+        fetchProductDetails, 
+        loading, 
+        dadosuserlogon, 
+        fetchaddfavoriteprod,
+        handleAddOnCarrinho
+    } = useContext(ContextProducts);
 
     const [clickednewcomment, setClickednewcomment] = useState(false);
 
     const [infocartcomments, setinfocartcomments] = useState([]);
 
+    const [sizeandquantity , setSizeandQuantity] = useState({
+        tamanho: '',
+        estoque: '',
+        codigo: ''
+    })
+
+    console.log('sizeandquantity:',sizeandquantity)
+
+    const localtion = useLocation();
+    const {infosprod} = localtion.state || []
+    console.log('infosprod:', infosprod)
+
     const handlecreatenewcomment = () => {
         setClickednewcomment(!clickednewcomment)
     };
+
+    // const descricaoDetalhada = JSON.parse(productdetails[0]?.descricaodetalhada);
 
     const sectionRef = useRef(null);
 
@@ -41,70 +65,17 @@ export default function ViewProduct() {
         sectionRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
-    // const [viewimage, setViewImage] = useState(productdetails[0]?.imagem);
-
     const [mainImage, setMainImage] = useState(productdetails[0]?.imagem);
 
-
-    // const descricaoDetalhada = JSON.parse(productdetails[0].descricaodetalhada);
 
     useEffect(() => {
         fetchProductDetails(id)
     }, [id]);
     
-
-    const fetchaddfavoriteprod = async () => {
-
-        const userid = dadosuserlogon.id;
-        
-        try {
-            const response = await fetch (`https://torcidavipoficial-teste.onrender.com/api/post/addfavoriteprod`, {
-                method: 'POST',
-               headers: {
-                        'Content-Type': 'application/json',
-                    },
-                body: JSON.stringify({
-                    userid: userid,
-                    itemid: productdetails[0].produto_id,
-                    imgprod: productdetails[0].imagem,
-                    title: productdetails[0].nome
-                })
-            })
-
-            const data = await response.json();
-
-            if (data.success) {
-                console.log('item adicionado aos favoritos')
-                Toastify({  
-                    text: 'item adicionado aos favoritos',
-                    position: 'center',
-                    style: {
-                        background: '#33ff00',
-                        color: '#ffffff'
-                    }
-                }).showToast();
-                console.log(data.message)
-            } else {
-                console.log(data.message)
-            }
-
-        } catch (err) {
-            console.log(err.message)
-            Toastify({
-                text: 'Item já favoritado!',
-                position: 'center',
-                style: {
-                    background: '#db2d0e',
-                    color: '#ffffff'
-                }
-            })
-        }
-    }
-
     useEffect(() => {
         const fetchGetComments = async () => {
             try {             
-                const response = await fetch(`https://torcidavipoficial-teste.onrender.com/api/get/infocomments`, {
+                const response = await fetch(`http://localhost:3000/api/get/infocomments`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -132,6 +103,26 @@ export default function ViewProduct() {
     
         fetchGetComments();
     }, [])
+
+
+    const handlepassAttributescarditens = () => {
+
+        const quantidadeprod = 1
+
+        handleAddOnCarrinho(
+            dadosuserlogon.id,
+            id,
+            infosprod.nome,
+            infosprod.preco,
+            infosprod.imagem,
+            sizeandquantity.tamanho,
+            infosprod.tamanhos[0].marca,
+            sizeandquantity.estoque,
+            quantidadeprod,
+            infosprod.produto_id,
+            sizeandquantity.codigo
+        )
+    }
 
     if (loading) {
         return <div style={{width:'100%', height: '1000px', justifyContent: 'center', display: 'flex', alignItems: 'center'}}>
@@ -208,14 +199,29 @@ export default function ViewProduct() {
                                 <div style={{ width: '730px', display: 'flex' }}>
 
                                     <div className="size-selector-container">
-                                        <label htmlhtmlFor="tamanho">Tamanho</label>
-                                        <select className='stylecelect' name="tamanho" id="">
+                                        <label htmlFor="tamanho">Tamanho</label>
+                                        <select 
+                                            className='stylecelect'
+                                            name="tamanho"
+                                            id=""
+                                            onChange={(e) =>
+                                                {const [tamanho, estoque, codigo] = e.target.value.split('|');
+                                                setSizeandQuantity({...sizeandquantity, tamanho, estoque, codigo})}
+                                            }>
                                             <option value="">Escolha uma opção...</option>
-                                            <option value="">P</option>
-                                            <option value="">M</option>
-                                            <option value="">G</option>
-                                            <option value="">GG</option>
-                                        </select>
+                                            {infosprod?.tamanhos?.map((produto, index) => {
+                                                return (
+                                                <option 
+                                                key={index}
+                                                 value={`${produto.estoque}|${produto.tamanho}|${produto.codigo}`
+                                                }>
+                                                    {produto.tamanho} - {produto.estoque} Disponíveis
+                                                </option>
+
+                                                )
+                                            })}
+                                        </select> 
+
                                     </div>
 
                                     {/* <div style={{ display: 'grid' }}>
@@ -231,11 +237,16 @@ export default function ViewProduct() {
 
                                 </div>
 
-                                <div className='container-buttonadicionarcarrinho' >
+                                <div onClick={handlepassAttributescarditens} className='container-buttonadicionarcarrinho' >
                                     <button >Adicionar ao carrinho</button>
                                 </div>
 
-                                <div onClick={fetchaddfavoriteprod} className="container-buttonadicionarcarrinho">
+                                <div 
+                                onClick={() => {
+                                    fetchaddfavoriteprod(productdetails[0].produto_id,productdetails[0].imagem, productdetails[0].nome);
+                                    
+                                }} 
+                                className="container-buttonadicionarcarrinho">
                                     <button><CiHeart/> Adicionar aos Favoritos </button>
                                 </div>
                                
@@ -273,14 +284,30 @@ export default function ViewProduct() {
 
                             {/* {descricaoDetalhada && descricaoDetalhada.length > 0 && (
                                 <ul>
-                                    <li className='style-list-descriprod'><p>Composição: {descricaoDetalhada.Composicao || ''}</p></li>
-                                    <li className='style-list-descriprod'><p>Cor predominante: {descricaoDetalhada["Cor predominante"]}</p></li>
-                                    <li className='style-list-descriprod'><p>Clube: {descricaoDetalhada.Clube}</p></li>
-                                    <li className='style-list-descriprod'><p>Indicada para: {descricaoDetalhada["Indicada para"]}</p></li>
-                                    <li className='style-list-descriprod'><p>Escudo: {descricaoDetalhada.Escudo}</p></li>
-                                    <li className='style-list-descriprod'><p>Gênero: {descricaoDetalhada.Gênero}</p></li>
-                                    <li className='style-list-descriprod'><p>Manga: {descricaoDetalhada.Manga}</p></li>
-                                    <li className='style-list-descriprod'><p>Gola: {descricaoDetalhada.Gola}</p></li>
+                                    <li className='style-list-descriprod'>
+                                        <p>Composição: {descricaoDetalhada.Composicao || ''}</p>
+                                    </li>
+                                    <li className='style-list-descriprod'>
+                                        <p>Cor predominante: {descricaoDetalhada["Cor predominante"] || ''}</p>
+                                    </li>
+                                    <li className='style-list-descriprod'>
+                                        <p>Clube: {descricaoDetalhada.Clube || ''}</p>
+                                    </li>
+                                    <li className='style-list-descriprod'>
+                                        <p>Indicada para: {descricaoDetalhada["Indicada para"] || ''}</p>
+                                    </li>
+                                    <li className='style-list-descriprod'>
+                                        <p>Escudo: {descricaoDetalhada.Escudo || ''}</p>
+                                    </li>
+                                    <li className='style-list-descriprod'>
+                                        <p>Gênero: {descricaoDetalhada.Gênero || ''}</p>
+                                        </li>
+                                    <li className='style-list-descriprod'>
+                                        <p>Manga: {descricaoDetalhada.Manga || ''}</p>
+                                        </li>
+                                    <li className='style-list-descriprod'>
+                                        <p>Gola: {descricaoDetalhada.Gola || ''}</p>
+                                    </li>
                                 </ul>
                             )} */}
 
@@ -359,9 +386,7 @@ export default function ViewProduct() {
             </div>
 
             <InfoSite customTop={0} />
-
-            <InfoAtendimentos customcopyrightcontainer={0} customTop={1500} />
-
+            <InfoAtendimentos customcopyrightcontainer={0} customTop={50} />
 
         </div>
     )
