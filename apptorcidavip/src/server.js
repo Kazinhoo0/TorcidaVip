@@ -793,7 +793,10 @@ app.post('/viewproduct/:id', async (req, res) => {
        `SELECT 
           p.id AS produto_id, 
           p.nome, 
-          p.preco, 
+          p.preco,
+          p.marca,
+          p.idproduto, 
+          p.codigo,
           p.descricaolonga,
           p.descricaodetalhada,
           p.cor,
@@ -859,13 +862,33 @@ app.post('/api/post/renderitenscarrinho' , async (req,res) => {
 
 app.post('/api/post/additemcarrinho', async (req, res) => {
 
-  const {userid , itemid, nomeitem, preco, thumbnail, tamanho, marca, estoque, quantidade, idproduto, codigo} = req.body;
+  const {
+    userid,
+    itemid,
+    nomeitem,
+    preco,
+    thumbnail,
+    tamanho, 
+    marca, 
+    estoque,
+    quantidade,
+    idproduto,
+    codigo
+  } = req.body;
 
-  console.log('Info itens add carrinho:',req.body);
-
-  console.log('userid vindo do backend :', userid)
-
-  console.log(userid, itemid, nomeitem, preco, thumbnail, marca, estoque, quantidade, idproduto, codigo);
+  console.log({
+    userid: userid,
+    itemid: itemid,
+    nomeitem: nomeitem,
+    preco: preco,
+    thumbnail: thumbnail,
+    tamanho: tamanho,
+    marca: marca,
+    estoque: estoque,
+    quantidade: quantidade,
+    idproduto: idproduto,
+    codigo: codigo
+  });
   
   if (!userid || !itemid || !nomeitem || !preco || !thumbnail || !tamanho || !marca || !estoque || !quantidade || !idproduto || !codigo) {
       return res.status(400).json({error: 'Todos os campos precisam ser preenchidos'})
@@ -886,9 +909,7 @@ app.post('/api/post/additemcarrinho', async (req, res) => {
     const queryAddItemCarrinho = `INSERT INTO carrinho_compras (itemid , nomeitem , preco , thumbnail , userid, tamanho, marca, estoque, quantidade, idproduto, codigo) VALUES (?,?,?,?,?,?,?,?,?,?,?)`
     const result = await db.query(queryAddItemCarrinho, [itemid , nomeitem , preco, thumbnail, userid, tamanho, marca, estoque, quantidade, idproduto, codigo]);
 
-    
     return res.status(201).json({
-
       success: true,
       message: 'Item adicionado ao carrinho!',
       body: result
@@ -931,7 +952,7 @@ app.post('/api/post/addfavoriteprod' , async (req,res) => {
   
   const {userid ,itemid, imgprod, title} = req.body;
 
-  console.log(req.body);
+  console.log(userid,itemid,imgprod,title);
 
   console.log('userid addonfavorite:' , userid)
 

@@ -2,7 +2,7 @@ import '../../Index/Index.css';
 import { MdOutlineAddShoppingCart } from "react-icons/md";
 import seta from '../../../../imgs/seta-direita.png'
 import { useNavigate } from 'react-router-dom';
-import { useContext, useState} from 'react';
+import { useContext, useEffect, useState} from 'react';
 import ContextProducts from '../../../../context/ContextProduct';
 // import { jwtDecode } from "jwt-decode";
 import Toastify from 'toastify-js';
@@ -10,12 +10,10 @@ import 'toastify-js/src/toastify.css';
 
 
 
-export default function Product({ favoriteicon, produto }) {
+export default function Product({ allprodwithsizes , produto }) {
 
-    const {dadosuserlogon, setProdutosOnCarrinho, fetchProductDetails} = useContext(ContextProducts)
+    const {dadosuserlogon, setProdutosOnCarrinho, fetchProductDetails, fetchaddfavoriteprod, handleAddOnCarrinho, selectedSize, setSelectedSize} = useContext(ContextProducts);
     
-    const [selectedSize, setSelectedSize] = useState(null);
-        
     const navigate = useNavigate();
 
     const handleNoStockReserved = () => {
@@ -29,18 +27,33 @@ export default function Product({ favoriteicon, produto }) {
     }).showToast();
     }
 
-    const handleClicked = () => {
-        const id = produto.produto_id;
-        fetchProductDetails(id);
-        setTimeout(() => {
-            navigate(`/viewproduct/${produto.produto_id}`)
-        }, 500);
-    }
-
-    const HandlefetchAddOnCarrinho = async (e) => {
+    const handlepassAttributescarditens = async (e) => {
         e.stopPropagation();
-        console.log('produto id:', produto.produto_id)
-        console.log('Handleaddoncarrinho disparado!');
+
+        const userid = dadosuserlogon.id;
+        const quantidade = 1
+        const id = produto.produto_id;
+        const nomeitem = produto.nome;
+        const preco = produto.preco;
+        const imagemitem = produto.imagem;
+        const tamanhoSelecionado = produto.tamanhos.find(t => t.tamanho === selectedSize);
+        const tamanho = tamanhoSelecionado.tamanho
+        const marca = tamanhoSelecionado.marca;
+        const estoque = tamanhoSelecionado.estoque;
+        const idproduto = tamanhoSelecionado.idproduto
+        const codigo = tamanhoSelecionado.codigo
+
+        if (!tamanhoSelecionado) {
+        // Opcional: trata o caso em que o tamanho não for encontrado
+        return Toastify({
+            text: 'Tamanho selecionado não disponível!',
+            position: 'center',
+            style: {
+            background: '#db2d0e',
+            color: '#ffffff'
+            }
+        }).showToast();
+        }
 
         if(!selectedSize) {
             return Toastify({
@@ -53,101 +66,18 @@ export default function Product({ favoriteicon, produto }) {
         }).showToast();
         }
 
-        try {
-            const userid = dadosuserlogon.id;
-            const id = produto.produto_id;
-            const nomeitem = produto.nome;
-            const preco = produto.preco;
-            const imagemitem = produto.imagem;
-            const tamanhoSelecionado = produto.tamanhos.find(t => t.tamanho === selectedSize);
-            const idproduto = tamanhoSelecionado.idproduto
-            const codigo = tamanhoSelecionado.codigo
-            if (!tamanhoSelecionado) {
-            // Opcional: trate o caso em que o tamanho não foi encontrado
-            return Toastify({
-                text: 'Tamanho selecionado não disponível!',
-                position: 'center',
-                style: {
-                background: '#db2d0e',
-                color: '#ffffff'
-                }
-            }).showToast();
-            }
+        handleAddOnCarrinho(userid,id,nomeitem,preco,imagemitem,tamanho,marca,estoque,quantidade,idproduto,codigo);  
 
-            const marca = tamanhoSelecionado.marca;
-            const estoque = tamanhoSelecionado.estoque;
-
-            if (!userid) {
-                return Toastify({
-                    text: 'Você precisa estar logado!',
-                    position: 'center',
-                    style: {
-                        background: '#db2d0e',
-                        color: '#ffffff'
-                    }
-            }).showToast();
-            }
-
-            const response = await fetch(`http://localhost:3000/api/post/additemcarrinho`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ 
-                    userid: userid,
-                    itemid: id,
-                    nomeitem: nomeitem,
-                    preco: preco,
-                    thumbnail: imagemitem,
-                    tamanho: selectedSize,
-                    marca: marca,
-                    estoque: estoque,
-                    quantidade: 1,
-                    idproduto: idproduto,
-                    codigo: codigo
-                 })
-            });
-
-            if (!response.ok) {
-                throw new Error('Erro ao buscar dados');
-            }
-
-            const data = await response.json();
-
-            console.log('Resposta do backend' , data)
-
-            if (data.success) {
-                console.log('retorno do datasuccess',data);
-                Toastify({
-                    text:  data.message ||'Adicionado ao carrinho!',
-                    position: 'center',
-                    style: {
-                        background: '#33ff00',
-                        color: '#ffffff'
-                    }
-                }).showToast();
-                setSelectedSize(null);
-
-                setProdutosOnCarrinho(prev => [...prev, { itemid: id, nomeitem, preco, thumbnail: imagemitem, tamanho: selectedSize, marca: marca, quantidade: 1, estoque:estoque, idproduto: idproduto, codigo: codigo }]);
-            } else {
-                console.log(data.message);
-            }
-
-        } catch (err) {
-            console.error(err.message);
-            Toastify({
-                text: 'O produto já está no carrinho!',
-                position: 'center',
-                style: {
-                    background: '#db2d0e',
-                    color: '#ffffff'
-                }
-        }).showToast();
-        }
     };
-    
 
-    
+
+    const handleClicked = () => {
+        const id = produto.produto_id;
+        const handleTamanhoProduct = allprodwithsizes.find(produto => produto.produto_id === id)
+        fetchProductDetails(id);
+        navigate(`/viewproduct/${produto.produto_id}`, {state: { infosprod: handleTamanhoProduct}})
+    }
+
     return (
         <>
 
@@ -160,7 +90,8 @@ export default function Product({ favoriteicon, produto }) {
                         className='favorite-icon'
                         onClick={(e) => {
                             e.stopPropagation();
-                            // Adicione sua lógica de favorito/wishlist aqui
+                            fetchaddfavoriteprod(produto.produto_id,produto.imagem,produto.nome);
+                            
                         }}
                     >
                         <svg 
@@ -231,7 +162,7 @@ export default function Product({ favoriteicon, produto }) {
                         </div>
                     </div>
 
-                    <div onClick={HandlefetchAddOnCarrinho} className='icon-addcart'>
+                    <div onClick={handlepassAttributescarditens} className='icon-addcart'>
                         <MdOutlineAddShoppingCart className='imgcarrinhocompras-style' style={{ height: 30, width: '50px' }} />
                         <p className='font-addcart'>Adicionar</p>
                     </div>

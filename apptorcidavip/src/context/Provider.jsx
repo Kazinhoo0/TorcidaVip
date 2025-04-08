@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react';
 import ContextProducts from './ContextProduct';
 import propTypes from 'prop-types';
 import { jwtDecode } from "jwt-decode";
-
+import Toastify from 'toastify-js';
+import 'toastify-js/src/toastify.css';
+import FavotireProduct from '../Components/Favorite/FavoriteProduct';
 
 
 
@@ -36,6 +38,8 @@ export default function Provider ({ children }) {
         totalpedido: '',
         totalpedidowithfrete: ''
     })
+
+    const [selectedSize, setSelectedSize] = useState(null);
 
     const [addonfavorite, setaddonfavorite] = useState([]);
 
@@ -130,7 +134,7 @@ export default function Provider ({ children }) {
 
     const [userenderecos, setUserEnderecos] = useState([]);
     
-     console.log('productdetails no provider', productdetails)
+    console.log('productdetails no provider', productdetails)
     
     useEffect(() => {
         console.log("useEffect foi disparado!");
@@ -338,8 +342,9 @@ export default function Provider ({ children }) {
     // }, []);
 
 
-    const fetchProductDetails = async (id) => {
+    const fetchProductDetails = async (id, infosprod) => {
         try {
+            console.log('id:', id , 'infosprod:', infosprod)
             setLoading(true);
             const response = await fetch(`http://localhost:3000/viewproduct/${id}`, {
                 method: 'POST',
@@ -351,14 +356,17 @@ export default function Provider ({ children }) {
             
             const data = await response.json();
             if (data.success) {
-                setProductDetails(data.data);
+                console.log(
+                    'productdatails:', data
+                )
+                setProductDetails(data.data)
             }
         } catch (err) {
             console.error(err.message);
         } finally {
             setTimeout(() => {
                 setLoading(false);
-            } , 3000)
+            } , 2000)
         }
     };
 
@@ -398,6 +406,7 @@ export default function Provider ({ children }) {
 
 
     useEffect(() => {
+
         if (!dadosuserlogon?.id) return;
 
         const fetchGetFavoritesprods  = async () => {
@@ -545,13 +554,149 @@ export default function Provider ({ children }) {
 
 
 
+    const fetchaddfavoriteprod = async (itemid,imgprod,title) => {
+    
+            const userid = dadosuserlogon.id;
+            
+            try {
+                const response = await fetch (`http://localhost:3000/api/post/addfavoriteprod`, {
+                    method: 'POST',
+                   headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    body: JSON.stringify({
+                        userid: userid,
+                        itemid: itemid,
+                        imgprod: imgprod,
+                        title: title
+                    })
+                })
+    
+                const data = await response.json();
+    
+                if (data.success) {
+                    console.log('item adicionado aos favoritos')
+                    Toastify({  
+                        text: 'item adicionado aos favoritos',
+                        position: 'center',
+                        style: {
+                            background: '#33ff00',
+                            color: '#ffffff'
+                        }
+                    }).showToast();
+                    console.log(data.message)
+                    setaddonfavorite(prev => [...prev, {itemid, imgprod,title }])
+                } else {
+                    console.log(data.message)
+                }
+    
+            } catch (err) {
+                console.log(err.message)
+                Toastify({
+                    text: 'Item já favoritado!',
+                    position: 'center',
+                    style: {
+                        background: '#db2d0e',
+                        color: '#ffffff'
+                    }
+                })
+            }
+    }
+
+
+    const handleAddOnCarrinho = async (
+        userid,
+        itemid,
+        nomeitem,
+        preco ,
+        thumbnail ,
+        tamanho,
+        marca,
+        estoque ,
+        quantidade,
+        idproduto,
+        codigo 
+        ) => {
+            console.log('produto id:', itemid)
+            console.log('Handleaddoncarrinho disparado!');
+    
+            try {
+
+                if (!userid) {
+                    return Toastify({
+                        text: 'Você precisa estar logado!',
+                        position: 'center',
+                        style: {
+                            background: '#db2d0e',
+                            color: '#ffffff'
+                        }
+                }).showToast();
+                }
+    
+                const response = await fetch(`http://localhost:3000/api/post/additemcarrinho`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ 
+                        userid: userid,
+                        itemid: itemid,
+                        nomeitem: nomeitem,
+                        preco: preco,
+                        thumbnail: thumbnail,
+                        tamanho: tamanho,
+                        marca: marca,
+                        estoque: estoque,
+                        quantidade: quantidade,
+                        idproduto: idproduto,
+                        codigo: codigo
+                     })
+                });
+    
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar dados');
+                }
+    
+                const data = await response.json();
+    
+                console.log('Resposta do backend' , data)
+    
+                if (data.success) {
+                    console.log('retorno do datasuccess',data);
+                    Toastify({
+                        text:  data.message ||'Adicionado ao carrinho!',
+                        position: 'center',
+                        style: {
+                            background: '#33ff00',
+                            color: '#ffffff'
+                        }
+                    }).showToast();
+                    setSelectedSize(null);
+    
+                    setProdutosOnCarrinho(prev => [...prev, { itemid: itemid, nomeitem, preco, thumbnail: thumbnail, tamanho: tamanho , marca: marca, quantidade: quantidade, estoque: estoque, idproduto: idproduto, codigo }]);
+                } else {
+                    console.log(data.message);
+                }
+    
+            } catch (err) {
+                console.error(err.message);
+                Toastify({
+                    text: 'O produto já está no carrinho!',
+                    position: 'center',
+                    style: {
+                        background: '#db2d0e',
+                        color: '#ffffff'
+                    }
+            }).showToast();
+            }
+        };
+    
     // console.log('imagens do produto:', imagensprod);
     // console.log('produtos API no provider', produtosapi);
     // console.log('produtos DB no provider', produtosdb);
     // console.log('produto com imagem:', produtosdbImgandProd)
 
     const value = {
-
         // produtosapi,
         fetchProductDetails,
         produtosdb,
@@ -603,8 +748,11 @@ export default function Provider ({ children }) {
         observacoespedido,
         setObservacoesPedido,
         depositoid,
-        setDepositoId
-
+        setDepositoId,
+        fetchaddfavoriteprod,
+        handleAddOnCarrinho,
+        selectedSize, 
+        setSelectedSize,
     }
     return (
         <ContextProducts.Provider value={ value }>

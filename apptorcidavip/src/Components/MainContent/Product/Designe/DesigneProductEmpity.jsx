@@ -13,7 +13,7 @@ import ContextProducts from '../../../../context/ContextProduct';
 
 export default function ProductEmpity ({ favoriteicon, produto }) {
 
-    const {setProductDetails, refreshviewproduct } = useContext(ContextProducts)
+    const {setProductDetails, refreshviewproduct, fetchaddfavoriteprod } = useContext(ContextProducts)
 
  
     const navigate = useNavigate();
@@ -95,8 +95,7 @@ export default function ProductEmpity ({ favoriteicon, produto }) {
                         }}
                         onClick={(e) => {
                             e.stopPropagation();
-                            // Add your favorite/wishlist logic here
-                            // For example: toggleFavorite(produto.id)
+                            fetchaddfavoriteprod(produto.produto_id,produto.imagem,produto.nome)
                         }}
                         >
                         <svg 

@@ -1,28 +1,26 @@
 import Product from '../Product/Designe/DesigneProduct';
 import ContextProducts from '../../../context/ContextProduct';
-import { useContext } from 'react';
-import './Index.css'
+import { useContext, useEffect } from 'react';
+import './Index.css';
+import '../Carrinho/PaymentComp/pagamento.css';
 import ProductEmpity from '../Product/Designe/DesigneProductEmpity';
-
 
 
 export default function MaisVendidos() {
     
 
-    const { produtosdb, loading, error, allprodutosdb} = useContext(ContextProducts)
-
-    // if (loading) return <div class="wrapper">
-    // <div class="circle"></div>
-    // <div class="circle"></div>
-    // <div class="circle"></div>
-    // <div class="shadow"></div>
-    // <div class="shadow"></div>
-    // <div class="shadow"></div>
-    // </div>;
+    const { produtosdb, loading, error, allprodutosdb, setProductSizesGuard} = useContext(ContextProducts);
 
     if (error) {
         console.log(error)
     }
+
+    // if (loading) {
+    //     return <div style={{width:'100%', height: '1000px', justifyContent: 'center', display: 'flex', alignItems: 'center'}}>
+    //                 <div className="spinner"></div>
+    //             </div>
+    // }
+
         
 
     const getNomeBase = (nomeCompleto) => {
@@ -71,7 +69,6 @@ export default function MaisVendidos() {
     });
       
     
-   
     // console.log("Dados do db no frontend:", produtosdb);
     // console.log('AllprodDb:' , allprodutosdb)
     // console.log('TamanhosAgrupados:' ,tamanhosComEstoque);
@@ -92,7 +89,7 @@ export default function MaisVendidos() {
                     produto.tamanhos.length === 0 || produto.tamanhos.every(t => t.estoque <= 0) ? (
                     <ProductEmpity key={produto.produto_id} produto={produto} />
                     ) : (
-                    <Product key={produto.produto_id} produto={produto} />
+                    <Product key={produto.produto_id} allprodwithsizes={produtosComTamanhos} produto={produto} />
                     )
                 ))} 
 
