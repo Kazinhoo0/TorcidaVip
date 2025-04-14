@@ -9,7 +9,7 @@ import icon10 from '../../../imgs/Icon (10).png';
 import Product from '../Product/Designe/DesigneProduct';
 import FilterCategory from './FilterCategory';
 import ContextProducts from '../../../context/ContextProduct';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import ProductEmpity from '../Product/Designe/DesigneProductEmpity';
 import IndexComponent from '../Index/PagIndex';
@@ -19,15 +19,28 @@ import IndexComponent from '../Index/PagIndex';
 
 export default function SearchProduct() {
 
-    const { allprodutosdb , produtossearched, loading, error } = useContext(ContextProducts)
+    const { allprodutosdb , produtossearched, filterstate , productsfiltred , loading, error } = useContext(ContextProducts);
 
-    // if (loading) return <p>Carregando produtos...</p>; 
-
+    // if (loading) {
+    //     return  <div style={{width:'100%', height: '1000px', justifyContent: 'center', display: 'flex', alignItems: 'center'}}>
+    //                 <div className="spinner"></div>
+    //             </div>
+    // } 
+    
     if (error) {
         console.log(error)
     }
 
-    const Namesearched = localStorage.getItem('itemsearched')
+    const isFilterMarked = () => {
+        return (
+            filterstate.tamanho.length > 0 ||
+            filterstate.marca.length > 0 || 
+            filterstate.cor.length > 0 ||
+            filterstate.genero.length > 0
+        )
+    }
+
+    const Namesearched = localStorage.getItem('itemsearched');
 
     const lengthprodsearched = produtossearched.length
 
@@ -68,6 +81,19 @@ export default function SearchProduct() {
           tamanhos: tamanhosComEstoque?.[getNomeBase(produto.nome)] || []
         };
     });
+
+
+    const productsFiltredWithSize = productsfiltred.map((produto) => {
+        return {
+          ...produto,
+          // Usa a função getNomeBase para pegar a parte "limpa" do nome do produto
+          tamanhos: tamanhosComEstoque?.[getNomeBase(produto.nome)] || []
+        };
+    });
+
+
+
+
 
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
@@ -112,18 +138,37 @@ export default function SearchProduct() {
     
         <div className='sun-searchproduct'>
             <div className='container-filtercategory'>
-                <FilterCategory />
+                <FilterCategory nameitem={Namesearched} />
             </div> 
             
             <div style={{ width: '100%' }}>
                 <div className='container-renderproducts-searched'>
-                    {currentProducts.map((produto) => (
-                         produto.tamanhos.length === 0 || produto.tamanhos.every(t => t.estoque <= 0) ? (
-                        <ProductEmpity key={produto.produto_id} produto={produto} />
+                    {isFilterMarked() ? (
+                    productsFiltredWithSize && productsFiltredWithSize.length > 0 ? (
+                        productsFiltredWithSize.map((produto) =>
+                        produto.tamanhos.length === 0 || produto.tamanhos.every(t => t.estoque === 0) ? (
+                            <ProductEmpity key={produto.produto_id} produto={produto} />
                         ) : (
-                        <Product key={produto.produto_id} produto={produto} />
+                            <Product key={produto.produto_id} produto={produto} />
                         )
-                    ))} 
+                        )
+                    ) : (
+                        <div>Nenhum produto foi encontrado com os filtros selecionados.</div>
+                    )
+                    ) : (
+                    currentProducts && currentProducts.length > 0 ? (
+                        currentProducts.map((produto) =>
+                        produto.tamanhos.length === 0 || produto.tamanhos.every(t => t.estoque <= 0) ? (
+                            <ProductEmpity key={produto.produto_id} produto={produto} />
+                        ) : (
+                            <Product key={produto.produto_id} produto={produto} />
+                        )
+                        )
+                    ) : (
+                        <div>Nenhum produto foi encontrado.</div>
+                    )
+                    )}
+
                 </div>
     
                 <div className="pagination">

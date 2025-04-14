@@ -1556,9 +1556,123 @@ app.post('/api/post/quantprodbuy' , async (req,res) => {
     console.error(err)
     return res.status(500).json({success: false, message: 'Erro no servidor'})
   }
-
-
 });
+
+
+app.post('/api/get/filterproducts', async ( req,res) => {
+
+  const {filterstate, nameitem} = req.body
+
+  if (!filterstate  || !nameitem) {
+    return res.status(400).json({
+      success: false,
+      message:'Não foi possível achar estados para filtrar'
+    })
+  }
+
+  console.log({
+    filterstate: filterstate,
+    nameitem: nameitem
+  })
+
+  let conditions = ['p.idprodutopai IS NULL']
+  let params = [];
+
+
+  if (filterstate.tamanho) {
+
+    if(Array.isArray(filterstate.tamanho) && filterstate.tamanho.length > 0) {
+      const placeholders = filterstate.tamanho.map(() => 'p.tamanho = ?').join(' OR ');
+      conditions.push('(' + placeholders + ')')
+      params.push(...filterstate.tamanho);
+    } 
+
+    else if (!Array.isArray(filterstate.tamanho) && filterstate.tamanho) {
+      conditions.push(' p.tamanho = ? ');
+      params.push(filterstate.tamanho);
+    }
+
+  }
+
+
+
+  if (filterstate.cor) {
+
+    if(Array.isArray(filterstate.cor) && filterstate.cor.length > 0) {
+      const placeholders = filterstate.cor.map(() => 'p.cor = ?').join('OR');
+      conditions.push('(' + placeholders + ')')
+      params.push(...filterstate.cor);
+    } 
+
+    else if (!Array.isArray(filterstate.cor) && filterstate.cor) {
+      conditions.push(' p.cor = ? ');
+      params.push(filterstate.cor);
+    }
+    
+  }
+
+
+  if (filterstate.marca) {
+
+    if(Array.isArray(filterstate.marca) && filterstate.marca.length > 0) {
+      const placeholders = filterstate.marca.map(() => 'p.marca = ?').join(' OR ');
+      conditions.push('(' + placeholders + ')')
+      params.push(...filterstate.marca);
+    } 
+
+    else if (!Array.isArray(filterstate.marca) && filterstate.marca) {
+      conditions.push(' p.marca = ? ');
+      params.push(filterstate.marca);
+    }
+    
+  }
+
+  console.log(filterstate)
+    
+  const Query = conditions.length > 0 ? ' WHERE ' + conditions.join(" AND ") 
+  :  ''
+
+
+  const queryFilterProduct = `SELECT 
+    p.idproduto AS produto_id, 
+    p.nome, 
+    p.preco,
+    p.marca,
+    p.estoque,
+    p.tamanho,
+    (SELECT i.caminho 
+    FROM imagensprod i 
+    WHERE i.produto_id = p.id 
+    ORDER BY i.id ASC 
+    LIMIT 1) AS imagem -- Garante apenas uma imagem por produto
+    FROM Produtos p
+    ${Query} AND p.nome LIKE ?
+    GROUP BY p.idproduto, p.nome, p.preco, p.marca, p.estoque;`
+
+    console.log('queryfilterproduct:', queryFilterProduct);
+    console.log('parametros:', params);
+    console.log('query montada:', Query);
+
+  try {
+    const finalParams = [...params, `%${nameitem}%`];
+    const [resultfilter] = await db.query(queryFilterProduct, finalParams);
+
+    if(resultfilter.length > 0) {
+      return res.status(200).json({
+        success: true,
+        message: 'Sucesso ao filtrar produtos',
+        filterproducts: resultfilter
+      })
+    }
+  } catch (err) {
+    console.log(err)
+    return res.status(500).json({
+      success: false,
+      error: err.message
+    })
+  }
+
+})
 
 
 

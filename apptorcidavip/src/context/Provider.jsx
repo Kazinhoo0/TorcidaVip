@@ -41,6 +41,13 @@ export default function Provider ({ children }) {
 
     const [selectedSize, setSelectedSize] = useState(null);
 
+    const [filterstate, setFilterState] = useState({
+        tamanho: [],
+        cor: [],
+        marca: [],
+        genero: []
+    });
+
     const [addonfavorite, setaddonfavorite] = useState([]);
 
     const [ observacoespedido ,setObservacoesPedido ] = useState('')
@@ -52,6 +59,8 @@ export default function Provider ({ children }) {
     const [produtossearched, setProdutosSearched] = useState([]);
     
     const [prodsearchbar, setProdsearchbar] = useState([]);
+
+    const [productsfiltred, setProductsFiltred] = useState([]);
 
     const [configitens, setConfigItens] = useState({
         marca: '',
@@ -690,6 +699,11 @@ export default function Provider ({ children }) {
             }).showToast();
             }
         };
+
+
+
+
+     
     
     // console.log('imagens do produto:', imagensprod);
     // console.log('produtos API no provider', produtosapi);
@@ -753,6 +767,10 @@ export default function Provider ({ children }) {
         handleAddOnCarrinho,
         selectedSize, 
         setSelectedSize,
+        productsfiltred, 
+        setProductsFiltred,
+        filterstate, 
+        setFilterState
     }
     return (
         <ContextProducts.Provider value={ value }>
