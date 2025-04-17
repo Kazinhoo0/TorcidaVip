@@ -75,7 +75,7 @@ export default function ViewProduct() {
     useEffect(() => {
         const fetchGetComments = async () => {
             try {             
-                const response = await fetch(`http://localhost:3000/api/get/infocomments`, {
+                const response = await fetch(`http://localhost:5000/api/get/infocomments`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -208,7 +208,7 @@ export default function ViewProduct() {
                                                 {const [tamanho, estoque, codigo] = e.target.value.split('|');
                                                 setSizeandQuantity({...sizeandquantity, tamanho, estoque, codigo})}
                                             }>
-                                            <option value="">Escolha uma opção...</option>
+                                            <option value="">Escolha um tamanho...</option>
                                             {infosprod?.tamanhos?.map((produto, index) => {
                                                 return (
                                                 <option 

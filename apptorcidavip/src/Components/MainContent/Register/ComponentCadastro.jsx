@@ -4,17 +4,19 @@ import ContextProducts from "../../../context/ContextProduct";
 import { Helmet } from "react-helmet";
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
+import { GoogleLogin, useGoogleLogin } from '@react-oauth/google';
 
 
 export default function ComponentCadastro () {
 
-    const {Dadosnewuser, setDadosNewUser} = useContext(ContextProducts)
+    const {Dadosnewuser, setDadosNewUser} = useContext(ContextProducts);
 
     const navigate = useNavigate();
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     const handlenavigateregister = () => {
+
         if (!Dadosnewuser.nome || !Dadosnewuser.email) {
             Toastify({
                 text: 'Preencha os campos!',
@@ -24,8 +26,7 @@ export default function ComponentCadastro () {
                     color: '#ffffff'
                 }
             }).showToast();
-
-            return
+            return;
         } else if (!emailRegex.test(Dadosnewuser.email))  {
             Toastify({
                 text: 'Digite um email válido!',
@@ -35,13 +36,13 @@ export default function ComponentCadastro () {
                     color: '#ffffff'
                 }
             }).showToast();
-
-            return
+            return;
         }
+        
+        navigate('/register');
+    }
 
-        navigate('/register')
-    }   
-
+    
 
     return (
         <div className="container-inputs">
@@ -56,7 +57,8 @@ export default function ComponentCadastro () {
                     placeholder="NOME"
                     className="inputs-style"
                     type="text"
-                    onChange={(e) => setDadosNewUser({...Dadosnewuser, nome: e.target.value}) }
+                    onChange={(e) => setDadosNewUser({...Dadosnewuser, nome: e.target.value})}
+                    
                   />
 
                 <input 
@@ -77,6 +79,7 @@ export default function ComponentCadastro () {
             <div className='container-buttonentrar'>
                 <button onClick={handlenavigateregister} className="buttonentrar-style">CADASTRE-SE</button>
             </div>
+
         </div>
     )
 }

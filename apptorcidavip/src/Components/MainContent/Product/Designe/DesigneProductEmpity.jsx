@@ -25,7 +25,7 @@ export default function ProductEmpity ({ favoriteicon, produto }) {
                 try {
                     const id = produto.produto_id;
                     // console.log('id a ser enviado pro backend: ',id)
-                    const response = await fetch(`http://localhost:3000/viewproduct/${id}`, {
+                    const response = await fetch(`http://localhost:5000/viewproduct/${id}`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',

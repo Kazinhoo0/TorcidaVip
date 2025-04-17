@@ -9,19 +9,11 @@ import ProductEmpity from '../Product/Designe/DesigneProductEmpity';
 export default function MaisVendidos() {
     
 
-    const { produtosdb, loading, error, allprodutosdb, setProductSizesGuard} = useContext(ContextProducts);
+    const { produtosdb, error, allprodutosdb, setProductSizesGuard} = useContext(ContextProducts);
 
     if (error) {
         console.log(error)
-    }
-
-    // if (loading) {
-    //     return <div style={{width:'100%', height: '1000px', justifyContent: 'center', display: 'flex', alignItems: 'center'}}>
-    //                 <div className="spinner"></div>
-    //             </div>
-    // }
-
-        
+    };
 
     const getNomeBase = (nomeCompleto) => {
         if (nomeCompleto.includes('Tamanho:')) {

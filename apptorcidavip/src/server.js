@@ -22,7 +22,7 @@ const { default: ContextProducts } = require('./context/ContextProduct');
 
 
 app.use(cors({
-  origin: ['https://torcidavipoficial-teste.onrender.com/','https://torcidavip.com','http://localhost:3000/'],
+  origin: ['https://torcidavipoficial-teste.onrender.com/','https://torcidavip.com','http://localhost:3000'],
   methods: ['POST', 'GET', 'DELETE', 'PUT'],
   credentials: true,
 
@@ -540,7 +540,7 @@ app.post('/api/login', async (req, res) => {
 app.post('/api/register', async (req, res) => {
   const { nome , sobrenome , senha , confirmarsenha , email, tipoendereco, destinatario, bairro, cep, endereco, numero, cidade, pais, cpf, telefone } = req.body;
 
-  console.log('body no backend:', req.body);
+  console.log('body criação de nova conta:', req.body);
 
   // Verifica se todos os campos estão presentes
   if (!nome || !sobrenome || !senha || !confirmarsenha || !email || !tipoendereco || !destinatario || !bairro || !cep || !endereco || !numero || !cidade || !pais || !cpf || !telefone) {
@@ -1150,47 +1150,37 @@ app.post('/auth/google', async (req,res) => {
     const queryCheckuser = `SELECT * FROM users WHERE email = ?`
     const [result] = await db.query(queryCheckuser, [email]);
 
-    const user = result[0]
-    const secretKey =  process.env.JWT_KEY
-    const token = jwt.sign({ id: user.id, email, nome: user.nome }, secretKey, { expiresIn: '1h' });
+    if (result.length > 0) {
+      const user = result[0]
+      const secretKey =  process.env.JWT_KEY
+      const token = jwt.sign({ id: user.id, email, nome: user.nome }, secretKey, { expiresIn: '1h' });
 
-
-    if (!result.length === 0) {
-      const queryInsertNewUser = `INSERT INTO users (email , nome) VALUES (?,?)`
-      const resultInsert = await db.query(queryInsertNewUser, [email,name]);
-
-      if (resultInsert.affectedRows > 0 ) {
-        return res.status(200).json({
-          success: true,
-          data: resultInsert,
-          message:'Novo usuário criado!'
-        })
-
-      } else {
-        return res.status(500).json({
-          success: false,
-          error: 'Erro ao adicionar novo usuário'
-        })
-      }
-
-    } else {
-      return res.status(200).json({
+      return res.json({
         success: true,
-        message:'Usuário encontrado',
-        data: result[0],
+        login: true,
+        message:'Usuário encontrado, Login efetuado com sucesso!',
+        data: { id: user.id, nome: user.nome, email: user.email },
         token: token
       })
-    }
 
+    } else {
+      return res.json({
+        success: true,
+        login : false,
+        data: decodefic,
+        message: 'Usuário não encontrado, crie uma conta!',
+      })
+    }
+   
   } catch (err) {
-    console.error('Erro na api:', err)
+    console.log('Erro:', err);
     return res.status(500).json({
       success: false,
-      err: 'Erro na api do google'
+      message: 'Erro ao autenticar usuário',
+      error: err.message
     })
   }
-})
-
+});
 
 app.post('/api/get/produtobuscado', async (req,res) => {
 
@@ -1676,6 +1666,6 @@ app.post('/api/get/filterproducts', async ( req,res) => {
 
 
 
-app.listen(3000, () => {
-    console.log('Servidor iniciado na porta 3000')
+app.listen(5000, () => {
+    console.log('Servidor iniciado na porta 5000')
 })

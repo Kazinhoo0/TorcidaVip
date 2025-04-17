@@ -10,15 +10,22 @@ import { GoogleLogin } from '@react-oauth/google';
 
 
 export default function ComponentLogin () {
-
-    const {dadosuserlogin, setDadosUserLogin} = useContext(ContextProducts);
+    
+    const {dadosuserlogin, setDadosUserLogin, loading, setLoading, setDateRegisterWithGoogle} = useContext(ContextProducts);
 
     const navigate = useNavigate();
+
+    if (loading) {
+        return <div style={{ width: '100%', height: '1000px', justifyContent: 'center', display: 'flex', alignItems: 'center' }}>
+          <div className="spinner"></div>
+        </div>
+    };
+
 
     const handleefetuarlogin = async (e) => {
         e.preventDefault();
 
-        const response = await fetch(`http://localhost:3000/api/login`, {
+        const response = await fetch(`http://localhost:5000/api/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
@@ -30,12 +37,13 @@ export default function ComponentLogin () {
         const data = await response.json();
 
         if (data.success) {
+            setLoading(true);
         
             Toastify({
                 text: 'Login efetuado com sucesso!',
                 position: 'center',
                 style: {
-                    background: '#33ff00',
+                    background: '#47b868',
                     color: '#ffffff'
                 }
             }).showToast();
@@ -45,6 +53,7 @@ export default function ComponentLogin () {
 
             // Garantindo que o loader seja visível por pelo menos 2 segundos
             setTimeout(() => {
+                setLoading(false)
                 navigate('/');
             }, 2000);
             
@@ -52,8 +61,6 @@ export default function ComponentLogin () {
                 window.location.reload();
             }, 2010)
            
-
-
         }
         else {
             Toastify({
@@ -76,11 +83,11 @@ export default function ComponentLogin () {
                 }
             }).showToast();
         }
+        
     };
 
     const handleAuthGoogle = async (credential) => {
-
-        const response = await fetch(`http://localhost:3000/auth/google`, {
+        const response = await fetch(`http://localhost:5000/auth/google`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
@@ -90,28 +97,31 @@ export default function ComponentLogin () {
 
         const data = await response.json();
 
-        // console.log('informacoes vindo do banco no authgoogle:', data)
+        console.log('informacoes vindo do banco no authgoogle:', data)
 
-        if (data.success) {
-        
+        if (data.login) {
+            setLoading(true);
+            if (data.login) {
+                
+            }
             Toastify({
                 text: 'Login efetuado com sucesso!',
                 position: 'center',
                 style: {
-                    background: '#33ff00',
+                    background: '#47b868',
                     color: '#ffffff'
                 }
             }).showToast();
 
-            console.log('infomacoes do usuario vindo do backend: ', data)
             localStorage.setItem('authTokenGoogle', data.token);
             // Garantindo que o loader seja visível por pelo menos 2 segundos
             setTimeout(() => {
+                setLoading(false)
                 navigate('/');
             }, 2000);
             
-            setTimeout(() => {
-                window.location.reload();
+             setTimeout(() => {
+                 window.location.reload();
             }, 2010)
         
         }
@@ -124,12 +134,18 @@ export default function ComponentLogin () {
                     color: '#ffffff'
                 }
             }).showToast();
+
+            setLoading(true);
+        
+            localStorage.setItem('RegisterAccountauthTokenGoogle', data.data);
+            setDateRegisterWithGoogle(data.data)
+            setTimeout(() => {
+                setLoading(false)
+                navigate('/register');
+            }, 2000);
         }
 
     };
-
-      
-
 
     return (
 
@@ -158,13 +174,13 @@ export default function ComponentLogin () {
 
         <div style={{
             height: 'auto', 
-            minHeight: '200px', 
+            minHeight: '80px', 
             display: 'flex', 
             alignItems:'center', 
             justifyContent: 'center'
         }}>
             <div className="container-logingoogle">
-                <GoogleLogin
+                <GoogleLogin  
                     onSuccess={(CredentialResponse => {
                         console.log('Login bem-sucedido!', CredentialResponse)
                         if(CredentialResponse.credential) {
@@ -172,6 +188,14 @@ export default function ComponentLogin () {
                         }
                     })}
                     onError={() => {
+                        Toastify({
+                            text: 'Erro ao fazer login com o google!',
+                            position: 'center',
+                            style: {
+                                background: '#db2d0e',
+                                color: '#ffffff'
+                            }
+                        }).showToast();
                         console.log("Falha no login")
                     }}  
                 />

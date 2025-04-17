@@ -14,7 +14,7 @@ import 'toastify-js/src/toastify.css';
 
 export default function CarrinhoCompras() {
 
-    const { freteSelecionado, produtosoncarrinho, dadosuserlogon } = useContext(ContextProducts)
+    const { freteSelecionado, produtosoncarrinho, dadosuserlogon } = useContext(ContextProducts);
 
     const [localLoading, setLocalLoading] = useState(true);
 
@@ -30,7 +30,7 @@ export default function CarrinhoCompras() {
             Toastify({
                 text: 'Faça login para continuar',
                 position: 'center',
-                style: { background: '#db2d0e', color: '#ffffff' }
+                style: { background: '#47b868', color: '#ffffff' }
             }).showToast();
             return;
         }
@@ -47,7 +47,7 @@ export default function CarrinhoCompras() {
         if (freteSelecionado) {
             const fetchproductbuy = async () => {
                 try {
-                    const response = await fetch(`http://localhost:3000/api/post/quantprodbuy`, {
+                    const response = await fetch(`http://localhost:5000/api/post/quantprodbuy`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -166,7 +166,7 @@ export default function CarrinhoCompras() {
 
             </div>
 
-            <InfoAtendimentos customcopyrightcontainer={0} customTop={950} />
+            <InfoAtendimentos customcopyrightcontainer={0} customTop={0} />
 
         </div>
     )

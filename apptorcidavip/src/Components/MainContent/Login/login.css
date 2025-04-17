@@ -1,61 +1,29 @@
-.container-login-register {
-    position: relative; /* Define o limite do posicionamento absoluto */
-    /* border: 1px solid rgb(255, 2, 255); */
-    width: 1900px;
-    height: 1700px; /* Altura definida para limitar o filho */
-    overflow-x: hidden;
-}
-
-.container-sun-login {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* border: 2px solid rgb(0, 0, 0); */
-    z-index: 5;
-    width: 1900px;
-    height: 1200px;
+@font-face {
+    font-family: 'Teko';
+    src: url('../../../fonts/Teko-VariableFont_wght.ttf') format('truetype'); /* Caminho até a fonte */
+    font-weight: normal;
+    font-style: normal;
 }
 
 
-.container-inputs {
-    /* border: 1px solid red; */
-    width: 420px;
-    height: 600px;
-    margin: 200px;
-    padding: 20px;
-    
+@font-face {
+    font-family: 'Montserrat Alternates';
+    src: url('../../../fonts/MontserratAlternates-ExtraLight.ttf') format('truetype'); /* Caminho até a fonte */
+    font-weight: normal;
+    font-style: normal;
 }
 
-.inputs-style {
-    box-sizing: border-box;
-    width: 422px;
-    height: 53px;
-    background: #FFFFFF;
-    border: 1px solid #000000;
-    border-radius: 46.5px;
-    padding-left: 30px;
-    margin-top: 20px;
+@font-face {
+    font-family: 'Russo One';
+    src: url('../../../fonts/Russo_One.ttf') format('truetype'); /* Caminho até a fonte */
+    font-weight: normal;
+    font-style: normal;
 }
 
-.container-logingoogle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 330px;
-    height: 74px;
-    background: #FFFFFF;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 37px;
-    cursor: pointer;
-
-}
 
 .googleicon { 
     height: 35px;
     width: 60px;
-
-
-
 }
 
 .textfazerlogincomgoogle {
@@ -126,20 +94,6 @@
     cursor: pointer;
 }
 
-
-.titleloginregister {
-
-    width: 500px;
-    height: 9px;
-    font-family: 'Teko';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 48px;
-    line-height: 69px;
-    text-align: start;
-    color: #000000;
-}
-
 .titlearetorcedor {
     z-index: 3;
     position: absolute;
@@ -183,8 +137,6 @@
 
 /* REPONSIVIDADE COMPONENTE INTEIRO */
 
-
-/* Base styles for large screens */
 .container-login-register {
     position: relative;
     width: 100%;
@@ -234,7 +186,7 @@
     max-width: 330px;
     height: 74px;
     background: #FFFFFF;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
     border-radius: 37px;
     cursor: pointer;
     margin: 0 auto;
@@ -243,6 +195,36 @@
 .googleicon { 
     height: 35px;
     width: 60px;
+}
+
+.img-google {
+    width: 20px;
+    height: 20px;
+}  
+
+.BtnRigisterWithGoogle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 220px;
+    height: 40px;
+    gap: 10px;
+    background: #FFFFFF;
+    /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
+    border: 1px solid rgba(128, 128, 128, 0.377);
+    flex-wrap: nowrap;
+    border-radius: 3px;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.BtnRigisterWithGoogle span {
+    color: rgba(0, 0, 0, 0.781);
+    overflow: hidden;
+    font-family: "Google Sans", arial, sans-serif;
+    text-overflow: ellipsis;
+    vertical-align: top;
 }
 
 .textfazerlogincomgoogle {
@@ -263,7 +245,7 @@
 
 .container-infonewpassword{
     height: auto;
-    min-height: 200px;
+    min-height: 100px;
 }
 
 .text-recoverypass {
@@ -358,7 +340,7 @@
     }
     
     .container-inputs {
-        padding-top: 120px;
+        padding-top: 250px;
         margin: 30px;
     }
     
@@ -379,7 +361,7 @@
     }
 
     .container-inputs {
-        padding-top: 150px;
+        padding-top: 250px;
         margin: 30px;
     }
     
@@ -434,8 +416,7 @@
     }
     
     .container-inputs {
-        padding-top: 100px;
-        
+        padding-top: 180px;
         margin: 10px auto;
     }
     

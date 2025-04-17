@@ -15,9 +15,7 @@ export default function Dadospessoais({ buttonclicked }) {
         navigate('/Login')
     }
 
-    const { Dadosnewuser, setDadosNewUser } = useContext(ContextProducts)
-
-    // console.log('dadosnewuser:', Dadosnewuser);
+    const { Dadosnewuser, setDadosNewUser, dateregisterwithgoogle } = useContext(ContextProducts)
 
     return (
 
@@ -36,24 +34,28 @@ export default function Dadospessoais({ buttonclicked }) {
                 className="container-inputs-registernewuser"
                 onSubmit={(e) => {
                     e.preventDefault();
-
-                    if (!Dadosnewuser.sobrenome ||
-                        !Dadosnewuser.cpf ||
-                        !Dadosnewuser.telefone ||
-                        !Dadosnewuser.senha || 
-                        !Dadosnewuser.confirmarsenha
-                        ) {
-                        Toastify({
-                            text: 'Preencha todos os campos para continuar',
-                            position: 'center',
-                            style: {
-                                background: '#db2d0e',
-                                color: '#ffffff'
-                            }
-                        }).showToast();
-
-                        return
-                    } 
+                    if (!dateregisterwithgoogle) {
+                        if (!Dadosnewuser.sobrenome ||
+                            !Dadosnewuser.cpf ||
+                            !Dadosnewuser.telefone ||
+                            !Dadosnewuser.senha || 
+                            !Dadosnewuser.confirmarsenha
+                            ) {
+                            Toastify({
+                                text: 'Preencha todos os campos para continuar',
+                                position: 'center',
+                                style: {
+                                    background: '#db2d0e',
+                                    color: '#ffffff'
+                                }
+                            }).showToast();
+    
+                            return
+                        } 
+                    } else {
+                        buttonclicked();
+                    }
+                    
 
                     if (Dadosnewuser.senha.trim() !== Dadosnewuser.confirmarsenha.trim()) {
                         Toastify({
@@ -77,21 +79,22 @@ export default function Dadospessoais({ buttonclicked }) {
                     placeholder="Nome"
                     className="inputs-style"
                     type="text"
-                    value={Dadosnewuser.nome}
+                    value={dateregisterwithgoogle ? dateregisterwithgoogle.given_name : Dadosnewuser.nome}
                 />
 
                 <input
                     placeholder="Sobrenome"
                     className="inputs-style"
                     type="text"
-                    onChange={(e) => setDadosNewUser({ ...Dadosnewuser, sobrenome: e.target.value })}
+                    value={dateregisterwithgoogle ? dateregisterwithgoogle.family_name : ''}
+                    onChange={(e) => !dateregisterwithgoogle && setDadosNewUser({ ...Dadosnewuser, sobrenome: e.target.value })}
                 />
 
                 <input
                     placeholder="E-mail"
                     className="inputs-style"
                     type="email"
-                    value={Dadosnewuser.email}
+                    value={dateregisterwithgoogle ? dateregisterwithgoogle.email : Dadosnewuser.email}
                 />
 
                 <input

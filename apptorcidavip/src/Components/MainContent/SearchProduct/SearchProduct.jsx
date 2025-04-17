@@ -187,6 +187,10 @@ export default function SearchProduct() {
                 </div>
             </div>
         </div>
+
+        <InfoSite  customTop={50}  />
+        <InfoAtendimentos customcopyrightcontainer={0}  customTop={50}  />
+        
     </div>
     )
 }

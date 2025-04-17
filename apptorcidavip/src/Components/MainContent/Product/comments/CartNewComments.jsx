@@ -35,7 +35,7 @@ export default function CartNewComment({closecart, idproduto}) {
 
             console.log('novo comentario infomacoes:', novocomentario);
 
-            const response = await fetch(`http://localhost:3000/api/add/newcomment`, {
+            const response = await fetch(`http://localhost:5000/api/add/newcomment`, {
                 method: "POST",
                 body: formData
             });

@@ -7,11 +7,15 @@ import 'toastify-js/src/toastify.css';
 
 export default function DadosEntrega() {
     const navigate = useNavigate();
-    const { Dadosnewuser, setDadosNewUser } = useContext(ContextProducts);
+    const { Dadosnewuser, setDadosNewUser, dateregisterwithgoogle} = useContext(ContextProducts);
 
     const handleNavigateHome = () => {
         navigate('/Login');
     };
+
+    console.log(
+        'Datepagdados',dateregisterwithgoogle
+    )
 
     const handleRegisterNewUser = async (e) => {
         e.preventDefault();
@@ -30,15 +34,15 @@ export default function DadosEntrega() {
         }
 
         try {
-            const response = await fetch(`http://localhost:3000/api/register`, {
+            const response = await fetch(`http://localhost:5000/api/register`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    nome: Dadosnewuser.nome,
-                    sobrenome: Dadosnewuser.sobrenome,
-                    email: Dadosnewuser.email,
+                    nome: dateregisterwithgoogle ? dateregisterwithgoogle.given_name : Dadosnewuser.nome,
+                    sobrenome: dateregisterwithgoogle ? dateregisterwithgoogle.family_name : Dadosnewuser.sobrenome,
+                    email: dateregisterwithgoogle ? dateregisterwithgoogle.email : Dadosnewuser.email,
                     senha: Dadosnewuser.senha,
                     cep: Dadosnewuser.cep,
                     confirmarsenha: Dadosnewuser.confirmarsenha,
@@ -65,7 +69,7 @@ export default function DadosEntrega() {
                         text: 'Usuário criado com sucesso!',
                         position: 'center',
                         style: {
-                            background: '#33ff00',
+                            background: '#47b868',
                             color: '#ffffff'
                         }
                     }).showToast();
@@ -115,7 +119,7 @@ export default function DadosEntrega() {
                 <form onSubmit={handleRegisterNewUser} className="delivery-form">
                     <div className="delivery-form-group">
                         <input
-                            placeholder="Tipo de Endereço"
+                            placeholder="Tipo de Endereço: Casa, Apartamento"
                             className="delivery-form-input"
                             type="text"
                             onChange={(e) => handleInputChange('tipoendereco', e.target.value)}

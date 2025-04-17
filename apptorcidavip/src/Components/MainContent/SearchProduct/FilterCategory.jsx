@@ -28,7 +28,7 @@ export default function FilterCategory ({nameitem}) {
 
         const handlefilterproduct = async () => {
             try {
-                const response = await fetch ('http://localhost:3000/api/get/filterproducts' , {
+                const response = await fetch ('http://localhost:5000/api/get/filterproducts' , {
                     method: 'POST',
                     headers: {
                         'Content-Type' : 'application/json'

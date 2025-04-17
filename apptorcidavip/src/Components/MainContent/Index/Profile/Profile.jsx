@@ -12,7 +12,7 @@ export default function Profile ({handlenavigate}) {
         <>
 
             <div className='topflap-profile-container'>
-                <div lstyle={{cursor: 'pointer',width: 33.83, height: 33.43, left: 4.23, top: 4.18, position: 'absoute'}}>
+                <div style={{cursor: 'pointer',width: 33.83, height: 33.43, left: 4.23, top: 4.18, position: 'absoute'}}>
                     <img onClick={handlenavigate} src={user} alt="" />
                 </div>
             </div>

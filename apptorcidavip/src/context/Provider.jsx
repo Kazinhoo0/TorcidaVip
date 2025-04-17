@@ -85,6 +85,8 @@ export default function Provider ({ children }) {
         senha: ''
     });
 
+    const [dateregisterwithgoogle, setDateRegisterWithGoogle] = useState({})
+
     const [Dadosnewuser, setDadosNewUser] = useState({
         nome:'',
         sobrenome:'',
@@ -105,7 +107,7 @@ export default function Provider ({ children }) {
 
     const [dadosuserlogon, setDadosUserLogOn] = useState([]);
 
-     useEffect(() => {
+    useEffect(() => {
         const token = (localStorage.getItem('authToken'));
 
          if (token) {
@@ -114,7 +116,7 @@ export default function Provider ({ children }) {
          } else {
             setDadosNewUser('')
          }
-     }, []);
+    }, []);
 
     useEffect(() => {
         const token = (localStorage.getItem('authTokenGoogle'));
@@ -126,6 +128,18 @@ export default function Provider ({ children }) {
             setDadosNewUser('')
         }
     }, []);
+
+
+    // useEffect(() => {
+    //     const token = (localStorage.getItem('RegisterAccountauthTokenGoogle'));
+
+    //     if (token) {
+    //         const DecodeToken = jwtDecode(token);
+    //         setDateRegisterWithGoogle(DecodeToken);
+    //     } else {
+    //         setDateRegisterWithGoogle('')
+    //     }
+    // }, []);
 
     const [newendereco, setNewEndereco] = useState({
 
@@ -143,14 +157,14 @@ export default function Provider ({ children }) {
 
     const [userenderecos, setUserEnderecos] = useState([]);
     
-    console.log('productdetails no provider', productdetails)
+    // console.log('productdetails no provider', productdetails)
     
     useEffect(() => {
         console.log("useEffect foi disparado!");
 
         const fetchProdutosApi = async () => {
             try {
-                const response = await fetch('http://localhost:3000/api/get/produtos');
+                const response = await fetch('http://localhost:5000/api/get/produtos');
                 if (!response.ok) {
                     throw new Error(`Erro: ${response.statusText}`);
                 }
@@ -180,7 +194,7 @@ export default function Provider ({ children }) {
     useEffect(() => {
         const fetchDepositoApi = async () => {
             try {
-                const response = await fetch('http://localhost:3000/api/get/deposito');
+                const response = await fetch('http://localhost:5000/api/get/deposito');
                 if (!response.ok) {
                     throw new Error(`Erro: ${response.statusText}`);
                 }
@@ -204,7 +218,7 @@ export default function Provider ({ children }) {
 
         const fetchProductsDB = async () => {
           try {              
-                const response = await fetch(`http://localhost:3000/api/post/update/estoque/bling`, {
+                const response = await fetch(`http://localhost:5000/api/post/update/estoque/bling`, {
                     method: 'POST',
                     body:JSON.stringify({
                         
@@ -240,7 +254,7 @@ export default function Provider ({ children }) {
     
     //          const fetchProductsDB = async () => {
     //            try {              
-    //                  const response = await fetch(`http://localhost:3000/api/get/infoprodpai`, {
+    //                  const response = await fetch(`http://localhost:5000/api/get/infoprodpai`, {
     //                      method: 'POST',
     //                      headers: {
     //                          'Content-Type': 'application/json',
@@ -277,7 +291,7 @@ export default function Provider ({ children }) {
     
           const fetchAllProductDB = async () => {
               try {              
-                const response = await fetch(`http://localhost:3000/api/get/infoallprod`, {
+                const response = await fetch(`http://localhost:5000/api/get/infoallprod`, {
                       method: 'POST',
                       headers: {
                           'Content-Type': 'application/json',
@@ -316,7 +330,7 @@ export default function Provider ({ children }) {
     
     //     const fetchRenderItensCarrinho = async () => {
     //         try {              
-    //             const response = await fetch('http://localhost:3000/api/post/renderitenscarrinho', {
+    //             const response = await fetch('http://localhost:5000/api/post/renderitenscarrinho', {
     //                 method: 'POST',
     //                 headers: {
     //                     'Content-Type': 'application/json',
@@ -355,7 +369,7 @@ export default function Provider ({ children }) {
         try {
             console.log('id:', id , 'infosprod:', infosprod)
             setLoading(true);
-            const response = await fetch(`http://localhost:3000/viewproduct/${id}`, {
+            const response = await fetch(`http://localhost:5000/viewproduct/${id}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ id })
@@ -384,7 +398,7 @@ export default function Provider ({ children }) {
 
         const handleReturnPedido = async () => {
             try {
-            const response = await fetch('http://localhost:3000/api/get/infospedido', {
+            const response = await fetch('http://localhost:5000/api/get/infospedido', {
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json',
@@ -423,7 +437,7 @@ export default function Provider ({ children }) {
             const userid =  dadosuserlogon.id
 
             try {
-                const response = await fetch(`http://localhost:3000/api/get/addfavoriteprod`, {
+                const response = await fetch(`http://localhost:5000/api/get/addfavoriteprod`, {
                     method: 'POST',
                     headers: {
                         'Content-Type' : 'application/json',
@@ -462,7 +476,7 @@ export default function Provider ({ children }) {
         const fetchRenderItensCarrinho = async () => {
             const userid = dadosuserlogon.id
             try {
-            const response = await fetch(`http://localhost:3000/api/post/renderitenscarrinho`, {
+            const response = await fetch(`http://localhost:5000/api/post/renderitenscarrinho`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
@@ -496,7 +510,7 @@ export default function Provider ({ children }) {
         const fetchGetEnderecos  = async () => {
             
             try {
-                const response = await fetch(`http://localhost:3000/api/get/userenderecos`, {
+                const response = await fetch(`http://localhost:5000/api/get/userenderecos`, {
                     method: 'POST',
                     headers: {
                         'Content-Type' : 'application/json',
@@ -531,7 +545,7 @@ export default function Provider ({ children }) {
     
         const fetchProductsDB = async () => {
             try {              
-                const response = await fetch(`http://localhost:3000/api/get/imgs`, {
+                const response = await fetch(`http://localhost:5000/api/get/imgs`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -568,7 +582,7 @@ export default function Provider ({ children }) {
             const userid = dadosuserlogon.id;
             
             try {
-                const response = await fetch (`http://localhost:3000/api/post/addfavoriteprod`, {
+                const response = await fetch (`http://localhost:5000/api/post/addfavoriteprod`, {
                     method: 'POST',
                    headers: {
                             'Content-Type': 'application/json',
@@ -589,7 +603,7 @@ export default function Provider ({ children }) {
                         text: 'item adicionado aos favoritos',
                         position: 'center',
                         style: {
-                            background: '#33ff00',
+                            background: '#47b868',
                             color: '#ffffff'
                         }
                     }).showToast();
@@ -642,7 +656,7 @@ export default function Provider ({ children }) {
                 }).showToast();
                 }
     
-                const response = await fetch(`http://localhost:3000/api/post/additemcarrinho`, {
+                const response = await fetch(`http://localhost:5000/api/post/additemcarrinho`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -676,7 +690,7 @@ export default function Provider ({ children }) {
                         text:  data.message ||'Adicionado ao carrinho!',
                         position: 'center',
                         style: {
-                            background: '#33ff00',
+                            background: '#47b868',
                             color: '#ffffff'
                         }
                     }).showToast();
@@ -770,7 +784,9 @@ export default function Provider ({ children }) {
         productsfiltred, 
         setProductsFiltred,
         filterstate, 
-        setFilterState
+        setFilterState,
+        dateregisterwithgoogle, 
+        setDateRegisterWithGoogle
     }
     return (
         <ContextProducts.Provider value={ value }>

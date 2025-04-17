@@ -18,35 +18,30 @@ import MobileMenu from './Sidebar-Button/Sidebar';
 
 export default function TopFlap () {
 
-    const { addonfavorite, dadosuserlogon, showingpageclicked, produtosoncarrinho } = useContext(ContextProducts);
+    const navigate = useNavigate();
+
+    const { addonfavorite, dadosuserlogon, showingpageclicked, produtosoncarrinho, loading, setLoading } = useContext(ContextProducts);
     const [clickedprofile, setClickedProfile] = useState(false);
     const [favoriteopened, setFavoriteOpened] = useState(false);
-    const navigate = useNavigate();
 
     const handleProfileClicked = () => setClickedProfile(!clickedprofile);
     const handleFavoriteOpened = () => setFavoriteOpened(!favoriteopened);
     const handleNavigateHomepage = () => navigate('/');
     const handleNavigateCart = () => {
 
-      if (dadosuserlogon && dadosuserlogon.id) {
-          navigate('/carrinhocompras');
-      } else {
-          navigate('/carrinhocomprasvazio');
-      }
+        if (dadosuserlogon && dadosuserlogon.id) {
+            navigate('/carrinhocompras');
+        } else {
+            navigate('/carrinhocomprasvazio');
+        }
     }
 
-    // const toggleSidebar = () => {
-    //     console.log("Estado atual:", sidebaropen);
-    //     setSidebarOpen(!sidebaropen);
-    //     console.log("Novo estado:", !sidebaropen);
-    // };
+    useEffect(() => {
+        if (dadosuserlogon && Object.keys(dadosuserlogon).length <= 0 && clickedprofile) {
+          navigate('/login');
+        }
+    }, [dadosuserlogon, clickedprofile, navigate]);
 
-    const finalizaSessao = () => {
-        localStorage.removeItem('authToken');
-        localStorage.removeItem('authTokenGoogle');
-        navigate('/');
-        window.location.reload();
-    }
     const handleNavigateProfile = () => {
         if (dadosuserlogon && dadosuserlogon.id) {
              navigate('/profile')
@@ -70,11 +65,20 @@ export default function TopFlap () {
         }
     }
 
-    useEffect(() => {
-        if (dadosuserlogon && Object.keys(dadosuserlogon).length <= 0 && clickedprofile) {
-          navigate('/login');
-        }
-      }, [dadosuserlogon, clickedprofile, navigate]);
+    if (loading) {
+        return <div style={{ width: '100%', height: '1000px', justifyContent: 'center', display: 'flex', alignItems: 'center' }}>
+            <div className="spinner"></div>
+        </div>
+    };
+
+    const finalizaSessao = () => {
+        setLoading(true);
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('authTokenGoogle');
+        navigate('/');
+        setLoading(false);
+        window.location.reload();
+    }
 
     return (
 
@@ -94,14 +98,14 @@ export default function TopFlap () {
             </div>
 
             <Searchbar />
-
+            
             <div className="topflap-icons-container">
                 <Profile handlenavigate={handleProfileClicked} />
 
                 <div onClick={handleFavoriteOpened} className="topflap-heart-container">
                     <img src={heart} alt="Favoritos" />
                 </div>
-
+                
                 <div onClick={handleNavigateCart} className="topflap-cart-container">
                     <img src={cart} alt="Carrinho" />
                     <div className="topflap-cart-notification">
@@ -115,7 +119,8 @@ export default function TopFlap () {
                     </div>
                 )}
             </div>
-
+            
+        
             {dadosuserlogon && Object.keys(dadosuserlogon).length > 0 && (
                 clickedprofile && (
                     <CardProfile meuperfil={handleNavigateProfile} meuspedidos={handleNavigatePedidos} meuscartoes={handleNavigateCartoes}/>  

@@ -17,7 +17,7 @@ export default function FavotireProductEmpity ({handlefavoriteopened}) {
 
     return ( 
             <>
-                <div className='container-boxshadow'>
+            <div className='container-boxshadow'>
                 <div className='container-favoriteproduct'>
                     <div className='tittle-and-close'>
 

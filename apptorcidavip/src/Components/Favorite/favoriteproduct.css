@@ -1,13 +1,3 @@
-.container-boxshadow {
-    position: absolute;
-    /* border: 1px solid red; */
-    background-color: rgba(128, 128, 128, 0.651);
-    width: 1900px;
-    height: 1798px;
-    z-index: 5;
-    overflow-x: hidden;
-    overflow-y: hidden;
-}
 
 .container-favoriteproduct {
     /* border: 1px solid red; */
@@ -128,41 +118,16 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* REPONSIVIDADE */
 
 
 /* Base styles (existing) */
 .container-boxshadow {
     position: absolute;
+    top: 0px;
     background-color: rgba(128, 128, 128, 0.651);
     width: 100%;
-    height: 100%;
+    height: 1000vh;
     z-index: 5;
     overflow-x: hidden;
     overflow-y: hidden;

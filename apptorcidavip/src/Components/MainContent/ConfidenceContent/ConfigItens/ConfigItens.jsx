@@ -15,7 +15,7 @@ export default function ConfigItens () {
         e.preventDefault();
         
         try{
-            const response = await fetch (`http://localhost:3000/api/configitens` , {
+            const response = await fetch (`http://localhost:5000/api/configitens` , {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -41,7 +41,7 @@ export default function ConfigItens () {
                     text: 'Infos enviadas!',
                     position: 'center',
                     style: {
-                        background: '#33ff00',
+                        background: '#47b868',
                         color: '#ffffff'
                     }
                 }).showToast();
